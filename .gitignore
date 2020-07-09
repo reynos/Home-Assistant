@@ -1,6 +1,20 @@
 # homeassistant #
 secrets.yaml
 google_calendars.yaml
+*.yamlold
+*.yamlsave
+*.yamltxt
+*.yamltext
+.ftpconfig
+includes/known_devices.yaml
+devices.yaml
+known_devices.yaml
+appdaemon/conf/secrets.yaml
+appdaemon/conf/appdaemon.yaml
+appdaemon/conf/dashboards/
+OZW_Log.txt
+*.xml
+
 # Compiled source #
 ###################
 *.com
@@ -28,6 +42,8 @@ google_calendars.yaml
 *.log
 *.sql
 *.sqlite
+*.db*
+*.db
 
 # OS generated files #
 ######################
@@ -38,29 +54,4 @@ google_calendars.yaml
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-*.yamlold
-
-*.yamlsave
-
-*.yamltxt
-
-*.yamltext
-
-.ftpconfig
-
-includes/known_devices.yaml
-
-devices.yaml
-
-known_devices.yaml
-
-appdaemon/conf/secrets.yaml
-
-appdaemon/conf/appdaemon.yaml
-
-appdaemon/conf/dashboards/
-
 .ios.conf
-
-OZW_Log.txt
