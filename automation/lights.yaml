@@ -57,7 +57,6 @@
     - service: script.turn_on
       entity_id: script.morning_lights_on
 
-
 - alias: "Morning Lights manual OFF"
   trigger:
     platform: state
