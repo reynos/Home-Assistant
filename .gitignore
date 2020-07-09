@@ -13,6 +13,8 @@ appdaemon/conf/secrets.yaml
 appdaemon/conf/appdaemon.yaml
 appdaemon/conf/dashboards/
 OZW_Log.txt
+*.token
+*.conf
 *.xml
 
 # Compiled source #
