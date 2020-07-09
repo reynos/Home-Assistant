@@ -1,0 +1,18 @@
+# device_tracker.yaml
+
+- platform: unifi_direct
+  host: !secret unifi_ctlr_ip
+  username: !secret unifi_ctlr_username
+  password: !secret unifi_ctlr_password
+- platform: tile
+  username: !secret tile_uname
+  password: !secret tile_pass
+
+# - platform: asuswrt
+#   host: !secret asuswrt_ip
+#   username: !secret asuswrt_usename
+#   password: !secret asuswrt_pass
+#   interval_seconds: 10
+#   consider_home: 180
+#   new_device_defaults:
+#     track_new_devices: true

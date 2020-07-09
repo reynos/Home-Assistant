@@ -1,0 +1,114 @@
+## Doorbird.yaml automation
+- alias: Doorbird ring
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_doorbell
+  action:
+    - service: logbook.log
+      data:
+        name: "Doorbird:"
+        message: Front gate button pushed
+    - service: script.turn_off
+      data:
+        entity_id:
+          - script.doorbell_kit_only
+#          - script.doorbell
+#          - script.doorbell_night
+    - service: script.turn_on
+      entity_id: script.doorbell_kit_only
+
+- alias: Doorbird RFID Darren
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Darren
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Darren at Front Gate'
+- alias: Doorbird RFID Blythe
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Blythe
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Blythe at Front Gate'
+- alias: Doorbird RFID Niszczot
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Niszczot
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Niszczots at Front Gate'
+- alias: Doorbird RFID Reynolds
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Reynolds
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Reynolds at Front Gate'
+- alias: Doorbird RFID Cleaners
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Cleaners
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Cleaners at Front Gate'
+- alias: Doorbird RFID Vespa
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Vespa
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Vespa at Front Gate'
+- alias: Doorbird RFID Spare Key 1
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Spare_1
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Someone at Front Gate'
+- alias: Doorbird RFID Spare Key 2
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Spare_2
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Someone at Front Gate'
+- alias: Doorbird RFID Spare Key 3
+  trigger:
+    platform: event
+    event_type: doorbird_front_gate_RFID_Spare_3
+  action:
+    service: notify.mobile_app_darren_reynolds
+    data:
+      message: 'Someone at Front Gate'
+#- alias: Doorbird Relay
+#  trigger:
+#    platform: event
+#    event_type: doorbird_front_gate_relay
+#  action:
+#    service: notify.mobile_app_darren_reynolds
+#    data:
+#      message: 'Front Gate Unlatched'
+
+#- alias: Doorbird RFID
+#  trigger:
+#    platform: event
+#    event_type: state_changed
+#    event_data:
+#      domain: doorbird
+#  condition:
+#    condition: template
+#    value_template: "{{ trigger.event.data.event_type.startswith('doorbird_front_gate_RFID_') }}"
+#  action:
+#    service: notify.mobile_app_darren_reynolds
+#    data:
+#      message: "Front Gate RFID scan: {{ trigger.event.data.event_type }}"
+# {{ trigger.event.data.new_state.attributes.friendly_name | replace("Seventeentrack Package: ","") }}

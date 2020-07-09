@@ -1,0 +1,1135 @@
+### sensors.yaml
+
+### weather
+- platform: darksky
+  api_key: !secret DARKSKY_API_KEY
+  forecast:
+      - 0
+      - 1
+  monitored_conditions:
+    - summary
+    - temperature_high
+    - temperature_low
+    - icon
+    - nearest_storm_distance
+    - precip_intensity
+    - precip_probability
+    - temperature
+    - apparent_temperature
+    - wind_speed
+    - wind_bearing
+    - cloud_cover
+    - humidity
+    - pressure
+    - sunrise_time
+    - sunset_time
+  scan_interval:
+    minutes: 15
+
+###
+- platform: bom
+  station: !secret BOM_station
+  name: !secret BOM_name
+  monitored_conditions:
+    - apparent_t
+    - delta_t
+    - gust_kmh
+    - gust_kt
+    - air_temp
+    - dewpt
+    - rain_trace
+    - rel_hum
+    - wind_dir
+    - wind_spd_kmh
+    - wind_spd_kt
+
+- platform: bom_forecast
+  product_id: !secret BOM_product_ID
+  name: !secret BOM_name
+  forecast_days: 6
+  rest_of_today: true
+  friendly: false
+  friendly_state_format: '{max}, {summary}'
+  monitored_conditions:
+    - 'max'
+    - 'min'
+    - 'chance_of_rain'
+    - 'possible_rainfall'
+    - 'summary'
+    - 'detailed_summary'
+    - 'icon'
+    - 'uv_alert'
+    - 'fire_danger'
+
+- platform: template
+  sensors:
+
+    bom_current_text:
+      value_template: >
+          {% set val = states('sensor.bom_sydney_summary_0').split('.')[0] %}
+          {{ val | title }}
+    bom_uv_alert:
+      value_template: >
+          {%- if states('sensor.bom_sydney_uv_alert_0') == '##' -%}
+          UV Today: No Data
+          {%- elif states('sensor.bom_sydney_uv_alert_0') != 'n/a' -%}
+          UV Today: {{ states('sensor.bom_sydney_uv_alert_0') }}
+          {%- elif states('sensor.bom_sydney_uv_alert_1') == '##' -%}
+          UV Tomorrow: No Data
+          {%- else -%}
+          UV Tomorrow: {{ states('sensor.bom_sydney_uv_alert_1') }}
+          {%- endif -%}
+    bom_uv_alert_summary:
+      value_template: >
+          {%- if states('sensor.bom_sydney_uv_alert_0') == '##' -%}
+          {% set val = 'No Data' %}
+          {%- elif states('sensor.bom_sydney_uv_alert_0') != 'n/a' -%}
+          {% set val = states('sensor.bom_sydney_uv_alert_0').split('[')[1].split(']')[0] %}
+          {%- elif states('sensor.bom_sydney_uv_alert_1') == '##' -%}
+          {% set val = 'No Data' %}
+          {%- elif states('sensor.bom_sydney_uv_alert_1') != 'n/a' -%}
+          {% set val = states('sensor.bom_sydney_uv_alert_1').split('[')[1].split(']')[0] %}
+          {%- else -%}
+          {%- set val = 'No Data' -%}
+          {%- endif -%}
+          {{ val | title }}
+
+    bom_fire_danger:
+      value_template: >
+          {%- if states('sensor.bom_sydney_fire_danger_0') == '##' -%}
+          Fire Danger Today: No Data
+          {%- elif states('sensor.bom_sydney_fire_danger_0') != 'n/a' -%}
+          Fire Danger Today: {{ states('sensor.bom_sydney_fire_danger_0') }}
+          {%- elif states('sensor.bom_sydney_fire_danger_1') == '##' -%}
+          Fire Danger Tomorrow: No Data
+          {%- else -%}
+          Fire Danger Tomorrow: {{ states('sensor.bom_sydney_fire_danger_1') }}
+          {%- endif -%}
+    bom_fire_danger_summary:
+      value_template: >
+          {%- if states('sensor.bom_sydney_fire_danger_0') == '##' -%}
+          No Data
+          {%- elif states('sensor.bom_sydney_fire_danger_0') != 'n/a' -%}
+          {{ states('sensor.bom_sydney_fire_danger_0') }}
+          {%- elif states('sensor.bom_sydney_fire_danger_1') == '##' -%}
+          No Data
+          {%- else -%}
+          {{ states('sensor.bom_sydney_fire_danger_1') }}
+          {%- endif -%}
+    bom_forecast_0:
+      entity_id:
+        - sensor.bom_today_max
+        - sensor.bom_today_min
+        - sensor.bom_sydney_chance_of_rain_0
+        - sensor.bom_sydney_icon_0
+      friendly_name: "Today"
+      value_template: >
+        {{states('sensor.bom_today_max')|round(0)}}°/{{states('sensor.bom_today_min')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_0')|round(0)}}%
+      entity_picture_template: >-
+        {%- if states('sun.sun') == 'below_horizon' and (states('sensor.bom_sydney_icon_0') == 'fog' or states('sensor.bom_sydney_icon_0') == 'haze' or states('sensor.bom_sydney_icon_0') == 'light-showers' or states('sensor.bom_sydney_icon_0') == 'partly-cloudy' or states('sensor.bom_sydney_icon_0') == 'showers') -%}
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_0') ~ '-night.png' }}
+        {%- else -%}
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_0') ~ '.png' }}
+        {%- endif -%}
+    bom_forecast_1:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_1
+        - sensor.bom_sydney_min_temp_c_1
+        - sensor.bom_sydney_chance_of_rain_1
+        - sensor.bom_sydney_icon_1
+      friendly_name_template: >
+        {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
+        {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
+      value_template: >
+        {{states('sensor.bom_sydney_max_temp_c_1')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_1')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_1')|round(0)}}%
+      entity_picture_template: >-
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_1') ~ '.png' }}
+    bom_forecast_2:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_2
+        - sensor.bom_sydney_min_temp_c_2
+        - sensor.bom_sydney_chance_of_rain_2
+        - sensor.bom_sydney_icon_2
+      friendly_name_template: >
+        {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
+        {{ date | timestamp_custom('%A (%-d/%-m)') }}
+      value_template: >
+        {{states('sensor.bom_sydney_max_temp_c_2')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_2')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_2')|round(0)}}%
+      entity_picture_template: >-
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_2') ~ '.png' }}
+    bom_forecast_3:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_3
+        - sensor.bom_sydney_min_temp_c_3
+        - sensor.bom_sydney_chance_of_rain_3
+        - sensor.bom_sydney_icon_3
+      friendly_name_template: >
+        {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
+        {{ date | timestamp_custom('%A (%-d/%-m)') }}
+      value_template: >
+        {{states('sensor.bom_sydney_max_temp_c_3')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_3')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_3')|round(0)}}%
+      entity_picture_template: >-
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_3') ~ '.png' }}
+    bom_forecast_4:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_4
+        - sensor.bom_sydney_min_temp_c_4
+        - sensor.bom_sydney_chance_of_rain_4
+        - sensor.bom_sydney_icon_4
+      friendly_name_template: >
+        {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
+        {{ date | timestamp_custom('%A (%-d/%-m)') }}
+      value_template: >
+        {{states('sensor.bom_sydney_max_temp_c_4')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_4')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_4')|round(0)}}%
+      entity_picture_template: >-
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_4') ~ '.png' }}
+    bom_forecast_5:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_5
+        - sensor.bom_sydney_min_temp_c_5
+        - sensor.bom_sydney_chance_of_rain_5
+        - sensor.bom_sydney_icon_5
+      friendly_name_template: >
+        {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
+        {{ date | timestamp_custom('%A (%-d/%-m)') }}
+      value_template: >
+        {{states('sensor.bom_sydney_max_temp_c_5')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_5')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_5')|round(0)}}%
+      entity_picture_template: >-
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_5') ~ '.png' }}
+    bom_forecast_6:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_6
+        - sensor.bom_sydney_min_temp_c_6
+        - sensor.bom_sydney_chance_of_rain_6
+        - sensor.bom_sydney_icon_6
+      friendly_name_template: >
+        {%- set date = as_timestamp(now()) + (6 * 86400 ) -%}
+        {{ date | timestamp_custom('%A (%-d/%-m)') }}
+      value_template: >
+        {{states('sensor.bom_sydney_max_temp_c_6')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_6')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_6')|round(0)}}%
+      entity_picture_template: >-
+        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_6') ~ '.png' }}
+    bom_today_max:
+      entity_id:
+        - sensor.bom_sydney_max_temp_c_0
+        - sensor.today_temp_bom
+      value_template: >
+        {%- if states('sensor.bom_sydney_max_temp_c_0') == 'n/a' -%}
+          {{ state_attr('sensor.today_temp_bom', 'max_value') }}
+        {% else %}
+          {{ states('sensor.bom_sydney_max_temp_c_0') }}
+        {% endif %}
+    bom_today_min:
+      entity_id:
+        - sensor.bom_sydney_min_temp_c_0
+        - sensor.today_temp_bom
+      value_template: >
+        {%- if states('sensor.bom_sydney_min_temp_c_0') == 'n/a' -%}
+          {{ state_attr('sensor.today_temp_bom', 'min_value') }}
+        {% else %}
+          {{ states('sensor.bom_sydney_min_temp_c_0') }}
+        {% endif %}
+- platform: statistics
+  name: today_temp_bom
+  sampling_size: 150
+  entity_id: sensor.bom_sydney_air_temp_c
+  max_age:
+    hours: 24
+
+
+# - platform: bom_forecast
+#   product_id: !secret BOM_product_ID
+#   name: !secret BOM_name
+#   forecast_days: 6
+#   rest_of_today: true
+#   friendly: false
+#   friendly_state_format: '{max}, {summary}'
+#   monitored_conditions:
+#     - 'max'
+#     - 'min'
+#     - 'chance_of_rain'
+#     - 'possible_rainfall'
+#     - 'summary'
+#     - 'detailed_summary'
+#     - 'icon'
+#     - 'uv_alert'
+#     - 'fire_danger'
+
+## emoncms sensors
+- platform: emoncms
+  id: 1
+  api_key: !secret emoncms_write_key
+  url: !secret emoncms_url
+  scan_interval: 5
+  include_only_feed_id:
+    - 1
+    - 6
+    - 7
+  unit_of_measurement: "W"
+  sensor_names:
+    1: "Net Grid Power"
+# this value_teplate does not work and should so converted the KW in a template sensor below_horizon
+#  value_template: '{{ (value | float / 1000) | round(2) }}'
+- platform: emoncms
+  id: 2
+  api_key: !secret emoncms_write_key
+  url: !secret emoncms_url
+  scan_interval: 60
+  include_only_feed_id:
+    - 2
+  unit_of_measurement: "C"
+  sensor_names:
+    2: "Outside Temp"
+- platform: emoncms
+  id: 3
+  api_key: !secret emoncms_write_key
+  url: !secret emoncms_url
+  scan_interval: 60
+  include_only_feed_id:
+    - 8
+    - 9
+    - 10
+  unit_of_measurement: "kWh"
+  sensor_names:
+    8: "Grid Power kWh"
+    9: "Solar Production kWh"
+    10: "Solar Production kWh"
+- platform: transport_nsw
+  name: '333 Bus to Beach'
+  stop_id: !secret transport_nsw_stop_id_1
+  route:  '333'
+  api_key: !secret transport_nsw_api_key
+- platform: transport_nsw
+  name: '380 Bus to Beach'
+  stop_id: !secret transport_nsw_stop_id_1
+  route:  '380'
+  api_key: !secret transport_nsw_api_key
+- platform: transport_nsw
+  name: '333 Bus to Bondi Junction'
+  stop_id: !secret transport_nsw_stop_id_3
+  route:  '333'
+  api_key: !secret transport_nsw_api_key
+- platform: transport_nsw
+  name: '380 Bus to Bondi Junction'
+  stop_id: !secret transport_nsw_stop_id_3
+  route:  '380'
+  api_key: !secret transport_nsw_api_key
+- platform: transport_nsw
+  name: '381 Bus to Bondi Junction'
+  stop_id: !secret transport_nsw_stop_id_3
+  route:  '381'
+  api_key: !secret transport_nsw_api_key
+- platform: transport_nsw
+  name: 'Bus from Beach'
+  stop_id: !secret transport_nsw_stop_id_4
+  api_key: !secret transport_nsw_api_key
+
+- platform: version
+
+- platform: mqtt
+  name: "Darren's Mood"
+  state_topic: "home/darren/mood"
+  payload_available: "good"
+  payload_not_available: "bad"
+
+#### MQTT States
+- platform: mqtt
+  name: "Dryer State"
+  state_topic: "hass/state/dryer"
+  icon: mdi:tumble-dryer
+- platform: mqtt
+  name: "Washer State"
+  state_topic: "hass/state/washer"
+  icon: mdi:washing-machine
+- platform: mqtt
+  name: "Dishwasher State"
+  state_topic: "hass/state/dishwasher"
+  icon: mdi:dishwasher
+#### Washer
+- platform: mqtt
+  name: "Washer Watts"
+  state_topic: "tele/washer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Power }}"
+  qos: 2
+  unit_of_measurement : "W"
+  icon: mdi:flash-circle
+  availability_topic: "tele/washer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Washer Voltage"
+  state_topic: "tele/washer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Voltage }}"
+  qos: 2
+  unit_of_measurement : "V"
+  icon: mdi:flash-circle
+  availability_topic: "tele/washer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Washer Amps"
+  state_topic: "tele/washer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Current }}"
+  qos: 2
+  unit_of_measurement : "A"
+  icon: mdi:flash-circle
+  availability_topic: "tele/washer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Washer Energy Today"
+  state_topic: "tele/washer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Today }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/washer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Washer Energy Yesterday"
+  state_topic: "tele/washer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Yesterday }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/washer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  state_topic: "tele/washer/STATE"
+  name: "Washer Signal"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/washer/LWT"
+  qos: 1
+  payload_available: "Online"
+  payload_not_available: "Offline"
+#### Dryer
+- platform: mqtt
+  name: "Dryer Watts"
+  state_topic: "tele/dryer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Power }}"
+  qos: 2
+  unit_of_measurement : "W"
+  icon: mdi:flash-circle
+  availability_topic: "tele/dryer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dryer Voltage"
+  state_topic: "tele/dryer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Voltage }}"
+  qos: 2
+  unit_of_measurement : "V"
+  icon: mdi:flash-circle
+  availability_topic: "tele/dryer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dryer Amps"
+  state_topic: "tele/dryer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Current }}"
+  qos: 2
+  unit_of_measurement : "A"
+  icon: mdi:flash-circle
+  availability_topic: "tele/dryer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dryer Energy Today"
+  state_topic: "tele/dryer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Today }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/dryer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dryer Energy Yesterday"
+  state_topic: "tele/dryer/SENSOR"
+  value_template: "{{value_json['ENERGY'].Yesterday }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/dryer/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  state_topic: "tele/dryer/STATE"
+  name: "Dryer Signal"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/dryer/LWT"
+  qos: 1
+  payload_available: "Online"
+  payload_not_available: "Offline"
+#### Dishwasher
+- platform: mqtt
+  name: "Dishwasher Watts"
+  state_topic: "tele/dishwasher/SENSOR"
+  value_template: "{{value_json['ENERGY'].Power }}"
+  qos: 2
+  unit_of_measurement : "W"
+  icon: mdi:flash-circle
+  availability_topic: "tele/dishwasher/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dishwasher Voltage"
+  state_topic: "tele/dishwasher/SENSOR"
+  value_template: "{{value_json['ENERGY'].Voltage }}"
+  qos: 2
+  unit_of_measurement : "V"
+  icon: mdi:flash-circle
+  availability_topic: "tele/dishwasher/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dishwasher Amps"
+  state_topic: "tele/dishwasher/SENSOR"
+  value_template: "{{value_json['ENERGY'].Current }}"
+  qos: 2
+  unit_of_measurement : "A"
+  icon: mdi:flash-circle
+  availability_topic: "tele/dishwasher/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dishwasher Energy Today"
+  state_topic: "tele/dishwasher/SENSOR"
+  value_template: "{{value_json['ENERGY'].Today }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/dishwasher/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dishwasher Energy Yesterday"
+  state_topic: "tele/dishwasher/SENSOR"
+  value_template: "{{value_json['ENERGY'].Yesterday }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/dishwasher/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  state_topic: "tele/dishwasher/STATE"
+  name: "Dishwasher Signal"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/dishwasher/LWT"
+  qos: 1
+  payload_available: "Online"
+  payload_not_available: "Offline"
+
+- platform: qnap
+  host: !secret qnap_ip
+  username: !secret qnap_uname
+  password: !secret qnap_pass
+  monitored_conditions:
+    - status
+    - cpu_usage
+    - memory_percent_used
+    - network_tx
+    - volume_percentage_used
+
+- platform: systemmonitor
+  resources:
+    - type: disk_free
+      arg: /home
+    - type: disk_use
+      arg: /home
+    - type: disk_use_percent
+      arg: /home
+    - type: processor_use
+    - type: memory_free
+    - type: processor_use
+    - type: last_boot
+    - type: memory_use_percent
+    - type: memory_use
+    - type: memory_free
+    - type: swap_use_percent
+    - type: swap_use
+    - type: swap_free
+    - type: network_in
+      arg: eno1 # not eth0
+    - type: network_out
+      arg: eno1
+
+#- platform: uber
+#  server_token: !secret uber_server_token
+#  start_latitude: !secret home_lat
+#  start_longitude: !secret home_lon
+#  end_latitude: !secret zone7_lat
+#  end_longitude: !secret zone7_lon
+#  product_ids:
+#    - '2d1d002b-d4d0-4411-98e1-673b244878b2'
+
+# These call are Distance Matrix Advanced.
+# Free teir allows for up to 20,000 calls per month (eviqualebnt to USD$200)
+# Limit these to approx 5 sensors polling every 15mins 24x7 - not not exceed
+# BMW camera sensor also uses calles
+# Google API quota set to 600 calls per hour
+
+#- platform: google_travel_time
+#  name: GTDarren_Home
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.darren
+#  destination: zone.home
+#  scan_interval: 900
+#- platform: google_travel_time
+#  name: GTBlythe_Home
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.blythe
+#  destination: zone.home
+#  scan_interval: 900
+##- platform: google_travel_time
+##  name: GTHome_Work
+##  api_key: !secret google_maps_api_key
+##  origin: zone.home
+##  destination: zone.work
+##  scan_interval: 600
+#- platform: google_travel_time
+#  name: GTHome_City
+#  api_key: !secret google_maps_api_key
+#  origin: zone.home
+#  destination: zone.city
+#  scan_interval: 900
+#- platform: google_travel_time
+#  name: GTDom_Airport
+#  api_key: !secret google_maps_api_key
+#  origin: zone.home
+#  destination: zone.domairport
+#  scan_interval: 900
+#- platform: google_travel_time
+#  name: GTInt_Airport
+#  api_key: !secret google_maps_api_key
+#  origin: zone.home
+#  destination: zone.intairport
+#  scan_interval: 900
+##- platform: google_travel_time
+##  name: GTHome_Thornton
+##  api_key: !secret google_maps_api_key
+##  origin: zone.home
+##  destination: zone.mdn
+##  scan_interval: 900
+##- platform: google_travel_time
+##  name: GTHome_Wangi
+##  api_key: !secret google_maps_api_key
+##  origin: zone.home
+##  destination: zone.mdr
+##  scan_interval: 600
+
+#- platform: filesize
+#  file_paths:
+#    - /home-assistant_v2.db
+
+#- platform: scrape
+#  resource: https://home-assistant.io
+#  name: Release
+#  select: ".current-version h1"
+#  value_template: '{{ value.split(":")[1] }}'
+
+# - platform: apcupsd
+#   resources:
+#     - bcharge
+#     - linev
+#     - loadpct
+#     - numxfers
+#     - outputv
+#     - status
+#     - timeleft
+#     - tonbatt
+
+# templates
+- platform: template
+  sensors:
+    333_to_beach_template:
+      friendly_name: "Bus 333 to Beach"
+      value_template: >-
+        {% if is_state_attr('sensor.333_bus_to_beach', 'due', 'n/a') %}
+          No schedule found
+        {% else %}
+          {{ states.sensor["333_bus_to_beach"].attributes.due }}m ({{ states.sensor["333_bus_to_beach"].attributes.delay }})
+        {% endif %}
+    380_to_beach_template:
+      friendly_name: "Bus 380 to Beach"
+      value_template: >-
+        {% if is_state_attr('sensor.380_bus_to_beach', 'due', 'n/a') %}
+          No schedule found
+        {% else %}
+          {{ states.sensor["380_bus_to_beach"].attributes.due }}m ({{ states.sensor["380_bus_to_beach"].attributes.delay }})
+        {% endif %}
+    bus_from_beach_template:
+      friendly_name: "Bus from Nth Bondi to Home"
+      value_template: >-
+        {% if is_state_attr('sensor.bus_from_beach', 'due', 'n/a') %}
+          No schedule found
+        {% else %}
+          {{ states.sensor.bus_from_beach.attributes.route }} in {{ states.sensor.bus_from_beach.attributes.due }}m ({{ states.sensor.bus_from_beach.attributes.delay }})
+        {% endif %}
+    333_to_bondi_junction:
+      friendly_name: "Bus 333 to Bondi Junct"
+      value_template: >-
+        {% if is_state_attr('sensor.333_bus_to_bondi_junction', 'due', 'n/a') %}
+          No schedule found
+        {% else %}
+          {{ states.sensor["333_bus_to_bondi_junction"].attributes.due }}m ({{ states.sensor["333_bus_to_bondi_junction"].attributes.delay }})
+        {% endif %}
+    380_to_bondi_junction:
+      friendly_name: "Bus 380 to Bondi Junct"
+      value_template: >-
+        {% if is_state_attr('sensor.380_bus_to_bondi_junction', 'due', 'n/a') %}
+          No schedule found
+        {% else %}
+          {{ states.sensor["380_bus_to_bondi_junction"].attributes.due }}m ({{ states.sensor["380_bus_to_bondi_junction"].attributes.delay }})
+        {% endif %}
+    381_to_bondi_junction:
+      friendly_name: "Bus 381 to Bondi Junct"
+      value_template: >-
+        {% if is_state_attr('sensor.381_bus_to_bondi_junction', 'due', 'n/a') %}
+          No schedule found
+        {% else %}
+          {{ states.sensor["381_bus_to_bondi_junction"].attributes.due }}m ({{ states.sensor["381_bus_to_bondi_junction"].attributes.delay }})
+        {% endif %}
+    front_door_sensor_template:
+      friendly_name: "Front Door is"
+      value_template: >-
+        {% if is_state('binary_sensor.front_door_30', 'off') %}
+          Closed
+        {% elif is_state('binary_sensor.front_door_30', 'on') %}
+          Open
+        {% else %}
+          Error
+        {% endif %}
+      icon_template: >-
+        {% if is_state('binary_sensor.front_door_30', 'off') %}
+          mdi:door-closed
+        {% else %}
+          mdi:door-open
+        {% endif %}
+    # front_door_sensor_template:
+    #   friendly_name: Front Door
+    #   icon_template: >
+    #     {% if is_state('binary_sensor.front_door_30','on') %} mdi:door-open
+    #     {% else %} mdi:door-closed
+    #     {% endif %}
+    #   device_class: power
+    #   value_template: >-
+    #     {% if not states('binary_sensor.front_door_30') == 'unknown' and is_state('binary_sensor.front_door_30', 'on') %}
+    #        Open
+    #     {% endif %}
+
+    upstairs_nest_protect_color_status_template:
+      friendly_name: "Sensor Status"
+      value_template: '{{ states.sensor.upstairs_nest_protect_color_status.state  | capitalize }}'
+      icon_template: >-
+        {% if is_state('sensor.upstairs_nest_protect_color_status', 'green') %}
+          mdi:check-circle-outline
+        {% elif is_state('sensor.upstairs_nest_protect_color_status', 'yellow') %}
+          mdi:alert-outline
+        {% elif is_state('sensor.upstairs_nest_protect_color_status', 'red') %}
+          mdi:alert-octagram
+        {% else %}
+          mdi:help-rhombus-outline
+        {% endif %}
+
+    downstairs_nest_protect_color_status_template:
+      friendly_name: "Sensor Status"
+      value_template: '{{ states.sensor.downstairs_nest_protect_color_status.state | capitalize }}'
+      icon_template: >-
+        {% if is_state('sensor.downstairs_nest_protect_color_status', 'green') %}
+          mdi:check-circle-outline
+        {% elif is_state('sensor.downstairs_nest_protect_color_status', 'yellow') %}
+          mdi:alert-outline
+        {% elif is_state('sensor.downstairs_nest_protect_color_status', 'red') %}
+          mdi:alert-octagram
+        {% else %}
+          mdi:help-rhombus-outline
+        {% endif %}
+
+    solaredge_lifetime_energy_template:
+      friendly_name: "Lifetime energy generated"
+      value_template: >-
+        {% set power = states.sensor.solaredge_lifetime_energy.state | int %}
+        {% set kwh = (power / 1000) | round(2) %}
+        {% set mwh = (power / 1000000) | round(2) %}
+        {%- if kwh > 999 -%}
+          {{ mwh }} MWh
+        {%- else -%}
+          {{ kwh }} kWh
+        {%- endif -%}
+    solaredge_energy_this_year_template:
+      friendly_name: "Energy this year"
+      value_template: >-
+        {% set power = states.sensor.solaredge_energy_this_year.state | int %}
+        {% set kwh = (power / 1000) | round(2) %}
+        {% set mwh = (power / 1000000) | round(2) %}
+        {%- if kwh > 999 -%}
+          {{ mwh }} MWh
+        {%- else -%}
+          {{ kwh }} kWh
+        {%- endif -%}
+    solaredge_energy_this_month_template:
+      friendly_name: "Energy this month"
+      value_template: >-
+        {% set power = states.sensor.solaredge_energy_this_month.state | int %}
+        {% set kwh = (power / 1000) | round(2) %}
+        {% set mwh = (power / 1000000) | round(2) %}
+        {%- if kwh > 999 -%}
+          {{ mwh }} MWh
+        {%- else -%}
+          {{ kwh }} kWh
+        {%- endif -%}
+    solaredge_energy_today_template:
+      value_template: '{{(states.sensor.solaredge_energy_today.state | float / 1000) | round(2)}}'
+      friendly_name: "Energy today"
+      unit_of_measurement: "kWh"
+    solaredge_current_power_template:
+      value_template: '{{(states.sensor.solaredge_current_power.state | float / 1000) | round(2)}}'
+      friendly_name: "Current power"
+      unit_of_measurement: "kW"
+    template_sensor_emoncms_net_grid_power:
+      friendly_name: "Net Grid Power"
+      value_template: >
+        {{ (states.sensor.net_grid_power.state | float / 1000) | round(2) }}
+      unit_of_measurement: "kW"
+    template_sensor_emoncms_house_consumption:
+      friendly_name: "House Consumption"
+      value_template: >
+        {{ (states.sensor.emoncms_house_consumption.state | float / 1000) | round(2) }}
+      unit_of_measurement: "kW"
+    template_sensor_emoncms_solar_production:
+      friendly_name: "Solar Production"
+      value_template: >
+        {{ (states.sensor.emoncms_solar_production.state | float / 1000) | round(2) }}
+      unit_of_measurement: "kW"
+    template_binary_sensor_x5_xdrive30d_windows_front:
+      friendly_name: "Front Windows"
+      value_template: >
+        {{states.binary_sensor.x5_xdrive30d_windows.attributes.windowDriverFront }}/{{ states.binary_sensor.x5_xdrive30d_windows.attributes.windowPassengerFront }}
+    template_binary_sensor_x5_xdrive30d_windows_rear:
+      friendly_name: "Rear Windows"
+      value_template: >
+        {{states.binary_sensor.x5_xdrive30d_windows.attributes.windowDriverRear }}/{{ states.binary_sensor.x5_xdrive30d_windows.attributes.windowPassengerRear }}
+    template_binary_sensor_x5_xdrive30d_sunroof:
+      friendly_name: "Sunroof"
+      value_template: >
+        {{states.binary_sensor.x5_xdrive30d_windows.attributes.sunroof }}
+    template_binary_sensor_x5_xdrive30d_front_doors:
+      friendly_name: "Front Doors"
+      value_template: >
+        {{states.binary_sensor.x5_xdrive30d_lids.attributes.doorDriverFront }}/{{ states.binary_sensor.x5_xdrive30d_lids.attributes.doorPassengerFront }}
+    template_binary_sensor_x5_xdrive30d_rear_doors:
+      friendly_name: "Rear Doors"
+      value_template: >
+        {{states.binary_sensor.x5_xdrive30d_lids.attributes.doorDriverRear }}/{{ states.binary_sensor.x5_xdrive30d_lids.attributes.doorPassengerRear }}
+    template_binary_sensor_x5_xdrive30d_bonnet_rear:
+      friendly_name: "Bonnet/Rear Hatch"
+      value_template: >
+        {{states.binary_sensor.x5_xdrive30d_lids.attributes.hood }}/{{ states.binary_sensor.x5_xdrive30d_lids.attributes.trunk }}
+    template_x5_xdrive30d_remaining_fuel:
+      friendly_name: "Fuel remaining"
+      unit_of_measurement: "L"
+      value_template: >
+        {{"{:,}".format(states('sensor.x5_xdrive30d_remaining_fuel')|int)}}
+    template_x5_xdrive30d_mileage:
+      friendly_name: "Odometer"
+      unit_of_measurement: "kms"
+      value_template: >
+        {{"{:,}".format(states('sensor.x5_xdrive30d_mileage')|int)}}
+    template_x5_xdrive30d_remaining_range_fuel:
+      friendly_name: "Fuel Range"
+      unit_of_measurement: "kms"
+      value_template: >
+        {{"{:,}".format(states('sensor.x5_xdrive30d_remaining_range_fuel')|int)}}
+    template_gtdarren_home:
+      friendly_name: "Darren"
+      value_template: >
+        {{ states.sensor.gtdarren_home.attributes.distance }} ({{states.sensor.gtdarren_home.attributes.duration_in_traffic }})
+    template_gtblythe_home:
+      friendly_name: "Blythe"
+      value_template: >
+        {{ states.sensor.gtblythe_home.attributes.distance }} ({{states.sensor.gtblythe_home.attributes.duration_in_traffic }})
+    template_nursery_air_quality:
+      friendly_name: "Air Quality"
+      unit_of_measurement: "State"
+      value_template: "{%if states.sensor.nursery_air_quality.state == '1' %}Good{% elif states.sensor.nursery_air_quality.state == '2' %}Fair{% elif states.sensor.nursery_air_quality.state == '3' %}Poor{% elif states.sensor.nursery_air_quality.state == '4' %}Very Poor{% endif %}"
+    template_calendar_family:
+      value_template: >
+        {{ strptime(states.calendar.family.attributes.start_time, "%Y-%m-%d %H:%M:%S").strftime("%a %I:%M%p") }}:
+        {{ states.calendar.family.attributes.message }}
+      friendly_name: 'Family'
+      unit_of_measurement: ''
+    template_calendar_bin_nights:
+      unit_of_measurement: 'Wed'
+      friendly_name: 'Bin night'
+      value_template: >
+        {{ states.calendar.bin_nights.attributes.message }}
+      entity_picture_template: >
+        {% if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
+          /local/images/ry.jpg
+        {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
+          /local/images/rbg.jpg
+        {% endif %}
+    template_bondi_max_temp:
+      friendly_name: Bondi Max
+      unit_of_measurement: "°C"
+      value_template: "{{ states.sensor.dark_sky_daytime_high_temperature_0d.state|round(1) }}"
+    template_bondi_min_temp:
+      friendly_name: Bondi Min
+      unit_of_measurement: "°C"
+      value_template: "{{ states.sensor.dark_sky_overnight_low_temperature_0d.state|round(1) }}"
+    template_bondi_humidity:
+      friendly_name: Bondi Humidity
+      unit_of_measurement: "%"
+      value_template: "{{ states.sensor.dark_sky_humidity.state|int }}"
+    dark_sky_summary_template:
+      friendly_name_template: "{{ states.sensor.dark_sky_summary.state }}"
+      value_template: "{{ states.sensor.dark_sky_summary.state }}"
+      entity_picture_template: "{{ states.sensor.dark_sky_summary.attributes.entity_picture }}"
+#    dark_sky_summary_template:
+#      friendly_name_template: "{{ states.sensor.dark_sky_summary.state }}"
+#      value_template: "{{ states.sensor.dark_sky_summary.state }}"
+#      icon_template: "{{ states.sensor.dark_sky_summary.attributes.icon }}"
+#    template_kitchen_temp:
+#      friendly_name: "Kitchen Temp"
+#      unit_of_measurement: "°C"
+#      value_template: "{{ states.sensor.temperature_sensor_78.state|round(1) }}"
+#    template_nursery_temp:
+#      friendly_name: "Nursery Temp"
+#      unit_of_measurement: "°C"
+#      value_template: "{{ states.sensor.nursery_temp_57.state|round(1) }}"
+##      value_template: "{{ float(states.sensor.temperature_sensor_60.state) }}" does the same thing as above - default is 1 dec place
+#    template_gthome_thornton:
+#      value_template: "{{ states.sensor.gthome_thornton.attributes.duration_in_traffic }}"
+#      friendly_name: 'Thornton'
+#      unit_of_measurement: ''
+#    template_gthome_wangi:
+#      value_template: "{{ states.sensor.gthome_wangi.attributes.duration_in_traffic }}"
+#      friendly_name: 'Wangi Wangi'
+#      unit_of_measurement: ''
+    template_solar_angle:
+      friendly_name: "Sun Angle"
+      unit_of_measurement: '°'
+      value_template: "{{ '%+.1f'|format(states.sun.sun.attributes.elevation) }}"
+    home_assistant_db_template:
+      friendly_name: "HA database size"
+      unit_of_measurement: 'MB'
+      value_template: >
+        {{"{:,}".format(states('sensor.home_assistant_v2_db')|int)}}
+
+# next bus times
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_time_1"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.0.departureTimeEstimated}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_time_2"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.1.departureTimeEstimated}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_time_3"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.2.departureTimeEstimated}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_time_4"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.3.departureTimeEstimated}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_time_5"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.4.departureTimeEstimated}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_time_6"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.5.departureTimeEstimated}}'
+## nest bus routes
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_route_1"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.0.transportation.number}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_route_2"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.1.transportation.number}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_route_3"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.2.transportation.number}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_route_4"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.3.transportation.number}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_route_5"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.4.transportation.number}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_route_6"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.5.transportation.number}}'
+## nest bus seats
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_occupancy_1"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.0.location.properties.occupancy}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_occupancy_2"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.1.location.properties.occupancy}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_occupancy_3"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.2.location.properties.occupancy}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_occupancy_4"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.3.location.properties.occupancy}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_occupancy_5"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.4.location.properties.occupancy}}'
+#- platform: rest
+#  resource: !secret transport_nsw_resource
+#  name: "nextbus_occupancy_6"
+#  headers:
+#    Accept: application/json
+#    Authorization: !secret transport_nsw_api_key
+#  value_template: '{{value_json.stopEvents.5.location.properties.occupancy}}'
+
+## bus templates
+#    template_next_bus_time_utc_1:
+#      value_template: >
+#        {{ as_timestamp(states.sensor.nextbus_time_1.state) | timestamp_custom("%X") }}
+#    template_next_bus_time_utc_2:
+#      value_template: >
+#        {{ as_timestamp(states.sensor.nextbus_time_2.state) | timestamp_custom("%X") }}
+#    template_next_bus_time_utc_3:
+#      value_template: >
+#        {{ as_timestamp(states.sensor.nextbus_time_3.state) | timestamp_custom("%X") }}
+#    template_next_bus_time_utc_4:
+#      value_template: >
+#        {{ as_timestamp(states.sensor.nextbus_time_4.state) | timestamp_custom("%X") }}
+#    template_next_bus_time_utc_5:
+#      value_template: >
+#        {{ as_timestamp(states.sensor.nextbus_time_5.state) | timestamp_custom("%X") }}
+#    template_next_bus_time_utc_6:
+#      value_template: >
+#        {{ as_timestamp(states.sensor.nextbus_time_6.state) | timestamp_custom("%X") }}
+#    template_next_bus_1:
+#      friendly_name: "Next Bus 1"
+#      value_template: >
+#        {{ strptime(states.sensor.template_next_bus_time_utc_1.state, "%H:%M:%S").strftime("%I:%M%p") }}
+#        - {{ states.sensor.nextbus_route_1.state }}
+#        {% set min = ((as_timestamp(states.sensor.nextbus_time_1.state)-as_timestamp(now()))/60) | int %}
+#        {% if min < 1 %}
+#          {{ "Already_left" }}
+#        {% else %}
+#          {{ states.sensor.nextbus_occupancy_1.state }}
+#        {% endif %}
+##displays mins until bus leaves but not always acurate so can be misleading
+##          ({{ min | int }} mins)
+#    template_next_bus_2:
+#      friendly_name: "Next Bus 2"
+#      value_template: >
+#        {{ strptime(states.sensor.template_next_bus_time_utc_2.state, "%H:%M:%S").strftime("%I:%M %p") }}
+#        - {{ states.sensor.nextbus_route_2.state }}
+#        {% set min = ((as_timestamp(states.sensor.nextbus_time_2.state)-as_timestamp(now()))/60) | int %}
+#        {% if min < 1 %}
+#          {{ "Already_left" }}
+#        {% else %}
+#          {{ states.sensor.nextbus_occupancy_2.state }}
+#        {% endif %}
+#      friendly_name: "Next Bus 3"
+#      value_template: >
+#        {{ strptime(states.sensor.template_next_bus_time_utc_3.state, "%H:%M:%S").strftime("%I:%M %p") }}
+#        - {{ states.sensor.nextbus_route_3.state }}
+#        {% set min = ((as_timestamp(states.sensor.nextbus_time_3.state)-as_timestamp(now()))/60) | int %}
+#        {% if min < 1 %}
+#          {{ "Already_left" }}
+#        {% else %}
+#          {{ states.sensor.nextbus_occupancy_3.state }}
+#        {% endif %}
+#    template_next_bus_4:
+#      friendly_name: "Next Bus 4"
+#      value_template: >
+#        {{ strptime(states.sensor.template_next_bus_time_utc_4.state, "%H:%M:%S").strftime("%I:%M %p") }}
+#        - {{ states.sensor.nextbus_route_4.state }}
+#        {% set min = ((as_timestamp(states.sensor.nextbus_time_4.state)-as_timestamp(now()))/60) | int %}
+#        {% if min < 1 %}
+#          {{ "Already_left" }}
+#        {% else %}
+#          {{ states.sensor.nextbus_occupancy_4.state }}
+#        {% endif %}
+#    template_next_bus_5:
+#      friendly_name: "Next Bus 5"
+#      value_template: >
+#        {{ strptime(states.sensor.template_next_bus_time_utc_5.state, "%H:%M:%S").strftime("%I:%M %p") }}
+#        - {{ states.sensor.nextbus_route_5.state }}
+#        {% set min = ((as_timestamp(states.sensor.nextbus_time_5.state)-as_timestamp(now()))/60) | int %}
+#        {% if min < 1 %}
+#          {{ "Already_left" }}
+#        {% else %}
+#          {{ states.sensor.nextbus_occupancy_5.state }}
+#        {% endif %}
+#    template_next_bus_6:
+#      friendly_name: "Next Bus 6"
+#      value_template: >
+#        {{ strptime(states.sensor.template_next_bus_time_utc_6.state, "%H:%M:%S").strftime("%I:%M %p") }}
+#        - {{ states.sensor.nextbus_route_6.state }}
+#        {% set min = ((as_timestamp(states.sensor.nextbus_time_6.state)-as_timestamp(now()))/60) | int %}
+#        {% if min < 1 %}
+#          {{ "Already_left" }}
+#        {% else %}
+#          {{ states.sensor.nextbus_occupancy_6.state }}
+#        {% endif %}

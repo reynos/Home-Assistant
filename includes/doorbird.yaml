@@ -1,0 +1,20 @@
+#doorbird.yaml
+  devices:
+    - host: !secret doorbird_host
+      username: !secret doorbird_uname
+      password: !secret doorbird_pass
+      token: !secret doorbird_token
+      name: Front Gate
+      events:
+        - doorbell
+        - relay
+        - RFID_Darren
+        - RFID_Blythe
+        - RFID_Vespa
+        - RFID_Cleaners
+        - RFID_Niszczot
+        - RFID_Reynolds
+        - RFID_Spare_1
+        - RFID_Spare_2
+        - RFID_Spare_3
+#      hass_url_override: !secret doorbird_hass_url_override

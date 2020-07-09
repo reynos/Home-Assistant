@@ -1,0 +1,16 @@
+## binary_sensor.yaml
+
+- platform: hikvision
+  name: Front Garden Movement
+  host: !secret frontcam_ip
+  username: !secret frontcam_uname
+  password: !secret frontcam_pass
+
+- platform: tod
+  name: Before Sunset
+  after: sunset
+  after_offset: '-02:00'
+  before: sunset
+  before_offset: '+00:05'
+
+#- platform: apcupsd

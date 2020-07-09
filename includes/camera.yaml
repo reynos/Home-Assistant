@@ -1,0 +1,24 @@
+## camera.yaml
+- platform: mjpeg
+  name: nurserycam
+  mjpeg_url: !secret nurserycam_url
+  username: !secret nurserycam_uname
+  password: !secret nurserycam_pass
+
+- platform: mjpeg
+  name: frontcam
+  mjpeg_url: !secret frontcam_url
+  username: !secret frontcam_uname
+  password: !secret frontcam_pass
+
+# - platform: doorbird
+#   last_visitor: true
+
+- platform: bom
+  location: Sydney
+
+- platform: generic
+  name: BMW X5 Location
+  still_image_url: !secret x5_google_location
+  limit_refetch_to_url_change: true
+  scan_interval: 900

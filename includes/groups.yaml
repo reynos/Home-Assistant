@@ -1,0 +1,89 @@
+### groups.yaml
+#  default_view:
+  evening:
+    name: Evening Lights
+    entities:
+      - light.kitchen_bench_19_2
+      - light.stairs_33_2
+      - light.back_garden_29
+      - light.trampoline
+      - light.bargeboard
+
+  all_lights_not_beds:
+    name: All lights not beds
+    entities:
+      -  light.kitchen_high_137
+      - light.kitchen_low_32_2
+      - light.kitchen_bench_19_2
+      - light.lounge_34_2
+      - light.tv_35
+      - light.stairs_33_2
+      - light.laundry_hall_37_2
+      - light.hall_36_2
+      - light.front_porch_light_86_2
+      - light.back_garden_29
+      - light.trampoline
+      - light.back_floodlights_26_2
+      - light.side_28_2
+      - light.study_level
+#      - light.lounge_lamp_bulb_38
+# not - switch.front_garden_1_switch
+  morning_off:
+    name: Morning off
+    entities:
+      - light.kitchen_bench_19_2
+      -  light.kitchen_high_137
+      - light.kitchen_low_32_2
+#      - light.lounge_lamp_18
+      - light.stairs_33_2
+
+#presence groups
+  friends_family_presence:
+    name: Friends and Family Presence
+    entities:
+      - device_tracker.niz_iphone
+      - device_tracker.rey_dad_iphone
+      - device_tracker.rey_mum_iphone
+      - device_tracker.bin_iphone
+      - device_tracker.tony_iphone
+      - device_tracker.dani_iphone
+
+  lollie_lights:
+    name: Lollie Nightlight
+    entities:
+      - light.stairs_33_2
+      - light.kitchen_bench_19_2
+      - light.back_garden_29
+
+  washerpanel:
+    name: Washer
+    entities:
+      - sensor.washer_state
+      - sensor.washer_voltage
+      - sensor.washer_watts
+      - sensor.washer_amps
+      - sensor.washer_energy_today
+      - sensor.washer_energy_yesterday
+      - sensor.washer_signal
+
+  dryerpanel:
+    name: Dryer
+    entities:
+      - sensor.dryer_state
+      - sensor.dryer_voltage
+      - sensor.dryer_watts
+      - sensor.dryer_amps
+      - sensor.dryer_energy_today
+      - sensor.dryer_energy_yesterday
+      - sensor.dryer_signal
+
+  dishwasherpanel:
+    name: Dishwasher
+    entities:
+      - sensor.dishwasher_state
+      - sensor.dishwasher_voltage
+      - sensor.dishwasher_watts
+      - sensor.dishwasher_amps
+      - sensor.dishwasher_energy_today
+      - sensor.dishwasher_energy_yesterday
+      - sensor.dishwasher_signal

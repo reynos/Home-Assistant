@@ -1,0 +1,177 @@
+## appliances.yaml automation
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#  Dryer Start/Finish
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+- alias: 'Dryer State - Door'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dryer_watts
+    above: 5
+    below: 20
+    for:
+      seconds: 2
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/dryer
+        payload: 'Door Open'
+        retain: 'true'
+- alias: 'Dryer State - Drying'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dryer_watts
+    above: 50
+    for:
+      seconds: 2
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/dryer
+        payload: 'Drying'
+        retain: 'true'
+- alias: 'Dryer State - Idle'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dryer_watts
+    below: 6
+    for:
+      seconds: 2
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/dryer
+        payload: 'Idle'
+        retain: 'true'
+- alias: 'Dryer Finished'
+  trigger:
+    platform: state
+    entity_id: sensor.dryer_state
+    from: 'Drying'
+    to: 'Idle'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_all
+      data:
+        variables:
+          message: "Dryer finished!"
+    - service: tts.google_translate_say
+      entity_id:
+        - media_player.study
+      data_template:
+         message: "Dryer finished"
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#  Washing Machine Start/Finish
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# - alias: 'Washer State - Door'
+#   trigger:
+#     platform: numeric_state
+#     entity_id: sensor.washer_watts
+#     above: 5
+#     below: 20
+#     for:
+#       seconds: 2
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         topic: hass/state/washer
+#         payload: 'Door Open'
+#         retain: 'true'
+- alias: 'Washer State - Washing'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.washer_watts
+    above: 30
+    for:
+      seconds: 2
+# Make sure washer isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.washer_state.state != 'Washing' }}"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/washer
+        payload: 'Washing'
+        retain: 'true'
+- alias: 'Washer State - Idle'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.washer_watts
+    below: 15
+    for:
+      minutes: 1
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/washer
+        payload: 'Idle'
+        retain: 'true'
+- alias: 'Washing Machine Finished'
+  trigger:
+    platform: state
+    entity_id: sensor.washer_state
+    from: 'Washing'
+    to: 'Idle'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_all
+      data:
+        variables:
+          message: "Washing Machine finished!"
+    - service: tts.google_translate_say
+      entity_id:
+        - media_player.study
+      data_template:
+         message: "Washing machine finished"
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#  Dishwasher Start/Finish
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+- alias: 'Dishwasher State - Washing'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dishwasher_watts
+    above: 30
+    for:
+      seconds: 2
+# Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.dishwasher_state.state != 'Washing' }}"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/dishwasher
+        payload: 'Washing'
+        retain: 'true'
+- alias: 'Dishwasher State - Idle'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dishwasher_watts
+    below: 15
+    for:
+      minutes: 1
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/dishstate/washer
+        payload: 'Idle'
+        retain: 'true'
+- alias: 'Dishwasher Finished'
+  trigger:
+    platform: state
+    entity_id: sensor.dishwasher_state
+    from: 'Washing'
+    to: 'Idle'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_all
+      data:
+        variables:
+          message: "Dishwasher finished!"
+    - service: tts.google_translate_say
+      entity_id:
+        - media_player.study
+      data_template:
+         message: "Dishwasher finished"
+#

@@ -1,0 +1,11 @@
+# ui-camera-girls.yaml
+title: Cameras
+views:
+-   panel: true
+    cards:
+      - type: picture-entity
+        entity: camera.nurserycam
+        camera_view: live
+        tap_action:
+          action: navigate
+          navigation_path: /ui-ipad/0

@@ -1,0 +1,42 @@
+### switch.yaml
+
+- platform: mqtt
+  name: "Arlec SW1"
+  state_topic: "stat/SW_Arlec1/POWER"
+  command_topic: "cmnd/SW_Arlec1/POWER"
+  availability_topic: "tele/SW_Arlec1/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dryer"
+  state_topic: "stat/dryer/POWER"
+  command_topic: "cmnd/dryer/POWER"
+  availability_topic: "tele/dryer/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Washer"
+  state_topic: "stat/washer/POWER"
+  command_topic: "cmnd/washer/POWER"
+  availability_topic: "tele/washer/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Dishwasher"
+  state_topic: "stat/dishwasher/POWER"
+  command_topic: "cmnd/dishwasher/POWER"
+  availability_topic: "tele/dishwasher/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"

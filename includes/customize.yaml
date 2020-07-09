@@ -1,0 +1,236 @@
+### customize.yaml
+  binary_sensor.front_garden_movement_motion:
+    friendly_name: Front Garden Camera Movement
+#doorbird
+  switch.front_gate_relay_1:
+    friendly_name: Front Gate
+  switch.front_gate_ir:
+    friendly_name: Doorbird IR
+#bmw_x5
+  device_tracker.x5_xdrive30d:
+    friendly_name: Car Location
+    icon: mdi:car-connected
+  binary_sensor.x5_xdrive30d_door_lock_state:
+    friendly_name: Secured state
+  binary_sensor.x5_xdrive30d_lights_parking:
+    friendly_name: Parking Lights
+    icon: mdi:car-parking-lights
+  sensor.template_x5_xdrive30d_mileage:
+    icon: mdi:speedometer
+  sensor.template_x5_xdrive30d_remaining_fuel:
+    icon: mdi:fuel
+  sensor.template_x5_xdrive30d_remaining_range_fuel:
+    icon: mdi:road-variant
+  sensor.template_binary_sensor_x5_xdrive30d_windows_front:
+    icon: mdi:car-side
+  sensor.template_binary_sensor_x5_xdrive30d_windows_rear:
+    icon: mdi:car-side
+  sensor.template_binary_sensor_x5_xdrive30d_sunroof:
+    icon: mdi:car-pickup
+  sensor.template_binary_sensor_x5_xdrive30d_front_doors:
+    icon: mdi:car-side
+  sensor.template_binary_sensor_x5_xdrive30d_rear_doors:
+    icon: mdi:car-side
+  sensor.template_binary_sensor_x5_xdrive30d_bonnet_rear:
+    icon: mdi:car
+#sensors
+  binary_sensor.kitchen_sensor_20:
+    friendly_name: Kitchen Motion
+  sensor.temperature_sensor_78:
+    friendly_name: Kitchen Temp
+  sensor.light_sensor_79:
+    friendly_name: Kitchen Lux
+  sensor.humidity_sensor_80:
+    friendly_name: Kitchen Humidity
+  sensor.temperature_sensor_112:
+    friendly_name: Girl's Temp
+
+#nest
+#  binary_sensor.downstairs_nest_protect_online:
+#  sensor.downstairs_nest_protect_color_status:
+#    templates:
+#      icon: >
+#        if (state > green) return 'mdi:check-circle-outline';
+#        if (state > yellow) return 'mdi:alert-outline';
+#        if (state > red) return 'mdi:alert-octagram';
+#        return 'mdi:help-circle-outline';
+#      icon_color: >
+#        if (state > green) return 'rgb(0, 255, 0)';
+#        if (state > yellow) return 'rgb(255, 255, 0)';
+#        if (state > red) return 'rgb(255, 0, 0)';
+#        return 'rgb(128, 128, 128)';
+
+  sensor.net_grid_power:
+#    icon: mdi:flash
+    templates:
+      hs_color: >
+        if (state < -600) return [360, 85];
+        if (state < 1500) return [23, 90];
+        return [100,65];
+#        if (state < 0) return [50,100];
+#        if (state => 1501) return [65,85];
+#        if (state < 4) return [100,65];
+#        return [150,95];
+      brightness: >
+        if (state < -600) return 216;
+        if (state < 1200) return 255;
+        return 192;
+#        if (state < 0) return 255;
+#        if (state < 2) return 220;
+#        if (state < 4) return 192;
+#        return 153;
+      icon: >
+         if (state < -600) {
+           return mdi:arrow-down-bold-circle;
+         } else if (state < 1200 ) {
+           return mdi:check-circle;
+         } else {
+           return mdi:arrow-up-bold-circle;
+         }
+#      icon_color: >
+#        if (state > 600) {
+#          return [255, 0, 0];
+#        } else if (state >= 1 ) {
+#          return [255, 153, 0];
+#        } else {
+#          return [0, 255, 0];
+#        }
+
+  sensor.template_sensor_emoncms_net_grid_power:
+    templates:
+      theme: >
+        if (state > 600) {
+          return 'red_badge';
+        } else if (state >= 0 ) {
+          return 'orange_badge';
+        } else {
+          return 'green_badge';
+        }
+
+
+#trackers
+  device_tracker.darren_reynolds:
+    friendly_name: Darren
+    entity_picture: !secret picture_url_darren
+  device_tracker.blythe:
+    friendly_name: Blythe
+    entity_picture: !secret picture_url_blythe
+  device_tracker.reynolds_darren:
+    friendly_name: DarrenOT
+  device_tracker.reynolds_blythe:
+    friendly_name: BlytheOT
+#zones
+  zone.masterbed:
+#    track_ios: true
+    beacon:
+      uuid: B9407F30-F5F8-466E-AFF9-25556B57FE6D
+      major: 48427
+      minor: 769
+
+#google calendars
+#  sensor.template_calendar_bin_nights:
+#    friendly_name: Bin Night
+#google_travel_time
+  sensor.template_gtdarren_home:
+    friendly_name: Darren
+    entity_picture: !secret picture_url_darren
+  sensor.template_gtblythe_home:
+    friendly_name: Blythe
+    entity_picture: !secret picture_url_blythe
+  sensor.gthome_city:
+    friendly_name: City
+    icon: mdi:city
+  sensor.gthome_work:
+    friendly_name: Work
+    icon: mdi:briefcase
+  sensor.template_gthome_thornton:
+    friendly_name: Thornton
+    icon: mdi:home
+  sensor.template_gthome_wangi:
+    friendly_name: Wangi
+    icon: mdi:home
+  sensor.GTInt_Airport:
+    friendly_name: International Airport
+    icon: mdi:earth
+  sensor.GTDom_Airport:
+    friendly_name: Domestic Airport
+    icon: mdi:airplane
+#cameras
+  camera.nurserycam:
+    friendly_name: Nursery
+  camera.frontcam:
+    friendly_name: Front Garden
+#Sonos
+  media_player.kitchen:
+    friendly_name: Kitchen Sonos
+  media_player.lounge:
+    friendly_name: Lounge Sonos
+  media_player.nursery:
+    friendly_name: Nursery Sonos
+  media_player.study:
+    friendly_name: Study Sonos
+  media_player.front_garden:
+    friendly_name: Front Garden Sonos
+  media_player.bathroom:
+    friendly_name: Bathroom Sonos
+  media_player.master_bedroom:
+    friendly_name: Master Bedroom Sonos
+#Samsung TV
+  media_player.loungetv:
+    friendly_name: Lounge Room TV
+  media_player.bed_room_ua60h7000:
+    friendly_name: Master Bedroom TV
+#Plex
+  media_player.tv_ua65js8000:
+    friendly_name: Lounge Room Plex
+  media_player.tv_ua60h7000:
+    friendly_name: Master Bedroom Plex
+#speedtest
+    sensor.speedtest_download:
+      friendly_name: Internet Down
+    sensor.speedtest_upload:
+      friendly_name: Internet Up
+    sensor.speedtest_ping:
+      friendly_name: Internet Ping
+#outside
+  switch.greenwall_19:
+    friendly_name: Back Deck Watering
+    icon: mdi:water
+  input_number.backdeck_watering_timer:
+    friendly_name: Timer
+    icon: mdi:timer
+#other
+  sun.sun:
+    entity_picture: http://images.all-free-download.com/images/graphiclarge/smiling_sun_312442.jpg
+  sensor.current_version:
+    friendly_name: HA installed version
+    icon: mdi:home-assistant
+  sensor.release:
+    friendly_name: HA latest version
+    icon: mdi:home-assistant
+  sensor.template_homeassistant_db:
+    friendly_name: "HA Database Size"
+    icon: mdi:file
+  sensor.template_calendar_family:
+    friendly_name: 'Upcoming:'
+    icon: mdi:calendar-clock
+  sensor.ups_output_voltage:
+    friendly_name: 'UPS Output'
+  sensor.qnap_volume_used_volume_1:
+    friendly_name: 'QNAP Disk Used'
+  sensor.qnap_memory_usage:
+    friendly_name: 'QNAP Mem Used'
+  sensor.disk_use_percent_home:
+    friendly_name: 'HA Disk use'
+  sensor.memory_use_percent:
+    friendly_name: 'HA Mem use'
+  sensor.swap_use_percent:
+    friendly_name: 'HA Swap use'
+  sensor.network_in_eno1:
+    friendly_name: 'HA eth in'
+  sensor.network_out_eno1:
+    friendly_name: 'HA eth out'
+  sensor.qnap_network_up_eth0:
+    friendly_name: 'QNAP eth0'
+  sensor.qnap_network_up_eth1:
+    friendly_name: 'QNAP eth1'

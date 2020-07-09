@@ -1,0 +1,11 @@
+# asuswrt.yaml
+
+host: !secret asuswrt_ip
+username: !secret asuswrt_usename
+password: !secret asuswrt_pass
+mode: ap
+sensors:
+  - upload
+  - download
+  - upload_speed
+  - download_speed

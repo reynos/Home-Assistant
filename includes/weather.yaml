@@ -1,0 +1,6 @@
+# weather.nurserycam_url
+
+- platform: bom
+  station: !secret BOM_station
+- platform: darksky
+  api_key: !secret DARKSKY_API_KEY

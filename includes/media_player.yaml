@@ -1,0 +1,51 @@
+## media_player.yaml
+
+- platform: yamaha
+  host: 10.0.26.29
+  zone_ignore:
+  - "Zone_2"
+  source_names:
+    HDMI1: "Foxtel"
+    HDMI2: "HA"
+    AUDIO1: "TV"
+    AUDIO4: "Turntable"
+
+# - platform: universal
+#   name: Lounge TV
+#   children:
+#     - media_player.yamaha_receiver
+#   commands:
+#     turn_on:
+#       service: script.turn_on
+#       data: script.ha_lounge_tv_on
+#     turn_off:
+#       service: script.turn_off
+#       data: script.ha_lounge_tv_on
+#     volume_up:
+#       service: SERVICE
+#       data: SERVICE_DATA
+#     volume_down:
+#       service: SERVICE
+#       data: SERVICE_DATA
+#     volume_mute:
+#       service: SERVICE
+#       data: SERVICE_DATA
+#   attributes:
+#     is_volume_muted: ENTITY_ID|ATTRIBUTE
+#     state: ENTITY_ID|ATTRIBUTE
+
+#- platform: samsungtv_custom
+#  host: 10.0.26.27
+#  mac: 84:a4:66:07:dc:af
+#  port: 8001
+#  protocol: ws
+
+#- platform: samsungtv_custom
+#  host: 10.0.26.27
+#  mac: 84:a4:66:07:dc:af
+#  port: 8001
+#  protocol: ws
+
+#  protocol: ctl_qled
+#  timeout: 5
+#  name: LoungeTV

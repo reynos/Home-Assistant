@@ -1,0 +1,80 @@
+## tests.yaml automations
+
+- alias: test announce
+  trigger:
+    platform: state
+    from: 'off'
+    to: 'on'
+    entity_id: input_boolean.announce_test
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_all
+      data:
+        variables:
+          message: 'test'
+    # - service: script.turn_on
+    #   entity_id: script.notify_blythe
+    #   data:
+    #     variables:
+    #       message: 'test'
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.announce_test
+
+- alias: Doorbell test
+  trigger:
+    platform: state
+    entity_id: input_boolean.doorbell_test
+    to: 'on'
+  action:
+    - service: logbook.log
+      data:
+        name: "Doorbell:"
+        message: Test button pushed
+    - service: script.turn_off
+      data:
+        entity_id:
+          - script.doorbell
+          - script.doorbell_night
+    - service: script.turn_on
+      data_template:
+        entity_id: script.doorbell_kit_only
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.doorbell_test
+
+
+    # - service: script.turn_on
+    #   entity_id: script.notify_blythe
+    #   data:
+    #     variables:
+    #       message: 'test'
+    # - service: script.turn_off
+    #   entity_id: script.announce
+    # - service: script.turn_on
+    #   entity_id: script.announce
+    #   data:
+    #     variables:
+    #       sonos_entity: 'media_player.study'
+    #       message: 'test'
+    #       volume: .3
+    #       delay: 3
+
+
+# add to below TTS "front door still open"
+# - alias: Front Door Open
+#   trigger:
+#     - platform: state
+#       entity_id: input_select.house_mode
+#       to: 'Bedtime'
+#     - platform: state
+#       entity_id: input_select.house_mode
+#       to: 'Night'
+#   condition:
+#     condition: state
+#     entity_id: binary_sensor.front_door_30
+#     state: 'on'
+#   action:
+#     service: notify.ios_darren
+#     data:
+#       message: "Front Door Still OPEN!"

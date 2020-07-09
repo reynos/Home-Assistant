@@ -1,0 +1,10 @@
+# ui-camera-front-gate-last.yaml
+title: Cameras
+views:
+-   panel: true
+    cards:
+      - type: picture-entity
+        entity: camera.front_gate_last_ring
+        tap_action:
+          action: navigate
+          navigation_path: /ui-ipad/0

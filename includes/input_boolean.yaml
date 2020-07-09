@@ -1,0 +1,69 @@
+## input_boolean.yaml
+
+open_front_gate:
+  name: Open Front Gate
+  initial: off
+  icon: mdi:gate
+
+# presence
+darrenhome:
+  name: Darren Home
+  initial: on
+  icon: mdi:cellphone-iphone
+
+blythehome:
+  name: Blythe Home
+  initial: on
+  icon: mdi:cellphone-iphone
+
+sydneyfc_game:
+  name: Sydney FC Game Scene
+  initial: off
+  icon: mdi:soccer
+
+dyson_oscillate:
+  name: Oscillate
+  initial: off
+  icon: mdi:code-tags
+
+dyson_night_mode:
+  name: 'Night Mode'
+  initial: off
+  icon: mdi:weather-night
+
+## makes it easy to select Bedtime mode - set Bedtime scene
+bed_time:
+  name: "Goodnight"
+  initial: off
+  icon: mdi:sleep
+
+morning_lights:
+  name: "Morning Lights"
+  icon: mdi:weather-sunny
+
+lollie_lights:
+  name: "Lollie Light"
+  icon: mdi:dog
+
+# hidden flags
+house_mode_day:
+house_mode_evening:
+house_mode_bedtime:
+house_mode_night:
+evening_holiday:
+# these stop things happerning twice in a day - reset if required each day in script.day
+morning_lights_flag:
+evening_lights_on_flag:
+bedtime_beacon_flag:
+
+# tests
+tester:
+  name: "test"
+  initial: off
+
+doorbell_test:
+  name: "Doorbell test"
+  initial: off
+announce_test:
+  name: "Announce test"
+  initial: off

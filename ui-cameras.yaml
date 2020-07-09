@@ -1,0 +1,57 @@
+# ui-camera.yaml
+title: Cameras
+views:
+-   panel: true
+    cards:
+      - type: vertical-stack
+        show_header_toggle: false
+        cards:
+          - type: horizontal-stack
+            show_header_toggle: false
+            cards:
+              - type: picture-entity
+                entity: camera.nurserycam
+#                camera_view: live
+                tap_action:
+                  action: navigate
+                  navigation_path: /ui-camera-girls/0
+              - type: picture-entity
+                entity: camera.front_gate_live
+#                camera_view: live
+                tap_action:
+                  action: navigate
+                  navigation_path: /ui-camera-front-gate/0
+          - type: horizontal-stack
+            show_header_toggle: false
+            cards:
+              - type: picture-entity
+                entity: camera.frontcam
+#                camera_view: live
+                tap_action:
+                  action: navigate
+                  navigation_path: /ui-camera-front-porch/0
+              - type: picture-entity
+                entity: camera.front_gate_last_ring
+                tap_action:
+                  action: navigate
+                  navigation_path: /ui-ipad/0
+      #
+      # - entity: camera.frontcam
+      #   type: picture-entity
+      # - entity: camera.nurserycam
+      #   type: picture-entity
+      # - entity: camera.front_gate_live
+      #   type: picture-entity
+      # - entity: camera.front_gate_last_ring
+      #   type: picture-entity
+
+        # icon: mdi:arrow-left
+        # name: Back
+        # styles:
+        #   card:
+        #     - height: 93px
+        #     - width: 93px
+        #     - font-size: 15px
+        #     - white-space: initial
+        #     - text-overflow: initial
+        #     - overflow: initial

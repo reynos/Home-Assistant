@@ -1,0 +1,6 @@
+# persons.yaml
+
+- name: Darren
+  id: 1
+  device_trackers:
+    - device_tracker.darren_reynolds

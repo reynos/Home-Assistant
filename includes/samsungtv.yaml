@@ -1,0 +1,14 @@
+# samsungtv.yaml
+
+  - host: 10.0.26.27
+    name: Lounge TV
+    turn_on_action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: "84:a4:66:07:dc:af"
+  - host: 10.0.26.28
+    name: Master Bed TV
+    turn_on_action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: "90:f1:aa:38:5c:9c"

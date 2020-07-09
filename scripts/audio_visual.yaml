@@ -1,0 +1,62 @@
+### announce.yaml script
+
+donothing:
+  sequence:
+    - delay:
+        seconds: 0
+
+amp_on:
+  sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.yamaha_receiver
+
+amp_off:
+  sequence:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.yamaha_receiver
+
+amp_tv_on:
+  sequence:
+    - service: script.turn_on
+      data:
+        entity_id: script.ha_lounge_tv_on
+    - delay:
+        seconds: 1
+    - service: script.turn_on
+      entity_id: script.amp_select
+      data:
+        variables:
+          source: "TV"
+    - delay:
+        seconds: 1
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.yamaha_receiver
+        volume_level: 0.70
+
+amp_tv_off:
+  sequence:
+    - service: script.turn_on
+      data:
+        entity_id: script.ha_lounge_tv_off
+    - service: script.turn_on
+      data:
+        entity_id: script.amp_off
+
+amp_select:
+  alias: Amp Select Source
+  sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state('media_player.yamaha_receiver', 'off') %}
+            script.amp_on
+          {% else %}
+            script.donothing
+          {% endif %}
+    - service: media_player.select_source
+      data_template:
+        entity_id: media_player.yamaha_receiver
+        source: "{{ source }}"

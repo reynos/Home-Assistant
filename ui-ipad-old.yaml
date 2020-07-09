@@ -1,0 +1,641 @@
+# ui-lovelace.yaml
+title: 24 Avoca Street, Bondi
+views:
+  - icon: mdi:home
+    panel: true
+    cards:
+      - type: vertical-stack
+        show_header_toggle: false
+        cards:
+          - type: entity-filter
+            state_filter:
+              - 'on'
+            card:
+              type: glance
+              show_state: false
+              columns: 12
+            show_empty: false
+            entities:
+              - entity: binary_sensor.x5_xdrive30d_door_lock_state
+                icon: mdi:car-door
+              - entity: binary_sensor.front_door_30
+                icon: mdi:door-open
+              - entity: switch.back_deck_watering_25_2
+                icon: mdi:water
+                name: Deck Watering
+                tap_action:
+                  action: toggle
+              - entity:  light.kitchen_high_137
+                tap_action:
+                  action: toggle
+              - entity: light.kitchen_low_32_2
+                tap_action:
+                  action: toggle
+              - entity: light.kitchen_bench_19_2
+                name: Kit. Bench
+                tap_action:
+                  action: toggle
+              - entity: light.lounge_34_2
+                tap_action:
+                  action: toggle
+              - entity: light.tv_35
+                tap_action:
+                  action: toggle
+              - entity: light.stairs_33_2
+                tap_action:
+                  action: toggle
+              - entity: light.laundry_hall_37_2
+                tap_action:
+                  action: toggle
+              - entity: light.hall_36_2
+                tap_action:
+                  action: toggle
+              - entity: light.front_porch_light_86_2
+                tap_action:
+                  action: toggle
+              - entity: light.back_garden_29
+                tap_action:
+                  action: toggle
+              - entity: light.back_floodlights_26_2
+                tap_action:
+                  action: toggle
+              - entity: light.side_28_2
+                tap_action:
+                  action: toggle
+              - entity: light.study_level
+                tap_action:
+                  action: toggle
+              - entity: light.master_bedroom_level
+                tap_action:
+                  action: toggle
+              - entity: light.bedside_darren
+                tap_action:
+                  action: toggle
+              #- light.bedside_blythe
+                # tap_action:
+                #   action: toggle
+              - entity: light.front_bedroom_level
+                tap_action:
+                  action: toggle
+              - entity: switch.frontyard
+                icon: mdi:lightbulb
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            show_header_toggle: false
+            cards:
+              - type: vertical-stack
+                show_header_toggle: false
+                cards:
+                  - type: custom:button-card
+                    entity: input_boolean.morning_lights
+                    styles:
+                      card:
+                        - height: 88px
+                      name:
+                        - font-size: 15px
+                        - white-space: initial
+                        - text-overflow: initial
+                        - overflow: initial
+                  - type: custom:button-card
+                    entity: light.hall_36_2
+                    styles:
+                      card:
+                        - height: 88px
+                      name:
+                        - font-size: 15px
+                        - white-space: initial
+                        - text-overflow: initial
+                        - overflow: initial
+              - type: vertical-stack
+                show_header_toggle: false
+                cards:
+                  - type: custom:button-card
+                    entity: input_boolean.bed_time
+                    styles:
+                      card:
+                        - height: 88px
+                      name:
+                        - font-size: 15px
+                        - white-space: initial
+                        - text-overflow: initial
+                        - overflow: initial
+                  - type: custom:button-card
+                    entity: light.front_porch_light_86_2
+                    styles:
+                      card:
+                        - height: 88px
+                      name:
+                        - font-size: 15px
+                        - white-space: initial
+                        - text-overflow: initial
+                        - overflow: initial
+              - type: custom:canvas-gauge-card
+                entity: sensor.template_sensor_emoncms_net_grid_power
+                name: Grid Power Consuption
+                card_height: 160
+                shadow_height: 12%
+                font_size: 1em
+                gauge:
+                  type: "radial-gauge"
+                  title: KWh
+                  units:
+                  width: 220
+                  height: 220
+                  borderShadowWidth: 0
+                  borderOuterWidth: 0
+                  borderMiddleWidth: 0
+                  borderInnerWidth: 0
+                  minValue: -5
+                  maxValue: 6
+                  startAngle: 90
+                  ticksAngle: 180
+                  valueBox: false
+                  majorTicks:
+                    ["-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6"]
+                  minorTicks: 2
+                  strokeTicks: true
+                  highlights: [{ "from": -5, "to": -3, "color": "rgba(0,200,0,1)"},
+                               { "from": -3, "to": -1, "color": "rgba(0,255,0,.75)"},
+                               { "from": -1, "to": -0, "color": "rgba(0,255,0,.3)"},
+                               { "from": 0, "to": 1, "color": "rgba(255,255,0,.3)"},
+                               { "from": 1, "to": 3, "color": "rgba(255,255,0,1)"},
+                               { "from": 3, "to": 5, "color": "rgba(255,150,0,1)"},
+                               { "from": 5, "to": 6, "color": "rgba(255,0,0,1)" }]
+                  borders: false
+              - type: vertical-stack
+                show_header_toggle: false
+                cards:
+                  - type: vertical-stack
+                    show_header_toggle: false
+                    cards:
+                      - type: custom:button-card
+                        entity: input_boolean.lollie_lights
+                        styles:
+                          card:
+                            - height: 88px
+                          name:
+                            - font-size: 15px
+                            - white-space: initial
+                            - text-overflow: initial
+                            - overflow: initial
+                      - type: custom:button-card
+                        entity: light.master_bedroom_level
+                        styles:
+                          card:
+                            - height: 88px
+                          name:
+                            - font-size: 15px
+                            - white-space: initial
+                            - text-overflow: initial
+                            - overflow: initial
+              - type: vertical-stack
+                show_header_toggle: false
+                cards:
+                  - type: custom:button-card
+                    entity: input_boolean.open_front_gate
+                    styles:
+                      card:
+                        - height: 88px
+                      name:
+                        - font-size: 15px
+                        - white-space: initial
+                        - text-overflow: initial
+                        - overflow: initial
+                  - type: entities
+                    entities:
+                      - sensor.front_door_sensor_template
+                  # - type: custom:button-card
+                  #   entity: light.bedside_darren
+                  #   styles:
+                  #     card:
+                  #       - height: 80px
+                  #     name:
+                  #       - font-size: 15px
+                  #       - white-space: initial
+                  #       - text-overflow: initial
+                  #       - overflow: initial
+          - type: horizontal-stack
+            cards:
+              - type: horizontal-stack
+#                title: Kitchen
+                cards:
+                  - type: light
+                    entity:  light.kitchen_high_137
+                  - type: light
+                    entity: light.kitchen_low_32_2
+              - type: horizontal-stack
+#                title: Lounge
+                cards:
+                  - type: light
+                    entity: light.lounge_34_2
+                  - type: light
+                    entity: light.tv_35
+          - type: horizontal-stack
+            show_header_toggle: false
+            cards:
+              - type: vertical-stack
+                show_header_toggle: false
+                cards:
+                  - type: custom:mini-media-player
+                    entity: media_player.kitchen
+                    name: Kitchen Sonos
+                    hide:
+                      power: true
+                      icon: true
+                    speaker_group:
+                      platform: sonos
+                      show_group_count: true
+                      entities:
+                        - entity_id: media_player.lounge
+                          name: Lounge Sonos
+                  - entities:
+                    - input_select.house_mode
+                    show_header_toggle: false
+                    type: entities
+              - type: vertical-stack
+                cards:
+                  - type: custom:mini-media-player
+                    entity: media_player.lounge
+                    name: Lounge Sonos
+                    hide:
+                      power: true
+                      icon: true
+                  - entities:
+                    - sensor.template_calendar_family
+                    show_header_toggle: false
+                    type: entities
+          # - type: horizontal-stack
+          #   show_header_toggle: false
+          #   cards:
+          #     - type: custom:mini-media-player
+          #       entity: media_player.kitchen
+          #       name: Kitchen Sonos
+          #       hide:
+          #         power: true
+          #         icon: true
+          #       speaker_group:
+          #         platform: sonos
+          #         show_group_count: true
+          #         entities:
+          #           - entity_id: media_player.lounge
+          #             name: Lounge Sonos
+          #     - type: custom:mini-media-player
+          #       entity: media_player.lounge
+          #       name: Lounge Sonos
+          #       hide:
+          #         power: true
+          #         icon: true
+          # - type: horizontal-stack
+          #   cards:
+          #     - type: light
+          #       entity:  light.kitchen_high_137
+          #     - type: light
+          #       entity: light.kitchen_low_32_2
+          #     - type: light
+          #       entity: light.bedside_darren
+          #       name: Darren
+
+          # - type: horizontal-stack
+          #   show_header_toggle: true
+          #   cards:
+  - icon: mdi:stove
+    cards:
+      - type: vertical-stack
+        title: Kitchen
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity:  light.kitchen_high_137
+              - type: light
+                entity: light.kitchen_low_32_2
+      - type: entities
+        entities:
+          - light.kitchen_bench_19_2
+#          - entity: media_player.kitchen
+#            icon: mdi:speaker-wireless
+###        type: entities
+      - type: custom:mini-media-player
+        entity: media_player.kitchen
+        name: Kitchen Sonos
+        hide:
+          power: true
+          icon: true
+        speaker_group:
+          platform: sonos
+          show_group_count: true
+          entities:
+            - entity_id: media_player.lounge
+              name: Lounge Sonos
+      - type: vertical-stack
+        title: Lounge
+        show_header_toggle: true
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.lounge_34_2
+              - type: light
+                entity: light.tv_35
+          - type: custom:mini-media-player
+            entity: media_player.lounge
+            name: Lounge Sonos
+            hide:
+              power: true
+              icon: true
+          - type: custom:mini-media-player
+            entity: media_player.plex_plex_for_samsung_tv_ua65js8000
+            name: Plex Lounge
+            artwork: cover
+            hide:
+              icon: true
+              power: true
+              volume: true
+              runtime: false
+              play_stop: false
+  #    - type: media-control
+  #      entity: media_player.lounge
+  - icon: mdi:bed-empty
+    cards:
+      - type: vertical-stack
+        show_header_toggle: flase
+        cards:
+          - type: horizontal-stack
+            show_header_toggle: false
+            cards:
+              - type: light
+                entity: light.master_bedroom_level
+              - type: light
+                entity: light.bedside_darren
+          - type: custom:mini-media-player
+            entity: media_player.master_bedroom_tv
+            name: Master Bedroom TV
+            hide:
+              icon: true
+          - type: custom:mini-media-player
+            entity: media_player.master_bedroom
+            name: Master Bedroom Sonos
+            hide:
+              icon: true
+          - type: custom:mini-media-player
+            entity: media_player.plex_plex_for_samsung_tv_ua60h7000
+            name: Plex Master Bedroom
+            artwork: cover
+            hide:
+              icon: true
+              power: true
+              volume: true
+              runtime: false
+              play_stop: false
+      - type: entities
+        show_header_toggle: false
+        entities:
+            # Displays the light entity. It's optional
+            - entity: light.front_bedroom_level
+            - entity: light.bedside_darren
+            - type: 'custom:rgb-light-card'
+              entity: light.bedside_darren
+              justify: between
+              colors:
+                  # Any option of the light.turn_on service can be used in each color
+                  - rgb_color:
+                        - 255
+                        - 64
+                        - 0
+                    brightness: 120
+                    transition: 1
+                  - rgb_color:
+                        - 255
+                        - 181
+                        - 108
+                    brightness: 100
+                    transition: 1
+                  # - rgb_color:
+                  #       - 255
+                  #       - 0
+                  #       - 0
+                  #   brightness: 100
+                  #   transition: 1
+
+                  # - hs_color:
+                  #       - 60
+                  #       - 30
+                  #   icon_color: '#fff8b0' # Override icon color
+
+  - icon: mdi:stairs
+    cards:
+      - entities:
+        - light.stairs_33_2
+        - entity: input_number.stairs_light_timer
+          icon: mdi:timer
+        - entity: binary_sensor.front_door_30
+          icon: mdi:door
+        show_header_toggle: false
+        type: entities
+        title: Stairs/Hall/Bathroom
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.hall_36_2
+          - type: light
+            entity: light.laundry_hall_37_2
+      - entities:
+        - entity: media_player.bathroom
+          icon: mdi:speaker-wireless
+        type: entities
+  - icon: mdi:tree
+    cards:
+      - entities:
+        - light.back_floodlights_26_2
+        - light.back_garden_29
+        - light.side_28_2
+        - entity: switch.back_deck_watering_25_2
+          name: Back Deck watering
+          icon: mdi:water
+        - entity: input_number.backdeck_watering_timer
+          name: Timer
+          icon: mdi:timer
+        type: entities
+        title: Backyard
+      - entities:
+        - light.front_porch_light_86_2
+        - switch.frontyard
+        - switch.front_gate_ir
+        - entity: media_player.front_garden
+          icon: mdi:speaker-wireless
+        - sun.sun
+        show_header_toggle: false
+        type: entities
+        title: Frontyard
+      - entity: camera.front_gate_live
+        type: picture-entity
+      - entity: camera.front_gate_last_ring
+        type: picture-entity
+  - icon: mdi:weather-partly-cloudy
+    cards:
+      - type: weather-forecast
+        entity: weather.dark_sky
+        name: Sydney Weather
+      - entity: camera.bom_radar_loop_sydney
+        type: picture-entity
+        title: BOM Radar
+      - type: sensor
+        entity: sensor.outside_temp
+        name: Outside Temperature
+        graph: line
+        icon: mdi:thermometer
+        hours_to_show: 24
+        detail: 2
+  - icon: mdi:cctv
+    cards:
+      - entity: camera.frontcam
+        type: picture-entity
+      - entity: camera.nurserycam
+        type: picture-entity
+      - entity: camera.front_gate_live
+        type: picture-entity
+      - entity: camera.front_gate_last_ring
+        type: picture-entity
+  - icon: mdi:solar-power
+    cards:
+      - entities:
+        - sensor.solaredge_current_power_template
+        - sensor.solaredge_energy_today_template
+        - sensor.solaredge_energy_this_month_template
+        - sensor.solaredge_energy_this_year_template
+        - sensor.solaredge_lifetime_energy_template
+        type: entities
+        show_header_toggle: false
+        title: SolarEdge
+      - entities:
+        - sensor.template_sensor_emoncms_net_grid_power
+        - sensor.template_sensor_emoncms_house_consumption
+        - sensor.template_sensor_emoncms_solar_production
+        type: entities
+        show_header_toggle: false
+        title: EmonCMS
+      - type: sensor
+        entity: sensor.solaredge_current_power_template
+        name: Solar Power
+        graph: line
+        icon: mdi:solar-power
+        hours_to_show: 24
+        detail: 2
+  - icon: mdi:car-side
+    cards:
+      - entities:
+          - lock.x5_xdrive30d_lock
+        title: Lock
+        type: entities
+      - entities:
+        - device_tracker.x5_xdrive30d
+        - sensor.template_x5_xdrive30d_mileage
+        - sensor.template_x5_xdrive30d_remaining_fuel
+        - sensor.template_x5_xdrive30d_remaining_range_fuel
+        - binary_sensor.x5_xdrive30d_lights_parking
+        - binary_sensor.x5_xdrive30d_door_lock_state
+        - sensor.template_binary_sensor_x5_xdrive30d_windows_front
+        - sensor.template_binary_sensor_x5_xdrive30d_windows_rear
+        - sensor.template_binary_sensor_x5_xdrive30d_front_doors
+        - sensor.template_binary_sensor_x5_xdrive30d_rear_doors
+        - sensor.template_binary_sensor_x5_xdrive30d_bonnet_rear
+        - sensor.template_binary_sensor_x5_xdrive30d_sunroof
+        title: Car
+        type: entities
+        show_header_toggle: false
+      - entity: camera.bmw_x5_location
+        type: picture-entity
+      - entities:
+        - sensor.333_to_beach_template
+        - sensor.380_to_beach_template
+        - sensor.bus_from_beach_template
+        - sensor.333_to_bondi_junction
+        - sensor.380_to_bondi_junction
+        - sensor.381_to_bondi_junction
+        title: Buses
+        type: entities
+        show_header_toggle: false
+  - icon: mdi:help
+    cards:
+      - entity: media_player.master_bedroom_tv
+        type: media-control
+      - entity: media_player.front_garden
+        type: media-control
+      - entity: media_player.loungeroom_chromecast
+        type: media-control
+      - entity: media_player.lounge
+        type: media-control
+      - entity: media_player.bed_room_ua60h7000
+        type: media-control
+      - entity: media_player.study
+        type: media-control
+      - entity: camera.front_gate_last_motion
+        type: picture-entity
+      - entity: media_player.lounge_ua65js8000
+        type: media-control
+      - entity: media_player.ensuite
+        type: media-control
+      - entity: media_player.girl_s_room
+        type: media-control
+      - entities:
+          - switch.kitchen_sensor_20
+          - switch.uv_sensor_81
+          - switch.front_door_30_2
+          - switch.girls_room_66
+          - switch.aeon_labs_dsc12104_micro_smart_energy_switch_switch
+        title: Switch
+        type: entities
+      - entities:
+          - zwave.aeon_labs_zw090_z_stick_gen5_au
+          - zwave.aeon_labs_dsc19103_micro_smart_dimmer_2nd_edition
+          - zwave.aeon_labs_dsc19103_micro_smart_dimmer_2nd_edition_2
+          - zwave.aeon_labs_dsc12104_micro_smart_energy_switch
+          - zwave.unknown_node_4
+        title: Z-Wave
+        type: entities
+#      - type: glance
+#        title: Glance card sample
+#        entities:
+#          - device_tracker.darren_reynolds
+#          - device_tracker.blythe
+#          - entity: sensor.outside_temp
+#            icon: mdi:thermometer
+#          - sensor.dark_sky_summary_template
+#          - sensor.template_bondi_max_temp
+#          - sensor.template_calendar_bin_nights
+
+# example horizontal stack of buttons for house mode
+#      - type: vertical-stack
+#        cards:
+#          - type: "custom:button-card"
+#            color_type: label-card
+#            color: rgb(44, 109, 214)
+#            name: House Mode
+#          - type: horizontal-stack
+#            cards:
+#              - type: "custom:button-card"
+#                entity: house_mode_day
+#                color_type: card
+#                color: rgb(66, 134, 244)
+#                icon: mdi:numeric-1-box-outline
+#              - type: "custom:button-card"
+#                entity: house_mode_evening
+#                color_type: card
+#                color: rgb(66, 134, 244)
+#                icon: mdi:numeric-2-box-outline
+#              - type: "custom:button-card"
+#                entity: house_mode_bedtime
+#                color_type: card
+#                color: rgb(66, 134, 244)
+#                icon: mdi:numeric-3-box-outline
+#              - type: "custom:button-card"
+#                entity: house_mode_night
+#                color_type: card
+#                color: rgb(66, 134, 244)
+#                icon: mdi:numeric-4-box-outline
+#              - type: "custom:button-card"
+#                entity: house_mode_holiday
+#                color_type: card
+#                color: rgb(66, 134, 244)
+#                icon: mdi:eye-off-outline

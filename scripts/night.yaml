@@ -1,0 +1,44 @@
+# script night.yaml
+
+night:
+  alias: "Night lights off"
+  sequence:
+    - service: logbook.log
+      data_template:
+        name: "Script:"
+        message: Night lights OFF
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.house_mode
+        option: Night
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.morning_lights_flag #re-sets the morning lights trigger for the next day
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.morning_lights #ensure the switch is off - in case the lights have been turned off individually
+    - service: light.turn_off
+      entity_id:
+        - group.all_lights_not_beds
+        - light.bargeboard
+    - service: switch.turn_off
+      entity_id:
+        - switch.frontyard
+        - switch.back_deck_watering_25_2
+
+night_holiday:
+  alias: "Evening Holiday lights off"
+  sequence:
+    - service: logbook.log
+      data_template:
+        name: "Script:"
+        message: Night HOLIDAY lights OFF
+    - service: light.turn_off
+      entity_id:
+        - group.all_lights_not_beds
+        - light.bargeboard
+    - service: switch.turn_off
+      entity_id:
+        - switch.frontyard
+        - light.bargeboard
+        - switch.back_deck_watering_25_2
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.evening_holiday

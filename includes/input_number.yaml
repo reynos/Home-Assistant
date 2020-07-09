@@ -1,0 +1,62 @@
+## input_number.yaml
+doorbell_volume:
+    name: Doorbell Volume
+    min: 0.2
+    max: 0.95
+    step: 0.05
+stairs_light_timer:
+    name: Stair Light Timer Duration
+#    initial: 2
+    min: 0
+    max: 5
+    step: 1
+lights_auto_dim_level:
+    name: Lights Auto Dim Level
+    initial: 20
+    min: 5
+    max: 255
+    step: 5
+front_porch_motion_lights_timer_duration:
+    name: Porch Motion Light Timer Duration
+#    initial: 2
+    min: 0
+    max: 10
+    step: 1
+front_porch_timer_duration:
+    name: Porch Light Timer Duration
+#    initial: 3
+    min: 0
+    max: 10
+    step: 1
+front_lights_timer_duration:
+    name: Front Lights Timer Duration
+#    initial: 3
+    min: 0
+    max: 10
+    step: 1
+backdeck_watering_timer:
+    name: Back Deck Watering Timer Duration
+#    initial: 2
+    min: 0
+    max: 5
+    step: 1
+kitchen_high_dimmer:
+    name: Dimmer
+    min: 0
+    max: 100
+    step: 10
+kitchen_low_dimmer:
+    name: Dimmer
+    min: 0
+    max: 100
+    step: 10
+lounge_dimmer:
+    name: Dimmer
+    min: 0
+    max: 100
+    step: 10
+tv_dimmer:
+    name: Dimmer
+    min: 0
+    max: 100
+    step: 10

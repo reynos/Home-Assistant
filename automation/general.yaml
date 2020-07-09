@@ -1,0 +1,64 @@
+## general.yaml automations
+
+# add to below TTS "front door still open"
+- alias: Front Door Open
+  trigger:
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Bedtime'
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Night'
+  condition:
+    condition: state
+    entity_id: binary_sensor.front_door_30
+    state: 'on'
+  action:
+    - service: script.turn_off
+      entity_id: script.announce
+    - service: script.turn_on
+      entity_id: script.announce
+      data:
+        variables:
+          sonos_entity: 'media_player.kitchen'
+          message: 'The front door is still open'
+          volume: .3
+          delay: 3
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Front Door Still OPEN!"
+
+- alias: "Tasmota State on HA Restart"
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "cmnd/tasmotas/backlog"
+        payload: "power1 ;power2 ;power3 ;power4 ;power5; dimmer; state "
+
+- alias: 'Update BOM Icons'
+  trigger:
+    - event: start
+      platform: homeassistant
+    - entity_id: sun.sun
+      platform: state
+      to: 'above_horizon'
+    - entity_id: sun.sun
+      platform: state
+      to: 'below_horizon'
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.bom_forecast_0, sensor.bom_forecast_1, sensor.bom_forecast_2, sensor.bom_forecast_3, sensor.bom_forecast_4, sensor.bom_forecast_5, sensor.bom_forecast_6
+
+
+# ## Auto change themes
+# - alias: hass_theme
+#   trigger:
+#     - platform: state
+#       entity_id: input_select.hass_theme
+#   action:
+#     - service: frontend.set_theme
+#       data_template:
+#         name: "{{ states.input_select.hass_theme.state }}"

@@ -1,0 +1,37 @@
+## Evening lights script
+
+evening:
+  alias: "Evening lights on"
+  sequence:
+    # - service: logbook.log
+    #   data_template:
+    #     name: "Script:"
+    #     message: Evening lights ON
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.house_mode
+        option: Evening
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Evening lights on"
+#    - service: frontend.set_theme
+#      data:
+#        name: night
+
+evening_holiday:
+  alias: "Evening Holiday lights on"
+  sequence:
+    - service: logbook.log
+      data_template:
+        name: "Script:"
+        message: Evening HOLIDAY lights ON
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.evening_holiday
+    - service: light.turn_on
+      entity_id: light.kitchen_bench_19_2
+    - service: switch.turn_on
+      entity_id: switch.frontyard
+    - service: light.turn_on
+      entity_id: light.bargeboard
+    - service: light.turn_on
+      entity_id: light.tramopline

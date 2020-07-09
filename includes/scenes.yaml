@@ -1,0 +1,107 @@
+### scenes.yaml
+##
+## no scenes are used any longer
+##
+#some neat code to use in future:
+#automations
+#- alias: Living Room Scene
+#  trigger:
+#    platform: state
+#    entity_id: input_select.livingroom_scene
+#  action:
+#    - service: scene.turn_on
+#      data_template:
+#        entity_id: scene.{{ states.input_select.livingroom_scene.state | replace(' ', '_') | lower | string }}
+
+  - name: Morning
+    entities:
+      light.kitchen_bench_19_2: on
+      light.kitchen_high_137:
+        state: on
+        brightness: 20
+#      light.lounge_lamp_18:
+#        state: on
+#        rgb_color: [255, 64, 0]
+#        brightness: 60 # brightness not working??
+
+  - name: Morning off
+    entities:
+      light.kitchen_bench_19_2: off
+      light.kitchen_high_137: off
+      light.kitchen_low_32_2: off
+#      light.lounge_lamp_18: off
+
+  - name: Test
+    entities:
+      light.bedside_lamp_darren:
+        state: on
+        rgb_color: [255,64,0]
+        brightness: 40
+
+  - name: Evening
+    entities:
+      group.evening: on
+      switch.frontyard: on
+      light.bedside_lamp_darren:
+        state: on
+        rgb_color: [255,64,0]
+        brightness: 50
+#xy_color: [0.677, 0.319]
+
+#        brightness: 120
+        # rgb_color: [255, 64, 0]
+        # brightness: 40 # brightness not working??
+#        brightness_pct: 50
+#        rgb_color: [255, 147, 41]
+#        kelvin: 1900
+
+# triggered at 10:30 every night
+  - name: Night
+    entities:
+# add turn on light sensors here
+      group.all_lights_not_beds: off
+#      light.lounge_lamp_18: off
+      switch.frontyard: off
+      switch.back_deck_watering_25_2: off
+#      input_select.house_mode:
+#        option: "Night"
+
+  - name: Bedtime
+    entities:
+      group.all_lights_not_beds: off
+      light.stairs_33_2: on
+# this inuput select is OK cause Bedtime is only even manually selecte and will jump out of Holiday mode
+#      input_select.house_mode:
+#        option: Bedtime
+
+# triggered at 6am every morning
+  - name: Day
+    entities:
+#      group.all_lights_not_beds: off
+#      light.lounge_lamp_18: off
+# add turn off light sensors here
+# just to have something here:
+      switch.frontyard: off
+      switch.back_deck_watering_25_2: off
+#      input_select.house_mode:
+#        option: "Day"
+
+# tiggered at Sunset only if Holiday switch is ON
+  - name: Holiday Evening
+    entities:
+# when on holidays only turn on selected lights
+      switch.frontyard: on
+      light.kitchen_bench_19_2: on
+
+  # - name: Auto Dim
+  #   entities:
+  #     service_template: >
+  #       '{{ trigger.payload }}'
+  #       state: on
+  #       brightness: 20
+  #
+  #     notify.{{ trigger.topic.split('/')[-1] }}
+  #   data_template:
+  #     message:
+  #
+  #

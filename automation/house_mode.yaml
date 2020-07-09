@@ -1,0 +1,188 @@
+### house_mode.yaml automation
+
+## Automated Select Scenes - House modes Evening, Night and Day (Bedtime and Holiday only called manually)
+
+- alias: Set Evening mode at Sunset
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+      # after sunset
+      below: 1.0
+    - platform: numeric_state
+      entity_id: sensor.light_sensor_130 # this updates fom the Z-wave sensor every 1 min
+      below: 25
+  condition:
+    - condition: state
+      entity_id: binary_sensor.before_sunset
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.evening_lights_on_flag
+      state: 'off'
+  action:
+    - service: logbook.log
+      data_template:
+        name: 'Sunset:'
+        message: 'Evening lights ON ({{ trigger.to_state.attributes.friendly_name }})'
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.house_mode", "Holiday") %}
+            script.evening_holiday
+          {% else %}
+            script.evening
+          {% endif %}
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.evening_lights_on_flag
+
+- alias: Auto Set Night mode
+  trigger:
+    platform: time
+    at: '22:30:00'
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.house_mode", "Holiday") %}
+            script.night_holiday
+          {% else %}
+            script.night
+          {% endif %}
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.evening_lights_on_flag
+
+- alias: Set Day mode
+  trigger:
+    platform: time
+    at: '05:30:00'
+  action:
+    - service: script.turn_off
+      data:
+        entity_id:
+          - script.day
+          - script.day_holiday
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.house_mode", "Holiday") %}
+            script.day_holiday
+          {% else %}
+            script.day
+          {% endif %}
+
+- alias: "House Mode Bedtime"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: 'Bedtime'
+  condition:
+    condition: state
+    entity_id: input_boolean.bedtime_beacon_flag
+    state: 'off' # remove quotes?
+  action:
+    - service: script.turn_off
+      data:
+        entity_id: script.bedtime
+    - service: script.turn_on
+      data:
+        entity_id: script.bedtime
+
+- alias: "House Mode Evening"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: 'Evening'
+  action:
+    # - service: light.turn_on
+    #   data:
+    #     entity_id: group.evening
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.kitchen_bench_19_2
+          - light.stairs_33_2
+          - light.back_garden_29
+          - light.trampoline
+          - light.bargeboard
+    - service: light.turn_on
+      data:
+        entity_id: light.bedside_darren
+        brightness: 150
+        rgb_color: [255,0,0]
+    - service: switch.turn_on
+      data:
+        entity_id: switch.frontyard
+
+- alias: "House Mode Day"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: 'Day'
+  action:
+    - service: script.turn_off
+      data:
+        entity_id:
+          - script.day
+          - script.day_holiday
+    - service: script.turn_on
+      entity_id: script.day
+
+- alias: "House Mode Night"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: 'Night'
+  action:
+    - service: script.turn_off
+      data:
+        entity_id:
+          - script.night
+          - script.night_holiday
+    - service: script.turn_on
+      entity_id: script.night
+
+- alias: "House Mode Holiday"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: 'Holiday'
+  action:
+    - service: notify.ios_darren
+      data:
+        message: "Holiday mode set"
+        data:
+          push:
+            badge: 5
+          subtitle: "Mode"
+
+- alias: "House Mode Holiday Off"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    from: 'Holiday'
+  action:
+    - service: notify.ios_darren
+      data:
+        message: "Holiday mode OFF"
+        data:
+          push:
+            badge: 5
+          subtitle: "Mode"
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.evening_holiday
+
+#these allow a button press to change the House Mode input select
+#- alias: "House Mode  Select"
+#  trigger:
+#    platform: state
+#    entity_id: input_boolean.house_mode_
+#    from: 'on'
+#  action:
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.house_mode
+#        option: ''
+#    - service: input_boolean.turn_off
+#      entity_id: input_boolean.house_mode_

@@ -1,0 +1,81 @@
+# lovelace.yaml
+
+mode: yaml
+
+resources:
+  - url: /local/community/mini-media-player/mini-media-player-bundle.js?v=1.6.0
+    type: module
+  - url: /local/community/button-card/button-card.js
+    type: module
+  - url: /local/community/light-entity-row/light-entity-row.js
+    type: module
+  - url: /local/community/rgb-light-card/card.js
+    type: module
+  - url: /local/community/canvas-gauge-card/canvas-gauge-card.js
+    type: module
+  - url: /local/community/bar-card/bar-card.js
+    type: module
+  - url: /hacsfiles/bom-weather-card/bom-weather-card.js
+    type: module
+  - url: /community_plugin/calendar-card/calendar-card.js
+    type: js
+  - url: /community_plugin/light-entity-card/light-entity-card.js
+    type: js
+
+dashboards:
+  ui-iphone: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-iphone.yaml
+    title: iPhone
+    icon: mdi:cellphone-iphone
+    show_in_sidebar: true
+#    require_admin: true
+  ui-ipad: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-ipad.yaml
+    title: iPad
+    icon: mdi:tablet-ipad
+    show_in_sidebar: true
+  ui-ipad-test: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-ipad-test.yaml
+    title: iPad test
+    icon: mdi:test-tube
+    show_in_sidebar: true
+  ui-test: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-test.yaml
+    title: Test
+    icon: mdi:test-tube
+    show_in_sidebar: true
+  ui-cameras: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-cameras.yaml
+    title: Cameras
+    icon: mdi:video
+    show_in_sidebar: false
+  ui-camera-girls: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-camera-girls.yaml
+    title: Girls
+    icon: mdi:video
+    show_in_sidebar: false
+  ui-camera-front-porch: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-camera-front-porch.yaml
+    title: Girls
+    icon: mdi:video
+    show_in_sidebar: false
+  ui-camera-front-gate: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-camera-front-gate.yaml
+    title: Girls
+    icon: mdi:video
+    show_in_sidebar: false
+
+#    require_admin: true
+  #lovelace-ipad:
+  #  mode: yaml
+  #  title: hidden
+  #  show_in_sidebar: false
+  #  filename: ui-ipad.yaml

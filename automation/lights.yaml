@@ -1,0 +1,238 @@
+## lights.yaml automation
+
+## Front Porch Light Night Gate
+#- alias: "Front Porch Motion Light ON"
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.front_porch_102
+#    to: 'on'
+#      below: 50
+#  action:
+#    - service: logbook.log
+#      data_template:
+#        name: 'Front Porch:'
+#        message: 'motion detected'
+#    - service: switch.turn_on
+#      entity_id: light.front_porch_light_86
+#    - service: script.turn_on
+#      entity_id: script.timer_front_porch_motion_off
+
+- alias: "Morning Lights manual ON"
+  trigger:
+    platform: state
+    entity_id: input_boolean.morning_lights
+    to: 'on'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.morning
+    # - service: light.turn_on
+    #   entity_id:
+    #     - light.kitchen_bench_19_2
+    #     -  light.kitchen_high_137
+
+## Kitchen Morning Motion light on
+- alias: "Kitchen Morning Lights sensor ON"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.kitchen_sensor_116
+    to: 'on'
+  condition:
+# add or condition - if Holiday - send notify to mobile otherwise do below
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Day'
+    - condition: state
+      entity_id: input_boolean.morning_lights_flag
+      state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.light_sensor_130
+      below: 50
+  action:
+    - service: logbook.log
+      data_template:
+        name: Kitchen
+        message: Morning Lights auto tiggered
+        entity_id: binary_sensor.kitchen_sensor_116
+        domain: binary_sensor
+    - service: script.turn_on
+      entity_id: script.morning_lights_on
+
+
+- alias: "Morning Lights manual OFF"
+  trigger:
+    platform: state
+    entity_id: input_boolean.morning_lights
+    to: 'off'
+  action:
+    - service: light.turn_off
+      entity_id: group.morning_off
+
+- alias: "Morning Lights AUTO OFF"
+  trigger:
+    # platform: numeric_state
+    # entity_id: sun.sun
+    # value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+    # # after sunrise
+    # above: 6.0
+    platform: numeric_state
+    entity_id: sensor.light_sensor_130
+    above: 90
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.morning_lights
+
+- alias: Bedtime switch on
+  trigger:
+    platform: state
+    entity_id: input_boolean.bed_time
+    to: 'on'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.house_mode
+      option: 'Bedtime'
+
+#- alias: Arrive_home_evening
+#  trigger:
+#    platform: state
+#    entity_id: input_boolean.darrenhome, input_boolean.blythehome
+#    to: 'on'
+#  condition:
+#    condition: state
+#    entity_id: sun.sun
+#    state: 'below_horizon'
+#  action:
+#    - service: light.turn_on
+#      entity_id:
+#        light.front_porch_light_86
+#    - service: script.turn_on
+#      data_template:
+#        entity_id: >
+#          {% if states.input_select.house_mode.state == 'Evening' %}
+#            script.timer_front_lights_off_evening
+#          {% elif states.input_boolean.evening_holiday.state == ON %}
+#            script.timer_front_lights_off_evening
+#          {% elif states.input_select.house_mode.state == 'Bedtime' %}
+#            script.timer_front_lights_off_evening
+#          {% elif states.input_select.house_mode.state == 'Night' %}
+#            script.timer_front_lights_off_night
+#          {% else %}
+#            script.timer_front_lights_off_night
+#          {% endif %}
+
+- alias: Bedtime switch off # if triggered manually while the timer is running will turn the stairs light off early
+  trigger:
+    platform: state
+    entity_id: input_boolean.bed_time
+    to: 'off'
+  action:
+    - service: script.turn_off
+      data:
+        entity_id: script.bedtime
+    - service: light.turn_off
+      entity_id: light.stairs_33_2
+
+- alias: "Holiday Evening Light"
+  trigger:
+    platform: state
+    entity_id: input_boolean.evening_holiday
+    to: 'on'
+  action:
+    service: light.turn_on
+    entity_id: switch.frontyard
+
+# add in a check for the below if house mode= night only, if not skip the turn on and just switch ib off
+- alias: "Lollie Night light ON"
+  trigger:
+    platform: state
+    entity_id: input_boolean.lollie_lights
+    to: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: group.lollie_lights
+    - delay:
+        minutes: 5
+    - service: light.turn_off
+      entity_id: group.lollie_lights
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.lollie_lights
+
+- alias: "Lollie Night light OFF"
+  trigger:
+    platform: state
+    entity_id: input_boolean.lollie_lights
+    to: 'off'
+  action:
+    - service: light.turn_off
+      entity_id: group.lollie_lights
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.lollie_lights
+
+- alias: Tramp light off
+  trigger:
+    platform: time
+    at: '19:30:00'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: light.turn_off
+      entity_id: light.trampoline
+
+# Auto-dim lights
+- alias: "Auto Dim lights"
+  trigger:
+    platform: state
+    entity_id:
+      - light.kitchen_low_32_2
+      - light.kitchen_high_137
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: "{{ trigger.entity_id }}"
+        brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
+
+## Dimmers
+#- alias: Kitchen High Dimmer
+#  trigger:
+#    platform: state
+#    entity_id: input_number.kitchen_high_dimmer
+#  action:
+#    service: light.turn_off
+#    entity_id: light.stairs_33_2
+
+## Hall Night Motion
+#- alias: "Hall motion sensor ON"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.hall_sensor_50
+#      from: 'off'
+#      to: 'on'
+#  condition:
+#    - condition: state
+#      entity_id: input_select.house_mode
+#      state: 'Night'
+#  action:
+#    - service: light.turn_on
+#      entity_id: light.tv_4
+#      data:
+#        brightness: 30
+#Turn off Hall light 2 minutes after last movement
+#- alias: "Hall motion sensor OFF"
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.hall_sensor_50
+#    to: 'off'
+#    for:
+#      minutes: 5
+#  condition:
+#    condition: state
+#    entity_id: input_select.house_mode
+#    state: 'Night'
+#  action:
+#      service: light.turn_off
+#      entity_id: light.tv_4

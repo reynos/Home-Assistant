@@ -1,0 +1,173 @@
+### tracked events automation - things happening with beacons or presence
+
+- alias: Frontgate Darren
+  trigger:
+    platform: state
+    entity_id: device_tracker.darren_reynolds
+    to: 'frontgate'
+  action:
+    - service: notify.ios_darren
+      data:
+        message: "Darren trigger Frontgate"
+    - service: switch.turn_on
+      data:
+        entity_id: switch.front_gate_relay_1
+
+- alias: Frontgate Blythe
+  trigger:
+    platform: state
+    entity_id: device_tracker.reynolds_blythe
+    to: 'frontgate'
+  action:
+    - service: notify.ios_darren
+      data:
+        message: "Blythe trigger Frontgate"
+    - service: switch.turn_on
+      data:
+        entity_id: switch.front_gate_relay_1
+
+- alias: Masterbed Beacon Goodnight
+  trigger:
+    platform: state
+    entity_id: device_tracker.reynolds_darren
+    to: masterbed
+  condition:
+    - condition: time
+      after: '20:00:00'
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Evening'
+    - condition: state
+      entity_id: input_boolean.bedtime_beacon_flag
+      state: 'off'
+##add a wait timer (reset it first) and a wait_template for the actionable notification - wait for 1 2 then bedtime set
+##- wait_template: "{{ states.climate.kitchen.attributes.valve|int < 10 }}"
+##  timeout: '00:01:00'
+  action: # actionable notification
+    service: notify.ios_darren
+    data:
+      message: "Going to Bed? What to do with the lights?"
+      data:
+        push:
+          badge: 5
+          category: "bedtime_lights" # Needs to match the top level identifier you used in the ios configuration
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.bedtime
+
+- alias: Bedtime Now
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: BEDTIME_NOW
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.bedtime_now
+- alias: Bedtime Delay
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: BEDTIME_DELAY
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.bedtime
+    - service: logbook.log
+      data_template:
+        name: Bedtime DELAY
+        message: action selected
+- alias: Bedtime Set Night
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: NIGHT
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.night
+    - service: logbook.log
+      data_template:
+        name: Bedtime NIGHT
+        message: action selected
+
+- alias: Morning Lights
+  trigger:
+    platform: state
+    entity_id: device_tracker.reynolds_darren
+    to: kitchen
+  condition:
+    - condition: state
+      entity_id: input_boolean.morning_lights_flag
+      state: 'off' #so this only happerns once in the morning
+    - condition: time
+      before: '07:30:00'
+  action: # in future make this an actionable nofication?
+    - service: script.turn_on
+      entity_id: script.morning_lights
+
+#study
+# beacons are inacurate - commenting out
+#- alias: Enter Study
+#  trigger:
+#    platform: state
+#    entity_id: device_tracker.reynolds_darren, device_tracker.reynolds_blythe
+#    to: 'study'
+#  condition:
+#    - condition: state
+#      entity_id: input_select.house_mode
+#      state: 'Evening'
+#  action:
+#    - service: light.turn_on
+#      entity_id: light.study_lamp_18
+#
+#- alias: Leave Study
+#  trigger:
+#    platform: state
+#    entity_id: device_tracker.reynolds_darren, device_tracker.reynolds_blythe
+#    from: 'study'
+#  condition:
+#    - condition: state
+#      entity_id: input_select.house_mode
+#      state: 'Evening'
+#    - condition: and
+#      conditions:
+#        - condition: template
+#          value_template: "{{ states.device_tracker.reynolds_darren.state != 'study' }}"
+#        - condition: template
+#          value_template: "{{ states.device_tracker.reynolds_blythe.state != 'study' }}"
+#  action:
+#    - service: light.turn_off
+#      entity_id: light.study_lamp_18
+
+#- alias: Masterbed on
+#  trigger:
+#    platform: states
+#    entity_id: device_tracker.reynolds_darren
+#    to: masterbed
+#  action:
+#    service: light.turn_on
+#    entity_id: light.study_31
+
+#- alias: Masterbed off
+#  trigger:
+#    platform: state
+#    entity_id: device_tracker.reynolds_darren
+#    from: masterbed
+#  action:
+#    service: light.turn_off
+#    entity_id: light.study_31
+
+#- alias: Enter Front Door
+#  trigger:
+#    platform: zone
+#    entity_id: device_tracker.reynolds_darren
+#    zone: zone.FrontDoorBeacon
+#    # Event is either enter or leave
+#    event: enter
+#  action:
+#    service: light.turn_on
+#    entity_id: light.hallway_5
