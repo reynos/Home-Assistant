@@ -40,3 +40,13 @@
   payload_off: "OFF"
   payload_available: "Online"
   payload_not_available: "Offline"
+- platform: mqtt
+  name: "Xmas Lights"
+  state_topic: "stat/xmas/POWER"
+  command_topic: "cmnd/xmas/POWER"
+  availability_topic: "tele/xmas/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"

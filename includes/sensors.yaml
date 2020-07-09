@@ -519,6 +519,64 @@
   qos: 1
   payload_available: "Online"
   payload_not_available: "Offline"
+#### Xmas Lights
+- platform: mqtt
+  name: "Xmas Lights Watts"
+  state_topic: "tele/xmas/SENSOR"
+  value_template: "{{value_json['ENERGY'].Power }}"
+  qos: 2
+  unit_of_measurement : "W"
+  icon: mdi:flash-circle
+  availability_topic: "tele/xmas/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Xmas Lights Voltage"
+  state_topic: "tele/xmas/SENSOR"
+  value_template: "{{value_json['ENERGY'].Voltage }}"
+  qos: 2
+  unit_of_measurement : "V"
+  icon: mdi:flash-circle
+  availability_topic: "tele/xmas/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Xmas Lights Amps"
+  state_topic: "tele/xmas/SENSOR"
+  value_template: "{{value_json['ENERGY'].Current }}"
+  qos: 2
+  unit_of_measurement : "A"
+  icon: mdi:flash-circle
+  availability_topic: "tele/xmas/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Xmas Lights Energy Today"
+  state_topic: "tele/xmas/SENSOR"
+  value_template: "{{value_json['ENERGY'].Today }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/xmas/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Xmas Lights Energy Yesterday"
+  state_topic: "tele/xmas/SENSOR"
+  value_template: "{{value_json['ENERGY'].Yesterday }}"
+  qos: 2
+  unit_of_measurement : "kWh"
+  availability_topic: "tele/xmas/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  state_topic: "tele/xmas/STATE"
+  name: "Xmas Lights Signal"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/xmas/LWT"
+  qos: 1
+  payload_available: "Online"
+  payload_not_available: "Offline"
 
 - platform: qnap
   host: !secret qnap_ip

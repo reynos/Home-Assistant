@@ -9,22 +9,18 @@ views:
     #   - entity: binary_sensor.kitchen_sensor_116
     #   - entity: sensor.temperature_sensor_117
     cards:
-      - type: glance
-        columns: 3
-        entities:
-          - switch.arlec_sw1
-          - sensor.outside_temp
+
       - entities:
         - input_boolean.announce_test
         - light.bedside_lamp_darren
         - scene.test
         - scene.morning
         - scene.morning_off
-        - script.day
         - light.bedside_lamp_darren
         - group.washerpanel
         - group.dryerpanel
         - group.dishwasherpanel
+        - group.xmaspanel
         - switch.arlec_sw1
         - input_boolean.ha_lounge_hdmi_power
         - script.ha_lounge_tv_on
