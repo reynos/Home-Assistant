@@ -90,10 +90,14 @@ views:
                 icon: mdi:lightbulb
                 tap_action:
                   action: toggle
+              - entity: sensor.washer_state
+                icon: mdi:washing-machine
+              - entity: sensor.dryer_state
+                icon: mdi:tumble-dryer
+              - entity: sensor.dishwasher_state
+                icon: mdi:dishwasher
               - entity: binary_sensor.snapshots_stale
                 icon: mdi:sync-alert
-                tap_action:
-                  action: toggle
           - type: horizontal-stack
             show_header_toggle: false
             cards:
