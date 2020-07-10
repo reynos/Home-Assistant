@@ -90,6 +90,10 @@ views:
                 icon: mdi:lightbulb
                 tap_action:
                   action: toggle
+              - entity: binary_sensor.snapshots_stale
+                icon: mdi:sync-alert
+                tap_action:
+                  action: toggle
           - type: horizontal-stack
             show_header_toggle: false
             cards:

@@ -51,10 +51,15 @@
     to: 'Idle'
   action:
     - service: script.turn_on
-      entity_id: script.notify_all
+      entity_id: script.notify_darren
       data:
         variables:
-          message: "Dryer finished!"
+          message: 'Dryer finished!'
+    - service: script.turn_on
+      entity_id: script.notify_blythe
+      data:
+        variables:
+          message: 'Dryer finished!'
     - service: tts.google_translate_say
       entity_id:
         - media_player.study
@@ -115,10 +120,15 @@
     to: 'Idle'
   action:
     - service: script.turn_on
-      entity_id: script.notify_all
+      entity_id: script.notify_darren
       data:
         variables:
-          message: "Washing Machine finished!"
+          message: 'Washing Machine finished!'
+    - service: script.turn_on
+      entity_id: script.notify_blythe
+      data:
+        variables:
+          message: 'Washing Machine finished!'
     - service: tts.google_translate_say
       entity_id:
         - media_player.study
@@ -154,7 +164,7 @@
   action:
     - service: mqtt.publish
       data:
-        topic: hass/dishstate/washer
+        topic: hass/state/dishwasher
         payload: 'Idle'
         retain: 'true'
 - alias: 'Dishwasher Finished'
@@ -165,10 +175,15 @@
     to: 'Idle'
   action:
     - service: script.turn_on
-      entity_id: script.notify_all
+      entity_id: script.notify_darren
       data:
         variables:
-          message: "Dishwasher finished!"
+          message: 'Dishwasher finished!'
+    - service: script.turn_on
+      entity_id: script.notify_blythe
+      data:
+        variables:
+          message: 'Dishwasher finished!'
     - service: tts.google_translate_say
       entity_id:
         - media_player.study

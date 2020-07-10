@@ -77,6 +77,11 @@ views:
               - entity: light.master_bedroom_level
                 tap_action:
                   action: toggle
+              - entity: binary_sensor.snapshots_stale
+                icon: mdi:sync-alert
+                tap_action:
+                  action: toggle
+
               #- light.bedside_blythe
                 # tap_action:
                 #   action: toggle
