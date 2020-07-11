@@ -17,16 +17,13 @@ views:
         - scene.morning_off
         - light.bedside_lamp_darren
         - group.turntablepanel
+        - sensor.turntable_watts
         - group.washerpanel
         - group.dryerpanel
         - group.dishwasherpanel
         - group.xmaspanel
         - sensor.xmas_lights_watts
         - switch.arlec_sw1
-        - input_boolean.ha_lounge_hdmi_power
-        - script.ha_lounge_tv_on
-        - script.ha_lounge_tv_off
-        - media_player.yamaha_receiver
         show_header_toggle: false
         type: entities
       - type: custom:mini-media-player

@@ -199,7 +199,7 @@
     entity_id: sensor.turntable_watts
     above: 2
     for:
-      seconds: 1
+      seconds: 10
   action:
     - service: mqtt.publish
       data:
