@@ -189,4 +189,59 @@
         - media_player.study
       data_template:
          message: "Dishwasher finished"
-#
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#  Turbtable On/Off
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+- alias: 'Turntable State - On'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.turntable_watts
+    above: 10
+    # for:
+      # seconds: 1
+# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+#   condition:
+#     condition: template
+#     value_template: "{{ states.sensor.dishwasher_state.state != 'Washing' }}"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/turntable
+        payload: 'On'
+        retain: 'true'
+- alias: 'Turntable State - Off'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.turntable_watts
+    below: 10
+    # for:
+    #   minutes: 1
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/turntable
+        payload: 'Off'
+        retain: 'true'
+- alias: 'Turntable Turned Off'
+  trigger:
+    platform: state
+    entity_id: sensor.turntable_state
+    from: 'Off'
+    to: 'On'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Turntable On!'
+    # - service: script.turn_on
+    #   entity_id: script.notify_blythe
+    #   data:
+    #     variables:
+    #       message: 'Dishwasher finished!'
+    # - service: tts.google_translate_say
+    #   entity_id:
+    #     - media_player.study
+    #   data_template:
+    #      message: "Dishwasher finished"

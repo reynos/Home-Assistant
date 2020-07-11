@@ -98,3 +98,14 @@
       - sensor.xmas_energy_today
       - sensor.xmas_energy_yesterday
       - sensor.xmas_signal
+
+  turntablepanel:
+    name: Turntable
+    entities:
+      - sensor.turntable_state
+      - sensor.turntable_voltage
+      - sensor.turntable_watts
+      - sensor.turntable_amps
+      - sensor.turntable_energy_today
+      - sensor.turntable_energy_yesterday
+      - sensor.turntable_signal

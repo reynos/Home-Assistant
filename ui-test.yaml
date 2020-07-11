@@ -17,6 +17,7 @@ views:
         - scene.morning
         - scene.morning_off
         - light.bedside_lamp_darren
+        - group.turntablepanel
         - group.washerpanel
         - group.dryerpanel
         - group.dishwasherpanel
