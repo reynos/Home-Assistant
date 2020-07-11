@@ -9,7 +9,6 @@ views:
     #   - entity: binary_sensor.kitchen_sensor_116
     #   - entity: sensor.temperature_sensor_117
     cards:
-
       - entities:
         - input_boolean.announce_test
         - light.bedside_lamp_darren
@@ -22,6 +21,7 @@ views:
         - group.dryerpanel
         - group.dishwasherpanel
         - group.xmaspanel
+        - sensor.xmas_lights_watts
         - switch.arlec_sw1
         - input_boolean.ha_lounge_hdmi_power
         - script.ha_lounge_tv_on

@@ -197,13 +197,9 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
-    above: 10
-    # for:
-      # seconds: 1
-# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
-#   condition:
-#     condition: template
-#     value_template: "{{ states.sensor.dishwasher_state.state != 'Washing' }}"
+    above: 2
+    for:
+      seconds: 1
   action:
     - service: mqtt.publish
       data:
@@ -214,7 +210,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
-    below: 10
+    below: 3
     # for:
     #   minutes: 1
   action:

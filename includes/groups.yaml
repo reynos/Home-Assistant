@@ -91,13 +91,13 @@
   xmaspanel:
     name: Xmas Lights
     entities:
-      - sensor.xmas_state
-      - sensor.xmas_voltage
-      - sensor.xmas_watts
-      - sensor.xmas_amps
-      - sensor.xmas_energy_today
-      - sensor.xmas_energy_yesterday
-      - sensor.xmas_signal
+      - sensor.xmas_lights_state
+      - sensor.xmas_lights_voltage
+      - sensor.xmas_lights_watts
+      - sensor.xmas_lights_amps
+      - sensor.xmas_lights_energy_today
+      - sensor.xmas_lights_energy_yesterday
+      - sensor.xmas_lights_signal
 
   turntablepanel:
     name: Turntable
