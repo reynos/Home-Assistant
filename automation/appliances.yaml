@@ -219,7 +219,7 @@
         topic: hass/state/turntable
         payload: 'Off'
         retain: 'true'
-- alias: 'Turntable Turned Off'
+- alias: 'Turntable Turned On'
   trigger:
     platform: state
     entity_id: sensor.turntable_state
@@ -231,6 +231,20 @@
       data:
         variables:
           message: 'Turntable On!'
+- alias: 'Turntable Still On'
+  trigger:
+    platform: time_pattern
+    # Trigger every hour, on the hour
+    hours: "*"
+  condition: state
+    entity_id: sensor.turntable_state
+    state: 'on'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Turntable still on!'
     # - service: script.turn_on
     #   entity_id: script.notify_blythe
     #   data:
