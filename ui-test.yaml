@@ -79,11 +79,15 @@ views:
           runtime: false
           play_stop: false
       - type: sensor
-        entity: sensor.dryer_power
+        entity: sensor.dryer_watts
         name: Dryer Power
         graph: line
       - type: sensor
-        entity: sensor.washing_machine_power
+        entity: sensor.dishwasher_watts
+        name: Dishwasher Power
+        graph: line
+      - type: sensor
+        entity: sensor.washer_watts
         name: Washing Machine Power
         graph: line
       - type: sensor
@@ -94,40 +98,6 @@ views:
         entity: sensor.light_sensor_130
         name: Kitchen Lux
         graph: line
-      - type: custom:bar-card
-        align: top-split
-        title: Grid KWh
-        entity: sensor.template_sensor_emoncms_net_grid_power
-        severity:
-        - value: -5
-          color: '#bf4040'
-        - value: 0
-          color: '#bf9540'
-        - value: 5
-          color: '#40bf40'
-      - type: custom:canvas-gauge-card
-        entity: sensor.template_sensor_emoncms_net_grid_power
-        card_height: 125
-        gauge:
-          type: "radial-gauge"
-          title: Grid Power (KWh)
-          width: 220
-          height: 220
-          borderShadowWidth: 0
-          borderOuterWidth: 0
-          borderMiddleWidth: 0
-          borderInnerWidth: 0
-          minValue: -5
-          maxValue: 6
-          startAngle: 90
-          ticksAngle: 180
-          valueBox: false
-          majorTicks:
-            ["-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6"]
-          minorTicks: 1
-          strokeTicks: true
-          highlights: [{ "from": 1, "to": 6, "color": "rgba(200, 50, 50, .75)" }]
-          borders: false
       - type: custom:bom-weather-card
         title: BOM Weather
         entity_current_conditions: sensor.bom_sydney_icon_0
