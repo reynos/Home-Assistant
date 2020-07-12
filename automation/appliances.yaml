@@ -1,7 +1,7 @@
 ## appliances.yaml automation
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#  Dryer Start/Finish
+#  Dryer
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 - alias: 'Dryer State - Door'
   trigger:
@@ -66,7 +66,7 @@
       data_template:
          message: "Dryer finished"
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#  Washing Machine Start/Finish
+#  Washing Machine
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # - alias: 'Washer State - Door'
 #   trigger:
@@ -135,7 +135,7 @@
       data_template:
          message: "Washing machine finished"
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#  Dishwasher Start/Finish
+#  Dishwasher
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 - alias: 'Dishwasher State - Washing'
   trigger:
@@ -191,34 +191,62 @@
          message: "Dishwasher finished"
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#  Turbtable On/Off
+#  Turntable
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 - alias: 'Turntable State - On'
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
     above: 3
-    for:
-      seconds: 10
+    # for:
+    #   seconds: 10
   action:
     - service: mqtt.publish
       data:
         topic: hass/state/turntable
         payload: 'On'
         retain: 'true'
+
 - alias: 'Turntable State - Off'
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
-    below: 3
-    # for:
-    #   minutes: 1
+    below: 4
   action:
     - service: mqtt.publish
       data:
         topic: hass/state/turntable
         payload: 'Off'
         retain: 'true'
+
+- alias: 'Turntable On - Amp On'
+  trigger:
+    platform: state
+    entity_id: sensor.turntable_state
+    from: 'Off'
+    to: 'On'
+  action:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.yamaha_receiver
+    - delay:
+        seconds: 10
+    - service: media_player.select_scene
+      data:
+        entity_id: media_player.yamaha_receiver
+        scene: 'Vinyl Listening'
+
+- alias: 'Turntable Off - Amp Off'
+  trigger:
+    platform: state
+    entity_id: sensor.turntable_state
+    from: 'On'
+    to: 'Off'
+  action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.yamaha_receiver
+
 - alias: 'Turntable Turned On'
   trigger:
     - platform: state
@@ -231,18 +259,20 @@
       data:
         variables:
           message: 'Turntable On!'
+
 - alias: 'Turntable Still On'
   trigger:
     - platform: time_pattern
       # Trigger every hour, on the hour
-      hours: "*"
+      # hours: "/1"
+      minutes: "/30"
     - platform: state
       entity_id: input_select.house_mode
       to: 'Bedtime'
   condition:
     condition: state
     entity_id: sensor.turntable_state
-    state: 'on'
+    state: 'On'
   action:
     - service: script.turn_on
       entity_id: script.notify_darren
