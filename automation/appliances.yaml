@@ -234,12 +234,15 @@
 - alias: 'Turntable Still On'
   trigger:
     - platform: time_pattern
-      # Trigger every hour, on the half hour
-      minutes: "*"
+      # Trigger every hour, on the hour
+      hours: "*"
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Bedtime'
   condition:
-    - condition: state
-      entity_id: sensor.turntable_state
-      state: 'on'
+    condition: state
+    entity_id: sensor.turntable_state
+    state: 'on'
   action:
     - service: script.turn_on
       entity_id: script.notify_darren
