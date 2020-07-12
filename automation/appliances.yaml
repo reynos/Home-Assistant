@@ -197,7 +197,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
-    above: 2
+    above: 3
     for:
       seconds: 10
   action:

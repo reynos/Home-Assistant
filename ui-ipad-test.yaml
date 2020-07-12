@@ -90,14 +90,30 @@ views:
                 icon: mdi:lightbulb
                 tap_action:
                   action: toggle
+              - entity: media_player.yamaha_receiver
+                icon: mdi:amplifier
+                tap_action:
+                  action: toggle
               - entity: sensor.washer_state
                 icon: mdi:washing-machine
+                state_filter:
+                  - Washing
               - entity: sensor.dryer_state
                 icon: mdi:tumble-dryer
+                state_filter:
+                  - Drying
               - entity: sensor.dishwasher_state
                 icon: mdi:dishwasher
+                state_filter:
+                  - Washing
+              - entity: sensor.turntable_state
+                icon: mdi:record-player
+                state_filter:
+                  - Playing
               - entity: binary_sensor.snapshots_stale
                 icon: mdi:sync-alert
+                state_filter:
+                  - True
           - type: horizontal-stack
             show_header_toggle: false
             cards:
