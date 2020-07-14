@@ -50,6 +50,9 @@ views:
               - entity: light.hall_36_2
                 tap_action:
                   action: toggle
+              - entity: light.girl_s_lamp
+                tap_action:
+                  action: toggle
               - entity: light.bedside_lamp_darren
                 tap_action:
                   action: toggle

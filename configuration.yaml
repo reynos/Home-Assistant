@@ -97,6 +97,8 @@ zeroconf:
 system_health:
 updater:
 
+## Includes
+light: !include includes/lights.yaml
 lovelace: !include includes/lovelace.yaml
 weather: !include includes/weather.yaml
 input_select: !include includes/input_select.yaml

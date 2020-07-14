@@ -1,0 +1,35 @@
+# lights.yaml
+
+- platform: mqtt
+  name: "Girl's Lamp"
+  command_topic: "cmnd/girlslamp/POWER"
+  state_topic: "tele/girlslamp/STATE"
+  state_value_template: "{{value_json.POWER}}"
+  availability_topic: "tele/girlslamp/LWT"
+  brightness_command_topic: "cmnd/girlslamp/Dimmer"
+  brightness_state_topic: "tele/girlslamp/STATE"
+  brightness_scale: 100
+  on_command_type: "last"
+  brightness_value_template: "{{value_json.Dimmer}}"
+  white_value_state_topic: "tele/girlslamp/STATE"
+  white_value_command_topic: "cmnd/girlslamp/white"
+  white_value_scale: 100
+  white_value_template: "{{ value_json.Channel[3] }}"
+  rgb_command_topic: "cmnd/girlslamp/Color2"
+  rgb_state_topic: "tele/girlslamp/STATE"
+  rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+  effect_command_topic: "cmnd/girlslamp/Scheme"
+  effect_state_topic: "tele/girlslamp/STATE"
+  effect_value_template: "{{value_json.Scheme}}"
+  effect_list:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  qos: 1
+  retain: false

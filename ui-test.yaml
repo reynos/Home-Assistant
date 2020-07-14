@@ -10,6 +10,7 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - light.girl_s_lamp
         - input_boolean.announce_test
         - light.bedside_lamp_darren
         - scene.test
@@ -21,6 +22,7 @@ views:
         - group.washerpanel
         - group.dryerpanel
         - group.dishwasherpanel
+        - sensor.dishwasher_watts
         - group.xmaspanel
         - sensor.xmas_lights_watts
         - switch.arlec_sw1

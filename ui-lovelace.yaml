@@ -235,17 +235,7 @@ views:
                         - 108
                     brightness: 100
                     transition: 1
-                  # - rgb_color:
-                  #       - 255
-                  #       - 0
-                  #       - 0
-                  #   brightness: 100
-                  #   transition: 1
-
-                  # - hs_color:
-                  #       - 60
-                  #       - 30
-                  #   icon_color: '#fff8b0' # Override icon color
+            - entity: light.girl_s_lamp
 
   - icon: mdi:stairs
     cards:
