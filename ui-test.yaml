@@ -11,6 +11,8 @@ views:
     cards:
       - entities:
         - light.girl_s_lamp
+        - light.bargeboard_segment_1
+        - light.bargeboard_segment_2
         - input_boolean.announce_test
         - light.bedside_lamp_darren
         - scene.test

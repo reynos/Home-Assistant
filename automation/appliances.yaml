@@ -230,7 +230,7 @@
       data:
         entity_id: media_player.yamaha_receiver
     - delay:
-        seconds: 10
+        seconds: 15
     - service: media_player.select_scene
       data:
         entity_id: media_player.yamaha_receiver
