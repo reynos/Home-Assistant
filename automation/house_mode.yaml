@@ -100,13 +100,16 @@
     - service: scene.turn_on
       data_template:
         entity_id: >
-          {% if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
-            scene.bb_yellow_bins
-          {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
-            scene.bb_blue_green_bins
-          {% else %}
-            scene.bb_pink
-          {% endif %}
+         {% if now().isoweekday() == 3 %} # if if's Wednesday
+           {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
+              scene.bb_yellow_bins
+           {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
+              scene.bb_blue_green_bins
+           {% endif %}
+         {% else %}
+           scene.bb_pink
+         {% endif %}
+
 
 # - alias: "House Mode Evening"
 #   trigger:
