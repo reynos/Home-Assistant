@@ -11,6 +11,11 @@ views:
     cards:
       - entities:
         - light.girl_s_lamp
+        - scene.bb_blue_green_bins
+        - scene.bb_yellow_bins
+        - scene.bb_pink
+        - light.bargeboard_master
+        - light.bargeboard
         - light.bargeboard_segment_1
         - light.bargeboard_segment_2
         - input_boolean.announce_test

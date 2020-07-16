@@ -40,20 +40,16 @@
 
   - name: Evening
     entities:
-      group.evening: on
+      # group.evening: on
+      light.kitchen_bench_19_2: on
+      light.stairs_33_2: on
+      light.back_garden_29: on
+      light.trampoline: on
       switch.frontyard: on
       light.bedside_lamp_darren:
         state: on
         rgb_color: [255,64,0]
-        brightness: 50
-#xy_color: [0.677, 0.319]
-
-#        brightness: 120
-        # rgb_color: [255, 64, 0]
-        # brightness: 40 # brightness not working??
-#        brightness_pct: 50
-#        rgb_color: [255, 147, 41]
-#        kelvin: 1900
+        brightness: 100
 
 # triggered at 10:30 every night
   - name: Night
@@ -92,6 +88,42 @@
 # when on holidays only turn on selected lights
       switch.frontyard: on
       light.kitchen_bench_19_2: on
+
+  - name: BB Pink
+    entities:
+      light.bargeboard_master: on
+      light.bargeboard_segment_1:
+        state: on
+        rgb_color: [255,0,255]
+        brightness: 100
+      light.bargeboard_segment_2:
+        state: on
+        rgb_color: [255,0,255]
+        brightness: 100
+
+  - name: BB Blue Green Bins
+    entities:
+      light.bargeboard_master: on
+      light.bargeboard_segment_1:
+        state: on
+        rgb_color: [0,0,255]
+        brightness: 100
+      light.bargeboard_segment_2:
+        state: on
+        rgb_color: [0,255,0]
+        brightness: 100
+
+  - name: BB Yellow Bins
+    entities:
+      light.bargeboard_master: on
+      light.bargeboard_segment_1:
+        state: on
+        rgb_color: [255,255,0]
+        brightness: 100
+      light.bargeboard_segment_2:
+        state: on
+        rgb_color: [255,255,0]
+        brightness: 100
 
   # - name: Auto Dim
   #   entities:

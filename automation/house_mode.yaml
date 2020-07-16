@@ -88,32 +88,48 @@
     - service: script.turn_on
       data:
         entity_id: script.bedtime
-
 - alias: "House Mode Evening"
   trigger:
     platform: state
     entity_id: input_select.house_mode
     to: 'Evening'
   action:
-    # - service: light.turn_on
-    #   data:
-    #     entity_id: group.evening
-    - service: light.turn_on
+    - service: scene.turn_on
       data:
-        entity_id:
-          - light.kitchen_bench_19_2
-          - light.stairs_33_2
-          - light.back_garden_29
-          - light.trampoline
-          - light.bargeboard
-    - service: light.turn_on
-      data:
-        entity_id: light.bedside_darren
-        brightness: 150
-        rgb_color: [255,0,0]
-    - service: switch.turn_on
-      data:
-        entity_id: switch.frontyard
+        entity_id: scene.evening
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          {% if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
+            scene.bb_yellow_bins
+          {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
+            scene.bb_blue_green_bins
+          {% else %}
+            scene.bb_pink
+          {% endif %}
+
+# - alias: "House Mode Evening"
+#   trigger:
+#     platform: state
+#     entity_id: input_select.house_mode
+#     to: 'Evening'
+#   action:
+#     - service: light.turn_on
+#       data:
+#         entity_id:
+#           - light.kitchen_bench_19_2
+#           - light.stairs_33_2
+#           - light.back_garden_29
+#           - light.trampoline
+#           - light.bargeboard
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.bedside_darren
+#         brightness: 150
+#         rgb_color: [255,0,0]
+#     - service: switch.turn_on
+#       data:
+#         entity_id: switch.frontyard
 
 - alias: "House Mode Day"
   trigger:
