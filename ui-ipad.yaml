@@ -80,12 +80,11 @@ views:
               - entity: light.master_bedroom_level
                 tap_action:
                   action: toggle
-              - entity: light.bedside_darren
+              - entity: light.bedside_lamp_darren
+                tap_action:
+              - entity: light.blythe_s_lamp
                 tap_action:
                   action: toggle
-              #- light.bedside_blythe
-                # tap_action:
-                #   action: toggle
               - entity: light.front_bedroom_level
                 tap_action:
                   action: toggle
