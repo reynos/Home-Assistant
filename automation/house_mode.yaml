@@ -88,6 +88,7 @@
     - service: script.turn_on
       data:
         entity_id: script.bedtime
+
 - alias: "House Mode Evening"
   trigger:
     platform: state
@@ -109,7 +110,6 @@
          {% else %}
            scene.bb_pink
          {% endif %}
-
 
 # - alias: "House Mode Evening"
 #   trigger:

@@ -50,6 +50,14 @@
         state: on
         rgb_color: [255,64,0]
         brightness: 100
+      light.blythe_s_lamp:
+        state: on
+        rgb_color: [255,64,0]
+        brightness: 100
+      light.girl_s_lamp:
+        state: on
+        rgb_color: [255,0,255]
+        brightness: 200
 
 # triggered at 10:30 every night
   - name: Night
@@ -95,11 +103,11 @@
       light.bargeboard_segment_1:
         state: on
         rgb_color: [255,0,255]
-        brightness: 100
+        brightness: 150
       light.bargeboard_segment_2:
         state: on
         rgb_color: [255,0,255]
-        brightness: 100
+        brightness: 150
 
   - name: BB Blue Green Bins
     entities:
@@ -107,11 +115,11 @@
       light.bargeboard_segment_1:
         state: on
         rgb_color: [0,0,255]
-        brightness: 100
+        brightness: 150
       light.bargeboard_segment_2:
         state: on
         rgb_color: [0,255,0]
-        brightness: 100
+        brightness: 150
 
   - name: BB Yellow Bins
     entities:
@@ -119,11 +127,11 @@
       light.bargeboard_segment_1:
         state: on
         rgb_color: [255,255,0]
-        brightness: 100
+        brightness: 150
       light.bargeboard_segment_2:
         state: on
         rgb_color: [255,255,0]
-        brightness: 100
+        brightness: 150
 
   # - name: Auto Dim
   #   entities:

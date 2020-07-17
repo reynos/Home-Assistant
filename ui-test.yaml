@@ -23,7 +23,6 @@ views:
         - scene.test
         - scene.morning
         - scene.morning_off
-        - light.bedside_lamp_darren
         - group.turntablepanel
         - sensor.turntable_watts
         - group.washerpanel

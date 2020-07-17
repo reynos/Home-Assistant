@@ -188,9 +188,15 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
+                entity: light.blythe_s_lamp
+              - type: light
+                entity: light.bedside_lamp_darren
+          - type: horizontal-stack
+            cards:
+              - type: light
                 entity: light.master_bedroom_level
               - type: light
-                entity: light.bedside_darren
+                entity: light.girl_s_lamp
           - type: custom:mini-media-player
             entity: media_player.master_bedroom_tv
             name: Master Bedroom TV
@@ -215,8 +221,10 @@ views:
         show_header_toggle: false
         entities:
             # Displays the light entity. It's optional
+            - entity: light.bedside_lamp_darren
+            - entity: light.blythe_s_lamp
+            - entity: light.girl_s_lamp
             - entity: light.front_bedroom_level
-            - entity: light.bedside_darren
             # Card configuration starts here
             - type: 'custom:rgb-light-card'
               entity: light.bedside_darren
@@ -235,7 +243,6 @@ views:
                         - 108
                     brightness: 100
                     transition: 1
-            - entity: light.girl_s_lamp
 
   - icon: mdi:stairs
     cards:
