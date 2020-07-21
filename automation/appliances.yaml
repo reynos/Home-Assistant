@@ -158,9 +158,9 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.dishwasher_watts
-    below: 5
+    below: 3
     for:
-      minutes: 7
+      minutes: 5
   action:
     - service: mqtt.publish
       data:
