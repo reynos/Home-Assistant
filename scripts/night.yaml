@@ -37,11 +37,13 @@ night_holiday:
     - service: light.turn_off
       entity_id:
         - group.all_lights_not_beds
+        - light.bargeboard_master
         - light.bargeboard
+        - light.bargeboard_segment_1
+        - light.bargeboard_segment_2
     - service: switch.turn_off
       entity_id:
         - switch.frontyard
-        - light.bargeboard
         - switch.back_deck_watering_25_2
     - service: input_boolean.turn_off
       entity_id: input_boolean.evening_holiday

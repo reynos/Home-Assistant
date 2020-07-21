@@ -31,7 +31,15 @@ evening_holiday:
       entity_id: light.kitchen_bench_19_2
     - service: switch.turn_on
       entity_id: switch.frontyard
-    - service: light.turn_on
-      entity_id: light.bargeboard
-    - service: light.turn_on
-      entity_id: light.tramopline
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+         {% if now().isoweekday() == 3 %}
+           {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
+              scene.bb_yellow_bins
+           {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
+              scene.bb_blue_green_bins
+           {% endif %}
+         {% else %}
+           scene.bb_pink
+         {% endif %}

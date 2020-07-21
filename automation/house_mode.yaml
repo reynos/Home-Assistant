@@ -98,10 +98,11 @@
     - service: scene.turn_on
       data:
         entity_id: scene.evening
+# vary scene if it's Wednesday (day 3)
     - service: scene.turn_on
       data_template:
         entity_id: >
-         {% if now().isoweekday() == 3 %} # if if's Wednesday
+         {% if now().isoweekday() == 3 %}
            {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
               scene.bb_yellow_bins
            {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
