@@ -126,11 +126,11 @@
       light.bargeboard_master: on
       light.bargeboard_segment_1:
         state: on
-        rgb_color: [255,255,0]
+        rgb_color: [255,200,0]
         brightness: 150
       light.bargeboard_segment_2:
         state: on
-        rgb_color: [255,255,0]
+        rgb_color: [255,200,0]
         brightness: 150
 
   # - name: Auto Dim
