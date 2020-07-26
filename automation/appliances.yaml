@@ -103,9 +103,9 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.washer_watts
-    below: 15
+    below: 11
     for:
-      minutes: 1
+      minutes: 2
   action:
     - service: mqtt.publish
       data:

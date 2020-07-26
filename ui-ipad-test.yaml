@@ -25,10 +25,10 @@ views:
                 name: Deck Watering
                 tap_action:
                   action: toggle
-              - entity:  light.kitchen_high_137
+              - entity:  light.kitchen_high_level_6
                 tap_action:
                   action: toggle
-              - entity: light.kitchen_low_32_2
+              - entity: light.kitchen_low_level_4
                 tap_action:
                   action: toggle
               - entity: light.kitchen_bench_19_2
@@ -38,7 +38,7 @@ views:
               - entity: light.lounge_34_2
                 tap_action:
                   action: toggle
-              - entity: light.tv_35
+              - entity: light.tv_level_8
                 tap_action:
                   action: toggle
               - entity: light.stairs_33_2
@@ -47,7 +47,7 @@ views:
               - entity: light.laundry_hall_37_2
                 tap_action:
                   action: toggle
-              - entity: light.hall_36_2
+              - entity: light.hall_level_10
                 tap_action:
                   action: toggle
               - entity: light.girl_s_lamp
@@ -80,7 +80,7 @@ views:
               - entity: light.master_bedroom_level
                 tap_action:
                   action: toggle
-              - entity: light.bedside_darren
+              - entity: light.bedside_lamp_darren
                 tap_action:
                   action: toggle
               - entity: light.blythe_s_lamp
@@ -373,14 +373,14 @@ views:
                     show_header_toggle: false
                     cards:
                       - type: light
-                        entity:  light.kitchen_high_137
+                        entity:  light.kitchen_high_level_6
                       - type: light
-                        entity: light.kitchen_low_32_2
+                        entity: light.kitchen_low_level_4
                   - type: horizontal-stack
                     show_header_toggle: false
                     cards:
                       - type: light
-                        entity: light.hall_36_2
+                        entity: light.hall_level_10
                       - type: light
                         entity: light.laundry_hall_37_2
               - type: vertical-stack
@@ -438,7 +438,7 @@ views:
                       - type: light
                         entity: light.lounge_34_2
                       - type: light
-                        entity: light.tv_35
+                        entity: light.tv_level_8
 
                   - type: custom:mini-media-player
                     entity: media_player.kitchen
@@ -679,9 +679,9 @@ views:
   #         - type: horizontal-stack
   #           cards:
   #             - type: light
-  #               entity:  light.kitchen_high_137
+  #               entity:  light.kitchen_high_level_6
   #             - type: light
-  #               entity: light.kitchen_low_32_2
+  #               entity: light.kitchen_low_level_4
   #     - type: entities
   #       entities:
   #         - light.kitchen_bench_19_2
@@ -709,7 +709,7 @@ views:
   #             - type: light
   #               entity: light.lounge_34_2
   #             - type: light
-  #               entity: light.tv_35
+  #               entity: light.tv_level_8
   #         - type: custom:mini-media-player
   #           entity: media_player.lounge
   #           name: Lounge Sonos
@@ -739,7 +739,7 @@ views:
   #             - type: light
   #               entity: light.master_bedroom_level
   #             - type: light
-  #               entity: light.bedside_darren
+  #               entity: light.bedside_lamp_darren
   #         - type: custom:mini-media-player
   #           entity: media_player.master_bedroom_tv
   #           name: Master Bedroom TV
@@ -765,9 +765,9 @@ views:
   #       entities:
   #           # Displays the light entity. It's optional
   #           - entity: light.front_bedroom_level
-  #           - entity: light.bedside_darren
+  #           - entity: light.bedside_lamp_darren
   #           - type: 'custom:rgb-light-card'
-  #             entity: light.bedside_darren
+  #             entity: light.bedside_lamp_darren
   #             justify: between
   #             colors:
   #                 # Any option of the light.turn_on service can be used in each color
@@ -809,7 +809,7 @@ views:
 #       - type: horizontal-stack
 #         cards:
 #           - type: light
-#             entity: light.hall_36_2
+#             entity: light.hall_level_10
 #           - type: light
 #             entity: light.laundry_hall_37_2
 #       - entities:

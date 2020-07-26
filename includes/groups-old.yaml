@@ -71,7 +71,7 @@
     entities:
       - light.lounge_34
 #      - input_number.lounge_dimmer
-      - light.tv_35
+      - light.tv_level_8
 #      - input_number.tv_dimmer
 
 #  qnursery:
@@ -131,7 +131,7 @@
       - light.lounge_lamp_18
       - light.lounge_lamp_bulb_38
       - light.lounge_34
-      - light.tv_35
+      - light.tv_level_8
       - media_player.lounge_2
       - media_player.loungetv
       - media_player.tv_ua65js8000
@@ -509,15 +509,15 @@
     name: All lights not beds
     view: no
     entities:
-      -  light.kitchen_high_137
-      - light.kitchen_low_32_2
+      -  light.kitchen_high_level_6
+      - light.kitchen_low_level_4
       - light.kitchen_bench_19_2
       - light.lounge_34_2
-      - light.tv_35
+      - light.tv_level_8
 #      - light.lounge_lamp_18
       - light.stairs_33_2
       - light.laundry_hall_37_2
-      - light.hall_36_2
+      - light.hall_level_10
       - light.front_porch_light_86_2
       - light.back_garden_29
       - light.trampoline
@@ -532,8 +532,8 @@
     view: no
     entities:
       - light.kitchen_bench_19_2
-      -  light.kitchen_high_137
-      - light.kitchen_low_32_2
+      -  light.kitchen_high_level_6
+      - light.kitchen_low_level_4
 #      - light.lounge_lamp_18
       - light.stairs_33_2
 

@@ -28,7 +28,7 @@
     # - service: light.turn_on
     #   entity_id:
     #     - light.kitchen_bench_19_2
-    #     -  light.kitchen_high_137
+    #     -  light.kitchen_high_level_6
 
 ## Kitchen Morning Motion light on
 - alias: "Kitchen Morning Lights sensor ON"
@@ -186,8 +186,8 @@
   trigger:
     platform: state
     entity_id:
-      - light.kitchen_low_32_2
-      - light.kitchen_high_137
+      - light.kitchen_low_level_4
+      - light.kitchen_high_level_6
     to: 'on'
   action:
     - service: light.turn_on

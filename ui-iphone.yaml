@@ -69,11 +69,11 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity:  light.kitchen_high_137
+                entity:  light.kitchen_high_level_6
               - type: light
-                entity: light.kitchen_low_32_2
+                entity: light.kitchen_low_level_4
               - type: light
-                entity: light.bedside_darren
+                entity: light.bedside_lamp_darren
                 name: Darren
           - type: horizontal-stack
             show_header_toggle: true
@@ -89,7 +89,7 @@ views:
                     - text-overflow: initial
                     - overflow: initial
               - type: custom:button-card
-                entity: light.tv_35
+                entity: light.tv_level_8
                 styles:
                   card:
                     - height: 80px
@@ -127,9 +127,9 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity:  light.kitchen_high_137
+                entity:  light.kitchen_high_level_6
               - type: light
-                entity: light.kitchen_low_32_2
+                entity: light.kitchen_low_level_4
       - type: entities
         entities:
           - light.kitchen_bench_19_2
@@ -157,7 +157,7 @@ views:
               - type: light
                 entity: light.lounge_34_2
               - type: light
-                entity: light.tv_35
+                entity: light.tv_level_8
           - type: custom:mini-media-player
             entity: media_player.lounge
             name: Lounge Sonos
@@ -177,7 +177,7 @@ views:
               - type: light
                 entity: light.master_bedroom_level
               - type: light
-                entity: light.bedside_darren
+                entity: light.bedside_lamp_darren
           - type: custom:mini-media-player
             entity: media_player.master_bedroom_tv
             name: Master Bedroom TV
@@ -196,11 +196,11 @@ views:
       - type: entities
         entities:
             # Displays the light entity. It's optional
-            - entity: light.bedside_darren
+            - entity: light.bedside_lamp_darren
 
             # Card configuration starts here
             - type: 'custom:rgb-light-card'
-              entity: light.bedside_darren
+              entity: light.bedside_lamp_darren
               justify: between
               colors:
                   # Any option of the light.turn_on service can be used in each color
@@ -240,7 +240,7 @@ views:
       - type: horizontal-stack
         cards:
           - type: light
-            entity: light.hall_36_2
+            entity: light.hall_level_10
           - type: light
             entity: light.laundry_hall_37_2
       - entities:

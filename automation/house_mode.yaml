@@ -128,7 +128,7 @@
 #           - light.bargeboard
 #     - service: light.turn_on
 #       data:
-#         entity_id: light.bedside_darren
+#         entity_id: light.bedside_lamp_darren
 #         brightness: 150
 #         rgb_color: [255,0,0]
 #     - service: switch.turn_on
