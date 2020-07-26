@@ -35,7 +35,7 @@ views:
                 name: Kit. Bench
                 tap_action:
                   action: toggle
-              - entity: light.lounge_34_2
+              - entity: light.lounge_level_6
                 tap_action:
                   action: toggle
               - entity: light.tv_level_8
@@ -436,7 +436,7 @@ views:
                     show_header_toggle: false
                     cards:
                       - type: light
-                        entity: light.lounge_34_2
+                        entity: light.lounge_level_6
                       - type: light
                         entity: light.tv_level_8
 
@@ -707,7 +707,7 @@ views:
   #         - type: horizontal-stack
   #           cards:
   #             - type: light
-  #               entity: light.lounge_34_2
+  #               entity: light.lounge_level_6
   #             - type: light
   #               entity: light.tv_level_8
   #         - type: custom:mini-media-player

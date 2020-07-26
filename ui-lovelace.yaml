@@ -73,7 +73,7 @@ views:
               - type: light
                 entity: light.kitchen_high_level_6
               - type: light
-                entity: light.kitchen_low_32_2
+                entity: light.kitchen_low_level_4
               - type: light
                 entity: light.bedside_darren
                 name: Darren
@@ -81,7 +81,7 @@ views:
             show_header_toggle: true
             cards:
               - type: custom:button-card
-                entity: light.lounge_34_2
+                entity: light.lounge_level_6
                 styles:
                   card:
                     - height: 80px
@@ -91,7 +91,7 @@ views:
                     - text-overflow: initial
                     - overflow: initial
               - type: custom:button-card
-                entity: light.tv_35
+                entity: light.tv_level_8
                 styles:
                   card:
                     - height: 80px
@@ -131,7 +131,7 @@ views:
               - type: light
                 entity:  light.kitchen_high_level_6
               - type: light
-                entity: light.kitchen_low_32_2
+                entity: light.kitchen_low_level_4
       - type: entities
         entities:
           - light.kitchen_bench_19_2
@@ -154,9 +154,9 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity: light.lounge_34_2
+                entity: light.lounge_level_6
               - type: light
-                entity: light.tv_35
+                entity: light.tv_level_8
           - type: custom:mini-media-player
             entity: media_player.yamaha_receiver
             name: Lounge

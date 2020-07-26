@@ -79,7 +79,7 @@ views:
             show_header_toggle: true
             cards:
               - type: custom:button-card
-                entity: light.lounge_34_2
+                entity: light.lounge_level_6
                 styles:
                   card:
                     - height: 80px
@@ -155,7 +155,7 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity: light.lounge_34_2
+                entity: light.lounge_level_6
               - type: light
                 entity: light.tv_level_8
           - type: custom:mini-media-player
