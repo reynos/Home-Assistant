@@ -71,7 +71,7 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity: light.kitchen_high_137
+                entity: light.kitchen_high_level_6
               - type: light
                 entity: light.kitchen_low_32_2
               - type: light
@@ -129,7 +129,7 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity:  light.kitchen_high_137
+                entity:  light.kitchen_high_level_6
               - type: light
                 entity: light.kitchen_low_32_2
       - type: entities
