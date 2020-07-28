@@ -7,9 +7,9 @@
     to: 'on'
     entity_id: input_boolean.announce_test
   action:
-    - service: script.sonos_say
+    - service: script.announce
       data:
-        sonos_entity: media_player.study
+        sonos_entity: media_player.ensuite
         volume: 0.5
         message: 'Test of Text to speach'
         delay: '00:00:05'

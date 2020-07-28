@@ -60,11 +60,12 @@
       data:
         variables:
           message: 'Dryer finished!'
-    - service: tts.google_translate_say
-      entity_id:
-        - media_player.study
-      data_template:
-         message: "Dryer finished"
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.5
+        message: 'Dryer finished'
+        delay: '00:00:03'
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Washing Machine
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -129,11 +130,12 @@
       data:
         variables:
           message: 'Washing Machine finished!'
-    - service: tts.google_translate_say
-      entity_id:
-        - media_player.study
-      data_template:
-         message: "Washing machine finished"
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.5
+        message: 'Washing machine finished'
+        delay: '00:00:03'
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Dishwasher
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -184,12 +186,12 @@
       data:
         variables:
           message: 'Dishwasher finished!'
-    - service: tts.google_translate_say
-      entity_id:
-        - media_player.study
-      data_template:
-         message: "Dishwasher finished"
-
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.5
+        message: 'Dishwasher finished'
+        delay: '00:00:03'
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Turntable
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
