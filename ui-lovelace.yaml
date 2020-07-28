@@ -75,7 +75,7 @@ views:
               - type: light
                 entity: light.kitchen_low_level_4
               - type: light
-                entity: light.bedside_darren
+                entity: light.bedside_lamp_darren
                 name: Darren
           - type: horizontal-stack
             show_header_toggle: true
@@ -227,7 +227,7 @@ views:
             - entity: light.front_bedroom_level
             # Card configuration starts here
             - type: 'custom:rgb-light-card'
-              entity: light.bedside_darren
+              entity: light.bedside_lamp_darren
               justify: between
               colors:
                   # Any option of the light.turn_on service can be used in each color

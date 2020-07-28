@@ -7,23 +7,24 @@
     to: 'on'
     entity_id: input_boolean.announce_test
   action:
-    # - service: tts.google_translate_say
-    #   entity_id:
-    #     - media_player.study
-    #   data_template:
-    #      message: "test"
-    - service: mqtt.publish
+    - service: script.sonos_say
       data:
-        topic: hass/state/dryer
-        payload: 'Drying'
-        retain: 'true'
-    - delay:
-        seconds: 5
-    - service: mqtt.publish
-      data:
-        topic: hass/state/dryer
-        payload: 'Idle'
-        retain: 'true'
+        sonos_entity: media_player.study
+        volume: 0.5
+        message: 'Test of Text to speach'
+        delay: '00:00:05'
+    # - service: mqtt.publish
+    #   data:
+    #     topic: hass/state/dryer
+    #     payload: 'Drying'
+    #     retain: 'true'
+    # - delay:
+    #     seconds: 5
+    # - service: mqtt.publish
+    #   data:
+    #     topic: hass/state/dryer
+    #     payload: 'Idle'
+    #     retain: 'true'
 
     # - service: script.turn_on
     #   entity_id: script.notify_darren
