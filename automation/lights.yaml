@@ -190,6 +190,7 @@
       - light.kitchen_high_level_6
       - light.lounge_level_6
       - light.tv_level_8
+      - light.hall_level_10
     to: 'on'
   action:
     - service: light.turn_on

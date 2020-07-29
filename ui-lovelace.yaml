@@ -258,7 +258,7 @@ views:
       - type: horizontal-stack
         cards:
           - type: light
-            entity: light.hall_36_2
+            entity: light.hall_level_10
           - type: light
             entity: light.laundry_hall_37_2
       - entities:
