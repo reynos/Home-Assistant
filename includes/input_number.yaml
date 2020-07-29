@@ -10,6 +10,12 @@ stairs_light_timer:
     min: 0
     max: 5
     step: 1
+bathroom_light_timer:
+    name: Bathroom Light Timer Duration
+#    initial: 2
+    min: 0
+    max: 10
+    step: 1
 lights_auto_dim_level:
     name: Lights Auto Dim Level
     initial: 20

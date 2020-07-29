@@ -195,6 +195,39 @@
         entity_id: "{{ trigger.entity_id }}"
         brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
 
+## Bathroom Motion light on
+- alias: "Bathroom Lights motion sensor ON"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_motion
+    to: 'on'
+  # condition:
+  #   - condition: state
+  #     entity_id: input_select.house_mode
+  #     state: 'Evening'
+  #   - condition: state
+  #     entity_id: input_select.house_mode
+  #     state: 'Night'
+  action:
+    - service: logbook.log
+      data_template:
+        name: Bathroom
+        message: Bathroom Lights motion tiggered
+        entity_id: binary_sensor.bathroom_motion
+        domain: binary_sensor
+    - service: light.turn_on
+      entity_id: light.bathroom_level
+
+- alias: 'Bathroom light Auto-off'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_motion
+    to: 'off'
+    for: "00:{{ '%02i' | format(states('input_number.bathroom_light_timer') |int)}}:00"
+  action:
+    service: light.turn_off
+    entity_id: light.bathroom_level
+
 ## Dimmers
 #- alias: Kitchen High Dimmer
 #  trigger:

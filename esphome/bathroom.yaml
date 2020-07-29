@@ -8,12 +8,9 @@ wifi:
   password: !secret esph-iot-pass
   power_save_mode: none
   fast_connect: on
-captive_portal:
 
-# Enable logging
 logger:
 
-# Enable Home Assistant API
 api:
   password: !secret esph-api-pass
 

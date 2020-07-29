@@ -11,7 +11,7 @@ views:
     cards:
       - entities:
         - sensor.bathroom_humidity
-        - sensor.bathroom_temperature_2
+        - sensor.bathroom_temperature
         - binary_sensor.bathroom_motion
         - light.bathroom_level
         - light.girl_s_lamp
