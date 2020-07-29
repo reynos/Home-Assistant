@@ -201,13 +201,13 @@
     platform: state
     entity_id: binary_sensor.bathroom_motion
     to: 'on'
-  # condition:
-  #   - condition: state
-  #     entity_id: input_select.house_mode
-  #     state: 'Evening'
-  #   - condition: state
-  #     entity_id: input_select.house_mode
-  #     state: 'Night'
+  condition:
+    - condition: state
+      entity_id: light.bathroom_level
+      state: 'off'
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Evening'
   action:
     - service: logbook.log
       data_template:
