@@ -188,6 +188,8 @@
     entity_id:
       - light.kitchen_low_level_4
       - light.kitchen_high_level_6
+      - light.lounge_level_6
+      - light.tv_level_8
     to: 'on'
   action:
     - service: light.turn_on
