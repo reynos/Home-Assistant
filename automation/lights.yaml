@@ -34,7 +34,8 @@
 - alias: "Kitchen Morning Lights sensor ON"
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_sensor_116
+    entity_id: binary_sensor.kitchen_motion
+    # entity_id: binary_sensor.kitchen_sensor_116
     to: 'on'
   condition:
 # add or condition - if Holiday - send notify to mobile otherwise do below
