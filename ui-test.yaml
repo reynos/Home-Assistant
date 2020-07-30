@@ -14,6 +14,7 @@ views:
         - sensor.bathroom_temperature
         - binary_sensor.bathroom_motion
         - binary_sensor.kitchen_motion
+        - binary_sensor.laundry_motion
         - light.bathroom_level
         - light.girl_s_lamp
         - scene.bb_blue_green_bins
