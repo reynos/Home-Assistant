@@ -1,5 +1,5 @@
 esphome:
-  name: kitchen
+  name: vergola
   platform: ESP8266
   board: nodemcuv2
 
@@ -17,8 +17,16 @@ api:
 ota:
   password: !secret esph-ota-pass
 
-binary_sensor:
+switch:
   - platform: gpio
+    name: "Vergola Select"
     pin: D2
-    name: "Kitchen Motion"
-    device_class: motion
+  - platform: gpio
+    name: "Vergola Auto"
+    pin: D5
+  - platform: gpio
+    name: "Vergola Close"
+    pin: D6
+  - platform: gpio
+    name: "Vergola Open"
+    pin: D7

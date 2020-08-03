@@ -17,7 +17,6 @@ api:
 ota:
   password: !secret esph-ota-pass
 
-sensor:
 binary_sensor:
   - platform: gpio
     pin: D2
