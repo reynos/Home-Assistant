@@ -1,10 +1,10 @@
 ### switch.yaml
 
 - platform: mqtt
-  name: "Arlec SW1"
-  state_topic: "stat/SW_Arlec1/POWER"
-  command_topic: "cmnd/SW_Arlec1/POWER"
-  availability_topic: "tele/SW_Arlec1/LWT"
+  name: "Subwoofer"
+  state_topic: "stat/subwoofer/POWER"
+  command_topic: "cmnd/subwoofer/POWER"
+  availability_topic: "tele/subwoofer/LWT"
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"

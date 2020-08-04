@@ -14,6 +14,7 @@ views:
         - switch.vergola_close
         - switch.vergola_open
         - switch.vergola_select
+        - switch.subwoofer
         - sensor.bathroom_humidity
         - sensor.bathroom_temperature
         - binary_sensor.bathroom_motion
