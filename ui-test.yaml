@@ -10,6 +10,10 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - switch.vergola_auto
+        - switch.vergola_close
+        - switch.vergola_open
+        - switch.vergola_select
         - sensor.bathroom_humidity
         - sensor.bathroom_temperature
         - binary_sensor.bathroom_motion

@@ -12,6 +12,7 @@
   all_lights_not_beds:
     name: All lights not beds
     entities:
+      - light.blythe_s_lamp
       - light.kitchen_high_level_6
       - light.kitchen_low_level_4
       - light.kitchen_bench_19_2
