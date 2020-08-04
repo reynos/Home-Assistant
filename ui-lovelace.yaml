@@ -75,7 +75,7 @@ views:
               - type: light
                 entity: light.kitchen_low_level_4
               - type: light
-                entity: light.bedside_darren
+                entity: light.bedside_lamp_darren
                 name: Darren
           - type: horizontal-stack
             show_header_toggle: true
@@ -227,7 +227,7 @@ views:
             - entity: light.front_bedroom_level
             # Card configuration starts here
             - type: 'custom:rgb-light-card'
-              entity: light.bedside_darren
+              entity: light.bedside_lamp_darren
               justify: between
               colors:
                   # Any option of the light.turn_on service can be used in each color
@@ -258,9 +258,13 @@ views:
       - type: horizontal-stack
         cards:
           - type: light
-            entity: light.hall_36_2
+            entity: light.hall_level_10
           - type: light
             entity: light.laundry_hall_37_2
+      # - type: horizontal-stack
+      #   cards:
+          - type: light
+            entity: light.bathroom_level
       - entities:
         - entity: media_player.bathroom
           icon: mdi:speaker-wireless
@@ -394,6 +398,7 @@ views:
     cards:
       - entities:
           - input_number.lights_auto_dim_level
+          - input_number.bathroom_light_timer
           - input_number.doorbell_volume
           - input_boolean.morning_lights_flag
           - input_boolean.evening_lights_on_flag

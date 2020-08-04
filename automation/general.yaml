@@ -14,16 +14,12 @@
     entity_id: binary_sensor.front_door_30
     state: 'on'
   action:
-    - service: script.turn_off
-      entity_id: script.announce
-    - service: script.turn_on
-      entity_id: script.announce
+    - service: script.announce
       data:
-        variables:
-          sonos_entity: 'media_player.kitchen'
-          message: 'The front door is still open'
-          volume: .3
-          delay: 3
+        sonos_entity: media_player.kitchen
+        volume: 0.3
+        message: 'The front door is still open'
+        delay: '00:00:05'
     - service: notify.mobile_app_darren_reynolds
       data:
         message: "Front Door Still OPEN!"

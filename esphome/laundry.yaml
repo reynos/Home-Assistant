@@ -1,0 +1,24 @@
+esphome:
+  name: laundry
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: !secret esph-iot-SSID
+  password: !secret esph-iot-pass
+  power_save_mode: none
+  fast_connect: on
+
+logger:
+
+api:
+  password: !secret esph-api-pass
+
+ota:
+  password: !secret esph-ota-pass
+
+binary_sensor:
+  - platform: gpio
+    pin: D2
+    name: "Laundry Motion"
+    device_class: motion

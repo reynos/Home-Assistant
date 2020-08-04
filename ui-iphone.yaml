@@ -1,6 +1,5 @@
-# ui-lovelace.yaml
+# ui-iphone.yaml
 title: iPhone
-
 views:
   - icon: mdi:home
     badges:

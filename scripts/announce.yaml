@@ -1,33 +1,54 @@
 ### announce.yaml script
 
 announce:
-  alias: Announce
+  alias: "Annonce on Sonos"
   sequence:
     - service: sonos.snapshot
-#      data:
-#        entity_id: media_player.kitchen
       data_template:
-        entity_id: "{{ sonos_entity|default('media_player.study') }}"
-        with_group: yes
+        entity_id: "{{ sonos_entity }}"
+    - service: sonos.unjoin
+      data_template:
+        entity_id: "{{ sonos_entity }}"
     - service: media_player.volume_set
       data_template:
-        entity_id: "{{ sonos_entity|default('media_player.study') }}"
-        volume_level: "{{ volume|default(0.5) }}"
-    - service: media_player.play_media
-      data:
-        entity_id: media_player.study
-        media_content_id: http://10.0.26.20/sounds/chime.mp3
-        media_content_type: music
-    - delay: "00:00:03"
+        entity_id: "{{ sonos_entity }}"
+        volume_level: "{{ volume }}"
     - service: tts.google_translate_say
-      entity_id: media_player.study
-      data:
-        message: 'May the Force be with you.'
-      # data_template:
-      #   entity_id: "{{ sonos_entity|default('media_player.study') }}"
-      #   message: "{{ message }}"
-    - delay: "00:00:{{ delay }}"
+      data_template:
+        entity_id: "{{ sonos_entity }}"
+        message: "{{ message }}"
+    - delay: "{{ delay }}"
     - service: sonos.restore
       data_template:
-        entity_id: "{{ sonos_entity|default('media_player.study') }}"
-        with_group: yes
+        entity_id: "{{ sonos_entity }}"
+
+#   alias: Announce
+#   sequence:
+#     - service: sonos.snapshot
+# #      data:
+# #        entity_id: media_player.kitchen
+#       data_template:
+#         entity_id: "{{ sonos_entity|default('media_player.study') }}"
+#         with_group: yes
+#     - service: media_player.volume_set
+#       data_template:
+#         entity_id: "{{ sonos_entity|default('media_player.study') }}"
+#         volume_level: "{{ volume|default(0.5) }}"
+#     - service: media_player.play_media
+#       data:
+#         entity_id: media_player.study
+#         media_content_id: http://10.0.26.20/sounds/chime.mp3
+#         media_content_type: music
+#     - delay: "00:00:03"
+#     - service: tts.google_translate_say
+#       entity_id: media_player.study
+#       data:
+#         message: 'May the Force be with you.'
+#       # data_template:
+#       #   entity_id: "{{ sonos_entity|default('media_player.study') }}"
+#       #   message: "{{ message }}"
+#     - delay: "00:00:{{ delay }}"
+#     - service: sonos.restore
+#       data_template:
+#         entity_id: "{{ sonos_entity|default('media_player.study') }}"
+#         with_group: yes
