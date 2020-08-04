@@ -261,6 +261,10 @@ views:
             entity: light.hall_level_10
           - type: light
             entity: light.laundry_hall_37_2
+      # - type: horizontal-stack
+      #   cards:
+          - type: light
+            entity: light.bathroom_level
       - entities:
         - entity: media_player.bathroom
           icon: mdi:speaker-wireless
