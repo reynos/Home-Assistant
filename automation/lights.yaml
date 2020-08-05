@@ -194,10 +194,61 @@
       - light.hall_level_10
     to: 'on'
   action:
-    - service: light.turn_on
-      data_template:
-        entity_id: "{{ trigger.entity_id }}"
-        brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: light.kitchen_low_level_4
+            state: "on"
+        sequence:
+          - service: scene.turn_on
+            entity_id: scene.dim_kl
+      - conditions:
+          - condition: state
+            entity_id: light.kitchen_high_level_6
+            state: "on"
+        sequence:
+          - service: scene.turn_on
+            entity_id: scene.dim_kh
+      - conditions:
+          - condition: state
+            entity_id: light.lounge_level_6
+            state: "on"
+        sequence:
+          - service: scene.turn_on
+            entity_id: scene.dim_lg
+      - conditions:
+          - condition: state
+            entity_id: light.tv_level_8
+            state: "on"
+        sequence:
+          - service: scene.turn_on
+            entity_id: scene.dim_tv
+      - conditions:
+          - condition: state
+            entity_id: light.hall_level_10
+            state: "on"
+        sequence:
+          - service: scene.turn_on
+            entity_id: scene.dim_h
+      # default:
+      #   - service: notify.frenck
+      #     data:
+      #       message: Some other unknown button was pressed!
+
+    # - data:
+    #     entity_id: "{{ trigger.entity_id }}"
+    #     brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
+    #   service: scene.apply
+
+      # entities:
+      #   "{{ trigger.entity_id }}":
+      #     # state: "on"
+      #     brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
+
+    # - service: light.turn_on
+    #   data_template:
+    #     entity_id: "{{ trigger.entity_id }}"
+    #     brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
 
 ## Bathroom Motion light on
 - alias: "Bathroom Lights motion sensor ON"

@@ -10,6 +10,8 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - sensor.sun_azimuth_template
+        - sensor.sun_elevation_template
         - switch.vergola_auto
         - switch.vergola_close
         - switch.vergola_open

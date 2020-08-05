@@ -133,6 +133,33 @@
         rgb_color: [255,200,0]
         brightness: 150
 
+  - name: Dim KH
+    entities:
+      light.kitchen_high_level_6:
+        state: on
+        brightness: 50
+        # brightness: "{{ states('input_number.lights_auto_dim_level')|int }}"
+  - name: Dim KL
+    entities:
+      light.kitchen_low_level_4:
+        state: on
+        brightness: 50
+  - name: Dim LL
+    entities:
+      light.lounge_level_6:
+        state: on
+        brightness: 50
+  - name: Dim GL
+    entities:
+      light.tv_level_8:
+        state: on
+        brightness: 50
+  - name: Dim H
+    entities:
+      light.hall_level:
+        state: on
+        brightness: 50
+
   # - name: Auto Dim
   #   entities:
   #     service_template: >

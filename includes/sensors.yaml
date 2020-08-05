@@ -866,6 +866,14 @@
           mdi:help-rhombus-outline
         {% endif %}
 
+    sun_azimuth_template:
+      value_template: '{{states.sun.sun.attributes.azimuth}}'
+      friendly_name: "Sun Azimuth"
+      unit_of_measurement: "Degs"
+    sun_elevation_template:
+      value_template: '{{states.sun.sun.attributes.elevation}}'
+      friendly_name: "Sun Elevation"
+      unit_of_measurement: "Degs"
     solaredge_lifetime_energy_template:
       friendly_name: "Lifetime energy generated"
       value_template: >-
