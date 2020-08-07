@@ -183,7 +183,7 @@
     entity_id: sensor.dishwasher_watts
     below: 3
     for:
-      minutes: 5
+      minutes: 8
   action:
     - service: mqtt.publish
       data:
