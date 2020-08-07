@@ -51,6 +51,8 @@ house_mode_evening:
 house_mode_bedtime:
 house_mode_night:
 evening_holiday:
+# light flags
+bathroom_motion:
 # these stop things happerning twice in a day - reset if required each day in script.day
 morning_lights_flag:
 evening_lights_on_flag:

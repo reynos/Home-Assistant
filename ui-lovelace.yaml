@@ -400,6 +400,7 @@ views:
           - input_number.lights_auto_dim_level
           - input_number.bathroom_light_timer
           - input_number.doorbell_volume
+          - input_boolean.bathroom_motion
           - input_boolean.morning_lights_flag
           - input_boolean.evening_lights_on_flag
           - input_boolean.bedtime_beacon_flag

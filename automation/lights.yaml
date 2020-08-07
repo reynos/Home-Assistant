@@ -272,6 +272,8 @@
         domain: binary_sensor
     - service: light.turn_on
       entity_id: light.bathroom_level
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bathroom_motion
 
 - alias: 'Bathroom light Auto-off'
   trigger:
@@ -279,9 +281,22 @@
     entity_id: binary_sensor.bathroom_motion
     to: 'off'
     for: "00:{{ '%02i' | format(states('input_number.bathroom_light_timer') |int)}}:00"
+  condition:
+    condition: state
+    entity_id: input_boolean.bathroom_motion
+    state: 'on'
   action:
     service: light.turn_off
     entity_id: light.bathroom_level
+
+- alias: "Bathroom Lights OFF"
+  trigger:
+    platform: state
+    entity_id: light.bathroom_level
+    to: 'off'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bathroom_motion
 
 ## Dimmers
 #- alias: Kitchen High Dimmer
