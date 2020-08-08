@@ -9,9 +9,9 @@
   action:
     - service: script.announce
       data:
-        sonos_entity: media_player.ensuite
+        sonos_entity: media_player.kitchen
         volume: 0.5
-        message: 'Test of Text to speach'
+        message: 'Test message'
         delay: '00:00:05'
     # - service: mqtt.publish
     #   data:

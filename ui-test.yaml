@@ -24,27 +24,17 @@ views:
         - binary_sensor.laundry_motion
         - light.bathroom_level
         - light.girl_s_lamp
-        - scene.bb_blue_green_bins
-        - scene.bb_yellow_bins
-        - scene.bb_pink
         - light.bargeboard_master
         - light.bargeboard
         - light.bargeboard_segment_1
         - light.bargeboard_segment_2
         - input_boolean.announce_test
         - light.bedside_lamp_darren
-        - scene.test
-        - scene.morning
-        - scene.morning_off
-        - group.turntablepanel
         - sensor.turntable_watts
-        - group.washerpanel
-        - group.dryerpanel
-        - group.dishwasherpanel
+        - sensor.washerpanel_watts
+        - sensor.dryerpanel_watts
         - sensor.dishwasher_watts
-        - group.xmaspanel
         - sensor.xmas_lights_watts
-        - switch.arlec_sw1
         show_header_toggle: false
         type: entities
       - type: custom:mini-media-player
