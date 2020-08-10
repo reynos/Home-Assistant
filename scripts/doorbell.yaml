@@ -1,7 +1,7 @@
 ### doorbell.yaml
 
 doorbell: # for day and night
-  alias: Ring Doorbell Day
+  alias: Ring Doorbell
   sequence:
     - service: logbook.log
       data:
@@ -24,7 +24,12 @@ doorbell: # for day and night
         media_content_type: music
     - delay:
         seconds: 3
-    - service: script.timer_front_lights
+    - service_template: >
+          {% if binary_sensor.dark == on %}
+            script.timer_front_lights
+          {% else %}
+            script.donothing
+          {% endif %}
     - service: sonos.restore
       data:
         entity_id: media_player.kitchen

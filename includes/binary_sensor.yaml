@@ -13,4 +13,11 @@
   before: sunset
   before_offset: '+00:05'
 
+- platform: tod
+  name: Dark
+  after: sunset
+  after_offset: '00:30'
+  before: sunrise
+  after_offset: '+00:30'
+
 #- platform: apcupsd
