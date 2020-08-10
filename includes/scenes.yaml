@@ -97,6 +97,11 @@
       switch.frontyard: on
       light.kitchen_bench_19_2: on
 
+  - name: Front Lights # used for Doorbell
+    entities:
+      light.front_porch_light_86: on
+      switch.frontyard: on
+
   - name: BB Pink
     entities:
       light.bargeboard_master: on
