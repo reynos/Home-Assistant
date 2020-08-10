@@ -27,14 +27,9 @@
       data:
         name: "Doorbell:"
         message: Test button pushed
-    - service: script.turn_off
-      data:
-        entity_id:
-          - script.doorbell
-          - script.doorbell_night
     - service: script.turn_on
-      data_template:
-        entity_id: script.doorbell_kit_only
+      data:
+        entity_id: script.doorbell
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.doorbell_test

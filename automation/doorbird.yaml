@@ -9,7 +9,7 @@
         name: "Doorbird:"
         message: Front gate button pushed
     - service: script.turn_on
-      entity_id: script.doorbell_kit_only
+      entity_id: script.doorbell
 
 - alias: Doorbird RFID Darren
   trigger:
