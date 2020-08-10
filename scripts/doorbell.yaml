@@ -7,6 +7,12 @@ doorbell: # for day and night
       data:
         name: "Script:"
         message: Doorbell DAY
+    - service_template: >
+          {% if binary_sensor.dark == on %}
+            script.timer_front_lights
+          {% else %}
+            script.donothing
+          {% endif %}
     - service: sonos.snapshot
       data:
         entity_id: media_player.kitchen
@@ -24,12 +30,6 @@ doorbell: # for day and night
         media_content_type: music
     - delay:
         seconds: 3
-    - service_template: >
-          {% if binary_sensor.dark == on %}
-            script.timer_front_lights
-          {% else %}
-            script.donothing
-          {% endif %}
     - service: sonos.restore
       data:
         entity_id: media_player.kitchen
