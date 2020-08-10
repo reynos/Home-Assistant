@@ -13,29 +13,6 @@
         volume: 0.5
         message: 'Test message'
         delay: '00:00:05'
-    # - service: mqtt.publish
-    #   data:
-    #     topic: hass/state/dryer
-    #     payload: 'Drying'
-    #     retain: 'true'
-    # - delay:
-    #     seconds: 5
-    # - service: mqtt.publish
-    #   data:
-    #     topic: hass/state/dryer
-    #     payload: 'Idle'
-    #     retain: 'true'
-
-    # - service: script.turn_on
-    #   entity_id: script.notify_darren
-    #   data:
-    #     variables:
-    #       message: 'test'
-    # - service: script.turn_on
-    #   entity_id: script.notify_blythe
-    #   data:
-    #     variables:
-    #       message: 'test'
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.announce_test
@@ -61,39 +38,3 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.doorbell_test
-
-
-    # - service: script.turn_on
-    #   entity_id: script.notify_blythe
-    #   data:
-    #     variables:
-    #       message: 'test'
-    # - service: script.turn_off
-    #   entity_id: script.announce
-    # - service: script.turn_on
-    #   entity_id: script.announce
-    #   data:
-    #     variables:
-    #       sonos_entity: 'media_player.study'
-    #       message: 'test'
-    #       volume: .3
-    #       delay: 3
-
-
-# add to below TTS "front door still open"
-# - alias: Front Door Open
-#   trigger:
-#     - platform: state
-#       entity_id: input_select.house_mode
-#       to: 'Bedtime'
-#     - platform: state
-#       entity_id: input_select.house_mode
-#       to: 'Night'
-#   condition:
-#     condition: state
-#     entity_id: binary_sensor.front_door_30
-#     state: 'on'
-#   action:
-#     service: notify.ios_darren
-#     data:
-#       message: "Front Door Still OPEN!"
