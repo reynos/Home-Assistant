@@ -7,7 +7,7 @@ timer_front_lights:
       data:
         scene_id: front_lights_before
         snapshot_entities:
-        - light.front_porch_light_86
+        - light.front_porch_light_86_2
         - switch.frontyard
     - service: scene.turn_on
       entity_id: scene.front_lights

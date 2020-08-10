@@ -99,7 +99,7 @@
 
   - name: Front Lights # used for Doorbell
     entities:
-      light.front_porch_light_86: on
+      light.front_porch_light_86_2: on
       switch.frontyard: on
 
   - name: BB Pink
