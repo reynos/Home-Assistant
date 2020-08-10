@@ -21,17 +21,14 @@ doorbell_kit_only:
         entity_id: media_player.kitchen
         media_content_id: http://10.0.26.20/sounds/doorbell.mp3
         media_content_type: music
-    - service: logbook.log
-      data:
-        name: "Playing:"
-        message: Ding Dong
     - delay:
         seconds: 3
     - service: sonos.restore
       data:
         entity_id: media_player.kitchen
         with_group: yes
-
+    - delay: # cool down - 10 seconds
+          seconds: 5
 # same as DAY for now...
 doorbell_night:
   alias: Ring Doorbell night
