@@ -58,11 +58,6 @@
     platform: time
     at: '05:30:00'
   action:
-    - service: script.turn_off
-      data:
-        entity_id:
-          - script.day
-          - script.day_holiday
     - service: script.turn_on
       data_template:
         entity_id: >
@@ -82,9 +77,6 @@
     entity_id: input_boolean.bedtime_beacon_flag
     state: 'off' # remove quotes?
   action:
-    - service: script.turn_off
-      data:
-        entity_id: script.bedtime
     - service: script.turn_on
       data:
         entity_id: script.bedtime
@@ -112,40 +104,12 @@
            scene.bb_pink
          {% endif %}
 
-# - alias: "House Mode Evening"
-#   trigger:
-#     platform: state
-#     entity_id: input_select.house_mode
-#     to: 'Evening'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id:
-#           - light.kitchen_bench_19_2
-#           - light.stairs_33_2
-#           - light.back_garden_29
-#           - light.trampoline
-#           - light.bargeboard
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.bedside_lamp_darren
-#         brightness: 150
-#         rgb_color: [255,0,0]
-#     - service: switch.turn_on
-#       data:
-#         entity_id: switch.frontyard
-
 - alias: "House Mode Day"
   trigger:
     platform: state
     entity_id: input_select.house_mode
     to: 'Day'
   action:
-    - service: script.turn_off
-      data:
-        entity_id:
-          - script.day
-          - script.day_holiday
     - service: script.turn_on
       entity_id: script.day
 
@@ -155,11 +119,6 @@
     entity_id: input_select.house_mode
     to: 'Night'
   action:
-    - service: script.turn_off
-      data:
-        entity_id:
-          - script.night
-          - script.night_holiday
     - service: script.turn_on
       entity_id: script.night
 
