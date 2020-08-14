@@ -1,4 +1,4 @@
-### doorbell.yaml
+### doorbell.yaml script
 
 doorbell: # for day and night
   alias: Ring Doorbell
@@ -8,7 +8,7 @@ doorbell: # for day and night
         name: "Script:"
         message: Doorbell DAY
     - service_template: >
-          {% if binary_sensor.dark == on %}
+          {% if is_state('binary_sensor.dark', 'on') %}
             script.timer_front_lights
           {% else %}
             script.donothing
