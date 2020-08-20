@@ -3,11 +3,8 @@
 doorbell: # for day and night
   alias: Ring Doorbell
   sequence:
-    - service: logbook.log
-      data:
-        name: "Script:"
-        message: Doorbell DAY
-    - service_template: >
+    - service: script.turn_on
+      data_template:
           {% if is_state('binary_sensor.dark', 'on') %}
             script.timer_front_lights
           {% else %}
@@ -34,7 +31,7 @@ doorbell: # for day and night
       data:
         entity_id: media_player.kitchen
         with_group: yes
-    - delay: # cool down - 10 seconds
+    - delay: # cool down - 5 seconds
           seconds: 5
 
 doorbell_multi_speaker: # not used at this stage
