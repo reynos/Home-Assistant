@@ -1,8 +1,28 @@
 ### announce.yaml script
 
 announce:
-  alias: "Annonce on Sonos"
+  alias: "Announce on Sonos"
   sequence:
+    - service: notify.mobile_app_darren_reynolds
+      data_template:
+        message: "{{ at_night }}"
+    - service: script.turn_off
+      data_template:
+        entity_id: >
+            {% if is_state('input_select.house_mode', 'Night') %}
+              script.announce
+            {% else  %}
+              script.donothing
+            {% endif %}
+#          {% if is_state('input_select.house_mode', 'Night') %}
+#            {% if "{{ at_night }}" == 'no' %}
+#               script.announce
+#            {% else  %}
+#               script.donothing
+#            {% endif %}
+#          {% else %}
+#            script.donothing
+#          {% endif %}
     - service: sonos.snapshot
       data_template:
         entity_id: "{{ sonos_entity }}"
@@ -14,8 +34,8 @@ announce:
         entity_id: "{{ sonos_entity }}"
         volume_level: "{{ volume }}"
     - service: media_player.play_media
-      data:
-        entity_id: media_player.kitchen
+      data_template:
+        entity_id: "{{ sonos_entity }}"
         media_content_id: http://10.0.26.20/sounds/announce.wav
         media_content_type: music
     - delay: "00:00:02"

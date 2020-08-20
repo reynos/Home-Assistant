@@ -9,10 +9,11 @@
   action:
     - service: script.announce
       data:
-        sonos_entity: media_player.kitchen
-        volume: 0.5
-        message: 'Test message'
-        delay: '00:00:05'
+        sonos_entity: media_player.study
+        volume: 0.1
+        message: 'a'
+        delay: '00:00:01'
+        at_night: 'no'
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.announce_test
