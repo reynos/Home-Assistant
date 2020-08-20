@@ -71,18 +71,17 @@ google:
 #   host: !secret apc_ups_host
 #   port: !secret apc_ups_port
 
-remote_homeassistant:
-  instances:
-  - host: !secret ha_lounge_ip
-    port: !secret ha_lounge_port
-    secure: false
-#    verify_ssl: false
-    access_token: !secret ha_lounge_access_token
-    entity_prefix: "ha_lounge_"
-    include:
-      domains:
-      - script
-      - input_boolean
+# remote_homeassistant:
+#   instances:
+#   - host: !secret ha_lounge_ip
+#     port: !secret ha_lounge_port
+#     secure: false
+#     access_token: !secret ha_lounge_access_token
+#     entity_prefix: "ha_lounge_"
+#     include:
+#       domains:
+#       - script
+#       - input_boolean
 
 tts:
   - platform: google_translate

@@ -43,23 +43,23 @@
     - wind_spd_kmh
     - wind_spd_kt
 
-- platform: bom_forecast
-  product_id: !secret BOM_product_ID
-  name: !secret BOM_name
-  forecast_days: 6
-  rest_of_today: true
-  friendly: false
-  friendly_state_format: '{max}, {summary}'
-  monitored_conditions:
-    - 'max'
-    - 'min'
-    - 'chance_of_rain'
-    - 'possible_rainfall'
-    - 'summary'
-    - 'detailed_summary'
-    - 'icon'
-    - 'uv_alert'
-    - 'fire_danger'
+# - platform: bom_forecast
+#   product_id: !secret BOM_product_ID
+#   name: !secret BOM_name
+#   forecast_days: 6
+#   rest_of_today: true
+#   friendly: false
+#   friendly_state_format: '{max}, {summary}'
+#   monitored_conditions:
+#     - 'max'
+#     - 'min'
+#     - 'chance_of_rain'
+#     - 'possible_rainfall'
+#     - 'summary'
+#     - 'detailed_summary'
+#     - 'icon'
+#     - 'uv_alert'
+#     - 'fire_danger'
 
 - platform: template
   sensors:

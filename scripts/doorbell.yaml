@@ -5,6 +5,7 @@ doorbell: # for day and night
   sequence:
     - service: script.turn_on
       data_template:
+        entity_id: >
           {% if is_state('binary_sensor.dark', 'on') %}
             script.timer_front_lights
           {% else %}
