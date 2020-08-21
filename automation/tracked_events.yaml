@@ -6,7 +6,7 @@
     entity_id: device_tracker.darren_reynolds
     to: 'frontgate'
   action:
-    - service: notify.ios_darren
+    - service: notify.mobile_app_darren_reynolds
       data:
         message: "Darren trigger Frontgate"
     - service: switch.turn_on
@@ -44,7 +44,7 @@
 ##- wait_template: "{{ states.climate.kitchen.attributes.valve|int < 10 }}"
 ##  timeout: '00:01:00'
   action: # actionable notification
-    service: notify.ios_darren
+    service: notify.mobile_app_darren_reynolds
     data:
       message: "Going to Bed? What to do with the lights?"
       data:
