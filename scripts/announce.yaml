@@ -3,26 +3,25 @@
 announce:
   alias: "Announce on Sonos"
   sequence:
-    - service: notify.mobile_app_darren_reynolds
-      data_template:
-        message: "{{ at_night }}"
-    - service: script.turn_off
-      data_template:
-        entity_id: >
-            {% if is_state('input_select.house_mode', 'Night') %}
-              script.announce
-            {% else  %}
-              script.donothing
-            {% endif %}
-#          {% if is_state('input_select.house_mode', 'Night') %}
-#            {% if "{{ at_night }}" == 'no' %}
-#               script.announce
-#            {% else  %}
-#               script.donothing
-#            {% endif %}
-#          {% else %}
-#            script.donothing
-#          {% endif %}
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ is_state('input_select.house_mode', 'Night') and at_night == 'no' }}
+          sequence:
+            - service: script.turn_off
+              entity_id: script.announce
+  #   - service: notify.mobile_app_darren_reynolds
+  #     data_template:
+  #       message: "{{ at_night }}"
+  #   - service: script.turn_off
+  #     data_template:
+  #       entity_id: >
+  #           {% if is_state('input_select.house_mode', 'Night') %}
+  #             script.announce
+  #           {% else  %}
+  #             script.donothing
+  #           {% endif %}
     - service: sonos.snapshot
       data_template:
         entity_id: "{{ sonos_entity }}"
