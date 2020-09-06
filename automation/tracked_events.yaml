@@ -29,17 +29,17 @@
 - alias: Masterbed Beacon Goodnight
   trigger:
     platform: state
-    entity_id: device_tracker.reynolds_darren
+    entity_id: device_tracker.darren_reynolds_3
     to: masterbed
-  condition:
-    - condition: time
-      after: '20:00:00'
-    - condition: state
-      entity_id: input_select.house_mode
-      state: 'Evening'
-    - condition: state
-      entity_id: input_boolean.bedtime_beacon_flag
-      state: 'off'
+  # condition:
+  #   - condition: time
+  #     after: '20:00:00'
+  #   - condition: state
+  #     entity_id: input_select.house_mode
+  #     state: 'Evening'
+  #   - condition: state
+  #     entity_id: input_boolean.bedtime_beacon_flag
+  #     state: 'off'
 ##add a wait timer (reset it first) and a wait_template for the actionable notification - wait for 1 2 then bedtime set
 ##- wait_template: "{{ states.climate.kitchen.attributes.valve|int < 10 }}"
 ##  timeout: '00:01:00'

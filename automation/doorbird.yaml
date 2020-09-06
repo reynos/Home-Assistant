@@ -15,9 +15,22 @@
     platform: event
     event_type: doorbird_front_gate_RFID_Darren
   action:
-    service: notify.mobile_app_darren_reynolds
-    data:
-      message: 'Darren at Front Gate'
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.dark
+              state: "on"
+          sequence:
+            - service: script.turn_on
+              entity_id: script.timer_front_lights
+            - service: notify.mobile_app_darren_reynolds
+              data:
+                message: 'Darren at Front Gate - lighst ON!'
+      default:
+        - service: notify.mobile_app_darren_reynolds
+          data:
+              message: 'Darren at Front Gate - day'
+
 - alias: Doorbird RFID Blythe
   trigger:
     platform: event
