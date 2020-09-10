@@ -1,0 +1,130 @@
+## vergola.yaml scripts
+vergola_open_all:
+  alias: "Vergola Open All"
+  sequence:
+# Select Auto - reset bank count
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_auto
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_auto
+# Select bank 1
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_select
+# Activate Open
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_open
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_open
+    - delay:
+        milliseconds: 500
+# Select bank 2
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+# Activate Open
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_open
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_open
+
+vergola_close_all:
+  alias: "Vergola Close All"
+  sequence:
+# Select Auto - reset bank count
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_auto
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_auto
+# Select bank 1
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_select
+# Activate Close
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_close
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_close
+    - delay:
+        milliseconds: 500
+# Select bank 2
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_select
+    - delay:
+        milliseconds: 200
+# Activate Open
+    - service: switch.turn_on
+      entity_id:
+        - switch.vergola_close
+    - delay:
+        milliseconds: 200
+    - service: switch.turn_off
+      entity_id:
+        - switch.vergola_close

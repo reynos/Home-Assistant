@@ -1,5 +1,19 @@
 ## tests.yaml automations
 
+- alias: test notify
+  trigger:
+    platform: state
+    from: 'off'
+    to: 'on'
+    entity_id: input_boolean.tester
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: 'Successful notify test'
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.tester
+
 - alias: test announce
   trigger:
     platform: state

@@ -13,6 +13,8 @@ views:
         - binary_sensor.dark        
         - sensor.sun_azimuth_template
         - sensor.sun_elevation_template
+        - script.vergola_open_all
+        - script.vergola_close_all
         - switch.vergola_auto
         - switch.vergola_close
         - switch.vergola_open
