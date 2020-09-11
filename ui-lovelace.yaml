@@ -276,7 +276,7 @@ views:
       - type: custom:light-entity-card
         entity: light.wled
       - entities:
-        - light.back_floodlights_26_2
+        - switch.backyard_floodlight
         - light.back_garden_29
         - light.trampoline
         - sensor.trampoline_wi_fi_signal

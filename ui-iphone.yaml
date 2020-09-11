@@ -304,7 +304,7 @@ views:
   - icon: mdi:tree
     cards:
       - entities:
-        - light.back_floodlights_26_2
+        - switch.backyard_floodlight
         - light.back_garden_29
         - light.side_28_2
         - entity: switch.back_deck_watering_25_2

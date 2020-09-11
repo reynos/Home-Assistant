@@ -68,7 +68,10 @@ views:
               - entity: light.bargeboard
                 tap_action:
                   action: toggle
-              - entity: light.back_floodlights_26_2
+              - entity: switch.backyard_floodlight
+                tap_action:
+                  action: toggle
+              - entity: switch.back_deck
                 tap_action:
                   action: toggle
               - entity: light.side_28_2
@@ -359,7 +362,7 @@ views:
                             - text-overflow: initial
                             - overflow: initial
                       - type: custom:button-card
-                        entity: light.back_floodlights_26_2
+                        entity: switch.backyard_floodlight
                         styles:
                           card:
                             - height: 93px
@@ -775,7 +778,7 @@ views:
 #   - icon: mdi:tree
 #     cards:
 #       - entities:
-#         - light.back_floodlights_26_2
+#         - switch.backyard_floodlight
 #         - light.back_garden_29
 #         - light.side_28_2
 #         - entity: switch.back_deck_watering_25_2
