@@ -277,6 +277,7 @@ views:
         entity: light.wled
       - entities:
         - switch.backyard_floodlight
+        - switch.back_deck
         - light.back_garden_29
         - light.trampoline
         - sensor.trampoline_wi_fi_signal
