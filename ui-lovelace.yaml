@@ -252,9 +252,13 @@ views:
           icon: mdi:timer
         - entity: binary_sensor.front_door_30
           icon: mdi:door
+        - entity: sensor.laundry_temperature
+          icon: mdi:thermometer
+        - entity: sensor.laundry_humidity
+          icon: mdi:water-percent
         show_header_toggle: false
         type: entities
-        title: Stairs/Hall/Bathroom
+        title: Stairs/Hall/Bathroom/Laundry
       - type: horizontal-stack
         cards:
           - type: light
