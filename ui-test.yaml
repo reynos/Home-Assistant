@@ -10,15 +10,15 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
-        - binary_sensor.dark        
+        - binary_sensor.dark
         - sensor.sun_azimuth_template
         - sensor.sun_elevation_template
         - script.vergola_open_all
         - script.vergola_close_all
+        - switch.vergola_select
         - switch.vergola_auto
         - switch.vergola_close
         - switch.vergola_open
-        - switch.vergola_select
         - switch.subwoofer
         - sensor.bathroom_humidity
         - sensor.bathroom_temperature
@@ -111,6 +111,14 @@ views:
       - type: sensor
         entity: sensor.light_sensor_130
         name: Kitchen Lux
+        graph: line
+      - type: sensor
+        entity: sensor.laundry_temperature
+        name: Laundry Temp
+        graph: line
+      - type: sensor
+        entity: sensor.laundry_humidity
+        name: Laundry Humidity
         graph: line
       - type: custom:bom-weather-card
         title: BOM Weather
