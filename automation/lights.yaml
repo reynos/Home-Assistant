@@ -158,6 +158,28 @@
       data:
         entity_id: input_boolean.lollie_lights
 
+- alias: Girls night light on
+  trigger:
+    platform: time
+    at: '19:00:00'
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: input_select.house_mode
+        state: 'Holiday'
+  action:
+    service: scene.turn_on
+    entity_id: scene.girls_night_light
+
+- alias: Girls night light off
+  trigger:
+    platform: time
+    at: '07:00:00'
+  action:
+    service: light.turn_off
+    entity_id: light.girl_s_lamp
+
 - alias: "Lollie Night light OFF"
   trigger:
     platform: state
@@ -183,53 +205,53 @@
       entity_id: light.trampoline
 
 # Auto-dim lights
-- alias: "Auto Dim lights"
-  trigger:
-    platform: state
-    entity_id:
-      - light.kitchen_low_level_4
-      - light.kitchen_high_level_6
-      - light.lounge_level_6
-      - light.tv_level_8
-      - light.hall_level_10
-    to: 'on'
-  action:
-    - choose:
-      - conditions:
-          - condition: state
-            entity_id: light.kitchen_low_level_4
-            state: "on"
-        sequence:
-          - service: scene.turn_on
-            entity_id: scene.dim_kl
-      - conditions:
-          - condition: state
-            entity_id: light.kitchen_high_level_6
-            state: "on"
-        sequence:
-          - service: scene.turn_on
-            entity_id: scene.dim_kh
-      - conditions:
-          - condition: state
-            entity_id: light.lounge_level_6
-            state: "on"
-        sequence:
-          - service: scene.turn_on
-            entity_id: scene.dim_lg
-      - conditions:
-          - condition: state
-            entity_id: light.tv_level_8
-            state: "on"
-        sequence:
-          - service: scene.turn_on
-            entity_id: scene.dim_tv
-      - conditions:
-          - condition: state
-            entity_id: light.hall_level_10
-            state: "on"
-        sequence:
-          - service: scene.turn_on
-            entity_id: scene.dim_h
+# - alias: "Auto Dim lights"
+#   trigger:
+#     platform: state
+#     entity_id:
+#       - light.kitchen_low_level_4
+#       - light.kitchen_high_level_6
+#       - light.lounge_level_6
+#       - light.tv_level_8
+#       - light.hall_level_10
+#     to: 'on'
+#   action:
+#     - choose:
+#       - conditions:
+#           - condition: state
+#             entity_id: light.kitchen_low_level_4
+#             state: "on"
+#         sequence:
+#           - service: scene.turn_on
+#             entity_id: scene.dim_kl
+#       - conditions:
+#           - condition: state
+#             entity_id: light.kitchen_high_level_6
+#             state: "on"
+#         sequence:
+#           - service: scene.turn_on
+#             entity_id: scene.dim_kh
+#       - conditions:
+#           - condition: state
+#             entity_id: light.lounge_level_6
+#             state: "on"
+#         sequence:
+#           - service: scene.turn_on
+#             entity_id: scene.dim_lg
+#       - conditions:
+#           - condition: state
+#             entity_id: light.tv_level_8
+#             state: "on"
+#         sequence:
+#           - service: scene.turn_on
+#             entity_id: scene.dim_tv
+#       - conditions:
+#           - condition: state
+#             entity_id: light.hall_level_10
+#             state: "on"
+#         sequence:
+#           - service: scene.turn_on
+#             entity_id: scene.dim_h
       # default:
       #   - service: notify.frenck
       #     data:
