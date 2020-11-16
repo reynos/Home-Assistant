@@ -54,10 +54,6 @@
         state: on
         rgb_color: [255,64,0]
         brightness: 100
-      light.girl_s_lamp:
-        state: on
-        rgb_color: [255,0,255]
-        brightness: 200
 
 # triggered at 10:30 every night
   - name: Night
@@ -107,7 +103,7 @@
       light.girl_s_lamp:
         state: on
         rgb_color: [255,0,0]
-        brightness: 100
+        brightness: 150
 
   - name: BB Pink
     entities:
