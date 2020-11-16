@@ -265,8 +265,6 @@ views:
             entity: light.hall_level_10
           - type: light
             entity: light.laundry_hall_37_2
-      # - type: horizontal-stack
-      #   cards:
           - type: light
             entity: light.bathroom_level
       - entities:
@@ -275,6 +273,17 @@ views:
         - entity: media_player.study
           icon: mdi:speaker-wireless
         type: entities
+  - icon: mdi:face-woman-outline
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.play_room_tv
+        name: Play Room TV
+        hide:
+          icon: false
+          power: false
+          volume: false
+          runtime: false
+          play_stop: true
   - icon: mdi:tree
     cards:
       - type: custom:light-entity-card
