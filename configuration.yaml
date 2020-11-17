@@ -94,8 +94,6 @@ webostv:
     service: wake_on_lan.send_magic_packet
     data:
       mac: !secret play_room_tv_mac
-      broadcast_address: !secret play_room_tv_host
-
   customize:
     sources:
       - livetv
