@@ -87,6 +87,22 @@ tts:
   - platform: google_translate
     base_url: !secret tts_base_url
 
+webostv:
+  host: !secret play_room_tv_host
+  name: Play Room TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret play_room_tv_mac
+      broadcast_address: !secret play_room_tv_host
+
+  customize:
+    sources:
+      - livetv
+      - youtube
+      - iview
+      - netflix
+      - plex
 config:
 mobile_app:
 person:
