@@ -100,7 +100,8 @@ webostv:
       - youtube
       - iview
       - netflix
-      - plex
+      - Plex
+      - stan
 config:
 mobile_app:
 person:

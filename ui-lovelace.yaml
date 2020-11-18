@@ -284,6 +284,15 @@ views:
           volume: false
           runtime: false
           play_stop: true
+      - type: custom:mini-media-player
+        entity: media_player.plex_plex_for_lg_lg_43un7300ptc_2
+        name: Play Room Plex
+        hide:
+          icon: false
+          power: false
+          volume: false
+          runtime: false
+          play_stop: true
   - icon: mdi:tree
     cards:
       - type: custom:light-entity-card
