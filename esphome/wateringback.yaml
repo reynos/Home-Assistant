@@ -1,5 +1,5 @@
 esphome:
-  name: kitchen
+  name: wateringback
   platform: ESP8266
   board: nodemcuv2
 
@@ -17,18 +17,13 @@ api:
 ota:
   password: !secret esph-ota-pass
 
-binary_sensor:
+switch:
   - platform: gpio
+    name: "Soleniod 1"
     pin: D2
-    name: "Kitchen Motion"
-    device_class: motion
-
-sensor:
-  - platform: dht
+  - platform: gpio
+    name: "Soleniod 2"
     pin: D5
-    model: AM2302
-    temperature:
-      name: "Kitchen Temperature"
-    humidity:
-      name: "Kitchen Humidity"
-    update_interval: 60s
+  - platform: gpio
+    name: "Soleniod 3"
+    pin: D6
