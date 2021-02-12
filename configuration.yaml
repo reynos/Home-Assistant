@@ -16,6 +16,9 @@ homeassistant:
         - !secret subnet2
       allow_bypass_login: true
 
+  whitelist_external_dirs:
+    - '/config/www/sounds'
+
 frontend:
   themes: !include_dir_merge_named ../themes
 
