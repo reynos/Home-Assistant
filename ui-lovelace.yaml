@@ -295,8 +295,8 @@ views:
           play_stop: true
   - icon: mdi:tree
     cards:
-      - type: custom:light-entity-card
-        entity: light.wled
+      # - type: custom:light-entity-card
+      #   entity: light.trampoline
       - entities:
         - switch.backyard_floodlight
         - switch.back_deck
@@ -336,6 +336,14 @@ views:
         type: picture-entity
       - entity: camera.front_gate_last_ring
         type: picture-entity
+  - icon: mdi:water
+    cards:
+      - entities:
+        - switch.water_lawn
+        - switch.water_garden
+        - switch.water_hedge
+        type: entities
+        title: Backyard Watering
   - icon: mdi:weather-partly-cloudy
     cards:
       - type: weather-forecast

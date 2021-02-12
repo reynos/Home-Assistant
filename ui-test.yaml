@@ -10,9 +10,10 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
-        - switch.soleniod_1
-        - switch.soleniod_2
-        - switch.soleniod_3
+        - light.decksteps_master
+        - light.decksteps_segment_1
+        - light.decksteps_segment_2
+        - light.decksteps_segment_3
         - binary_sensor.dark
         - sensor.sun_azimuth_template
         - sensor.sun_elevation_template
