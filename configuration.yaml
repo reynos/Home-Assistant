@@ -51,11 +51,11 @@ solaredge:
   site_id: !secret solaredge_site_id
   name: SolarEdge
 
-bmw_connected_drive:
-  bmw_x5:
-    username: !secret USERNAME_BMW_CONNECTED_DRIVE
-    password: !secret PASSWORD_BMW_CONNECTED_DRIVE
-    region: rest_of_world
+# bmw_connected_drive:
+#   bmw_x5:
+#     username: !secret USERNAME_BMW_CONNECTED_DRIVE
+#     password: !secret PASSWORD_BMW_CONNECTED_DRIVE
+#     region: rest_of_world
 
 speedtestdotnet:
   server_id: 2629
