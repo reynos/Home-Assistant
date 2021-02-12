@@ -304,6 +304,9 @@ views:
         - light.trampoline
         - sensor.trampoline_wi_fi_signal
         - sensor.trampoline_estimated_current
+        - light.decksteps
+        - sensor.decksteps_wi_fi_signal
+        - sensor.decksteps_estimated_current
         - light.bargeboard
         - sensor.bargeboard_wi_fi_signal
         - sensor.bargeboard_estimated_current

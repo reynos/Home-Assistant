@@ -24,6 +24,7 @@
       - light.front_porch_light_86_2
       - light.back_garden_29
       - light.trampoline
+      - light.decksteps
       - switch.backyard_floodlight
       - switch.back_deck
       - light.side_28_2

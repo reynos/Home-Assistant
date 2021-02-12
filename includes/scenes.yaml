@@ -45,6 +45,7 @@
       light.stairs_33_2: on
       light.back_garden_29: on
       light.trampoline: on
+      light.decksteps: on
       switch.frontyard: on
       light.bedside_lamp_darren:
         state: on

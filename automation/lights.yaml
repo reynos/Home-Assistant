@@ -195,7 +195,7 @@
 - alias: Tramp light off
   trigger:
     platform: time
-    at: '19:30:00'
+    at: '20:00:00'
   condition:
     - condition: state
       entity_id: sun.sun
