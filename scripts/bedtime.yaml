@@ -9,6 +9,13 @@ bedtime:
     - service: light.turn_off
       entity_id:
         - group.all_lights_not_beds
+    - service: switch.turn_off
+      entity_id:
+        - switch.backyard_floodlight
+        - switch.back_deck
+        - switch.water_lawn
+        - switch.water_garden
+        - switch.water_hedge
     - service: light.turn_on
       entity_id: light.stairs_33_2
     - service: input_boolean.turn_on

@@ -45,7 +45,7 @@
       light.stairs_33_2: on
       light.back_garden_29: on
       light.trampoline: on
-      light.decksteps: on
+      light.decksteps_master: on
       switch.frontyard: on
       light.bedside_lamp_darren:
         state: on
@@ -61,11 +61,10 @@
     entities:
 # add turn on light sensors here
       group.all_lights_not_beds: off
-#      light.lounge_lamp_18: off
       switch.frontyard: off
-      switch.back_deck_watering_25_2: off
-#      input_select.house_mode:
-#        option: "Night"
+      switch.water_lawn: off
+      switch.water_garden: off
+      switch.water_hedge: off
 
   - name: Bedtime
     entities:
