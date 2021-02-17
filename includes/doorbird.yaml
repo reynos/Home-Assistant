@@ -1,3 +1,5 @@
+##DEPRICATED## - this config is not used
+
 #doorbird.yaml
   devices:
     - host: !secret doorbird_host

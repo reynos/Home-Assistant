@@ -257,7 +257,7 @@
         entity_id: media_player.yamaha_receiver
     - delay:
         seconds: 15
-    - service: media_player.select_scene
+    - service: media_player.scene
       data:
         entity_id: media_player.yamaha_receiver
         scene: 'Vinyl Listening'
