@@ -3,7 +3,9 @@
 mode: yaml
 
 resources:
-  - url: /local/community/mini-media-player/mini-media-player-bundle.js?v=1.6.0
+  - url: /hacsfiles/bom-radar-card/bom-radar-card.js
+    type: module
+  - url: /local/community/mini-media-player/mini-media-player-bundle.js?
     type: module
   - url: /local/community/button-card/button-card.js
     type: module
