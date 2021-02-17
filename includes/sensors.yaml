@@ -26,235 +26,6 @@
   scan_interval:
     minutes: 15
 
-###
-- platform: bom
-  station: !secret BOM_station
-  name: !secret BOM_name
-  monitored_conditions:
-    - apparent_t
-    - delta_t
-    - gust_kmh
-    - gust_kt
-    - air_temp
-    - dewpt
-    - rain_trace
-    - rel_hum
-    - wind_dir
-    - wind_spd_kmh
-    - wind_spd_kt
-
-# - platform: bom_forecast
-#   product_id: !secret BOM_product_ID
-#   name: !secret BOM_name
-#   forecast_days: 6
-#   rest_of_today: true
-#   friendly: false
-#   friendly_state_format: '{max}, {summary}'
-#   monitored_conditions:
-#     - 'max'
-#     - 'min'
-#     - 'chance_of_rain'
-#     - 'possible_rainfall'
-#     - 'summary'
-#     - 'detailed_summary'
-#     - 'icon'
-#     - 'uv_alert'
-#     - 'fire_danger'
-
-- platform: template
-  sensors:
-
-    bom_current_text:
-      value_template: >
-          {% set val = states('sensor.bom_sydney_summary_0').split('.')[0] %}
-          {{ val | title }}
-    bom_uv_alert:
-      value_template: >
-          {%- if states('sensor.bom_sydney_uv_alert_0') == '##' -%}
-          UV Today: No Data
-          {%- elif states('sensor.bom_sydney_uv_alert_0') != 'n/a' -%}
-          UV Today: {{ states('sensor.bom_sydney_uv_alert_0') }}
-          {%- elif states('sensor.bom_sydney_uv_alert_1') == '##' -%}
-          UV Tomorrow: No Data
-          {%- else -%}
-          UV Tomorrow: {{ states('sensor.bom_sydney_uv_alert_1') }}
-          {%- endif -%}
-    bom_uv_alert_summary:
-      value_template: >
-          {%- if states('sensor.bom_sydney_uv_alert_0') == '##' -%}
-          {% set val = 'No Data' %}
-          {%- elif states('sensor.bom_sydney_uv_alert_0') != 'n/a' -%}
-          {% set val = states('sensor.bom_sydney_uv_alert_0').split('[')[1].split(']')[0] %}
-          {%- elif states('sensor.bom_sydney_uv_alert_1') == '##' -%}
-          {% set val = 'No Data' %}
-          {%- elif states('sensor.bom_sydney_uv_alert_1') != 'n/a' -%}
-          {% set val = states('sensor.bom_sydney_uv_alert_1').split('[')[1].split(']')[0] %}
-          {%- else -%}
-          {%- set val = 'No Data' -%}
-          {%- endif -%}
-          {{ val | title }}
-
-    bom_fire_danger:
-      value_template: >
-          {%- if states('sensor.bom_sydney_fire_danger_0') == '##' -%}
-          Fire Danger Today: No Data
-          {%- elif states('sensor.bom_sydney_fire_danger_0') != 'n/a' -%}
-          Fire Danger Today: {{ states('sensor.bom_sydney_fire_danger_0') }}
-          {%- elif states('sensor.bom_sydney_fire_danger_1') == '##' -%}
-          Fire Danger Tomorrow: No Data
-          {%- else -%}
-          Fire Danger Tomorrow: {{ states('sensor.bom_sydney_fire_danger_1') }}
-          {%- endif -%}
-    bom_fire_danger_summary:
-      value_template: >
-          {%- if states('sensor.bom_sydney_fire_danger_0') == '##' -%}
-          No Data
-          {%- elif states('sensor.bom_sydney_fire_danger_0') != 'n/a' -%}
-          {{ states('sensor.bom_sydney_fire_danger_0') }}
-          {%- elif states('sensor.bom_sydney_fire_danger_1') == '##' -%}
-          No Data
-          {%- else -%}
-          {{ states('sensor.bom_sydney_fire_danger_1') }}
-          {%- endif -%}
-    bom_forecast_0:
-      entity_id:
-        - sensor.bom_today_max
-        - sensor.bom_today_min
-        - sensor.bom_sydney_chance_of_rain_0
-        - sensor.bom_sydney_icon_0
-      friendly_name: "Today"
-      value_template: >
-        {{states('sensor.bom_today_max')|round(0)}}°/{{states('sensor.bom_today_min')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_0')|round(0)}}%
-      entity_picture_template: >-
-        {%- if states('sun.sun') == 'below_horizon' and (states('sensor.bom_sydney_icon_0') == 'fog' or states('sensor.bom_sydney_icon_0') == 'haze' or states('sensor.bom_sydney_icon_0') == 'light-showers' or states('sensor.bom_sydney_icon_0') == 'partly-cloudy' or states('sensor.bom_sydney_icon_0') == 'showers') -%}
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_0') ~ '-night.png' }}
-        {%- else -%}
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_0') ~ '.png' }}
-        {%- endif -%}
-    bom_forecast_1:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_1
-        - sensor.bom_sydney_min_temp_c_1
-        - sensor.bom_sydney_chance_of_rain_1
-        - sensor.bom_sydney_icon_1
-      friendly_name_template: >
-        {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
-        {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
-      value_template: >
-        {{states('sensor.bom_sydney_max_temp_c_1')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_1')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_1')|round(0)}}%
-      entity_picture_template: >-
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_1') ~ '.png' }}
-    bom_forecast_2:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_2
-        - sensor.bom_sydney_min_temp_c_2
-        - sensor.bom_sydney_chance_of_rain_2
-        - sensor.bom_sydney_icon_2
-      friendly_name_template: >
-        {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
-        {{ date | timestamp_custom('%A (%-d/%-m)') }}
-      value_template: >
-        {{states('sensor.bom_sydney_max_temp_c_2')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_2')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_2')|round(0)}}%
-      entity_picture_template: >-
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_2') ~ '.png' }}
-    bom_forecast_3:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_3
-        - sensor.bom_sydney_min_temp_c_3
-        - sensor.bom_sydney_chance_of_rain_3
-        - sensor.bom_sydney_icon_3
-      friendly_name_template: >
-        {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
-        {{ date | timestamp_custom('%A (%-d/%-m)') }}
-      value_template: >
-        {{states('sensor.bom_sydney_max_temp_c_3')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_3')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_3')|round(0)}}%
-      entity_picture_template: >-
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_3') ~ '.png' }}
-    bom_forecast_4:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_4
-        - sensor.bom_sydney_min_temp_c_4
-        - sensor.bom_sydney_chance_of_rain_4
-        - sensor.bom_sydney_icon_4
-      friendly_name_template: >
-        {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
-        {{ date | timestamp_custom('%A (%-d/%-m)') }}
-      value_template: >
-        {{states('sensor.bom_sydney_max_temp_c_4')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_4')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_4')|round(0)}}%
-      entity_picture_template: >-
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_4') ~ '.png' }}
-    bom_forecast_5:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_5
-        - sensor.bom_sydney_min_temp_c_5
-        - sensor.bom_sydney_chance_of_rain_5
-        - sensor.bom_sydney_icon_5
-      friendly_name_template: >
-        {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
-        {{ date | timestamp_custom('%A (%-d/%-m)') }}
-      value_template: >
-        {{states('sensor.bom_sydney_max_temp_c_5')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_5')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_5')|round(0)}}%
-      entity_picture_template: >-
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_5') ~ '.png' }}
-    bom_forecast_6:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_6
-        - sensor.bom_sydney_min_temp_c_6
-        - sensor.bom_sydney_chance_of_rain_6
-        - sensor.bom_sydney_icon_6
-      friendly_name_template: >
-        {%- set date = as_timestamp(now()) + (6 * 86400 ) -%}
-        {{ date | timestamp_custom('%A (%-d/%-m)') }}
-      value_template: >
-        {{states('sensor.bom_sydney_max_temp_c_6')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_6')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_6')|round(0)}}%
-      entity_picture_template: >-
-        {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_6') ~ '.png' }}
-    bom_today_max:
-      entity_id:
-        - sensor.bom_sydney_max_temp_c_0
-        - sensor.today_temp_bom
-      value_template: >
-        {%- if states('sensor.bom_sydney_max_temp_c_0') == 'n/a' -%}
-          {{ state_attr('sensor.today_temp_bom', 'max_value') }}
-        {% else %}
-          {{ states('sensor.bom_sydney_max_temp_c_0') }}
-        {% endif %}
-    bom_today_min:
-      entity_id:
-        - sensor.bom_sydney_min_temp_c_0
-        - sensor.today_temp_bom
-      value_template: >
-        {%- if states('sensor.bom_sydney_min_temp_c_0') == 'n/a' -%}
-          {{ state_attr('sensor.today_temp_bom', 'min_value') }}
-        {% else %}
-          {{ states('sensor.bom_sydney_min_temp_c_0') }}
-        {% endif %}
-- platform: statistics
-  name: today_temp_bom
-  sampling_size: 150
-  entity_id: sensor.bom_sydney_air_temp_c
-  max_age:
-    hours: 24
-
-
-# - platform: bom_forecast
-#   product_id: !secret BOM_product_ID
-#   name: !secret BOM_name
-#   forecast_days: 6
-#   rest_of_today: true
-#   friendly: false
-#   friendly_state_format: '{max}, {summary}'
-#   monitored_conditions:
-#     - 'max'
-#     - 'min'
-#     - 'chance_of_rain'
-#     - 'possible_rainfall'
-#     - 'summary'
-#     - 'detailed_summary'
-#     - 'icon'
-#     - 'uv_alert'
-#     - 'fire_danger'
-
 ## emoncms sensors
 - platform: emoncms
   id: 1
@@ -674,90 +445,6 @@
     - type: network_out
       arg: eno1
 
-#- platform: uber
-#  server_token: !secret uber_server_token
-#  start_latitude: !secret home_lat
-#  start_longitude: !secret home_lon
-#  end_latitude: !secret zone7_lat
-#  end_longitude: !secret zone7_lon
-#  product_ids:
-#    - '2d1d002b-d4d0-4411-98e1-673b244878b2'
-
-# These call are Distance Matrix Advanced.
-# Free teir allows for up to 20,000 calls per month (eviqualebnt to USD$200)
-# Limit these to approx 5 sensors polling every 15mins 24x7 - not not exceed
-# BMW camera sensor also uses calles
-# Google API quota set to 600 calls per hour
-
-#- platform: google_travel_time
-#  name: GTDarren_Home
-#  api_key: !secret google_maps_api_key
-#  origin: device_tracker.darren
-#  destination: zone.home
-#  scan_interval: 900
-#- platform: google_travel_time
-#  name: GTBlythe_Home
-#  api_key: !secret google_maps_api_key
-#  origin: device_tracker.blythe
-#  destination: zone.home
-#  scan_interval: 900
-##- platform: google_travel_time
-##  name: GTHome_Work
-##  api_key: !secret google_maps_api_key
-##  origin: zone.home
-##  destination: zone.work
-##  scan_interval: 600
-#- platform: google_travel_time
-#  name: GTHome_City
-#  api_key: !secret google_maps_api_key
-#  origin: zone.home
-#  destination: zone.city
-#  scan_interval: 900
-#- platform: google_travel_time
-#  name: GTDom_Airport
-#  api_key: !secret google_maps_api_key
-#  origin: zone.home
-#  destination: zone.domairport
-#  scan_interval: 900
-#- platform: google_travel_time
-#  name: GTInt_Airport
-#  api_key: !secret google_maps_api_key
-#  origin: zone.home
-#  destination: zone.intairport
-#  scan_interval: 900
-##- platform: google_travel_time
-##  name: GTHome_Thornton
-##  api_key: !secret google_maps_api_key
-##  origin: zone.home
-##  destination: zone.mdn
-##  scan_interval: 900
-##- platform: google_travel_time
-##  name: GTHome_Wangi
-##  api_key: !secret google_maps_api_key
-##  origin: zone.home
-##  destination: zone.mdr
-##  scan_interval: 600
-
-#- platform: filesize
-#  file_paths:
-#    - /home-assistant_v2.db
-
-#- platform: scrape
-#  resource: https://home-assistant.io
-#  name: Release
-#  select: ".current-version h1"
-#  value_template: '{{ value.split(":")[1] }}'
-
-# - platform: apcupsd
-#   resources:
-#     - bcharge
-#     - linev
-#     - loadpct
-#     - numxfers
-#     - outputv
-#     - status
-#     - timeleft
-#     - tonbatt
 
 # templates
 - platform: template
@@ -1045,6 +732,235 @@
       value_template: >
         {{"{:,}".format(states('sensor.home_assistant_v2_db')|int)}}
 
+# - platform: template
+#   sensors:
+#
+#     bom_current_text:
+#       value_template: >
+#           {% set val = states('sensor.bom_sydney_summary_0').split('.')[0] %}
+#           {{ val | title }}
+#     bom_uv_alert:
+#       value_template: >
+#           {%- if states('sensor.bom_sydney_uv_alert_0') == '##' -%}
+#           UV Today: No Data
+#           {%- elif states('sensor.bom_sydney_uv_alert_0') != 'n/a' -%}
+#           UV Today: {{ states('sensor.bom_sydney_uv_alert_0') }}
+#           {%- elif states('sensor.bom_sydney_uv_alert_1') == '##' -%}
+#           UV Tomorrow: No Data
+#           {%- else -%}
+#           UV Tomorrow: {{ states('sensor.bom_sydney_uv_alert_1') }}
+#           {%- endif -%}
+#     bom_uv_alert_summary:
+#       value_template: >
+#           {%- if states('sensor.bom_sydney_uv_alert_0') == '##' -%}
+#           {% set val = 'No Data' %}
+#           {%- elif states('sensor.bom_sydney_uv_alert_0') != 'n/a' -%}
+#           {% set val = states('sensor.bom_sydney_uv_alert_0').split('[')[1].split(']')[0] %}
+#           {%- elif states('sensor.bom_sydney_uv_alert_1') == '##' -%}
+#           {% set val = 'No Data' %}
+#           {%- elif states('sensor.bom_sydney_uv_alert_1') != 'n/a' -%}
+#           {% set val = states('sensor.bom_sydney_uv_alert_1').split('[')[1].split(']')[0] %}
+#           {%- else -%}
+#           {%- set val = 'No Data' -%}
+#           {%- endif -%}
+#           {{ val | title }}
+#
+#     bom_fire_danger:
+#       value_template: >
+#           {%- if states('sensor.bom_sydney_fire_danger_0') == '##' -%}
+#           Fire Danger Today: No Data
+#           {%- elif states('sensor.bom_sydney_fire_danger_0') != 'n/a' -%}
+#           Fire Danger Today: {{ states('sensor.bom_sydney_fire_danger_0') }}
+#           {%- elif states('sensor.bom_sydney_fire_danger_1') == '##' -%}
+#           Fire Danger Tomorrow: No Data
+#           {%- else -%}
+#           Fire Danger Tomorrow: {{ states('sensor.bom_sydney_fire_danger_1') }}
+#           {%- endif -%}
+#     bom_fire_danger_summary:
+#       value_template: >
+#           {%- if states('sensor.bom_sydney_fire_danger_0') == '##' -%}
+#           No Data
+#           {%- elif states('sensor.bom_sydney_fire_danger_0') != 'n/a' -%}
+#           {{ states('sensor.bom_sydney_fire_danger_0') }}
+#           {%- elif states('sensor.bom_sydney_fire_danger_1') == '##' -%}
+#           No Data
+#           {%- else -%}
+#           {{ states('sensor.bom_sydney_fire_danger_1') }}
+#           {%- endif -%}
+#     bom_forecast_0:
+#       entity_id:
+#         - sensor.bom_today_max
+#         - sensor.bom_today_min
+#         - sensor.bom_sydney_chance_of_rain_0
+#         - sensor.bom_sydney_icon_0
+#       friendly_name: "Today"
+#       value_template: >
+#         {{states('sensor.bom_today_max')|round(0)}}°/{{states('sensor.bom_today_min')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_0')|round(0)}}%
+#       entity_picture_template: >-
+#         {%- if states('sun.sun') == 'below_horizon' and (states('sensor.bom_sydney_icon_0') == 'fog' or states('sensor.bom_sydney_icon_0') == 'haze' or states('sensor.bom_sydney_icon_0') == 'light-showers' or states('sensor.bom_sydney_icon_0') == 'partly-cloudy' or states('sensor.bom_sydney_icon_0') == 'showers') -%}
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_0') ~ '-night.png' }}
+#         {%- else -%}
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_0') ~ '.png' }}
+#         {%- endif -%}
+#     bom_forecast_1:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_1
+#         - sensor.bom_sydney_min_temp_c_1
+#         - sensor.bom_sydney_chance_of_rain_1
+#         - sensor.bom_sydney_icon_1
+#       friendly_name_template: >
+#         {%- set date = as_timestamp(now()) + (1 * 86400 ) -%}
+#         {{ date | timestamp_custom('Tomorrow (%-d/%-m)') }}
+#       value_template: >
+#         {{states('sensor.bom_sydney_max_temp_c_1')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_1')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_1')|round(0)}}%
+#       entity_picture_template: >-
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_1') ~ '.png' }}
+#     bom_forecast_2:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_2
+#         - sensor.bom_sydney_min_temp_c_2
+#         - sensor.bom_sydney_chance_of_rain_2
+#         - sensor.bom_sydney_icon_2
+#       friendly_name_template: >
+#         {%- set date = as_timestamp(now()) + (2 * 86400 ) -%}
+#         {{ date | timestamp_custom('%A (%-d/%-m)') }}
+#       value_template: >
+#         {{states('sensor.bom_sydney_max_temp_c_2')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_2')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_2')|round(0)}}%
+#       entity_picture_template: >-
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_2') ~ '.png' }}
+#     bom_forecast_3:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_3
+#         - sensor.bom_sydney_min_temp_c_3
+#         - sensor.bom_sydney_chance_of_rain_3
+#         - sensor.bom_sydney_icon_3
+#       friendly_name_template: >
+#         {%- set date = as_timestamp(now()) + (3 * 86400 ) -%}
+#         {{ date | timestamp_custom('%A (%-d/%-m)') }}
+#       value_template: >
+#         {{states('sensor.bom_sydney_max_temp_c_3')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_3')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_3')|round(0)}}%
+#       entity_picture_template: >-
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_3') ~ '.png' }}
+#     bom_forecast_4:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_4
+#         - sensor.bom_sydney_min_temp_c_4
+#         - sensor.bom_sydney_chance_of_rain_4
+#         - sensor.bom_sydney_icon_4
+#       friendly_name_template: >
+#         {%- set date = as_timestamp(now()) + (4 * 86400 ) -%}
+#         {{ date | timestamp_custom('%A (%-d/%-m)') }}
+#       value_template: >
+#         {{states('sensor.bom_sydney_max_temp_c_4')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_4')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_4')|round(0)}}%
+#       entity_picture_template: >-
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_4') ~ '.png' }}
+#     bom_forecast_5:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_5
+#         - sensor.bom_sydney_min_temp_c_5
+#         - sensor.bom_sydney_chance_of_rain_5
+#         - sensor.bom_sydney_icon_5
+#       friendly_name_template: >
+#         {%- set date = as_timestamp(now()) + (5 * 86400 ) -%}
+#         {{ date | timestamp_custom('%A (%-d/%-m)') }}
+#       value_template: >
+#         {{states('sensor.bom_sydney_max_temp_c_5')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_5')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_5')|round(0)}}%
+#       entity_picture_template: >-
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_5') ~ '.png' }}
+#     bom_forecast_6:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_6
+#         - sensor.bom_sydney_min_temp_c_6
+#         - sensor.bom_sydney_chance_of_rain_6
+#         - sensor.bom_sydney_icon_6
+#       friendly_name_template: >
+#         {%- set date = as_timestamp(now()) + (6 * 86400 ) -%}
+#         {{ date | timestamp_custom('%A (%-d/%-m)') }}
+#       value_template: >
+#         {{states('sensor.bom_sydney_max_temp_c_6')|round(0)}}°/{{states('sensor.bom_sydney_min_temp_c_6')|round(0)}}°/{{states('sensor.bom_sydney_chance_of_rain_6')|round(0)}}%
+#       entity_picture_template: >-
+#         {{ '/local/icons/bom_icons/' ~ states('sensor.bom_sydney_icon_6') ~ '.png' }}
+#     bom_today_max:
+#       entity_id:
+#         - sensor.bom_sydney_max_temp_c_0
+#         - sensor.today_temp_bom
+#       value_template: >
+#         {%- if states('sensor.bom_sydney_max_temp_c_0') == 'n/a' -%}
+#           {{ state_attr('sensor.today_temp_bom', 'max_value') }}
+#         {% else %}
+#           {{ states('sensor.bom_sydney_max_temp_c_0') }}
+#         {% endif %}
+#     bom_today_min:
+#       entity_id:
+#         - sensor.bom_sydney_min_temp_c_0
+#         - sensor.today_temp_bom
+#       value_template: >
+#         {%- if states('sensor.bom_sydney_min_temp_c_0') == 'n/a' -%}
+#           {{ state_attr('sensor.today_temp_bom', 'min_value') }}
+#         {% else %}
+#           {{ states('sensor.bom_sydney_min_temp_c_0') }}
+#         {% endif %}
+# - platform: statistics
+#   name: today_temp_bom
+#   sampling_size: 150
+#   entity_id: sensor.bom_sydney_air_temp_c
+#   max_age:
+#     hours: 24
+
+###
+# - platform: bom
+#   station: !secret BOM_station
+#   name: !secret BOM_name
+#   monitored_conditions:
+#     - apparent_t
+#     - delta_t
+#     - gust_kmh
+#     - gust_kt
+#     - air_temp
+#     - dewpt
+#     - rain_trace
+#     - rel_hum
+#     - wind_dir
+#     - wind_spd_kmh
+#     - wind_spd_kt
+
+# - platform: bom_forecast
+#   product_id: !secret BOM_product_ID
+#   name: !secret BOM_name
+#   forecast_days: 6
+#   rest_of_today: true
+#   friendly: false
+#   friendly_state_format: '{max}, {summary}'
+#   monitored_conditions:
+#     - 'max'
+#     - 'min'
+#     - 'chance_of_rain'
+#     - 'possible_rainfall'
+#     - 'summary'
+#     - 'detailed_summary'
+#     - 'icon'
+#     - 'uv_alert'
+#     - 'fire_danger'
+
+# - platform: bom_forecast
+#   product_id: !secret BOM_product_ID
+#   name: !secret BOM_name
+#   forecast_days: 6
+#   rest_of_today: true
+#   friendly: false
+#   friendly_state_format: '{max}, {summary}'
+#   monitored_conditions:
+#     - 'max'
+#     - 'min'
+#     - 'chance_of_rain'
+#     - 'possible_rainfall'
+#     - 'summary'
+#     - 'detailed_summary'
+#     - 'icon'
+#     - 'uv_alert'
+#     - 'fire_danger'
+
+
 # next bus times
 #- platform: rest
 #  resource: !secret transport_nsw_resource
@@ -1261,3 +1177,87 @@
 #        {% else %}
 #          {{ states.sensor.nextbus_occupancy_6.state }}
 #        {% endif %}
+#- platform: uber
+#  server_token: !secret uber_server_token
+#  start_latitude: !secret home_lat
+#  start_longitude: !secret home_lon
+#  end_latitude: !secret zone7_lat
+#  end_longitude: !secret zone7_lon
+#  product_ids:
+#    - '2d1d002b-d4d0-4411-98e1-673b244878b2'
+
+# These call are Distance Matrix Advanced.
+# Free teir allows for up to 20,000 calls per month (eviqualebnt to USD$200)
+# Limit these to approx 5 sensors polling every 15mins 24x7 - not not exceed
+# BMW camera sensor also uses calles
+# Google API quota set to 600 calls per hour
+
+#- platform: google_travel_time
+#  name: GTDarren_Home
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.darren
+#  destination: zone.home
+#  scan_interval: 900
+#- platform: google_travel_time
+#  name: GTBlythe_Home
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.blythe
+#  destination: zone.home
+#  scan_interval: 900
+##- platform: google_travel_time
+##  name: GTHome_Work
+##  api_key: !secret google_maps_api_key
+##  origin: zone.home
+##  destination: zone.work
+##  scan_interval: 600
+#- platform: google_travel_time
+#  name: GTHome_City
+#  api_key: !secret google_maps_api_key
+#  origin: zone.home
+#  destination: zone.city
+#  scan_interval: 900
+#- platform: google_travel_time
+#  name: GTDom_Airport
+#  api_key: !secret google_maps_api_key
+#  origin: zone.home
+#  destination: zone.domairport
+#  scan_interval: 900
+#- platform: google_travel_time
+#  name: GTInt_Airport
+#  api_key: !secret google_maps_api_key
+#  origin: zone.home
+#  destination: zone.intairport
+#  scan_interval: 900
+##- platform: google_travel_time
+##  name: GTHome_Thornton
+##  api_key: !secret google_maps_api_key
+##  origin: zone.home
+##  destination: zone.mdn
+##  scan_interval: 900
+##- platform: google_travel_time
+##  name: GTHome_Wangi
+##  api_key: !secret google_maps_api_key
+##  origin: zone.home
+##  destination: zone.mdr
+##  scan_interval: 600
+
+#- platform: filesize
+#  file_paths:
+#    - /home-assistant_v2.db
+
+#- platform: scrape
+#  resource: https://home-assistant.io
+#  name: Release
+#  select: ".current-version h1"
+#  value_template: '{{ value.split(":")[1] }}'
+
+# - platform: apcupsd
+#   resources:
+#     - bcharge
+#     - linev
+#     - loadpct
+#     - numxfers
+#     - outputv
+#     - status
+#     - timeleft
+#     - tonbatt

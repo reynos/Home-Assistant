@@ -11,14 +11,14 @@
   username: !secret frontcam_uname
   password: !secret frontcam_pass
 
-# - platform: doorbird
-#   last_visitor: true
-
-- platform: bom
-  location: Sydney
-
 - platform: generic
   name: BMW X5 Location
   still_image_url: !secret x5_google_location
   limit_refetch_to_url_change: true
   scan_interval: 900
+
+# - platform: doorbird
+#   last_visitor: true
+
+# - platform: bom
+#   location: Sydney
