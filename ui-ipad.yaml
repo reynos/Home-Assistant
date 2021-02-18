@@ -127,39 +127,39 @@ views:
                 cards:
                   - type: custom:bom-weather-card
                     title: BOM Weather
-                    entity_current_conditions: sensor.bom_sydney_icon_0
+                    entity_current_conditions: sensor.bondi_icon_descriptor_0
                     # entity_temperature: sensor.bom_sydney_air_temp_c
                     entity_temperature: sensor.outside_temp
-                    entity_forecast_high_temp_1: sensor.bom_sydney_max_temp_c_1
-                    entity_forecast_high_temp_2: sensor.bom_sydney_max_temp_c_2
-                    entity_forecast_high_temp_3: sensor.bom_sydney_max_temp_c_3
-                    entity_forecast_high_temp_4: sensor.bom_sydney_max_temp_c_4
-                    entity_forecast_high_temp_5: sensor.bom_sydney_max_temp_c_5
-                    entity_forecast_icon_1: sensor.bom_sydney_icon_1
-                    entity_forecast_icon_2: sensor.bom_sydney_icon_2
-                    entity_forecast_icon_3: sensor.bom_sydney_icon_3
-                    entity_forecast_icon_4: sensor.bom_sydney_icon_4
-                    entity_forecast_icon_5: sensor.bom_sydney_icon_5
-                    entity_forecast_low_temp_1: sensor.bom_sydney_min_temp_c_1
-                    entity_forecast_low_temp_2: sensor.bom_sydney_min_temp_c_2
-                    entity_forecast_low_temp_3: sensor.bom_sydney_min_temp_c_3
-                    entity_forecast_low_temp_4: sensor.bom_sydney_min_temp_c_4
-                    entity_forecast_low_temp_5: sensor.bom_sydney_min_temp_c_5
-                    entity_summary_1: sensor.bom_sydney_summary_1
-                    entity_summary_2: sensor.bom_sydney_summary_2
-                    entity_summary_3: sensor.bom_sydney_summary_3
-                    entity_summary_4: sensor.bom_sydney_summary_4
-                    entity_summary_5: sensor.bom_sydney_summary_5
+                    entity_forecast_high_temp_1: sensor.bondi_temp_max_1
+                    entity_forecast_high_temp_2: sensor.bondi_temp_max_2
+                    entity_forecast_high_temp_3: sensor.bondi_temp_max_3
+                    entity_forecast_high_temp_4: sensor.bondi_temp_max_4
+                    entity_forecast_high_temp_5: sensor.bondi_temp_max_5
+                    entity_forecast_icon_1: sensor.bondi_icon_descriptor_1
+                    entity_forecast_icon_2: sensor.bondi_icon_descriptor_2
+                    entity_forecast_icon_3: sensor.bondi_icon_descriptor_3
+                    entity_forecast_icon_4: sensor.bondi_icon_descriptor_4
+                    entity_forecast_icon_5: sensor.bondi_icon_descriptor_5
+                    entity_forecast_low_temp_1: sensor.bondi_temp_min_1
+                    entity_forecast_low_temp_2: sensor.bondi_temp_min_2
+                    entity_forecast_low_temp_3: sensor.bondi_temp_min_3
+                    entity_forecast_low_temp_4: sensor.bondi_temp_min_4
+                    entity_forecast_low_temp_5: sensor.bondi_temp_min_5
+                    entity_summary_1: sensor.bondi_short_text_1
+                    entity_summary_2: sensor.bondi_short_text_2
+                    entity_summary_3: sensor.bondi_short_text_3
+                    entity_summary_4: sensor.bondi_short_text_4
+                    entity_summary_5: sensor.bondi_short_text_5
                     entity_sun: sun.sun
                     # entity_visibility: sensor.dark_sky_visibility
                     entity_daytime_high: sensor.bom_today_max
                     entity_daytime_low: sensor.bom_today_min
-                    entity_wind_bearing: sensor.bom_sydney_wind_direction
-                    entity_wind_speed: sensor.bom_sydney_wind_speed_kmh
-                    entity_humidity: sensor.bom_sydney_relative_humidity
+                    entity_wind_bearing: sensor.bondi_wind_direction
+                    entity_wind_speed: sensor.bondi_wind_speed_kilometre
+                    entity_humidity: sensor.bondi_humidity
                     # entity_pressure: sensor.dark_sky_pressure
-                    entity_apparent_temp: sensor.bom_sydney_feels_like_c
-                    entity_daily_summary: sensor.bom_sydney_detailed_summary_0
+                    entity_apparent_temp: sensor.bondi_temp_feels_like
+                    entity_daily_summary: sensor.bondi_extended_text_1
                     entity_pop: sensor.bom_sydney_chance_of_rain_0
                     entity_pop_intensity: sensor.bom_sydney_rain_today
                     entity_possible_today: sensor.bom_sydney_possible_rainfall_0
