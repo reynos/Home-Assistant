@@ -370,6 +370,7 @@ views:
         show_recenter: true
         show_playback: true
         zoom_level: 12
+        map_style: satellite
   - icon: mdi:cctv
     cards:
       - entity: camera.frontcam
