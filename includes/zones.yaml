@@ -6,9 +6,15 @@
   radius: 50
   icon: mdi:home
 
-- name: Work
-  latitude: !secret work_lat
-  longitude: !secret work_lon
+- name: Darren Work
+  latitude: !secret darren_work_lat
+  longitude: !secret darren_work_lon
+  radius: 150
+  icon: mdi:briefcase
+
+- name: Blythe Work
+  latitude: !secret blythe_work_lat
+  longitude: !secret blythe_work_lon
   radius: 150
   icon: mdi:briefcase
 
