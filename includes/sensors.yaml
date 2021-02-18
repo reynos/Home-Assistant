@@ -449,6 +449,22 @@
 # templates
 - platform: template
   sensors:
+    template_house_mode:
+      friendly_name: "House Mode:"
+      value_template: >-
+        {% if is_state('input_select.house_mode', 'Day') %}
+          Day
+        {% elif is_state('input_select.house_mode', 'Evening') %}
+          Evening
+        {% elif is_state('input_select.house_mode', 'Bedtime') %}
+          Bedtime
+        {% elif is_state('input_select.house_mode', 'Night') %}
+          Night
+        {% elif is_state('input_select.house_mode', 'Holiday') %}
+          Holiday
+        {% else %}
+          Error
+        {% endif %}
     333_to_beach_template:
       friendly_name: "Bus 333 to Beach"
       value_template: >-
