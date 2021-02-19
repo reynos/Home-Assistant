@@ -84,7 +84,9 @@
 # add turn off light sensors here
 # just to have something here:
       switch.frontyard: off
-      switch.back_deck_watering_25_2: off
+      switch.water_garden: off
+      switch.water_hedge: off
+      switch.water_lawn: off
 #      input_select.house_mode:
 #        option: "Day"
 
