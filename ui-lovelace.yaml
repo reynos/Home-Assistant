@@ -12,8 +12,6 @@ views:
       - entity: sensor.outside_temp
       - entity: sensor.template_bondi_min_temp
       - entity: sensor.template_sensor_emoncms_net_grid_power
-      - entity: sensor.template_house_mode
-
       # - entity: sensor.template_sensor_emoncms_house_consumption
       # - entity: sensor.template_sensor_emoncms_solar_production
       - entity: sensor.template_calendar_bin_nights
@@ -36,7 +34,8 @@ views:
                     - text-overflow: initial
                     - overflow: initial
               - type: custom:button-card
-                entity: input_boolean.lollie_lights
+                # entity: input_boolean.lollie_lights
+                entity: input_select.house_mode
                 styles:
                   card:
                     - height: 80px
@@ -45,6 +44,43 @@ views:
                     - white-space: initial
                     - text-overflow: initial
                     - overflow: initial
+                state:
+                  - operator: template
+                    value: >
+                      [[[
+                        return (states['input_select.house_mode'].state == 'Day')
+                      ]]]
+                    icon: mdi:white-balance-sunny
+                    color: yellow
+                  - operator: template
+                    value: >
+                      [[[
+                        return (states['input_select.house_mode'].state == 'Bedtime')
+                      ]]]
+                    icon: mdi:bed-empty
+                    color: green
+                  - operator: template
+                    value: >
+                      [[[
+                        return (states['input_select.house_mode'].state == 'Evening')
+                      ]]]
+                    icon: mdi:weather-sunset
+                    color: orange
+                  - operator: template
+                    value: >
+                      [[[
+                        return (states['input_select.house_mode'].state == 'Night')
+                      ]]]
+                    icon: mdi:weather-night
+                    color: grey
+                  - operator: template
+                    value: >
+                      [[[
+                        return (states['input_select.house_mode'].state == 'Holiday')
+                      ]]]
+                    icon: mdi:palm-tree
+                    color: green
+
               - type: custom:button-card
                 entity: input_boolean.bed_time
                 styles:
@@ -66,7 +102,7 @@ views:
                     - text-overflow: initial
                     - overflow: initial
           - entities:
-            - input_select.house_mode
+            # - input_select.house_mode
             - sensor.template_calendar_family
             show_header_toggle: false
             type: entities
@@ -81,8 +117,19 @@ views:
               show_group_count: true
               entities:
                 - entity_id: media_player.deck
-                  name: Lounge Sonos
-
+                  name: Deck
+          - type: custom:mini-media-player
+            entity: media_player.deck
+            name: Deck Music
+            hide:
+              power: true
+              icon: true
+            speaker_group:
+              platform: sonos
+              show_group_count: true
+              entities:
+                - entity_id: media_player.kitchen
+                  name: Kitchen
           - type: horizontal-stack
             cards:
               - type: light
@@ -446,6 +493,7 @@ views:
   - icon: mdi:toggle-switch-outline
     cards:
       - entities:
+          - input_select.house_mode
           - input_number.lights_auto_dim_level
           - input_number.bathroom_light_timer
           - input_number.doorbell_volume
