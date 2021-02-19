@@ -1,37 +1,37 @@
 ## Back Deck watering
 
-- alias: Back Deck Watering
-  trigger:
-    platform: time
-    at: '07:30:00'
-  condition:
-    condition: time
-    weekday:
-      - tue
-      - fri
-  action:
-    - service: logbook.log
-      data_template:
-        name: 'Watering:'
-        message: Back Deck ON
-    - service: switch.turn_on
-      entity_id: switch.back_deck_watering_25_2
-
-- alias: "Back Deck Watering Timer"
-  trigger:
-    platform: state
-    entity_id: switch.back_deck_watering_25_2
-    to: 'on'
-  action:
-    - service: notify.mobile_app_darren_reynolds
-      data_template:
-#        title: Back Deck Watering"
-        message: >
-          Watering ON for {{ states('input_number.backdeck_watering_timer')|int }} minute{%if states('input_number.backdeck_watering_timer')|int > 1 %}s{% endif %}
-    - delay: '00:{{ states.input_number.backdeck_watering_timer.state | int }}:00'
-    - service: switch.turn_off
-      entity_id: switch.back_deck_watering_25_2
-    - service: logbook.log
-      data_template:
-        name: 'Watering:'
-        message: Back Deck OFF
+# - alias: Back Deck Watering
+#   trigger:
+#     platform: time
+#     at: '07:30:00'
+#   condition:
+#     condition: time
+#     weekday:
+#       - tue
+#       - fri
+#   action:
+#     - service: logbook.log
+#       data_template:
+#         name: 'Watering:'
+#         message: Back Deck ON
+#     - service: switch.turn_on
+#       entity_id: switch.back_deck_watering_25_2
+#
+# - alias: "Back Deck Watering Timer"
+#   trigger:
+#     platform: state
+#     entity_id: switch.back_deck_watering_25_2
+#     to: 'on'
+#   action:
+#     - service: notify.mobile_app_darren_reynolds
+#       data_template:
+# #        title: Back Deck Watering"
+#         message: >
+#           Watering ON for {{ states('input_number.backdeck_watering_timer')|int }} minute{%if states('input_number.backdeck_watering_timer')|int > 1 %}s{% endif %}
+#     - delay: '00:{{ states.input_number.backdeck_watering_timer.state | int }}:00'
+#     - service: switch.turn_off
+#       entity_id: switch.back_deck_watering_25_2
+#     - service: logbook.log
+#       data_template:
+#         name: 'Watering:'
+#         message: Back Deck OFF
