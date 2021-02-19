@@ -1,7 +1,5 @@
 ## general.yaml automations
 
-
-
 - alias: Front Door Open
   trigger:
     - platform: state
@@ -47,7 +45,28 @@
     - service: notify.mobile_app_darren_reynolds
       data:
         message: "Car UNLOCKED!"
-
+- alias: Car Windows Late
+  trigger:
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Bedtime'
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Night'
+  condition:
+    condition: state
+    entity_id: binary_sensor.x5_xdrive30d_windows
+    state: 'on'
+  action:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.3
+        message: 'The car windows or sunroof is still open'
+        delay: '00:00:06'
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Car windows or sunroof OPEN!"
 - alias: Car Unlocked
   trigger:
     - platform: state
@@ -69,6 +88,28 @@
     - service: notify.mobile_app_darren_reynolds
       data:
         message: "Car still UNLOCKED!"
+
+- alias: Car Windows
+  trigger:
+    - platform: state
+      entity_id: device_tracker.x5_xdrive30d
+      to: 'home'
+      for:
+        minutes: 15
+  condition:
+    condition: state
+    entity_id: binary_sensor.x5_xdrive30d_windows
+    state: 'on'
+  action:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.3
+        message: 'The car windows or sunroof is open'
+        delay: '00:00:06'
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Car windows or sunroof OPEN!"
 
 - alias: "Tasmota State on HA Restart"
   trigger:
