@@ -1,6 +1,7 @@
 ## general.yaml automations
 
-# add to below TTS "front door still open"
+
+
 - alias: Front Door Open
   trigger:
     - platform: state
@@ -23,6 +24,51 @@
     - service: notify.mobile_app_darren_reynolds
       data:
         message: "Front Door Still OPEN!"
+
+- alias: Car Unlocked Late
+  trigger:
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Bedtime'
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Night'
+  condition:
+    condition: state
+    entity_id: binary_sensor.x5_xdrive30d_door_lock_state
+    state: 'on'
+  action:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.3
+        message: 'The car is unlocked'
+        delay: '00:00:04'
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Car UNLOCKED!"
+
+- alias: Car Unlocked
+  trigger:
+    - platform: state
+      entity_id: device_tracker.x5_xdrive30d
+      to: 'home'
+      for:
+        minutes: 15
+  condition:
+    condition: state
+    entity_id: binary_sensor.x5_xdrive30d_door_lock_state
+    state: 'on'
+  action:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.3
+        message: 'The car is unlocked'
+        delay: '00:00:04'
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Car still UNLOCKED!"
 
 - alias: "Tasmota State on HA Restart"
   trigger:

@@ -2,6 +2,7 @@
 
 announce:
   alias: "Announce on Sonos"
+  mode: queued
   sequence:
     - choose:
         - conditions:
