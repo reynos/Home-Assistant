@@ -105,6 +105,13 @@
         rgb_color: [255,0,0]
         brightness: 150
 
+  - name: Girls Night Light DIM
+    entities:
+      light.girl_s_lamp:
+        state: on
+        rgb_color: [255,0,0]
+        brightness: 64
+
   - name: BB Pink
     entities:
       light.bargeboard_master: on

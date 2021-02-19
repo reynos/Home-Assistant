@@ -172,6 +172,20 @@
     service: scene.turn_on
     entity_id: scene.girls_night_light
 
+- alias: Girls night light DIM
+  trigger:
+    platform: time
+    at: '20:00:00'
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: input_select.house_mode
+        state: 'Holiday'
+  action:
+    service: scene.turn_on
+    entity_id: scene.girls_night_light_dim
+
 - alias: Girls night light off
   trigger:
     platform: time
