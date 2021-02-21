@@ -40,8 +40,20 @@ front_lights_timer_duration:
     min: 0
     max: 10
     step: 1
-backdeck_watering_timer:
-    name: Back Deck Watering Timer Duration
+water_lawn_timer:
+    name: Lawn Watering Timer Duration
+#    initial: 2
+    min: 0
+    max: 5
+    step: 1
+water_garden_timer:
+    name: Back Garden Lawn Watering Timer Duration
+#    initial: 2
+    min: 0
+    max: 5
+    step: 1
+water_hedge_timer:
+    name: Lawn Watering Timer Duration
 #    initial: 2
     min: 0
     max: 5

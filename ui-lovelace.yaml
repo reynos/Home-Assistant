@@ -390,8 +390,11 @@ views:
     cards:
       - entities:
         - switch.water_lawn
+        - input_number.water_lawn__timer
         - switch.water_garden
+        - input_number.water_garden_timer
         - switch.water_hedge
+        - input_number.water_hedge_timer
         type: entities
         title: Backyard Watering
   - icon: mdi:weather-partly-cloudy
