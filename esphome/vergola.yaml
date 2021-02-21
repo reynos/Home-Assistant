@@ -20,7 +20,7 @@ ota:
 switch:
   - platform: gpio
     name: "Vergola Select"
-    pin: D2
+    pin: D1
   - platform: gpio
     name: "Vergola Auto"
     pin: D5

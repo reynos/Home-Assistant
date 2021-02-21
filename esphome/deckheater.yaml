@@ -1,0 +1,43 @@
+esphome:
+  name: deckheater
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret esph-iot-SSID
+  password: !secret esph-iot-pass
+  power_save_mode: none
+  fast_connect: on
+
+logger:
+
+api:
+  password: !secret esph-api-pass
+
+ota:
+  password: !secret esph-ota-pass
+
+# Device Specific Config
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: shelly_1_relay
+
+light:
+  - platform: binary
+    name: "Shelly 1 Light"
+    output: shelly_1_relay
+    id: lightid
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO5
+      #mode: INPUT_PULLUP
+      #inverted: True
+    name: "Deck Heater Switch"
+    on_state:
+      then:
+        - light.toggle: lightid
+    internal: true
+    id: switchid
