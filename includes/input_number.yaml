@@ -41,22 +41,25 @@ front_lights_timer_duration:
     max: 10
     step: 1
 water_lawn_timer:
-    name: Lawn Watering Timer Duration
-#    initial: 2
+    name: Timer (mins)
+    icon: mdi:timer-outline
+    initial: 5
     min: 0
-    max: 5
+    max: 15
     step: 1
 water_garden_timer:
-    name: Back Garden Lawn Watering Timer Duration
-#    initial: 2
+    name: Timer (mins)
+    icon: mdi:timer-outline
+    initial: 5
     min: 0
-    max: 5
+    max: 15
     step: 1
 water_hedge_timer:
-    name: Lawn Watering Timer Duration
-#    initial: 2
+    name: Timer (mins)
+    icon: mdi:timer-outline
+    initial: 10
     min: 0
-    max: 5
+    max: 15
     step: 1
 kitchen_high_dimmer:
     name: Dimmer

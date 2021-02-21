@@ -10,7 +10,7 @@
     - service: notify.mobile_app_darren_reynolds
       data_template:
         message: >
-          Watering ON for {{ states('input_number.water_lawn_timer')|int }} minute{%if states('input_number.water_lawn_timer')|int > 1 %}s{% endif %}
+          Lawn watering ON for {{ states('input_number.water_lawn_timer')|int }} minute{%if states('input_number.water_lawn_timer')|int > 1 %}s{% endif %}
     - delay: '00:{{ states.input_number.water_lawn_timer.state | int }}:00'
     - service: switch.turn_off
       entity_id: switch.water_lawn
@@ -29,7 +29,7 @@
     - service: notify.mobile_app_darren_reynolds
       data_template:
         message: >
-          Watering ON for {{ states('input_number.water_garden_timer')|int }} minute{%if states('input_number.water_garden_timer')|int > 1 %}s{% endif %}
+          Garden watering ON for {{ states('input_number.water_garden_timer')|int }} minute{%if states('input_number.water_garden_timer')|int > 1 %}s{% endif %}
     - delay: '00:{{ states.input_number.water_garden_timer.state | int }}:00'
     - service: switch.turn_off
       entity_id: switch.water_garden
@@ -48,7 +48,7 @@
     - service: notify.mobile_app_darren_reynolds
       data_template:
         message: >
-          Watering ON for {{ states('input_number.water_hedge_timer')|int }} minute{%if states('input_number.water_hedge_timer')|int > 1 %}s{% endif %}
+          Hedge watering ON for {{ states('input_number.water_hedge_timer')|int }} minute{%if states('input_number.water_hedge_timer')|int > 1 %}s{% endif %}
     - delay: '00:{{ states.input_number.water_hedge_timer.state | int }}:00'
     - service: switch.turn_off
       entity_id: switch.water_hedge
