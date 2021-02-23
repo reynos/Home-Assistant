@@ -1,7 +1,7 @@
 ## Back Deck watering
 
-- alias: "Lawn Watering Timer"
-  mode: restart
+## LAWN
+- alias: "Lawn Watering ON"
   trigger:
     platform: state
     entity_id: switch.water_lawn
@@ -11,7 +11,22 @@
       data_template:
         message: >
           Lawn watering ON for {{ states('input_number.water_lawn_timer')|int }} minute{%if states('input_number.water_lawn_timer')|int > 1 %}s{% endif %}
-    - delay: '00:{{ states.input_number.water_lawn_timer.state | int }}:00'
+    - service: timer.start
+      data_template:
+        entity_id: timer.water_lawn
+        duration: >
+          00:{{ states.input_number.water_lawn_timer.state | int }}:00
+
+- alias: "Lawn Watering Timer OFF"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.water_lawn
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Lawn watering Off"
     - service: switch.turn_off
       entity_id: switch.water_lawn
     - service: logbook.log
@@ -19,8 +34,8 @@
         name: 'Watering:'
         message: Lawn OFF
 
-- alias: "Garden Watering Timer"
-  mode: restart
+## GARDEN
+- alias: "Garden Watering ON"
   trigger:
     platform: state
     entity_id: switch.water_garden
@@ -29,8 +44,23 @@
     - service: notify.mobile_app_darren_reynolds
       data_template:
         message: >
-          Garden watering ON for {{ states('input_number.water_garden_timer')|int }} minute{%if states('input_number.water_garden_timer')|int > 1 %}s{% endif %}
-    - delay: '00:{{ states.input_number.water_garden_timer.state | int }}:00'
+          =Garden watering ON for {{ states('input_number.water_garden_timer')|int }} minute{%if states('input_number.water_garden_timer')|int > 1 %}s{% endif %}
+    - service: timer.start
+      data_template:
+        entity_id: timer.water_garden
+        duration: >
+          00:{{ states.input_number.water_garden_timer.state | int }}:00
+
+- alias: "Garden Watering Timer OFF"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.water_garden
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Garden watering Off"
     - service: switch.turn_off
       entity_id: switch.water_garden
     - service: logbook.log
@@ -38,8 +68,8 @@
         name: 'Watering:'
         message: Garden OFF
 
-- alias: "Hedge Watering Timer"
-  mode: restart
+## Hedge
+- alias: "Hedge Watering ON"
   trigger:
     platform: state
     entity_id: switch.water_hedge
@@ -49,13 +79,66 @@
       data_template:
         message: >
           Hedge watering ON for {{ states('input_number.water_hedge_timer')|int }} minute{%if states('input_number.water_hedge_timer')|int > 1 %}s{% endif %}
-    - delay: '00:{{ states.input_number.water_hedge_timer.state | int }}:00'
+    - service: timer.start
+      data_template:
+        entity_id: timer.water_hedge
+        duration: >
+          00:{{ states.input_number.water_hedge_timer.state | int }}:00
+
+- alias: "Hedge Watering Timer OFF"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.water_hedge
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Hedge watering Off"
     - service: switch.turn_off
       entity_id: switch.water_hedge
     - service: logbook.log
       data_template:
         name: 'Watering:'
         message: Hedge OFF
+
+# - alias: "Garden Watering Timer"
+#   mode: restart
+#   trigger:
+#     platform: state
+#     entity_id: switch.water_garden
+#     to: 'on'
+#   action:
+#     - service: notify.mobile_app_darren_reynolds
+#       data_template:
+#         message: >
+#           Garden watering ON for {{ states('input_number.water_garden_timer')|int }} minute{%if states('input_number.water_garden_timer')|int > 1 %}s{% endif %}
+#     - delay: '00:{{ states.input_number.water_garden_timer.state | int }}:00'
+#     - service: switch.turn_off
+#       entity_id: switch.water_garden
+#     - service: logbook.log
+#       data_template:
+#         name: 'Watering:'
+#         message: Garden OFF
+#
+# - alias: "Hedge Watering Timer"
+#   mode: restart
+#   trigger:
+#     platform: state
+#     entity_id: switch.water_hedge
+#     to: 'on'
+#   action:
+#     - service: notify.mobile_app_darren_reynolds
+#       data_template:
+#         message: >
+#           Hedge watering ON for {{ states('input_number.water_hedge_timer')|int }} minute{%if states('input_number.water_hedge_timer')|int > 1 %}s{% endif %}
+#     - delay: '00:{{ states.input_number.water_hedge_timer.state | int }}:00'
+#     - service: switch.turn_off
+#       entity_id: switch.water_hedge
+#     - service: logbook.log
+#       data_template:
+#         name: 'Watering:'
+#         message: Hedge OFF
 
 # - alias: Back Deck Watering
 #   trigger:

@@ -1,12 +1,17 @@
 ## tests.yaml automations
 
-- alias: test notify
+- alias: test
   trigger:
     platform: state
     from: 'off'
     to: 'on'
     entity_id: input_boolean.tester
   action:
+    - service: timer.start
+      data_template:
+        entity_id: timer.water_lawn
+        duration: >
+          00:{{ states.input_number.water_lawn_timer.state | int }}:00
     - service: notify.mobile_app_darren_reynolds
       data:
         message: 'Successful notify test'

@@ -128,6 +128,7 @@ input_number: !include includes/input_number.yaml
 sensor: !include includes/sensors.yaml
 switch: !include includes/switch.yaml
 binary_sensor: !include includes/binary_sensor.yaml
+timer: !include includes/timer.yaml
 device_tracker: !include includes/device_tracker.yaml
 scene: !include includes/scenes.yaml
 group: !include includes/groups.yaml

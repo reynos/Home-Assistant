@@ -350,6 +350,7 @@ views:
       - entities:
         - switch.backyard_floodlight
         - switch.back_deck
+        - switch.deck_heater
         - light.back_garden_29
         - light.trampoline
         - sensor.trampoline_wi_fi_signal
@@ -390,6 +391,7 @@ views:
     cards:
       - entities:
         - switch.water_lawn
+        - timer.water_lawn
         - input_number.water_lawn_timer
         - switch.water_garden
         - input_number.water_garden_timer
