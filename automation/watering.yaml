@@ -1,4 +1,4 @@
-## Back Deck watering
+## Watering.yaml automation
 
 ## LAWN
 - alias: "Lawn Watering ON"
@@ -43,7 +43,6 @@
     - service: timer.finish
       data:
         entity_id: timer.water_lawn
-
 
 ## GARDEN
 - alias: "Garden Watering ON"
@@ -132,59 +131,3 @@
     - service: timer.finish
       data:
         entity_id: timer.water_hedge
-
-# - alias: "Garden Watering Timer"
-#   mode: restart
-#   trigger:
-#     platform: state
-#     entity_id: switch.water_garden
-#     to: 'on'
-#   action:
-#     - service: notify.mobile_app_darren_reynolds
-#       data_template:
-#         message: >
-#           Garden watering ON for {{ states('input_number.water_garden_timer')|int }} minute{%if states('input_number.water_garden_timer')|int > 1 %}s{% endif %}
-#     - delay: '00:{{ states.input_number.water_garden_timer.state | int }}:00'
-#     - service: switch.turn_off
-#       entity_id: switch.water_garden
-#     - service: logbook.log
-#       data_template:
-#         name: 'Watering:'
-#         message: Garden OFF
-#
-# - alias: "Hedge Watering Timer"
-#   mode: restart
-#   trigger:
-#     platform: state
-#     entity_id: switch.water_hedge
-#     to: 'on'
-#   action:
-#     - service: notify.mobile_app_darren_reynolds
-#       data_template:
-#         message: >
-#           Hedge watering ON for {{ states('input_number.water_hedge_timer')|int }} minute{%if states('input_number.water_hedge_timer')|int > 1 %}s{% endif %}
-#     - delay: '00:{{ states.input_number.water_hedge_timer.state | int }}:00'
-#     - service: switch.turn_off
-#       entity_id: switch.water_hedge
-#     - service: logbook.log
-#       data_template:
-#         name: 'Watering:'
-#         message: Hedge OFF
-
-# - alias: Back Deck Watering
-#   trigger:
-#     platform: time
-#     at: '07:30:00'
-#   condition:
-#     condition: time
-#     weekday:
-#       - tue
-#       - fri
-#   action:
-#     - service: logbook.log
-#       data_template:
-#         name: 'Watering:'
-#         message: Back Deck ON
-#     - service: switch.turn_on
-#       entity_id: switch.back_deck_watering_25_2
-#
