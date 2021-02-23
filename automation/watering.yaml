@@ -34,6 +34,17 @@
         name: 'Watering:'
         message: Lawn OFF
 
+- alias: "Lawn Watering Timer Reset"
+  trigger:
+    platform: state
+    entity_id: switch.water_lawn
+    to: 'off'
+  action:
+    - service: timer.finish
+      data:
+        entity_id: timer.water_lawn
+
+
 ## GARDEN
 - alias: "Garden Watering ON"
   trigger:
@@ -68,6 +79,16 @@
         name: 'Watering:'
         message: Garden OFF
 
+- alias: "Garden Watering Timer Reset"
+  trigger:
+    platform: state
+    entity_id: switch.water_garden
+    to: 'off'
+  action:
+    - service: timer.finish
+      data:
+        entity_id: timer.water_garden
+
 ## Hedge
 - alias: "Hedge Watering ON"
   trigger:
@@ -101,6 +122,16 @@
       data_template:
         name: 'Watering:'
         message: Hedge OFF
+
+- alias: "Hedge Watering Timer Reset"
+  trigger:
+    platform: state
+    entity_id: switch.water_hedge
+    to: 'off'
+  action:
+    - service: timer.finish
+      data:
+        entity_id: timer.water_hedge
 
 # - alias: "Garden Watering Timer"
 #   mode: restart

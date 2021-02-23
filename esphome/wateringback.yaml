@@ -19,11 +19,11 @@ ota:
 
 switch:
   - platform: gpio
-    name: "Soleniod 1"
-    pin: D2
+    name: "water lawn"
+    pin: D1
   - platform: gpio
-    name: "Soleniod 2"
+    name: "water garden"
     pin: D5
   - platform: gpio
-    name: "Soleniod 3"
+    name: "water hedge"
     pin: D6
