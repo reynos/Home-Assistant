@@ -10,6 +10,7 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - switch.deck_heater
         - sensor.turntable_watts
         - light.decksteps_master
         - light.decksteps_segment_1

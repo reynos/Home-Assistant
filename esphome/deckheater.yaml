@@ -21,13 +21,13 @@ ota:
 output:
   - platform: gpio
     pin: GPIO4
-    id: shelly_1_relay
+    id: relay
 
-light:
-  - platform: binary
-    name: "Shelly 1 Light"
-    output: shelly_1_relay
-    id: lightid
+switch:
+  - platform: output
+    name: "Deck Heater"
+    output: relay
+    id: switchid
 
 binary_sensor:
   - platform: gpio
@@ -35,9 +35,9 @@ binary_sensor:
       number: GPIO5
       #mode: INPUT_PULLUP
       #inverted: True
-    name: "Deck Heater Switch"
+    name: "Deck Heater Wall Switch"
     on_state:
       then:
-        - light.toggle: lightid
+        - switch.toggle: switchid
     internal: true
-    id: switchid
+    id: wallswitchid
