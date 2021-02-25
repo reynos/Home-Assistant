@@ -426,7 +426,7 @@ views:
         show_zoom: true
         show_recenter: true
         show_playback: true
-        zoom_level: 12
+        zoom_level: 8
         map_style: satellite
   - icon: mdi:cctv
     cards:

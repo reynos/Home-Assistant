@@ -10,6 +10,9 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - sensor.ensuite_temperature
+        - sensor.ensuite_humidity
+        - switch.ensuite_fan
         - switch.deck_heater
         - sensor.turntable_watts
         - light.decksteps_master
@@ -107,8 +110,8 @@ views:
         name: Dishwasher Power
         graph: line
       - type: sensor
-        entity: sensor.washer_watts
-        name: Washing Machine Power
+        entity: sensor.ensuite_temperature
+        name: Ensuite Temp
         graph: line
       - type: sensor
         entity: sensor.temperature_sensor_129
