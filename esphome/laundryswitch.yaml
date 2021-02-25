@@ -1,0 +1,126 @@
+esphome:
+  name: laundryswitch
+  platform: ESP8266
+  board: esp01_1m
+
+substitutions:
+  devicename: Laundry
+  s1: Light
+  s2: Fan
+
+wifi:
+  ssid: !secret esph-iot-SSID
+  password: !secret esph-iot-pass
+  power_save_mode: none
+  fast_connect: on
+
+logger:
+
+api:
+  password: !secret esph-api-pass
+
+ota:
+  password: !secret esph-ota-pass
+
+captive_portal:
+
+# Device Specific Config
+i2c:
+  sda: GPIO12
+  scl: GPIO14
+
+sensor:
+  - platform: ade7953
+    voltage:
+      name: ${devicename} Voltage
+    current_a:
+      name: ${devicename} ${s1} Current
+    current_b:
+      name: ${devicename} ${s2} Current
+    active_power_a:
+      name: ${devicename} ${s1} Active Power
+      filters:
+        - multiply: -1
+    active_power_b:
+      name: ${devicename} ${s2} Active Power
+      filters:
+        - multiply: -1
+    update_interval: 60s
+
+  # NTC Temperature
+  - platform: ntc
+    sensor: temp_resistance_reading
+    name: ${devicename} Switch Temperature
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    icon: "mdi:thermometer"
+    calibration:
+      b_constant: 3350
+      reference_resistance: 10kOhm
+      reference_temperature: 298.15K
+  - platform: resistance
+    id: temp_resistance_reading
+    sensor: temp_analog_reading
+    configuration: DOWNSTREAM
+    resistor: 32kOhm
+  - platform: adc
+    id: temp_analog_reading
+    pin: A0
+
+status_led:
+  pin:
+    number: GPIO0
+    inverted: yes
+
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: shelly_25_relay_1
+  # - platform: gpio
+  #   pin: GPIO15
+  #   id: shelly_25_relay_2
+
+light:
+  - platform: binary
+    name: "${devicename} ${s1}"
+    output: shelly_25_relay_1
+    id: lightid1
+  # - platform: binary
+  #   name: "${devicename} ${s2}"
+  #   output: shelly_25_relay_2
+  #   id: lightid2
+switch:
+  - platform: gpio
+    id: switchid2
+    name: "${devicename} ${s2}"
+    pin: GPIO15
+    icon: "mdi:electric-switch"
+    restore_mode: RESTORE_DEFAULT_OFF
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO16
+    name: "ade7953 IRQ pin"
+    internal: true
+  - platform: gpio
+    pin:
+      number: GPIO13
+      #mode: INPUT_PULLUP
+      #inverted: True
+    name: "${devicename} ${s1} Switch"
+    on_state:
+      then:
+        - light.toggle: lightid1
+    internal: true
+    id: physwitchid1
+  - platform: gpio
+    pin:
+      number: GPIO5
+      #mode: INPUT_PULLUP
+      #inverted: True
+    name: "${devicename} ${s2} Switch"
+    on_state:
+      then:
+        - switch.toggle: switchid2
+    internal: true
+    id: physwitchid2

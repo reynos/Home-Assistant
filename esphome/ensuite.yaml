@@ -1,5 +1,5 @@
 esphome:
-  name: wateringback
+  name: ensuite
   platform: ESP8266
   board: nodemcuv2
 
@@ -17,13 +17,12 @@ api:
 ota:
   password: !secret esph-ota-pass
 
-switch:
-  - platform: gpio
-    name: "water lawn"
+sensor:
+  - platform: dht
     pin: D2
-  - platform: gpio
-    name: "water garden"
-    pin: D5
-  - platform: gpio
-    name: "water hedge"
-    pin: D6
+    model: AM2302
+    temperature:
+      name: "Ensuite Temperature"
+    humidity:
+      name: "Ensuite Humidity"
+    update_interval: 60s
