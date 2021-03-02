@@ -61,6 +61,7 @@
     entities:
 # add turn on light sensors here
       group.all_lights_not_beds: off
+      switch.back_deck: off
       switch.frontyard: off
       switch.water_lawn: off
       switch.water_garden: off
