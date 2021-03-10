@@ -45,8 +45,8 @@ water_lawn_timer:
     icon: mdi:timer-outline
     initial: 5
     min: 0
-    max: 15
-    step: 1
+    max: 40
+    step: 5
 water_garden_timer:
     name: Timer (mins)
     icon: mdi:timer-outline
@@ -59,8 +59,8 @@ water_hedge_timer:
     icon: mdi:timer-outline
     initial: 10
     min: 0
-    max: 15
-    step: 1
+    max: 40
+    step: 5
 kitchen_high_dimmer:
     name: Dimmer
     min: 0
