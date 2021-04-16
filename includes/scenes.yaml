@@ -16,9 +16,9 @@
   - name: Morning
     entities:
       light.kitchen_bench_19_2: on
-      light.kitchen_high_level_6:
-        state: on
-        brightness: 20
+      # light.kitchen_high_level_6:
+      #   state: on
+      #   brightness: 20
 #      light.lounge_lamp_18:
 #        state: on
 #        rgb_color: [255, 64, 0]
