@@ -74,6 +74,7 @@ google:
 #   host: !secret apc_ups_host
 #   port: !secret apc_ups_port
 
+## this now configured from the inergration GUI
 # remote_homeassistant:
 #   instances:
 #   - host: !secret ha_lounge_ip
@@ -85,6 +86,8 @@ google:
 #       domains:
 #       - script
 #       - input_boolean
+#    subscribe_events:
+#    - deconz_event
 
 tts:
   - platform: google_translate
