@@ -12,6 +12,30 @@
     - service: light.toggle
       target:
         entity_id: light.tv_level_8
+- alias: "'ON light test Lounge'"
+  # initial_state: "on"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: tradfri_on_off_switch
+        event: 1002
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.blythe_s_lamp
+- alias: "'OFF light test Lounge'"
+  # initial_state: "on"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: tradfri_on_off_switch
+        event: 2002
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.blythe_s_lamp
 
 - alias: "Increase brightness test"
   initial_state: "on"
@@ -35,12 +59,12 @@
     - platform: event
       event_type: deconz_event
       event_data:
-        id: light.tv_level_8
+        id: tradfri_remote_control
         event: 3002
   action:
     - service: light.turn_on
       target:
-        entity_id: light.lamp
+        entity_id: light.tv_level_8
       data:
         brightness: >
           {% set bri = state_attr('light.tv_level_8', 'brightness') | int %}
