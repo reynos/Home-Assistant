@@ -16,8 +16,49 @@
 #      entity_id: light.front_porch_light_86
 #    - service: script.turn_on
 #      entity_id: script.timer_front_porch_motion_off
+
+# short press - turn on
+- alias: "'Darren Bedside light ON'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: darren_bedside_switch
+        event: 1002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.bedside_lamp_darren
+# long press dim up
+- alias: "Darren Bedside dim up"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: darren_bedside_switch
+        event: 1003
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.bedside_lamp_darren
+      data:
+        brightness: >
+          {% set bri = state_attr('light.tv_level_8', 'brightness') | int %}
+          {{ [bri+30, 249] | min }}
+
+- alias: "'Darren Bedisde light OFF'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: darren_bedside_switch
+        event: 2002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.bedside_lamp_darren
+
 - alias: "'Darren Bedisde light toggle'"
-  initial_state: "on"
   trigger:
     - platform: event
       event_type: deconz_event
@@ -29,6 +70,17 @@
       target:
         entity_id: light.bedside_lamp_darren
 
+- alias: "'Playroom Light 1 Toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: tradfri_shortcut_button
+        event: 1002
+  action:
+    - service: switch.toggle
+      target:
+        entity_id: switch.ha_lounge_playroom_lamp_1
 
 - alias: "Morning Lights manual ON"
   trigger:
