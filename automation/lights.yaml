@@ -17,6 +17,63 @@
 #    - service: script.turn_on
 #      entity_id: script.timer_front_porch_motion_off
 
+# Playroom swotches
+- alias: "'Playroom lamp 1 toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: playroom_lamp_switch_1
+        event: 1002
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: playroom_lamp_switch_1
+        event: 2002
+  action:
+    - service: switch.toggle
+      target:
+        entity_id: switch.ha_lounge_playroom_lamp_1
+- alias: "'Playroom lamp 2 toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: playroom_lamp_switch_2
+        event: 1002
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: playroom_lamp_switch_2
+        event: 2002
+  action:
+    - service: switch.toggle
+      target:
+        entity_id: switch.ha_lounge_playroom_lamp_2
+
+- alias: "'Kitchen high light toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: kitchen_sonos
+        event: 1004
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.kitchen_high_level_6
+- alias: "'Kitchen low light toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: kitchen_sonos
+        event: 1005
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.kitchen_low_level_4
+
 # short press - turn on
 - alias: "'Darren Bedside light ON'"
   trigger:

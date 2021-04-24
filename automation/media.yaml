@@ -1,0 +1,14 @@
+## media.yaml automation
+
+
+- alias: "'Kitchen Sonos toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: kitchen_sonos
+        event: 1002
+  action:
+    - service: media_player.media_play_pause
+      target:
+        entity_id: media_player.kitchen

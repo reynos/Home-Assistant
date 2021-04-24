@@ -114,13 +114,17 @@
     entity_id: input_boolean.doorbell_test
     to: 'on'
   action:
-    - service: logbook.log
-      data:
-        name: "Doorbell:"
-        message: Test button pushed
-    - service: script.turn_on
-      data:
-        entity_id: script.doorbell
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.doorbell_test
+    - service: media_player.media_play_pause
+      target:
+        entity_id: media_player.kitchen
+
+    # - service: logbook.log
+    #   data:
+    #     name: "Doorbell:"
+    #     message: Test button pushed
+    # - service: script.turn_on
+    #   data:
+    #     entity_id: script.doorbell
+    # - service: input_boolean.turn_off
+    #   data:
+    #     entity_id: input_boolean.doorbell_test
