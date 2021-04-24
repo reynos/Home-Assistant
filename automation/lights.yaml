@@ -17,6 +17,80 @@
 #    - service: script.turn_on
 #      entity_id: script.timer_front_porch_motion_off
 
+# Girls Bedroom
+- alias: "'Girlsroom lights toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: girls_room_lights
+        event: 1002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.girls_bedroom_downlights
+- alias: "Girlsroom lights dim up"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: girls_room_lights
+        event: 2002
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.girls_bedroom_downlights
+      data:
+        brightness: >
+          {% set bri = state_attr('light.girls_bedroom_downlights', 'brightness') | int %}
+          {{ [bri+30, 249] | min }}
+- alias: "Girlsroom lights dim down"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: girls_room_lights
+        event: 3002
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.girls_bedroom_downlights
+      data:
+        brightness: >
+          {% set bri = state_attr('light.girls_bedroom_downlights', 'brightness') | int %}
+          {{ [bri-30, 1] | max }}
+- alias: "Girlsroom lights colour up"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: girls_room_lights
+        event: 5002
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.girls_bedroom_downlights
+      data:
+        color_temp: >
+          {% set temp = state_attr('light.girls_bedroom_downlights', 'color_temp') | int %}
+          {{ [temp+30, 650] | min }}
+- alias: "Girlsroom lights colour down"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: girls_room_lights
+        event: 4002
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.girls_bedroom_downlights
+      data:
+        color_temp: >
+          {% set temp = state_attr('light.girls_bedroom_downlights', 'color_temp') | int %}
+          {{ [temp-30, 1] | max }}
+
+
 # Playroom swotches
 - alias: "'Playroom lamp 1 toggle'"
   trigger:

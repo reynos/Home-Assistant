@@ -51,6 +51,14 @@
       - device_tracker.tony_iphone
       - device_tracker.dani_iphone
 
+# moved this top lights.yaml under light platform
+  # girls_bedroom_downlights:
+  #   name: Girls Bedroom Downlights
+  #   entities:
+  #     - light.ha_lounge_girls_room_1
+  #     - light.ha_lounge_girls_room_2
+  #     - light.ha_lounge_girls_room_3
+
   lollie_lights:
     name: Lollie Nightlight
     entities:
