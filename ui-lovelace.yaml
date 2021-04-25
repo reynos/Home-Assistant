@@ -325,6 +325,11 @@ views:
         type: entities
   - icon: mdi:face-woman-outline
     cards:
+      - entities:
+        - script.playroom_off
+        - switch.ha_lounge_playroom_lamp_1
+        - switch.ha_lounge_playroom_lamp_2
+        type: entities
       - type: custom:mini-media-player
         entity: media_player.play_room_tv
         name: Play Room TV
