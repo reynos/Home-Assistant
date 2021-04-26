@@ -124,7 +124,7 @@
     - service: switch.toggle
       target:
         entity_id: switch.ha_lounge_playroom_lamp_2
-
+#from Sonos controller
 - alias: "'Kitchen high light toggle'"
   trigger:
     - platform: event
@@ -147,6 +147,29 @@
     - service: light.toggle
       target:
         entity_id: light.kitchen_low_level_4
+#from Sonos controller
+- alias: "'Deck light toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: deck_sonos
+        event: 1004
+  action:
+    - service: switch.toggle
+      target:
+        entity_id: switch.back_deck
+- alias: "'Deck Heater toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: deck_sonos
+        event: 1005
+  action:
+    - service: switch.toggle
+      target:
+        entity_id: switch.deck_heater
 
 # short press - turn on
 - alias: "'Darren Bedside light ON'"

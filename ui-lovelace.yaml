@@ -245,6 +245,10 @@ views:
             cards:
               - type: light
                 entity: light.master_bedroom_level
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.girls_bedroom_downlights
               - type: light
                 entity: light.girl_s_lamp
           - type: custom:mini-media-player
