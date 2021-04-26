@@ -1,5 +1,17 @@
 ## general.yaml automations
 
+- alias: Turn Off Playroom button
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: front_door_switch
+        event: 1002
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.playroom_off
+
 - alias: Front Door Open
   trigger:
     - platform: state

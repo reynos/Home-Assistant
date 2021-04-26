@@ -1,9 +1,14 @@
 # open_front_gate.yaml automation
 - alias: "Open Front Gate"
   trigger:
-    platform: state
-    entity_id: input_boolean.open_front_gate
-    to: 'on'
+    - platform: state
+      entity_id: input_boolean.open_front_gate
+      to: 'on'
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: front_door_switch
+        event: 2002
   action:
     - service: switch.turn_on
       entity_id: switch.front_gate_relay_1
