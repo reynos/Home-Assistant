@@ -8,10 +8,17 @@ announce:
         - conditions:
             - condition: template
               value_template: >
-                {{ is_state('input_select.house_mode', 'Night') and not_at_night == 'yes' }}
+                {{ is_state('input_select.house_mode', 'Night') }}
           sequence:
             - service: script.turn_off
               entity_id: script.announce
+        # - conditions:
+        #     - condition: template
+        #       value_template: >
+        #         {{ is_state('input_select.house_mode', 'Night') and not_at_night == 'yes' }}
+        #   sequence:
+        #     - service: script.turn_off
+        #       entity_id: script.announce
   #   - service: notify.mobile_app_darren_reynolds
   #     data_template:
   #       message: "{{ at_night }}"
