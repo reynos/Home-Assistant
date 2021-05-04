@@ -254,13 +254,13 @@
   action:
     - service: media_player.turn_on
       data:
-        entity_id: media_player.yamaha_receiver
+        entity_id: media_player.lounge_main
     - delay:
         seconds: 15
-    - service: media_player.scene
+    - service: media_player.select_source
       data:
-        entity_id: media_player.yamaha_receiver
-        scene: 'Vinyl Listening'
+        entity_id: media_player.lounge_main
+        source: 'audio3'
 
 - alias: 'Turntable Off - Amp Off'
   trigger:
@@ -271,7 +271,7 @@
   action:
     - service: media_player.turn_off
       data:
-        entity_id: media_player.yamaha_receiver
+        entity_id: media_player.lounge_main
 
 - alias: 'Turntable Turned On'
   trigger:
