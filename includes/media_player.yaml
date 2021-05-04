@@ -1,14 +1,18 @@
 ## media_player.yaml
 
-- platform: yamaha
+# - platform: yamaha
+#   host: 10.0.26.29
+#   zone_ignore:
+#   - "Zone_2"
+#   source_names:
+#     HDMI1: "Foxtel"
+#     HDMI2: "HA"
+#     AUDIO1: "TV"
+#     AUDIO4: "Turntable"
+
+- platform: yamaha_musiccast
   host: 10.0.26.29
-  zone_ignore:
-  - "Zone_2"
-  source_names:
-    HDMI1: "Foxtel"
-    HDMI2: "HA"
-    AUDIO1: "TV"
-    AUDIO4: "Turntable"
+  port: 5005
 
 # - platform: universal
 #   name: Lounge TV

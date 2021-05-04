@@ -208,7 +208,7 @@ views:
               - type: light
                 entity: light.tv_level_8
           - type: custom:mini-media-player
-            entity: media_player.yamaha_receiver
+            entity: media_player.lounge_main
             name: Lounge
             artwork: cover
             hide:
