@@ -17,7 +17,7 @@
 # - platform: universal
 #   name: Lounge TV
 #   children:
-#     - media_player.yamaha_receiver
+#     - media_player.lounge_main
 #   commands:
 #     turn_on:
 #       service: script.turn_on
