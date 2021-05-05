@@ -50,7 +50,7 @@ views:
         show_header_toggle: false
         type: entities
       - type: custom:mini-media-player
-        entity: media_player.yamaha_receiver
+        entity: media_player.lounge_main
         name: Yamaha Receiver
         volume_stateless: true
         hide:

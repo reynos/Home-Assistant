@@ -93,7 +93,7 @@ views:
                 icon: mdi:lightbulb
                 tap_action:
                   action: toggle
-              - entity: media_player.yamaha_receiver
+              - entity: media_player.lounge_main
                 icon: mdi:amplifier
                 tap_action:
                   action: toggle
@@ -642,7 +642,7 @@ views:
                       #         ]]]
 
                   - type: custom:mini-media-player
-                    entity: media_player.yamaha_receiver
+                    entity: media_player.lounge_main
                     name: Yamaha Receiver
                     volume_stateless: true
 

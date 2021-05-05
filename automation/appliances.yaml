@@ -6,7 +6,7 @@
 - alias: 'Subwoofer ON'
   trigger:
     platform: state
-    entity_id: media_player.yamaha_receiver
+    entity_id: media_player.lounge_main
     to: 'on'
   action:
     - service: switch.turn_on
@@ -15,7 +15,7 @@
 - alias: 'Subwoofer OFF'
   trigger:
     platform: state
-    entity_id: media_player.yamaha_receiver
+    entity_id: media_player.lounge_main
     to: 'off'
   action:
     - service: switch.turn_off
