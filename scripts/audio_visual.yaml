@@ -9,13 +9,13 @@ amp_on:
   sequence:
     - service: media_player.turn_on
       data:
-        entity_id: media_player.yamaha_receiver
+        entity_id: media_player.lounge_main
 
 amp_off:
   sequence:
     - service: media_player.turn_off
       data:
-        entity_id: media_player.yamaha_receiver
+        entity_id: media_player.lounge_main
 
 amp_tv_on:
   sequence:
@@ -33,7 +33,7 @@ amp_tv_on:
         seconds: 1
     - service: media_player.volume_set
       data:
-        entity_id: media_player.yamaha_receiver
+        entity_id: media_player.lounge_main
         volume_level: 0.70
 
 amp_tv_off:
@@ -51,12 +51,12 @@ amp_select:
     - service: script.turn_on
       data_template:
         entity_id: >
-          {% if is_state('media_player.yamaha_receiver', 'off') %}
+          {% if is_state('media_player.lounge_main', 'off') %}
             script.amp_on
           {% else %}
             script.donothing
           {% endif %}
     - service: media_player.select_source
       data_template:
-        entity_id: media_player.yamaha_receiver
+        entity_id: media_player.lounge_main
         source: "{{ source }}"

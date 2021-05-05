@@ -10,6 +10,8 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - script.amp_on
+        - script.amp_off
         - sensor.ensuite_temperature
         - sensor.ensuite_humidity
         - switch.ensuite_fan
