@@ -90,8 +90,7 @@
           {% set temp = state_attr('light.girls_bedroom_downlights', 'color_temp') | int %}
           {{ [temp-30, 1] | max }}
 
-
-# Playroom swotches
+# Playroom switches
 - alias: "'Playroom lamp 1 toggle'"
   trigger:
     - platform: event

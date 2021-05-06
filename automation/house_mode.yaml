@@ -87,22 +87,67 @@
     entity_id: input_select.house_mode
     to: 'Evening'
   action:
-    - service: scene.turn_on
-      data:
-        entity_id: scene.evening
-# vary scene if it's Wednesday (day 3)
+    # Skip Bargeboard lights if Wed, else turn on Pink"
+    - choose:
+        # IF Wed just set evening scene - Bin lights will already be on
+        - conditions:
+            - condition: time
+              weekday:
+                - wed
+          sequence:
+            - service: scene.turn_on
+              data:
+                entity_id: scene.evening
+      # ELSE evening scene and Bargeboard set to pink
+      default:
+        - service: scene.turn_on
+          data:
+            entity_id: scene.evening
+        - service: scene.turn_on
+          data:
+            entity_id: scene.bb_pink
+- alias: "Bargeboard Bin lights"
+  trigger:
+    platform: time
+    after: '16:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - wed
+  action:
     - service: scene.turn_on
       data_template:
         entity_id: >
-         {% if now().isoweekday() == 3 %}
            {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
               scene.bb_yellow_bins
            {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
               scene.bb_blue_green_bins
+           {% else %}
+             scene.bb_pink
            {% endif %}
-         {% else %}
-           scene.bb_pink
-         {% endif %}
+# mode mode evening backuo
+# - alias: "House Mode Evening"
+#   trigger:
+#     platform: state
+#     entity_id: input_select.house_mode
+#     to: 'Evening'
+#   action:
+#     - service: scene.turn_on
+#       data:
+#         entity_id: scene.evening
+# # vary scene if it's Wednesday (day 3)
+#     - service: scene.turn_on
+#       data_template:
+#         entity_id: >
+#          {% if now().isoweekday() == 3 %}
+#            {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
+#               scene.bb_yellow_bins
+#            {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
+#               scene.bb_blue_green_bins
+#            {% endif %}
+#          {% else %}
+#            scene.bb_pink
+#          {% endif %}
 
 - alias: "House Mode Day"
   trigger:
