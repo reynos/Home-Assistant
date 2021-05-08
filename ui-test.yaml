@@ -10,6 +10,10 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - script.start_netflix
+        - script.stop_netflix
+        - script.start_abc_iview
+        - script.stop_abc_iview
         - script.amp_on
         - script.amp_off
         - sensor.ensuite_temperature
