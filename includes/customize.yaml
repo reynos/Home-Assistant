@@ -1,4 +1,6 @@
 ### customize.yaml
+  media_player.lounge_main:
+    friendly_name: Lounge Room Amplifier    
   binary_sensor.front_garden_movement_motion:
     friendly_name: Front Garden Camera Movement
 #doorbird

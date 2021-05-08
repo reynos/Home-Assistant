@@ -1,5 +1,16 @@
 ## media_player.yaml
 
+- platform: yamaha_musiccast
+  host: 10.0.26.29
+  port: 5005
+
+- platform: androidtv
+  name: Lounge Google TV
+  host: 10.0.26.23
+  # port: 5555 # defaults to 5555
+  # adb_server_ip: 127.0.0.1 # IP for the HA add on
+  # adb_server_port: 5037 # port on the ADB server add on`
+
 # - platform: yamaha
 #   host: 10.0.26.29
 #   zone_ignore:
@@ -9,10 +20,6 @@
 #     HDMI2: "HA"
 #     AUDIO1: "TV"
 #     AUDIO4: "Turntable"
-
-- platform: yamaha_musiccast
-  host: 10.0.26.29
-  port: 5005
 
 # - platform: universal
 #   name: Lounge TV

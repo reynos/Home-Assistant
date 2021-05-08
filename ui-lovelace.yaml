@@ -185,7 +185,7 @@ views:
   - icon: mdi:stove
     cards:
       - type: vertical-stack
-        title: Kitchen
+        title: Kitchen & Lounge
         show_header_toggle: true
         cards:
           - type: horizontal-stack
@@ -198,7 +198,7 @@ views:
         entities:
           - light.kitchen_bench_19_2
       - type: vertical-stack
-        title: Lounge
+        # title: Lounge
         show_header_toggle: true
         cards:
           - type: horizontal-stack
@@ -207,6 +207,18 @@ views:
                 entity: light.lounge_level_6
               - type: light
                 entity: light.tv_level_8
+          - type: custom:mini-media-player
+            entity: media_player.lounge_google_tv
+            name: Google TV
+            artwork: cover
+            hide:
+              icon: false
+              icon_state: false
+              power: false
+              power_state: false
+              volume: true
+              runtime: false
+              play_stop: false
           - type: custom:mini-media-player
             entity: media_player.lounge_main
             name: Lounge
