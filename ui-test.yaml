@@ -10,6 +10,8 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - input_boolean.kitchen_up_stop
+        - input_boolean.kitchen_down_stop
         - script.start_netflix
         - script.stop_netflix
         - script.start_abc_iview

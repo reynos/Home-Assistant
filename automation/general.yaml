@@ -12,6 +12,18 @@
       data:
         entity_id: input_boolean.kitchen_down_stop
 
+- alias: Kitchen Vol up stop
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: kitchen_sonos
+        event: 2003
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.kitchen_up_stop
+
 - alias: Front Door Open
   trigger:
     - platform: state

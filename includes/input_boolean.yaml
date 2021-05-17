@@ -2,9 +2,13 @@
 
 #volumne controls
 kitchen_up_stop:
+  initial: off
 kitchen_down_stop:
+  initial: off
 deck_up_stop:
+  initial: off
 deck_down_stop:
+  initial: off
 
 open_front_gate:
   name: Open Front Gate
