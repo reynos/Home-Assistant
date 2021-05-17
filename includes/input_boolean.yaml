@@ -1,5 +1,11 @@
 ## input_boolean.yaml
 
+#volumne controls
+kitchen_up_stop:
+kitchen_down_stop:
+deck_up_stop:
+deck_down_stop:
+
 open_front_gate:
   name: Open Front Gate
   initial: off

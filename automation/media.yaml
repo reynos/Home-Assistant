@@ -12,6 +12,34 @@
       target:
         entity_id: media_player.kitchen
 
+- alias: "'Kitchen Sonos Vol down'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: kitchen_sonos
+        event: 2001
+  action:
+    - repeat:
+        while:
+          - condition: state
+            entity_id: input_boolean.kitchen_down_stop
+            state: "off" # when knob stops turning - automation for this defined in general.yaml
+          - condition: template #stop at min volume
+            value_template: '{{ states.media_player.kitchen.attributes.volume_level > 0 }}'
+          - condition: template #repeat max 10 times
+            value_template: '{{ repeat.index <= 10 }}'
+        sequence:
+          - service: media_player.volume_set
+            entity_id: media_player.kitchen
+            data_template:
+              volume_level: '{{ states.media_player.kitchen.attributes.volume_level - 0.05}}'
+          - delay:
+              milliseconds: 200
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.kitchen_down_stop
+
 - alias: "'Deck Sonos toggle'"
   trigger:
     - platform: event

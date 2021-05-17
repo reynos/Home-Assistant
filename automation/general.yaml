@@ -1,16 +1,16 @@
 ## general.yaml automations
 
-- alias: Turn Off Playroom button
+- alias: Kitchen Vol down stop
   trigger:
     - platform: event
       event_type: deconz_event
       event_data:
-        id: front_door_switch
-        event: 1002
+        id: kitchen_sonos
+        event: 3003
   action:
-    - service: script.turn_on
+    - service: input_boolean.turn_on
       data:
-        entity_id: script.playroom_off
+        entity_id: input_boolean.kitchen_down_stop
 
 - alias: Front Door Open
   trigger:

@@ -170,18 +170,6 @@
       target:
         entity_id: switch.deck_heater
 
-# short press - turn on
-- alias: "'Darren Bedside light ON'"
-  trigger:
-    - platform: event
-      event_type: deconz_event
-      event_data:
-        id: darren_bedside_switch
-        event: 1002
-  action:
-    - service: light.toggle
-      target:
-        entity_id: light.bedside_lamp_darren
 # long press dim up
 - alias: "Darren Bedside dim up"
   trigger:
@@ -189,28 +177,35 @@
       event_type: deconz_event
       event_data:
         id: darren_bedside_switch
-        event: 1003
+        event: 1001
   action:
+    - alias: "Repeat the sequence UNTIL the conditions are true"
+      repeat:
+        sequence:
+          # Run command that for some reason doesn't always work
+          - service: light.turn_on
+            target:
+              entity_id: light.bedside_lamp_darren
+            data:
+              brightness: >
+                {% set bri = state_attr('light.bedside_lamp_darren', 'brightness') | int %}
+                {{ [bri+30, 249] | min }}
+#          # Give it time to complete
+          - delay:
+              milliseconds: 200
+        until:
+          # Did it work?
+          - condition: template
+            value_template: '{{ trigger.event.data.device_ieee == "1003" }}'
+
     - service: light.turn_on
       target:
         entity_id: light.bedside_lamp_darren
       data:
         brightness: >
-          {% set bri = state_attr('light.tv_level_8', 'brightness') | int %}
+          {% set bri = state_attr('light.bedside_lamp_darren', 'brightness') | int %}
           {{ [bri+30, 249] | min }}
-
-- alias: "'Darren Bedisde light OFF'"
-  trigger:
-    - platform: event
-      event_type: deconz_event
-      event_data:
-        id: darren_bedside_switch
-        event: 2002
-  action:
-    - service: light.toggle
-      target:
-        entity_id: light.bedside_lamp_darren
-
+#the ON button of Darren bedside button
 - alias: "'Darren Bedisde light toggle'"
   trigger:
     - platform: event
@@ -222,6 +217,18 @@
     - service: light.toggle
       target:
         entity_id: light.bedside_lamp_darren
+#the off button of Darren bedside button
+- alias: "'Master bed light toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: darren_bedside_switch
+        event: 2002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.master_bedroom_level
 
 - alias: "'Playroom Light 1 Toggle'"
   trigger:
