@@ -90,20 +90,24 @@
       data:
         entity_id: input_boolean.tester
 
-- alias: test announce
+- alias: 'Test Announce'
   trigger:
     platform: state
+    entity_id: input_boolean.announce_test
     from: 'off'
     to: 'on'
-    entity_id: input_boolean.announce_test
   action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Test announce'
     - service: script.announce
       data:
-        sonos_entity: media_player.study
-        volume: 0.1
-        message: 'a'
-        delay: '00:00:01'
-        at_night: 'no'
+        sonos_entity: media_player.kitchen
+        message: 'Announce test'
+        delay: '00:00:03'
+        not_at_night: yes
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.announce_test

@@ -39,7 +39,7 @@ announce:
     - service: media_player.volume_set
       data_template:
         entity_id: "{{ sonos_entity }}"
-        volume_level: "{{ volume }}"
+        volume_level: "{{ states('input_number.announce_volume') }}"
     - service: media_player.play_media
       data_template:
         entity_id: "{{ sonos_entity }}"

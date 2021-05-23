@@ -10,6 +10,7 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - input_boolean.announce_test
         - input_boolean.kitchen_up_stop
         - input_boolean.kitchen_down_stop
         - script.start_netflix
@@ -48,7 +49,6 @@ views:
         - light.bargeboard
         - light.bargeboard_segment_1
         - light.bargeboard_segment_2
-        - input_boolean.announce_test
         - light.bedside_lamp_darren
         - sensor.turntable_watts
         - sensor.washerpanel_watts
@@ -109,6 +109,10 @@ views:
           volume: true
           runtime: false
           play_stop: false
+      - type: sensor
+        entity: sensor.washer_watts
+        name: Washer Power
+        graph: line
       - type: sensor
         entity: sensor.dryer_watts
         name: Dryer Power
