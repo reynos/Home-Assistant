@@ -139,6 +139,9 @@ views:
               - type: light
                 entity: light.bedside_lamp_darren
                 name: Darren
+              - type: light
+                entity: light.blythe_s_lamp
+                name: Blythe
           - type: horizontal-stack
             show_header_toggle: true
             cards:
