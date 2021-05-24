@@ -206,7 +206,7 @@
           {% set bri = state_attr('light.bedside_lamp_darren', 'brightness') | int %}
           {{ [bri+30, 249] | min }}
 #the ON button of Darren bedside button
-- alias: "'Darren Bedisde light toggle'"
+- alias: "'Darren Bedside Lamp toggle'"
   trigger:
     - platform: event
       event_type: deconz_event
@@ -218,7 +218,7 @@
       target:
         entity_id: light.bedside_lamp_darren
 #the off button of Darren bedside button
-- alias: "'Master bed light toggle'"
+- alias: "'Darren Bedside Masterbed light toggle'"
   trigger:
     - platform: event
       event_type: deconz_event
