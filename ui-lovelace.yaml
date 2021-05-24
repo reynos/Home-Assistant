@@ -200,6 +200,7 @@ views:
       - type: entities
         entities:
           - light.kitchen_bench_19_2
+          - light.ha_lounge_lounge_lamp
       - type: vertical-stack
         # title: Lounge
         show_header_toggle: true
