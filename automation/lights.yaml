@@ -230,6 +230,30 @@
       target:
         entity_id: light.master_bedroom_level
 
+- alias: "'Blythe Bedside Lamp toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: blythes_lamp_switch
+        event: 1002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.blythe_s_lamp
+#the off button of Darren bedside button
+- alias: "'Blythe Bedside Masterbed light toggle'"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: blythes_lamp_switch
+        event: 2002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.master_bedroom_level
+
 - alias: "'Playroom Light 1 Toggle'"
   trigger:
     - platform: event
