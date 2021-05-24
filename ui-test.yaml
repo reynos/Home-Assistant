@@ -10,6 +10,7 @@ views:
     #   - entity: sensor.temperature_sensor_117
     cards:
       - entities:
+        - scene.evening
         - input_boolean.announce_test
         - input_boolean.kitchen_up_stop
         - input_boolean.kitchen_down_stop

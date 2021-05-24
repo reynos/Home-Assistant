@@ -55,6 +55,10 @@
         state: on
         rgb_color: [255,64,0]
         brightness: 100
+      light.ha_lounge_lounge_lamp:
+        state: on
+        rgb_color: [255,128,0] #setting for Ikea bulb
+        brightness: 180
 
 # triggered at 10:30 every night
   - name: Night
