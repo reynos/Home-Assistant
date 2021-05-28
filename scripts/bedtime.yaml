@@ -1,5 +1,5 @@
 ### bedtime.yaml script
-bedtime:
+bedtime: ## only used to have the stiars light delay - no used anymore
   alias: Bedtime Delay
   sequence:
     - service: logbook.log
@@ -48,12 +48,12 @@ bedtime_now:
         - switch.water_lawn
         - switch.water_garden
         - switch.water_hedge
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.bedtime_beacon_flag
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.house_mode
-        option: Bedtime
+    # - service: input_boolean.turn_on
+    #   entity_id: input_boolean.bedtime_beacon_flag
+    # - service: input_select.select_option
+    #   data:
+    #     entity_id: input_select.house_mode
+    #     option: Bedtime
     - service: input_boolean.turn_off
       entity_id: input_boolean.bed_time
 #hall_light_timer:

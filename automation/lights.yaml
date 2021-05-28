@@ -266,6 +266,18 @@
       target:
         entity_id: switch.ha_lounge_playroom_lamp_1
 
+- alias: "House Mode Top of Stairs Switch - Kitchen lights"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: top_of_stairs_switch
+        event: 1002
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_high_level_6
+
 - alias: "Morning Lights manual ON"
   trigger:
     platform: state

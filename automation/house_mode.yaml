@@ -72,14 +72,26 @@
     platform: state
     entity_id: input_select.house_mode
     to: 'Bedtime'
-  condition:
-    condition: state
-    entity_id: input_boolean.bedtime_beacon_flag
-    state: 'off' # remove quotes?
+  # condition:
+  #   condition: state
+  #   entity_id: input_boolean.bedtime_beacon_flag
+  #   state: 'off' # remove quotes?
   action:
     - service: script.turn_on
       data:
-        entity_id: script.bedtime
+        entity_id: script.bedtime_now
+
+- alias: "House Mode Top of Stairs Switch"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: top_of_stairs_switch
+        event: 2002
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.bed_time
 
 - alias: "House Mode Evening"
   trigger:
