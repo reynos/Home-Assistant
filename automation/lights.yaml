@@ -274,7 +274,7 @@
         id: top_of_stairs_switch
         event: 1002
   action:
-    - service: light.turn_on
+    - service: light.toggle
       data:
         entity_id: light.kitchen_high_level_6
 
