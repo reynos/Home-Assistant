@@ -12,6 +12,18 @@
       data:
         entity_id: input_boolean.kitchen_down_stop
 
+- alias: "Front Door switch - Playroom off"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: front_door_switch
+        event: 1002
+  action:
+    - service: script.turn_on
+      target:
+        entity_id: script.playroom_off
+
 - alias: Kitchen Vol up stop
   trigger:
     - platform: event
