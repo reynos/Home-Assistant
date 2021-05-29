@@ -130,7 +130,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.washer_watts
-    below: 11
+    below: 7
     for:
       minutes: 2
   action:
