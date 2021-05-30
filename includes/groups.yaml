@@ -28,7 +28,6 @@
       - light.decksteps_master
       - switch.backyard_floodlight
       - switch.back_deck
-      - light.side_28_2
       - light.study_level
 #      - light.lounge_lamp_bulb_38
 # not - switch.front_garden_1_switch
