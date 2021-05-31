@@ -132,7 +132,7 @@
     entity_id: sensor.washer_watts
     below: 7
     for:
-      minutes: 2
+      minutes: 3
   action:
     - service: mqtt.publish
       data:
