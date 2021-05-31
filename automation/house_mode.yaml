@@ -67,31 +67,38 @@
             script.day
           {% endif %}
 
-- alias: "House Mode Bedtime"
+- alias: House mode Bedtime - lights off
   trigger:
     platform: state
     entity_id: input_select.house_mode
     to: 'Bedtime'
-  # condition:
-  #   condition: state
-  #   entity_id: input_boolean.bedtime_beacon_flag
-  #   state: 'off' # remove quotes?
   action:
-    - service: script.turn_on
-      data:
-        entity_id: script.bedtime_now
-
-- alias: "House Mode Top of Stairs Switch"
-  trigger:
-    - platform: event
-      event_type: deconz_event
-      event_data:
-        id: top_of_stairs_switch
-        event: 2002
-  action:
-    - service: input_boolean.turn_on
-      data:
-        entity_id: input_boolean.bed_time
+    - service: light.turn_off
+      entity_id:
+        - light.blythe_s_lamp
+        - light.kitchen_high_level_6
+        - light.kitchen_low_level_4
+        - light.kitchen_bench_19_2
+        - light.lounge_level_6
+        - light.tv_level_8
+        - light.ha_lounge_lounge_lamp
+        - light.stairs_33_2
+        - light.laundry_hall_37_2
+        - light.hall_level_10
+        - light.front_porch_light_86_2
+        - light.back_garden_29
+        - light.trampoline
+        - light.decksteps_master
+        - light.study_level
+        - light.ha_lounge_lounge_lamp
+        # - group.all_lights_not_beds
+    - service: switch.turn_off
+      entity_id:
+        - switch.backyard_floodlight
+        - switch.back_deck
+        - switch.water_lawn
+        - switch.water_garden
+        - switch.water_hedge
 
 - alias: "House Mode Evening"
   trigger:

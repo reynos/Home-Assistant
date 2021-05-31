@@ -17,6 +17,20 @@
 #    - service: script.turn_on
 #      entity_id: script.timer_front_porch_motion_off
 
+- alias: "House Mode Top of Stairs Switch"
+  trigger:
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: top_of_stairs_switch
+        event: 2002
+  action:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.house_mode
+      data:
+          option: Bedtime
+
 # Girls Bedroom
 - alias: "'Girlsroom lights toggle'"
   trigger:
@@ -342,17 +356,6 @@
     - service: input_boolean.turn_off
       entity_id: input_boolean.morning_lights
 
-- alias: Bedtime switch on
-  trigger:
-    platform: state
-    entity_id: input_boolean.bed_time
-    to: 'on'
-  action:
-    service: input_select.select_option
-    data:
-      entity_id: input_select.house_mode
-      option: 'Bedtime'
-
 #- alias: Arrive_home_evening
 #  trigger:
 #    platform: state
@@ -385,13 +388,15 @@
   trigger:
     platform: state
     entity_id: input_boolean.bed_time
-    to: 'off'
+    to: 'on'
   action:
-    - service: script.turn_off
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.house_mode
       data:
-        entity_id: script.bedtime
-    - service: light.turn_off
-      entity_id: light.stairs_33_2
+          option: Bedtime
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bed_time
 
 - alias: "Holiday Evening Light"
   trigger:
