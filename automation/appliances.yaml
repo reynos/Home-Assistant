@@ -61,7 +61,7 @@
     entity_id: sensor.dryer_watts
     below: 6
     for:
-      seconds: 2
+      seconds: 20
   action:
     - service: mqtt.publish
       data:
