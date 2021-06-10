@@ -46,10 +46,10 @@ vera:
   lights: [18, 19, 26, 28, 29, 33, 38, 86]
   exclude: []
 
-solaredge:
-  api_key: !secret solaredge_api_key
-  site_id: !secret solaredge_site_id
-  name: SolarEdge
+# solaredge:
+#   api_key: !secret solaredge_api_key
+#   site_id: !secret solaredge_site_id
+#   name: SolarEdge
 
 # bmw_connected_drive:
 #   bmw_x5:
@@ -57,14 +57,14 @@ solaredge:
 #     password: !secret PASSWORD_BMW_CONNECTED_DRIVE
 #     region: rest_of_world
 
-speedtestdotnet:
-  server_id: 2629
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-  scan_interval:
-    hours: 6
+# speedtestdotnet:
+#   server_id: 2629
+#   monitored_conditions:
+#     - ping
+#     - download
+#     - upload
+#   scan_interval:
+#     hours: 6
 
 google:
   client_id: !secret google_id
