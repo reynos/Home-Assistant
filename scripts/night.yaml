@@ -15,9 +15,12 @@ night:
       entity_id: input_boolean.morning_lights_flag #re-sets the morning lights trigger for the next day
     - service: input_boolean.turn_off
       entity_id: input_boolean.morning_lights #ensure the switch is off - in case the lights have been turned off individually
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       entity_id:
         - group.all_lights_not_beds
+    - service: light.turn_off
+      entity_id:
+        # - group.all_lights_not_beds
         - light.bargeboard_master
         - light.bargeboard
         - light.bargeboard_segment_1
