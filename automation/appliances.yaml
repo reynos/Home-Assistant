@@ -61,7 +61,7 @@
     entity_id: sensor.dryer_watts
     below: 6
     for:
-      seconds: 20
+      seconds: 60
   action:
     - service: mqtt.publish
       data:
@@ -187,7 +187,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.dishwasher_watts
-    below: 3
+    below: 5
     for:
       minutes: 9
   action:
