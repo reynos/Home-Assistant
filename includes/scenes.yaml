@@ -133,6 +133,18 @@
         rgb_color: [255,0,255]
         brightness: 150
 
+  - name: BB Red
+    entities:
+      light.bargeboard_master: on
+      light.bargeboard_segment_1:
+        state: on
+        rgb_color: [255,0,0]
+        brightness: 150
+      light.bargeboard_segment_2:
+        state: on
+        rgb_color: [255,0,0]
+        brightness: 150
+
   - name: BB Blue Green Bins
     entities:
       light.bargeboard_master: on
