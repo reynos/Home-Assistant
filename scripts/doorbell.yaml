@@ -9,6 +9,8 @@ doorbell: # for day and night
         entity_id: >
           {% if is_state('binary_sensor.dark', 'on') %}
             script.timer_front_lights
+          {% else %}
+            script.donothing
           {% endif %}
     - service: sonos.snapshot
       data:

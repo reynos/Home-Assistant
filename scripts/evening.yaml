@@ -43,5 +43,5 @@ evening_holiday:
          {% elif is_state('input_boolean.lockdown', 'on') %}
             scene.bb_red
          {% else %}
-           scene.bb_pink
+            scene.bb_pink
          {% endif %}
