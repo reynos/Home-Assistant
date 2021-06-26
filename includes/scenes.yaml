@@ -127,11 +127,11 @@
       light.bargeboard_segment_1:
         state: on
         rgb_color: [255,0,255]
-        brightness: 150
+        brightness: 100
       light.bargeboard_segment_2:
         state: on
         rgb_color: [255,0,255]
-        brightness: 150
+        brightness: 100
 
   - name: BB Red
     entities:
