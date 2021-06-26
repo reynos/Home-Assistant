@@ -1,4 +1,5 @@
 ## input_boolean.yaml
+lockdown:
 
 #volumne controls
 kitchen_up_stop:

@@ -527,6 +527,7 @@ views:
       - entities:
           - sensor.remote_connection_to_ha_lounge
           - input_select.house_mode
+          - input_boolean.lockdown
           - input_number.lights_auto_dim_level
           - input_number.bathroom_light_timer
           - input_number.announce_volume
