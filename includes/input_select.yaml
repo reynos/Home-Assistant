@@ -1,4 +1,4 @@
-## inout_select.yaml
+## input_select.yaml
 
 house_mode:
   name: House Mode
@@ -9,3 +9,10 @@ house_mode:
     - "Night"
     - "Holiday"
   icon: mdi:home
+
+bb_colour:
+  name: Bargeboard Colour
+  options:
+    - "pink"
+    - "red"
+  icon: mdi:home-roof
