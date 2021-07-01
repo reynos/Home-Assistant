@@ -23,18 +23,51 @@
     - service: logbook.log
       data_template:
         name: 'Sunset:'
-        message: 'Evening lights ON ({{ trigger.to_state.attributes.friendly_name }})'
-    - service: script.turn_on
-      data_template:
-        entity_id: >
-          {% if is_state("input_select.house_mode", "Holiday") %}
-            script.evening_holiday
-          {% else %}
-            script.evening
-          {% endif %}
+        message: 'Evening lights turned ON by {{ trigger.entity_id.friendly_name }}'
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.evening_lights_on_flag
+    #Everyday except WED (non-bin nights)
+    #turn on Bargeboard light based on input_select.bb_colour
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+         {% if now().isoweekday() != 3 %}
+           scene.bb_{{states.input_select.bb_colour.state}}
+         {% else %}
+           scene.nothing
+         {% endif %}
+    - choose:
+      #IF Holiday house mode - turn on only select lights
+        - conditions:
+            - condition: state
+              entiny_id: input_select.house_mode
+              state: 'Holiday'
+          sequence:
+            - service: logbook.log
+              data_template:
+                name: "Evening Lights"
+                message: for HOLIDAY house mode ON
+            - service: input_boolean.turn_on
+              entity_id: input_boolean.evening_holiday
+            - service: light.turn_on
+              entity_id: light.kitchen_bench_19_2
+            - service: switch.turn_on
+              entity_id: switch.frontyard
+      # ELSE - any other house mode - input select Evening - which will call the evening script
+      default:
+        - service: input_select.select_option
+          data:
+            entity_id: input_select.house_mode
+            option: Evening
+
+- alias: "House Mode Evening"
+  trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: 'Evening'
+  action:
+    - service: script.evening
 
 - alias: Auto Set Night mode
   trigger:
@@ -101,31 +134,6 @@
     #     - switch.water_garden
     #     - switch.water_hedge
 
-- alias: "House Mode Evening"
-  trigger:
-    platform: state
-    entity_id: input_select.house_mode
-    to: 'Evening'
-  action:
-    # Skip Bargeboard lights if Wed, else turn on Pink"
-    - choose:
-        # IF Wed just set evening scene - Bin lights will already be on
-        - conditions:
-            - condition: time
-              weekday:
-                - wed
-          sequence:
-            - service: scene.turn_on
-              data:
-                entity_id: scene.evening
-      # ELSE evening scene and Bargeboard set to pink
-      default:
-        - service: scene.turn_on
-          data:
-            entity_id: scene.evening
-        - service: scene.turn_on
-          data:
-            entity_id: scene.bb_pink
 - alias: "Bargeboard Bin lights"
   trigger:
     platform: time
@@ -143,7 +151,7 @@
            {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
               scene.bb_blue_green_bins
            {% else %}
-             scene.bb_pink
+             scene.nothing
            {% endif %}
 # mode mode evening backuo
 # - alias: "House Mode Evening"

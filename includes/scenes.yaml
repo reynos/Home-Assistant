@@ -1,46 +1,20 @@
 ### scenes.yaml
 ##
-## no scenes are used any longer
-##
-#some neat code to use in future:
-#automations
-#- alias: Living Room Scene
-#  trigger:
-#    platform: state
-#    entity_id: input_select.livingroom_scene
-#  action:
-#    - service: scene.turn_on
-#      data_template:
-#        entity_id: scene.{{ states.input_select.livingroom_scene.state | replace(' ', '_') | lower | string }}
-
   - name: Morning
     entities:
       light.kitchen_bench_19_2: on
       # light.kitchen_high_level_6:
       #   state: on
       #   brightness: 20
-#      light.lounge_lamp_18:
-#        state: on
-#        rgb_color: [255, 64, 0]
-#        brightness: 60 # brightness not working??
 
   - name: Morning off
     entities:
       light.kitchen_bench_19_2: off
       light.kitchen_high_level_6: off
       light.kitchen_low_level_4: off
-#      light.lounge_lamp_18: off
-
-  - name: Test
-    entities:
-      light.bedside_lamp_darren:
-        state: on
-        rgb_color: [255,64,0]
-        brightness: 40
 
   - name: Evening
     entities:
-      # group.evening: on
       light.kitchen_bench_19_2: on
       light.stairs_33_2: on
       light.back_garden_29: on
@@ -63,7 +37,6 @@
 # triggered at 10:30 every night
   - name: Night
     entities:
-# add turn on light sensors here
       group.all_lights_not_beds: off
       switch.back_deck: off
       switch.frontyard: off
@@ -92,8 +65,6 @@
       switch.water_garden: off
       switch.water_hedge: off
       switch.water_lawn: off
-#      input_select.house_mode:
-#        option: "Day"
 
 # tiggered at Sunset only if Holiday switch is ON
   - name: Holiday Evening
@@ -195,6 +166,11 @@
       light.hall_level:
         state: on
         brightness: 50
+
+  - name: nothing
+    entities:
+      input_boolean.tester:
+        state: off
 
   # - name: Auto Dim
   #   entities:

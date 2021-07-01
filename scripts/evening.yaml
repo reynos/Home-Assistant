@@ -3,45 +3,58 @@
 evening:
   alias: "Evening lights on"
   sequence:
-    # - service: logbook.log
-    #   data_template:
-    #     name: "Script:"
-    #     message: Evening lights ON
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.house_mode
-        option: Evening
-    - service: notify.mobile_app_darren_reynolds
-      data:
-        message: "Evening lights on"
-#    - service: frontend.set_theme
-#      data:
-#        name: night
-
-evening_holiday:
-  alias: "Evening Holiday lights on"
-  sequence:
     - service: logbook.log
       data_template:
         name: "Script:"
-        message: Evening HOLIDAY lights ON
+        message: Evening lights ON
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Evening lights on"
     - service: input_boolean.turn_on
-      entity_id: input_boolean.evening_holiday
-    - service: light.turn_on
-      entity_id: light.kitchen_bench_19_2
-    - service: switch.turn_on
-      entity_id: switch.frontyard
+      entity_id: input_boolean.evening_lights_on_flag
     - service: scene.turn_on
-      data_template:
-        entity_id: >
-         {% if now().isoweekday() == 3 %}
-           {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
-              scene.bb_yellow_bins
-           {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
-              scene.bb_blue_green_bins
-           {% endif %}
-         {% elif is_state('input_boolean.lockdown', 'on') %}
-            scene.bb_red
-         {% else %}
-            scene.bb_pink
-         {% endif %}
+      data:
+        entity_id: scene.evening
+
+# continue only if it is not WED - bin lights would have already been turned on
+    # - condition: time
+    #   weekday:
+    #     - mon
+    #     - tue
+    #     - thu
+    #     - fri
+    #     - sat
+    #     - sun
+    # - service: scene.turn_on
+    #   data_template:
+    #     entity_id: scene.bb_{{states.input_select.bb_colour.state}}
+
+# \/ coded now in house_mode automation \/
+
+# evening_holiday:
+#   alias: "Evening Holiday lights on"
+#   sequence:
+#     - service: logbook.log
+#       data_template:
+#         name: "Script:"
+#         message: Evening HOLIDAY lights ON
+#     - service: input_boolean.turn_on
+#       entity_id: input_boolean.evening_holiday
+#     - service: light.turn_on
+#       entity_id: light.kitchen_bench_19_2
+#     - service: switch.turn_on
+#       entity_id: switch.frontyard
+#     - service: scene.turn_on
+#       data_template:
+#         entity_id: >
+#          {% if now().isoweekday() == 3 %}
+#            {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
+#               scene.bb_yellow_bins
+#            {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
+#               scene.bb_blue_green_bins
+#            {% endif %}
+#          {% elif is_state('input_boolean.lockdown', 'on') %}
+#             scene.bb_red
+#          {% else %}
+#            scene.bb_pink
+#          {% endif %}

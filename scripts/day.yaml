@@ -21,6 +21,7 @@ day:
       entity_id:
         - input_boolean.morning_lights_flag #re-sets the morning lights flag for the next day
         - input_boolean.bedtime_beacon_flag #re-sets the bedtime flag for the next day
+
 day_holiday:
   alias: "Day Holiday"
   sequence:
