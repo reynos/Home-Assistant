@@ -9,7 +9,7 @@
   #     - light.trampoline
   #     - light.bargeboard
 
-# not used for bedtime - all directly in the script now
+# not used for bedtime - all directly in the scene now
   all_lights_not_beds:
     name: All lights not beds
     entities:
