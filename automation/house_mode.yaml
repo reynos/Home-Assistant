@@ -41,7 +41,7 @@
       #IF Holiday house mode - turn on only select lights
         - conditions:
             - condition: state
-              entiny_id: input_select.house_mode
+              entity_id: input_select.house_mode
               state: 'Holiday'
           sequence:
             - service: logbook.log
