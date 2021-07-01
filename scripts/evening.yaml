@@ -13,8 +13,16 @@ evening:
     - service: input_boolean.turn_on
       entity_id: input_boolean.evening_lights_on_flag
     - service: scene.turn_on
-      data:
+      target:
         entity_id: scene.evening
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+         {% if now().isoweekday() != 3 %}
+           scene.bb_{{states.input_select.bb_colour.state}}
+         {% else %}
+           scene.nothing
+         {% endif %}
 
 # continue only if it is not WED - bin lights would have already been turned on
     # - condition: time

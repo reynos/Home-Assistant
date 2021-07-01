@@ -24,19 +24,14 @@
       data_template:
         name: 'Sunset:'
         message: 'Evening lights turned ON by {{ trigger.entity_id.friendly_name }}'
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: 'Evening lights on by {{ trigger.entity_id.friendly_name }}'
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.evening_lights_on_flag
     #Everyday except WED (non-bin nights)
     #turn on Bargeboard light based on input_select.bb_colour
-    - service: scene.turn_on
-      data_template:
-        entity_id: >
-         {% if now().isoweekday() != 3 %}
-           scene.bb_{{states.input_select.bb_colour.state}}
-         {% else %}
-           scene.nothing
-         {% endif %}
     - choose:
       #IF Holiday house mode - turn on only select lights
         - conditions:
@@ -54,6 +49,14 @@
               entity_id: light.kitchen_bench_19_2
             - service: switch.turn_on
               entity_id: switch.frontyard
+            - service: scene.turn_on
+              data_template:
+                entity_id: >
+                 {% if now().isoweekday() != 3 %}
+                   scene.bb_{{states.input_select.bb_colour.state}}
+                 {% else %}
+                   scene.nothing
+                 {% endif %}
       # ELSE - any other house mode - input select Evening - which will call the evening script
       default:
         - service: input_select.select_option
@@ -67,7 +70,8 @@
     entity_id: input_select.house_mode
     to: 'Evening'
   action:
-    - service: script.evening
+    - service: script.turn_on
+      entity_id: script.evening
 
 - alias: Auto Set Night mode
   trigger:
