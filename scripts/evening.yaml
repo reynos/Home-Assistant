@@ -7,9 +7,9 @@ evening:
       data_template:
         name: "Script:"
         message: Evening lights ON
-    - service: notify.mobile_app_darren_reynolds
-      data:
-        message: "Evening lights on"
+    # - service: notify.mobile_app_darren_reynolds
+    #   data:
+    #     message: "Evening lights on"
     - service: input_boolean.turn_on
       entity_id: input_boolean.evening_lights_on_flag
     - service: scene.turn_on
