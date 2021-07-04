@@ -5,8 +5,13 @@ playroom_off:
   sequence:
     - service: switch.turn_off
       entity_id:
+        - switch.playroom_touch_lamp
         - switch.ha_lounge_playroom_lamp_1
         - switch.ha_lounge_playroom_lamp_2
     - service: media_player.turn_off
       entity_id:
         - media_player.play_room_tv
+    - delay: "00:00:03"
+    - service: switch.turn_on
+      entity_id:
+        - switch.playroom_touch_lamp
