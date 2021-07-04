@@ -26,7 +26,7 @@
         message: 'Evening lights turned ON by {{trigger.entity_id}}'
     - service: notify.mobile_app_darren_reynolds
       data:
-        message: 'Evening lights on by {{ trigger.entity_id.friendly_name }}'
+        message: 'Evening lights on by {{trigger.entity_id}}'
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.evening_lights_on_flag
