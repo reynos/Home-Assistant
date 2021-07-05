@@ -23,10 +23,10 @@
     - service: logbook.log
       data_template:
         name: 'Sunset:'
-        message: 'Evening lights turned ON by {{trigger.entity_id}}'
+        message: "Evening lights on by {{ state_attr(trigger.entity_id, 'friendly_name') }}"
     - service: notify.mobile_app_darren_reynolds
       data:
-        message: 'Evening lights on by {{trigger.entity_id}}'
+        message: "Evening lights on by {{ state_attr(trigger.entity_id, 'friendly_name') }}"
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.evening_lights_on_flag
