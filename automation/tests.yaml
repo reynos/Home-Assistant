@@ -49,14 +49,18 @@
 
 - alias: test
   trigger:
-    platform: state
-    from: 'off'
-    to: 'on'
-    entity_id: input_boolean.tester
+    - platform: state
+      from: 'off'
+      to: 'on'
+      entity_id: input_boolean.tester
+    - platform: state
+      from: 'off'
+      to: 'on'
+      entity_id: input_boolean.lockdown
   action:
     - service: notify.mobile_app_darren_reynolds
       data:
-        message: "{{ state_attr(trigger.entity_id, 'friendly_name') }}"
+        message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
         # message: 'Message: {{trigger.entity_id.attributes.friendly_name}}'
     - service: input_boolean.turn_off
       data:
