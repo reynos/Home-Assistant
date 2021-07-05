@@ -1,5 +1,14 @@
 ## tests.yaml automations
 
+- alias: "tag test"
+  trigger:
+    - platform: tag
+      tag_id: 742cb4f2-540e-4678-96d4-e0f91bd2a357
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Tag swiped!"
+
 - alias: "'Toggle light test'"
   initial_state: "on"
   trigger:
@@ -60,6 +69,7 @@
   action:
     - service: notify.mobile_app_darren_reynolds
       data:
+        # message: "Trigger was: {{ trigger.event.data.friendly_name }}"
         message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
         # message: 'Message: {{trigger.entity_id.attributes.friendly_name}}'
     - service: input_boolean.turn_off
