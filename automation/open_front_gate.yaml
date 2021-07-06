@@ -9,6 +9,8 @@
       event_data:
         id: front_door_switch
         event: 2002
+    - platform: tag
+      tag_id: 742cb4f2-540e-4678-96d4-e0f91bd2a357
   action:
     - service: switch.turn_on
       entity_id: switch.front_gate_relay_1
