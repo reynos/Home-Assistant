@@ -28,6 +28,18 @@
       data:
         message: "Weekly Low battery warning: {{sensors}}"
 
+- alias: HA Update notify
+  trigger:
+    - platform: state
+      from: 'off'
+      to: 'on'
+      entity_id: binary_sensor.updater
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        title: "Update time!"
+        message: "Home Assistant version {{ states.binary_sensor.updater.attributes.newest_version }} is available"
+
 - alias: Kitchen Vol down stop
   trigger:
     - platform: event
