@@ -1,5 +1,33 @@
 ## general.yaml automations
 
+- alias: "Weekely Devices Low Battery Warning"
+  mode: single
+  variables:
+    day: 1
+    threshold: 20
+    sensors: >-
+      {% set result = namespace(sensors=[]) %}
+      {% for state in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}
+        {% if 0 <= state.state | int(-1) < threshold | int %}
+          {% set result.sensors = result.sensors + [state.name ~ ' (' ~ state.state ~ ' %)'] %}
+        {% endif %}
+      {% endfor %}
+      {% for state in states.binary_sensor | selectattr('attributes.device_class', '==', 'battery') | selectattr('state', '==', 'on') %}
+        {% set result.sensors = result.sensors + [state.name] %}
+      {% endfor %}
+      {{result.sensors|join(', ')}}
+  # run only on Thurs (day 4) at 9;30 am
+  trigger:
+  - platform: time
+    at: "09:30:00"
+  condition:
+  - condition: template
+    value_template: '{{ sensors != '''' and (4 == now().isoweekday()) }}'
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Weekly Low battery warning: {{sensors}}"
+
 - alias: Kitchen Vol down stop
   trigger:
     - platform: event
