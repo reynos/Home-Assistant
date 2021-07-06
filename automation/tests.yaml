@@ -2,12 +2,31 @@
 
 - alias: "tag test"
   trigger:
-    - platform: tag
-      tag_id: 742cb4f2-540e-4678-96d4-e0f91bd2a357
+    - platform: state
+      from: 'off'
+      to: 'on'
+      entity_id: input_boolean.lockdown
+    # - platform: tag
+    #   tag_id: 742cb4f2-540e-4678-96d4-e0f91bd2a357
   action:
-    - service: notify.mobile_app_darren_reynolds
+    # - service: notify.mobile_app_darren_reynolds
+    #   data:
+    #     message: "Gate tag swiped!"
+    - alias: "Ask for actions"
+      service: notify.mobile_app_darren_reynolds
       data:
-        message: "Tag swiped!"
+        message: "Test Action"
+        data:
+          actions:
+            - action: "1"
+              title: "One"
+            - action: "2"
+              title: "Two"
+            - action: "3"
+              title: "Three"
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.lockdown
 
 - alias: "'Toggle light test'"
   initial_state: "on"
@@ -62,10 +81,6 @@
       from: 'off'
       to: 'on'
       entity_id: input_boolean.tester
-    - platform: state
-      from: 'off'
-      to: 'on'
-      entity_id: input_boolean.lockdown
   action:
     - service: notify.mobile_app_darren_reynolds
       data:

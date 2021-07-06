@@ -1,0 +1,61 @@
+## actionable_noticiations.yaml automation
+
+- alias: "Deck Tag Actions"
+  trigger:
+    - platform: tag
+      tag_id: d32d05ff-5141-4bb3-9525-9d28e88bd56d
+  action:
+    - alias: "Set up variables for the actions"
+      variables:
+        # Including an id in the action allows us to identify this script run
+        # and not accidentally trigger for other notification actions
+        action_deck_heater_toggle: "{{ 'DECK_HEAT_' ~ context.id }}"
+        action_deck_lights_toggle: "{{ 'DECK_LIGHT_' ~ context.id }}"
+        action_back_floodlights_toggle: "{{ 'BACK_FLOODLIGHT_' ~ context.id }}"
+    - alias: "Ask for actions"
+      service: notify.mobile_app_darren_reynolds
+      data:
+        message: "Deck Action"
+        data:
+          actions:
+            - action: "{{ action_deck_heater_toggle }}"
+              title: "Deck Heater"
+            - action: "{{ action_deck_lights_toggle }}"
+              title: "Deck Lights"
+            - action: "{{ action_back_floodlights_toggle }}"
+              title: "Backyard Floodlight"
+    - alias: "Wait for a response"
+      wait_for_trigger:
+        - platform: event
+          event_type: mobile_app_notification_action
+          event_data:
+            # waiting for the specific action avoids accidentally continuing
+            # for another script/automation's notification action
+            action: "{{ action_deck_heater_toggle }}"
+        - platform: event
+          event_type: mobile_app_notification_action
+          event_data:
+            action: "{{ action_deck_lights_toggle }}"
+        - platform: event
+          event_type: mobile_app_notification_action
+          event_data:
+            action: "{{ action_back_floodlights_toggle }}"
+      timeout: "00:01:00"
+      continue_on_timeout: false
+    - alias: "Perform the action"
+      choose:
+        - conditions: "{{ wait.trigger.event.data.action == action_deck_heater_toggle }}"
+          sequence:
+            - service: switch.toggle
+              target:
+                entity_id: switch.deck_heater
+        - conditions: "{{ wait.trigger.event.data.action == action_deck_lights_toggle }}"
+          sequence:
+            - service: switch.toggle
+              target:
+                entity_id: switch.back_deck
+        - conditions: "{{ wait.trigger.event.data.action == action_back_floodlights_toggle }}"
+          sequence:
+            - service: switch.toggle
+              target:
+                entity_id: switch.backyard_floodlight
