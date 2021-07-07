@@ -291,6 +291,10 @@
         variables:
           message: 'Turntable On!'
 
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#  Still ON notifications
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 - alias: 'Turntable Still On'
   trigger:
     - platform: time_pattern
@@ -310,6 +314,38 @@
       data:
         variables:
           message: 'Turntable still on!'
+
+- alias: 'Deck Heater Still On'
+  trigger:
+    - platform: time_pattern
+      # Trigger every hour, on the hour
+      # hours: "/1"
+      minutes: "/30"
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Bedtime'
+  condition:
+    condition: state
+    entity_id: switch.deck_heater
+    state: 'On'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Deck Heater still on!'
+
+- alias: 'Deck Heater Turned On'
+  trigger:
+    - platform: state
+      entity_id: switch.deck_heater
+      to: 'On'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Deck Heater turned ON'
     # - service: script.turn_on
     #   entity_id: script.notify_blythe
     #   data:
