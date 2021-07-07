@@ -339,13 +339,48 @@
   trigger:
     - platform: state
       entity_id: switch.deck_heater
-      to: 'On'
+      to: "on"
   action:
-    - service: script.turn_on
-      entity_id: script.notify_darren
+    - service: logbook.log
+      data_template:
+        name: 'Deck Heater:'
+        message: "Deck Heater turned on"
+    - alias: "Set up variables for the actions"
+      variables:
+        # Including an id in the action allows us to identify this script run
+        # and not accidentally trigger for other notification actions
+        action_deck_heater_off: "{{ 'DECK_HEAT_OFF' ~ context.id }}"
+    - alias: "Ask for actions"
+      service: notify.mobile_app_darren_reynolds
       data:
-        variables:
-          message: 'Deck Heater turned ON'
+        title: "Deck Heater"
+        message: "Turned ON, Turn off?"
+        data:
+          actions:
+            - action: "{{ action_deck_heater_off }}"
+              title: "Turn OFF"
+    - alias: "Wait for a response"
+      wait_for_trigger:
+        - platform: event
+          event_type: mobile_app_notification_action
+          event_data:
+            # waiting for the specific action avoids accidentally continuing
+            # for another script/automation's notification action
+            action: "{{ action_deck_heater_off }}"
+
+      timeout: "00:30:00"
+      continue_on_timeout: false
+    - alias: "Perform the action"
+      choose:
+        - conditions: "{{ wait.trigger.event.data.action == action_deck_heater_off }}"
+          sequence:
+            - service: switch.turn_off
+              target:
+                entity_id: switch.deck_heater
+
+
+
+
     # - service: script.turn_on
     #   entity_id: script.notify_blythe
     #   data:

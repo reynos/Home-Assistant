@@ -18,11 +18,11 @@
       {{result.sensors|join(', ')}}
   # run only on Thurs (day 4) at 9;30 am
   trigger:
-  - platform: time
-    at: "09:30:00"
+    - platform: time
+      at: "09:30:00"
   condition:
-  - condition: template
-    value_template: '{{ sensors != '''' and (4 == now().isoweekday()) }}'
+    - condition: template
+      value_template: '{{ sensors != '''' and (4 == now().isoweekday()) }}'
   action:
     - service: notify.mobile_app_darren_reynolds
       data:
