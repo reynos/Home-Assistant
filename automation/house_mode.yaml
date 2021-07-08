@@ -2,7 +2,8 @@
 
 ## Automated Select Scenes - House modes Evening, Night and Day (Bedtime and Holiday only called manually)
 
-- alias: Set Evening mode at Sunset
+- id: semas
+  alias: Set Evening mode at Sunset
   trigger:
     - platform: numeric_state
       entity_id: sun.sun

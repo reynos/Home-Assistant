@@ -3,7 +3,7 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Subwoofer
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-- alias: 'Subwoofer ON'
+- alias: "Subwoofer ON"
   trigger:
     - platform: state
       entity_id: media_player.lounge_main
@@ -15,7 +15,7 @@
     - service: switch.turn_on
       entity_id: switch.subwoofer
 
-- alias: 'Subwoofer OFF'
+- alias: "Subwoofer OFF"
   trigger:
     platform: state
     entity_id: media_player.lounge_main
@@ -28,7 +28,7 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Dryer
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-- alias: 'Dryer State - Door'
+- alias: "Dryer State - Door"
   trigger:
     platform: numeric_state
     entity_id: sensor.dryer_watts
@@ -42,7 +42,7 @@
         topic: hass/state/dryer
         payload: 'Door Open'
         retain: 'true'
-- alias: 'Dryer State - Drying'
+- alias: "Dryer State - Drying"
   trigger:
     platform: numeric_state
     entity_id: sensor.dryer_watts
@@ -55,7 +55,7 @@
         topic: hass/state/dryer
         payload: 'Drying'
         retain: 'true'
-- alias: 'Dryer State - Idle'
+- alias: "Dryer State - Idle"
   trigger:
     platform: numeric_state
     entity_id: sensor.dryer_watts
@@ -68,7 +68,7 @@
         topic: hass/state/dryer
         payload: 'Idle'
         retain: 'true'
-- alias: 'Dryer Finished'
+- alias: "Dryer Finished"
   trigger:
     platform: state
     entity_id: sensor.dryer_state
@@ -109,7 +109,7 @@
 #         topic: hass/state/washer
 #         payload: 'Door Open'
 #         retain: 'true'
-- alias: 'Washer State - Washing'
+- alias: "Washer State - Washing"
   trigger:
     platform: numeric_state
     entity_id: sensor.washer_watts
@@ -126,7 +126,7 @@
         topic: hass/state/washer
         payload: 'Washing'
         retain: 'true'
-- alias: 'Washer State - Idle'
+- alias: "Washer State - Idle"
   trigger:
     platform: numeric_state
     entity_id: sensor.washer_watts
@@ -139,7 +139,7 @@
         topic: hass/state/washer
         payload: 'Idle'
         retain: 'true'
-- alias: 'Washing Machine Finished'
+- alias: "Washing Machine Finished"
   trigger:
     platform: state
     entity_id: sensor.washer_state
@@ -166,7 +166,7 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Dishwasher
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-- alias: 'Dishwasher State - Washing'
+- alias: "Dishwasher State - Washing"
   trigger:
     platform: numeric_state
     entity_id: sensor.dishwasher_watts
@@ -183,7 +183,7 @@
         topic: hass/state/dishwasher
         payload: 'Washing'
         retain: 'true'
-- alias: 'Dishwasher State - Idle'
+- alias: "Dishwasher State - Idle"
   trigger:
     platform: numeric_state
     entity_id: sensor.dishwasher_watts
@@ -196,7 +196,7 @@
         topic: hass/state/dishwasher
         payload: 'Idle'
         retain: 'true'
-- alias: 'Dishwasher Finished'
+- alias: "Dishwasher Finished"
   trigger:
     platform: state
     entity_id: sensor.dishwasher_state
@@ -223,7 +223,7 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Turntable
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-- alias: 'Turntable State - On'
+- alias: "Turntable State - On"
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
@@ -237,7 +237,7 @@
         payload: 'On'
         retain: 'true'
 
-- alias: 'Turntable State - Off'
+- alias: "Turntable State - Off"
   trigger:
     platform: numeric_state
     entity_id: sensor.turntable_watts
@@ -250,7 +250,7 @@
         payload: 'Off'
         retain: 'true'
 
-- alias: 'Turntable On - Amp On'
+- alias: "Turntable On - Amp On"
   trigger:
     platform: state
     entity_id: sensor.turntable_state
@@ -267,7 +267,7 @@
         entity_id: media_player.lounge_main
         source: 'audio3'
 
-- alias: 'Turntable Off - Amp Off'
+- alias: "Turntable Off - Amp Off"
   trigger:
     platform: state
     entity_id: sensor.turntable_state
@@ -278,7 +278,7 @@
       data:
         entity_id: media_player.lounge_main
 
-- alias: 'Turntable Turned On'
+- alias: "Turntable Turned On"
   trigger:
     - platform: state
       entity_id: sensor.turntable_state
@@ -295,7 +295,7 @@
 #  Still ON notifications
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-- alias: 'Turntable Still On'
+- alias: "Turntable Still On"
   trigger:
     - platform: time_pattern
       # Trigger every hour, on the hour
@@ -315,7 +315,7 @@
         variables:
           message: 'Turntable still on!'
 
-- alias: 'Deck Heater Still On'
+- alias: "Deck Heater Still On"
   trigger:
     - platform: time_pattern
       # Trigger every hour, on the hour
@@ -335,7 +335,7 @@
         variables:
           message: 'Deck Heater still on!'
 
-- alias: 'Deck Heater Turned On'
+- alias: "Deck Heater Turned On"
   trigger:
     - platform: state
       entity_id: switch.deck_heater

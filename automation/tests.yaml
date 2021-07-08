@@ -28,7 +28,7 @@
       data:
         entity_id: input_boolean.lockdown
 
-- alias: "'Toggle light test'"
+- alias: "Toggle light test"
   initial_state: "on"
   trigger:
     - platform: event
@@ -91,7 +91,7 @@
       data:
         entity_id: input_boolean.tester
 
-- alias: 'Test Announce'
+- alias: "Test Announce"
   trigger:
     platform: state
     entity_id: input_boolean.announce_test
@@ -113,7 +113,7 @@
       data:
         entity_id: input_boolean.announce_test
 
-- alias: Doorbell test
+- alias: "Doorbell test"
   trigger:
     platform: state
     entity_id: input_boolean.doorbell_test

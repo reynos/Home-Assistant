@@ -1,6 +1,7 @@
 ## media.yaml automation
 
-- alias: "'Kitchen Sonos toggle'"
+- id: kst
+  alias: "Kitchen Sonos toggle"
   trigger:
     - platform: event
       event_type: deconz_event
@@ -12,7 +13,7 @@
       target:
         entity_id: media_player.kitchen
 
-- alias: "'Kitchen Sonos Vol down'"
+- alias: "Kitchen Sonos Vol down"
   trigger:
     - platform: event
       event_type: deconz_event
@@ -39,7 +40,7 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.kitchen_down_stop
-- alias: "'Kitchen Sonos Vol up'"
+- alias: "Kitchen Sonos Vol up"
   trigger:
     - platform: event
       event_type: deconz_event
@@ -67,7 +68,7 @@
       data:
         entity_id: input_boolean.kitchen_up_stop
 
-- alias: "'Deck Sonos toggle'"
+- alias: "Deck Sonos toggle"
   trigger:
     - platform: event
       event_type: deconz_event
