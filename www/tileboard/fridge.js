@@ -43,9 +43,10 @@ var CONFIG = {
             styles: {
                margin: '0'
             },
-            icon: '&weather.mycity.state',
-            state: '&weather.mycity.state',
+            icon: '&weather.bondi.state',
+            state: '&weather.bondi.state',
             icons: {
+               'clear-day': 'clear',
                'clear-day': 'clear',
                'clear-night': 'nt-clear',
                'cloudy': 'cloudy',
@@ -81,16 +82,16 @@ var CONFIG = {
                'windy-variant': 'Windy'
             },
             fields: {
-               temperature: '&weather.mycity.attributes.temperature',
+               temperature: '&weather.bondi.attributes.temperature',
                temperatureUnit: '°C',
             }
           }
       ],
       left: [
-         {
+/*         {
             type: HEADER_ITEMS.CUSTOM_HTML,
             html: '<b><i>24 Avoca Street</b></i>'
-         },
+         }, */
          {
             type: HEADER_ITEMS.DATETIME,
             dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
@@ -133,13 +134,164 @@ var CONFIG = {
          icon: 'mdi-home-outline', // home icon
          groups: [
             {
-               title: 'First group',
-               width: 2,
-               height: 3,
-               // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               title: '',
+               width: 10,
+               height: 4,
+               row: 1,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
+                 {
+                    position: [0, 0],
+                    title: 'Kitchen',
+                    subtitle: 'High',
+                    id: 'light.kitchen_high_level_6',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
+                 {
+                    position: [1, 0],
+                    title: 'Kitchen',
+                    subtitle: 'Low',
+                    id: 'light.kitchen_low_level_4',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
+                 {
+                    position: [2, 0],
+                    title: 'Kitchen',
+                    subtitle: 'Low',
+                    id: 'light.kitchen_low_level_4',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
+                 {
+                    position: [3, 0],
+                    title: 'Kitchen',
+                    subtitle: 'High',
+                    id: 'light.kitchen_high_level_6',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
+                 {
+                    position: [4, 0],
+                    title: 'Kitchen',
+                    subtitle: 'Low',
+                    id: 'light.kitchen_low_level_4',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
+
                   {
-                     position: [0, 0],
+                     position: [5, 3],
                      width: 2,
                      type: TYPES.TEXT_LIST,
                      id: {}, // using empty object for an unknown id
@@ -165,6 +317,36 @@ var CONFIG = {
                      state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
                   },
                   {
+                     position: [0, 2],
+                     title: 'Kitchen',
+                     subtitle: 'High',
+                     id: 'light.kitchen_high_level_6',
+                     type: TYPES.LIGHT,
+                     states: {
+                        on: "On",
+                        off: "Off"
+                     },
+                     icons: {
+                        on: "mdi-lightbulb-on",
+                        off: "mdi-lightbulb",
+                     },
+                     sliders: [
+                        {
+                           title: 'Brightness',
+                           field: 'brightness',
+                           max: 255,
+                           min: 0,
+                           step: 5,
+                           request: {
+                              type: "call_service",
+                              domain: "light",
+                              service: "turn_on",
+                              field: "brightness"
+                           }
+                        },
+                     ],
+                  },
+                  {
                      title: 'Heating',
                      position: [1, 1],
                      id: { attributes: { current_temperature: 11 } },
@@ -183,147 +365,6 @@ var CONFIG = {
                ]
             },
 
-            {
-               title: 'Second group',
-               width: 2,
-               height: 3,
-               // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
-               items: [
-                  {
-                     position: [0, 0],
-                     width: 1,
-                     type: TYPES.SLIDER,
-                     //id: "input_number.volume",
-                     id: {state: 50, attributes: {}}, // replace it with real string id
-                     state: false,
-                     title: 'Custom slider',
-                     subtitle: 'Example of subtitle',
-                     slider: {
-                        min: 0,
-                        max: 100,
-                        step: 2,
-                        request: {
-                           type: "call_service",
-                           domain: "input_number",
-                           service: "set_value",
-                           field: "value"
-                        }
-                     }
-                  },
-                  {
-                     position: [1, 0],
-                     width: 1,
-                     type: TYPES.SWITCH,
-                     //id: "switch.lights",
-                     id: {state: 'off'}, // replace it with real string id (e.g. "switch.lights")
-                     state: false,
-                     title: 'Custom switch',
-                     icons: {'off': 'mdi-volume-off', 'on': 'mdi-volume-high'}
-                  },
-                  {
-                     position: [0, 1],
-                     type: TYPES.ALARM,
-                     // id: "alarm_control_panel.home_alarm",
-                     id: { state: 'disarmed' }, // replace it with real string id
-                     title: 'Home Alarm',
-                     icons: {
-                        arming: 'mdi-bell-outline',
-                        disarmed: 'mdi-bell-off',
-                        pending: 'mdi-bell',
-                        armed_custom_bypass: 'mdi-bell-check',
-                        armed_home: 'mdi-bell-plus',
-                        armed_night: 'mdi-bell-sleep',
-                        armed_away: 'mdi-bell',
-                        triggered: 'mdi-bell-ring',
-                     },
-                     states: {
-                        arming: 'Arming',
-                        disarmed: 'Disarmed',
-                        pending: 'Pending',
-                        armed_custom_bypass: 'Armed custom bypass',
-                        armed_home: 'Armed home',
-                        armed_night: 'Armed night',
-                        armed_away: 'Armed away',
-                        triggered: 'Triggered',
-                     },
-                  },
-
-               ],
-            },
-
-            {
-               title: 'MyCity',
-               width: 1,
-               height: 3,
-               // row: 1,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
-               items: [
-                  {
-                     // please read README.md for more information
-                     // this is just an example
-                     position: [0, 0],
-                     height: 2, // 1 for compact
-                     //classes: ['-compact'],
-                     type: TYPES.WEATHER,
-                     id: {},
-                     state: function () {return 'Clear, night'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
-                     icon: 'clear-night',
-                     icons: {
-                        'clear-day': 'clear',
-                        'clear-night': 'nt-clear',
-                        'cloudy': 'cloudy',
-                        'exceptional': 'unknown',
-                        'fog': 'fog',
-                        'hail': 'sleet',
-                        'lightning': 'chancestorms',
-                        'lightning-rainy': 'tstorms',
-                        'partly-cloudy-day': 'partlycloudy',
-                        'partly-cloudy-night': 'nt-partlycloudy',
-                        'pouring': 'rain',
-                        'snowy': 'snow',
-                        'snowy-rainy': 'sleet',
-                        'wind': 'unknown',
-                        'windy': 'unknown',
-                        'windy-variant': 'unknown'
-                     },
-                     states: {
-                        'clear-night': 'Clear, night',
-                        'cloudy': 'Cloudy',
-                        'exceptional': 'Exceptional',
-                        'fog': 'Fog',
-                        'hail': 'Hail',
-                        'lightning': 'Lightning',
-                        'lightning-rainy': 'Lightning, rainy',
-                        'partlycloudy': 'Partly cloudy',
-                        'pouring': 'Pouring',
-                        'rainy': 'Rainy',
-                        'snowy': 'Snowy',
-                        'snowy-rainy': 'Snowy, rainy',
-                        'sunny': 'Sunny',
-                        'windy': 'Windy',
-                        'windy-variant': 'Windy'
-                     },
-                     fields: {
-                        temperature: '18',
-                        temperatureUnit: '°C',
-                        windSpeed: '5',
-                        windSpeedUnit: 'kmh',
-                        humidity: '50',
-                        humidityUnit: '%',
-                        pressure: '650',
-                        pressureUnit: 'hPa',
-                        list: [
-                           'Feels like 16 °C',
-                           /*
-                           'Cloud coverage '
-                              + '&sensor.openweathermap_cloud_coverage.state'
-                              + '&sensor.openweathermap_cloud_coverage.attributes.unit_of_measurement',
-                           */
-                        ]
-                     }
-                  }
-
-               ]
-            }
          ]
       },
       {
