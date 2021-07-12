@@ -259,9 +259,39 @@ var CONFIG = {
                  },
                  {
                     position: [0, 1],
-                    title: 'Kitchen',
-                    subtitle: 'Low',
-                    id: 'light.kitchen_low_level_4',
+                    title: 'Lounge',
+                    subtitle: '',
+                    id: 'light.lounge_level_6',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
+                 {
+                    position: [1, 1],
+                    title: 'Lounge',
+                    subtitle: 'TV',
+                    id: 'light.tv_level_8',
                     type: TYPES.LIGHT,
                     states: {
                        on: "On",
@@ -289,9 +319,9 @@ var CONFIG = {
                  },
                  {
                     position: [0, 2],
-                    title: 'Kitchen',
-                    subtitle: 'High',
-                    id: 'light.kitchen_high_level_6',
+                    title: 'Hall',
+                    subtitle: '',
+                    id: 'light.hall_level_10',
                     type: TYPES.LIGHT,
                     states: {
                        on: "On",
@@ -318,10 +348,10 @@ var CONFIG = {
                     ],
                  },
                  {
-                    position: [4, 0],
-                    title: 'Kitchen',
-                    subtitle: 'Low',
-                    id: 'light.kitchen_low_level_4',
+                    position: [1, 2],
+                    title: 'Stairs',
+                    subtitle: '',
+                    id: 'light.stairs_33_2',
                     type: TYPES.LIGHT,
                     states: {
                        on: "On",
@@ -347,82 +377,117 @@ var CONFIG = {
                        },
                     ],
                  },
-
-                  {
-                     position: [5, 3],
-                     width: 2,
-                     type: TYPES.TEXT_LIST,
-                     id: {}, // using empty object for an unknown id
-                     state: false, // disable state element
-                     list: [
-                        {
-                           title: 'Sun.sun state',
-                           icon: 'mdi-weather-sunny',
-                           value: '&sun.sun.state'
-                        },
-                        {
-                           title: 'Custom',
-                           icon: 'mdi-clock-outline',
-                           value: 'value'
-                        }
-                     ]
-                  },
-                  {
-                     position: [0, 1], // [x, y]
-                     width: 1,
-                     type: TYPES.SENSOR,
-                     id: 'binary_sensor.updater',
-                     state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
-                  },
-                  {
-                     position: [0, 2],
-                     title: 'Kitchen',
-                     subtitle: 'High',
-                     id: 'light.kitchen_high_level_6',
-                     type: TYPES.LIGHT,
-                     states: {
-                        on: "On",
-                        off: "Off"
-                     },
-                     icons: {
-                        on: "mdi-lightbulb-on",
-                        off: "mdi-lightbulb",
-                     },
-                     sliders: [
-                        {
-                           title: 'Brightness',
-                           field: 'brightness',
-                           max: 255,
-                           min: 0,
-                           step: 5,
-                           request: {
-                              type: "call_service",
-                              domain: "light",
-                              service: "turn_on",
-                              field: "brightness"
-                           }
-                        },
-                     ],
-                  },
-                  {
-                     title: 'Heating',
-                     position: [1, 1],
-                     id: { attributes: { current_temperature: 11 } },
-                     type: TYPES.CLIMATE,
-                     unit: '°C',
-                     useHvacMode: true,  // Optional: enables HVAC mode (by default uses PRESET mode)
-                     state: function (item, entity) {
-                        return 'Actual: ' + this.$scope.filterNumber(entity.attributes.current_temperature, 1) + ' °C';
-                     },
-                     states: {
-                        'auto': 'Automatic',
-                        'heat': 'Manual',
-                        'off': 'Off'
-                     },
-                  },
+                 {
+                    position: [0, 3],
+                    title: 'Deck',
+                    subtitle: '',
+                    id: 'switch.back_deck',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                 },
+                 {
+                    position: [1, 3],
+                    title: 'Backyard Floodlight',
+                    subtitle: '',
+                    id: 'switch.backyard_floodlight',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                    ],
+                 },
                ]
             },
+            {
+               title: 'Surveillance',
+               width: 2,
+               height: 3,
+               row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               items: [
+                 {
+                    position: [0, 0],
+                    id: 'camera.front_gate_live',
+                    type: TYPES.CAMERA,
+                    bgSize: 'cover',
+                    width: 2,
+                    state: false,
+                    fullscreen: {
+                       type: TYPES.CAMERA_STREAM,
+                       objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+                       id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+                       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+                    },
+                    refresh: 1500,  // can be number in milliseconds
+                    refresh: function () {  // can also be a function
+                       return 3000 + Math.random() * 1000
+                    }
+                 },
+                 {
+                    position: [0, 1],
+                    id: 'camera.frontcam',
+                    type: TYPES.CAMERA,
+                    bgSize: 'cover',
+                    width: 2,
+                    state: false,
+                    fullscreen: {
+                       type: TYPES.CAMERA_STREAM,
+                       objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+                       id: 'camera.frontcam',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+                       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+                    },
+                    refresh: 1500,  // can be number in milliseconds
+                    refresh: function () {  // can also be a function
+                       return 3000 + Math.random() * 1000
+                    }
+                 },
 
+                 {
+                    position: [0, 2],
+                    id: 'camera.nurserycam',
+                    type: TYPES.CAMERA,
+                    bgSize: 'cover',
+                    width: 2,
+                    state: false,
+                    fullscreen: {
+                       type: TYPES.CAMERA_STREAM,
+                       objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+                       id: 'camera.nurserycam',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+                       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+                    },
+                    refresh: 1500,  // can be number in milliseconds
+                    refresh: function () {  // can also be a function
+                       return 3000 + Math.random() * 1000
+                   }
+                }
+               ]
+            },
+///// end of section
          ]
       },
       {
