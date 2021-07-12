@@ -36,7 +36,7 @@ var CONFIG = {
       right: [
          {
             type: HEADER_ITEMS.CUSTOM_HTML,
-            html: 'Bondi'
+            html: ''
          },
          {
             type: HEADER_ITEMS.WEATHER,
@@ -134,10 +134,68 @@ var CONFIG = {
          icon: 'mdi-home-outline', // home icon
          groups: [
             {
-               title: '',
-               width: 10,
-               height: 4,
-               row: 1,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               title: 'Music',
+               width: 1,
+               height: 3,
+               // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               items: [
+                  {
+                     position: [0, 0],
+                     id: 'media_player.kitchen',
+                     type: TYPES.MEDIA_PLAYER,
+                     hideSource: false,
+                     textSource: '',
+                     hideMuteButton: false,
+                     state: false,
+                     //state: '@attributes.media_title',
+                     subtitle: '@attributes.media_title',
+                     bgSuffix: '@attributes.entity_picture',
+                  },
+                  {
+                     position: [0, 1],
+                     id: 'media_player.deck',
+                     type: TYPES.MEDIA_PLAYER,
+                     hideSource: false,
+                     textSource: '',
+                     hideMuteButton: false,
+                     state: false,
+                     //state: '@attributes.media_title',
+                     subtitle: '@attributes.media_title',
+                     bgSuffix: '@attributes.entity_picture',
+                  },
+                  {
+                     position: [0, 2],
+                     id: 'media_player.lounge',
+                     type: TYPES.MEDIA_PLAYER,
+                     hideSource: false,
+                     textSource: '',
+                     hideMuteButton: false,
+                     state: false,
+                     //state: '@attributes.media_title',
+                     subtitle: '@attributes.media_title',
+                     bgSuffix: '@attributes.entity_picture',
+                  },
+                  {
+                     position: [0, 3],
+                     id: 'media_player.front_garden',
+                     type: TYPES.MEDIA_PLAYER,
+                     hideSource: false,
+                     textSource: '',
+                     hideMuteButton: false,
+                     state: false,
+                     //state: '@attributes.media_title',
+                     subtitle: '@attributes.media_title',
+                     bgSuffix: '@attributes.entity_picture',
+                  },
+
+               ]
+            },
+
+            {
+               title: 'Lights',
+               width: 2,
+               height: 3,
+               row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
                  {
                     position: [0, 0],
@@ -200,7 +258,7 @@ var CONFIG = {
                     ],
                  },
                  {
-                    position: [2, 0],
+                    position: [0, 1],
                     title: 'Kitchen',
                     subtitle: 'Low',
                     id: 'light.kitchen_low_level_4',
@@ -230,7 +288,7 @@ var CONFIG = {
                     ],
                  },
                  {
-                    position: [3, 0],
+                    position: [0, 2],
                     title: 'Kitchen',
                     subtitle: 'High',
                     id: 'light.kitchen_high_level_6',
