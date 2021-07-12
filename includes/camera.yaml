@@ -6,8 +6,20 @@
   password: !secret nurserycam_pass
 
 - platform: mjpeg
+  name: nurserycam_high
+  mjpeg_url: !secret nurserycam_high_url
+  username: !secret frontcam_uname
+  password: !secret frontcam_pass
+
+- platform: mjpeg
   name: frontcam
   mjpeg_url: !secret frontcam_url
+  username: !secret frontcam_uname
+  password: !secret frontcam_pass
+
+- platform: mjpeg
+  name: frontcam_high
+  mjpeg_url: !secret frontcam_high_url
   username: !secret frontcam_uname
   password: !secret frontcam_pass
 

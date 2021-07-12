@@ -456,7 +456,7 @@ views:
         map_style: satellite
   - icon: mdi:cctv
     cards:
-      - entity: camera.frontcam
+      - entity: camera.frontcam_high
         type: picture-entity
       - entity: camera.nurserycam
         type: picture-entity
