@@ -161,8 +161,9 @@
         sonos_entity: media_player.kitchen
 #        volume: 0.4
         message: 'Washing machine finished'
-        delay: '00:00:03'
+        delay: '00:00:04'
         not_at_night: yes
+
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Dishwasher
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
