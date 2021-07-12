@@ -443,7 +443,7 @@ var CONFIG = {
                     fullscreen: {
                        type: TYPES.CAMERA_STREAM,
                        objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
-                       id: 'camera.frontcam',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+                       id: 'camera.frontcam_high',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
                        bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
                     },
                     refresh: 1500,  // can be number in milliseconds
@@ -468,8 +468,9 @@ var CONFIG = {
                     refresh: 1500,  // can be number in milliseconds
                     refresh: function () {  // can also be a function
                        return 3000 + Math.random() * 1000
-                   }
-                }
+                    }
+                 }
+
                ]
             },
             {
@@ -480,6 +481,8 @@ var CONFIG = {
                items: [
                  {
                     position: [0, 0],
+                    width: 1.2,
+                    height: 1,
                     type: TYPES.SENSOR,
                     title: 'Net Grid Power',
                     id: 'sensor.template_sensor_emoncms_net_grid_power',
@@ -492,6 +495,8 @@ var CONFIG = {
                  },
                  {
                     position: [0, 1],
+                    width: 1.2,
+                    height: 1,
                     type: TYPES.HISTORY,
                     id: 'sensor.solaredge_current_power_template',
                     title: 'Net Grid Power Today',
@@ -501,6 +506,36 @@ var CONFIG = {
                     offset: 0.5*24*3600*1000,
                     options: MINIMAL_CHART_OPTIONS,
                  },
+                 {
+                    position: [0, 2],
+                    width: 1.2,
+                    height: 1.1,
+                    title: '',
+                    subtitle: '',
+                    type: TYPES.GAUGE,
+                    id: 'sensor.template_sensor_emoncms_net_grid_power', // Assign the sensor you want to display on the gauge
+                    value: function(item, entity){
+                       return entity.state;
+                    },
+                    settings: {
+                       size: 180, // Defaults to 50% of either height or width, whichever is smaller
+                       type: 'arch', // Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
+                       min: 0, // Defaults to 0
+                       max: 6, // Defaults to 100
+                       cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
+                       thick: 20, // Defaults to 6
+                       label: 'Net Power', // Defaults to undefined
+                       append: '@attributes.unit_of_measurement', // Defaults to undefined
+                       prepend: '', // Defaults to undefined
+                       duration: 1500, // Defaults to 1500ms
+                       thresholds: { 0: { color: 'yellow'}, 1: { color: 'orange' }, 3: { color: 'red' } },  // Defaults to undefined
+                       labelOnly: false, // Defaults to false
+                       foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
+                       backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
+                       fractionSize: 0, // Number of decimal places to round the number to. Defaults to current locale formatting
+                    },
+                 },
+
                ]
             },
 ///// end of section
