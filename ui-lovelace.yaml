@@ -224,7 +224,7 @@ views:
               runtime: false
               play_stop: false
           - type: custom:mini-media-player
-            entity: media_player.lounge_main
+            entity: media_player.lounge
             name: Lounge
             artwork: cover
             hide:
