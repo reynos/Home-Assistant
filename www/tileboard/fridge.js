@@ -406,21 +406,6 @@ var CONFIG = {
                        on: "mdi-lightbulb-on",
                        off: "mdi-lightbulb",
                     },
-                    sliders: [
-                       {
-                          title: 'Brightness',
-                          field: 'brightness',
-                          max: 255,
-                          min: 0,
-                          step: 5,
-                          request: {
-                             type: "call_service",
-                             domain: "light",
-                             service: "turn_on",
-                             field: "brightness"
-                          }
-                       },
-                    ],
                  },
                ]
             },
@@ -485,6 +470,37 @@ var CONFIG = {
                        return 3000 + Math.random() * 1000
                    }
                 }
+               ]
+            },
+            {
+               title: 'Other',
+               width: 2,
+               height: 3,
+               row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               items: [
+                 {
+                    position: [0, 0],
+                    type: TYPES.SENSOR,
+                    title: 'Net Grid Power',
+                    id: 'sensor.template_sensor_emoncms_net_grid_power',
+                    unit: 'kWh', // override default entity unit
+                    state: false, // hidding state
+                    filter: function (value) { // optional
+                       var num = parseFloat(value);
+                       return num && !isNaN(num) ? num.toFixed(1) : value;
+                    },
+                 },
+                 {
+                    position: [0, 1],
+                    type: TYPES.HISTORY,
+                    id: 'sensor.solaredge_current_power_template',
+                    title: 'Net Grid Power Today',
+                    subtitle: function (item, entity) {
+                       return 'since ' + timeAgo(Date.now() - (item.offset || 24*3600*1000));
+                    },
+                    offset: 0.5*24*3600*1000,
+                    options: MINIMAL_CHART_OPTIONS,
+                 },
                ]
             },
 ///// end of section
