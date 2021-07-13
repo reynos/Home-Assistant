@@ -1,4 +1,7 @@
 ### switch.yaml
+switch:
+- platform: switchbot
+  mac: EA:96:2D:63:66:40
 
 - platform: mqtt
   name: "Subwoofer"
