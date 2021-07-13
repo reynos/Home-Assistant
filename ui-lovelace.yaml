@@ -176,6 +176,24 @@ views:
                     - text-overflow: initial
                     - overflow: initial
               - type: custom:button-card
+                entity: switch.ha_lounge_air_conditioning
+                icon: mdi:fan
+                color: rgb(0, 150, 255)
+                state:
+                  - value: 'off'
+                    color: rgb(0, 150, 255)
+                lock:
+                  enabled: true
+                  duration: 5
+                styles:
+                  card:
+                    - height: 80px
+                  name:
+                    - font-size: 15px
+                    - white-space: initial
+                    - text-overflow: initial
+                    - overflow: initial
+              - type: custom:button-card
                 entity: light.front_porch_light_86_2
                 styles:
                   card:
