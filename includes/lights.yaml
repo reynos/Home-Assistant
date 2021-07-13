@@ -1,5 +1,16 @@
 # lights.yaml
 
+  # girls_bedroom_downlights:
+  #   name: Girls Bedroom Downlights
+  #   entities:
+- platform: group
+  name: Girls Bedroom Downlights
+  entities:
+    - light.ha_lounge_girls_room_1
+    - light.ha_lounge_girls_room_2
+    - light.ha_lounge_girls_room_3
+    - light.ha_lounge_girls_room_4
+
 - platform: mqtt
   name: "Blythe's Lamp"
   command_topic: "cmnd/blytheslamp/POWER"

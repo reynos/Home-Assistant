@@ -93,21 +93,21 @@ tts:
   - platform: google_translate
     base_url: !secret tts_base_url
 
-webostv:
-  host: !secret play_room_tv_host
-  name: Play Room TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret play_room_tv_mac
-  customize:
-    sources:
-      - livetv
-      - youtube
-      - iview
-      - netflix
-      - Plex
-      - stan
+# webostv:
+#   host: !secret play_room_tv_host
+#   name: Play Room TV
+#   turn_on_action:
+#     service: wake_on_lan.send_magic_packet
+#     data:
+#       mac: !secret play_room_tv_mac
+#   customize:
+#     sources:
+#       - livetv
+#       - youtube
+#       - iview
+#       - netflix
+#       - Plex
+#       - stan
 config:
 mobile_app:
 person:
@@ -139,6 +139,7 @@ zone: !include includes/zones.yaml
 notify: !include includes/notify.yaml
 media_player: !include includes/media_player.yaml
 camera: !include includes/camera.yaml
+webostv: !include includes/webostv.yaml
 #samsungtv: !include includes/samsungtv.yaml
 
 ##DEPRICATED
