@@ -132,15 +132,17 @@ var CONFIG = {
          title: 'Main page',
          bg: 'images/bg1.jpeg',
          icon: 'mdi-home-outline', // home icon
+         groupMarginCss: '20px 4px',
          groups: [
             {
                title: 'Music',
-               width: 1,
+               width: 1.2,
                height: 3,
                // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
                   {
                      position: [0, 0],
+                     width: 1.2,
                      id: 'media_player.kitchen',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
@@ -153,6 +155,7 @@ var CONFIG = {
                   },
                   {
                      position: [0, 1],
+                     width: 1.2,
                      id: 'media_player.deck',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
@@ -165,6 +168,7 @@ var CONFIG = {
                   },
                   {
                      position: [0, 2],
+                     width: 1.2,
                      id: 'media_player.lounge',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
@@ -177,6 +181,7 @@ var CONFIG = {
                   },
                   {
                      position: [0, 3],
+                     width: 1.2,
                      id: 'media_player.front_garden',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
@@ -458,6 +463,7 @@ var CONFIG = {
                     type: TYPES.CAMERA,
                     bgSize: 'cover',
                     width: 2,
+                    height: 2,
                     state: false,
                     fullscreen: {
                        type: TYPES.CAMERA_STREAM,
@@ -524,11 +530,11 @@ var CONFIG = {
                        max: 6, // Defaults to 100
                        cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
                        thick: 20, // Defaults to 6
-                       label: 'Net Power', // Defaults to undefined
+                       label: 'House Power', // Defaults to undefined
                        append: '@attributes.unit_of_measurement', // Defaults to undefined
                        prepend: '', // Defaults to undefined
                        duration: 1500, // Defaults to 1500ms
-                       thresholds: { 0: { color: 'yellow'}, 1: { color: 'orange' }, 3: { color: 'red' } },  // Defaults to undefined
+                       thresholds: { 0: { color: 'green'}, 0.1: { color: 'yellow'}, 1.5: { color: 'orange' }, 3: { color: 'red' } },  // Defaults to undefined
                        labelOnly: false, // Defaults to false
                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
