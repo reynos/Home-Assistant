@@ -33,9 +33,11 @@ logbook:
       - binary_sensor
       - zwave
 http:
-  base_url: !secret base_url
+  # base_url: !secret base_url
   use_x_forwarded_for: true
   trusted_proxies: !secret proxy
+  # ip_ban_enabled: true
+  # login_attempts_threshold: 5
 
 zwave:
   usb_path: /dev/ttyACM0
