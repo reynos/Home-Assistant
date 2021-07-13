@@ -14,6 +14,8 @@ homeassistant:
         - 127.0.0.1
         - !secret subnet1
         - !secret subnet2
+        - !secret subnet3
+        - !secret subnet4
       allow_bypass_login: true
 
   whitelist_external_dirs:
@@ -38,10 +40,6 @@ http:
   trusted_proxies: !secret proxy
   # ip_ban_enabled: true
   # login_attempts_threshold: 5
-
-zwave:
-  usb_path: /dev/ttyACM0
-  network_key: !secret zwave_network_key
 
 vera:
   vera_controller_url: !secret vera_url
