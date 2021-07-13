@@ -46,26 +46,6 @@ vera:
   lights: [18, 19, 26, 28, 29, 33, 38, 86]
   exclude: []
 
-# solaredge:
-#   api_key: !secret solaredge_api_key
-#   site_id: !secret solaredge_site_id
-#   name: SolarEdge
-
-# bmw_connected_drive:
-#   bmw_x5:
-#     username: !secret USERNAME_BMW_CONNECTED_DRIVE
-#     password: !secret PASSWORD_BMW_CONNECTED_DRIVE
-#     region: rest_of_world
-
-# speedtestdotnet:
-#   server_id: 2629
-#   monitored_conditions:
-#     - ping
-#     - download
-#     - upload
-#   scan_interval:
-#     hours: 6
-
 google:
   client_id: !secret google_id
   client_secret: !secret google_secret
@@ -74,40 +54,10 @@ google:
 #   host: !secret apc_ups_host
 #   port: !secret apc_ups_port
 
-## this now configured from the inergration GUI
-# remote_homeassistant:
-#   instances:
-#   - host: !secret ha_lounge_ip
-#     port: !secret ha_lounge_port
-#     secure: false
-#     access_token: !secret ha_lounge_access_token
-#     entity_prefix: "ha_lounge_"
-#     include:
-#       domains:
-#       - script
-#       - input_boolean
-#    subscribe_events:
-#    - deconz_event
-
 tts:
   - platform: google_translate
     base_url: !secret tts_base_url
 
-# webostv:
-#   host: !secret play_room_tv_host
-#   name: Play Room TV
-#   turn_on_action:
-#     service: wake_on_lan.send_magic_packet
-#     data:
-#       mac: !secret play_room_tv_mac
-#   customize:
-#     sources:
-#       - livetv
-#       - youtube
-#       - iview
-#       - netflix
-#       - Plex
-#       - stan
 config:
 mobile_app:
 person:
@@ -140,11 +90,6 @@ notify: !include includes/notify.yaml
 media_player: !include includes/media_player.yaml
 camera: !include includes/camera.yaml
 webostv: !include includes/webostv.yaml
-#samsungtv: !include includes/samsungtv.yaml
-
-##DEPRICATED
-##doorbird: !include includes/doorbird.yaml
-
 
 ## Dir Includes
 automation: !include_dir_merge_list automation
