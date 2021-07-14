@@ -490,9 +490,9 @@ var CONFIG = {
                     width: 1.2,
                     height: 1,
                     type: TYPES.SENSOR,
-                    title: 'Net Grid Power',
-                    id: 'sensor.template_sensor_emoncms_net_grid_power',
-                    unit: 'kWh', // override default entity unit
+                    title: 'Solar Power',
+                    id: 'sensor.solaredge_current_power_template',
+                    unit: 'kW', // override default entity unit
                     state: false, // hidding state
                     filter: function (value) { // optional
                        var num = parseFloat(value);
@@ -505,7 +505,7 @@ var CONFIG = {
                     height: 1,
                     type: TYPES.HISTORY,
                     id: 'sensor.solaredge_current_power_template',
-                    title: 'Net Grid Power Today',
+                    title: 'Solare Power Today',
                     subtitle: function (item, entity) {
                        return 'since ' + timeAgo(Date.now() - (item.offset || 24*3600*1000));
                     },
