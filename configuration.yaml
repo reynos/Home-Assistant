@@ -14,8 +14,6 @@ homeassistant:
         - 127.0.0.1
         - !secret subnet1
         - !secret subnet2
-        - !secret subnet3
-        - !secret subnet4
       allow_bypass_login: true
 
   whitelist_external_dirs:
