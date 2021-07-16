@@ -56,6 +56,15 @@ tts:
   - platform: google_translate
     base_url: !secret tts_base_url
 
+# cloud intergrate now broken - using HACS ha-dyson local intergration
+# dyson:
+#   username: !secret dyson_uname
+#   password: !secret dyson_uname
+#   language: !secret dyson_lang
+#   devices:
+#     - device_id: !secret dyson_dev_id1
+#       device_ip: !secret dyson_dev_ip1
+
 config:
 mobile_app:
 person:
