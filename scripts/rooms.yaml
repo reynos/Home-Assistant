@@ -3,13 +3,12 @@
 playroom_off:
   alias: "Playroom off"
   sequence:
-    - service: switch.turn_off
+    - service: homeassistant.turn_off
       entity_id:
         - switch.ha_lounge_playroom_touch_lamp
         - switch.ha_lounge_playroom_lamp_1
         - switch.ha_lounge_playroom_lamp_2
-    - service: media_player.turn_off
-      entity_id:
+        - fan.playroom
         - media_player.play_room_tv
     - delay: "00:00:03"
     - service: switch.turn_on

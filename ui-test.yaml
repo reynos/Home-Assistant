@@ -12,7 +12,7 @@ views:
       - entities:
         - person.darren
         - person.blythe
-        - scene.evening
+        - climate.playroom
         - input_boolean.announce_test
         - input_boolean.kitchen_up_stop
         - input_boolean.kitchen_down_stop

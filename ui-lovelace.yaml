@@ -361,10 +361,13 @@ views:
         - entity: media_player.study
           icon: mdi:speaker-wireless
         type: entities
+
   - icon: mdi:face-woman-outline
     cards:
       - entities:
         - script.playroom_off
+        - fan.playroom
+        - climate.playroom
         - switch.ha_lounge_playroom_lamp_1
         - switch.ha_lounge_playroom_lamp_2
         - switch.ha_lounge_playroom_touch_lamp
