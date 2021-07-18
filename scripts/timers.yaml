@@ -2,6 +2,7 @@
 
 timer_front_lights:
   alias: Auto Turn on and off for front lights
+  mode: single
   sequence:
     - service: switch.turn_on
       entity_id:  switch.front_gate_ir
