@@ -3,6 +3,8 @@
 timer_front_lights:
   alias: Auto Turn on and off for front lights
   sequence:
+    - service: switch.turn_on
+      entity_id:  switch.front_gate_ir
     - service: scene.create
       data:
         scene_id: front_lights_before
@@ -15,6 +17,8 @@ timer_front_lights:
     - service: scene.turn_on
       data:
         entity_id: scene.front_lights_before
+    - service: switch.turn_off
+      entity_id:  switch.front_gate_ir
 
 timer_front_lights_off:
   alias: Auto Turn off front lights
