@@ -1,6 +1,6 @@
 ### customize.yaml
   media_player.lounge_main:
-    friendly_name: Lounge Room Amplifier    
+    friendly_name: Lounge Room Amplifier
   binary_sensor.front_garden_movement_motion:
     friendly_name: Front Garden Camera Movement
 #doorbird
@@ -166,7 +166,7 @@
   media_player.kitchen:
     friendly_name: Kitchen Sonos
   media_player.lounge:
-    friendly_name: Lounge Sonos
+    friendly_name: Yamaha Lounge
   media_player.nursery:
     friendly_name: Nursery Sonos
   media_player.study:

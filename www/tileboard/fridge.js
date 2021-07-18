@@ -169,7 +169,7 @@ var CONFIG = {
                   {
                      position: [0, 2],
                      width: 1.2,
-                     id: 'media_player.lounge',
+                     id: 'media_player.lounge_room',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
                      textSource: '',
@@ -425,7 +425,7 @@ var CONFIG = {
                     id: 'camera.front_gate_live',
                     type: TYPES.CAMERA,
                     bgSize: 'cover',
-                    width: 2,
+                    width: 1,
                     state: false,
                     fullscreen: {
                        type: TYPES.CAMERA_STREAM,
@@ -439,11 +439,11 @@ var CONFIG = {
                     }
                  },
                  {
-                    position: [0, 1],
+                    position: [1, 0],
                     id: 'camera.frontcam',
                     type: TYPES.CAMERA,
                     bgSize: 'cover',
-                    width: 2,
+                    width: 1,
                     state: false,
                     fullscreen: {
                        type: TYPES.CAMERA_STREAM,
@@ -458,7 +458,7 @@ var CONFIG = {
                  },
 
                  {
-                    position: [0, 2],
+                    position: [0, 1],
                     id: 'camera.nurserycam',
                     type: TYPES.CAMERA,
                     bgSize: 'cover',
@@ -488,7 +488,7 @@ var CONFIG = {
                  {
                     position: [0, 0],
                     width: 1.2,
-                    height: 1,
+                    height: 0.9,
                     type: TYPES.SENSOR,
                     title: 'Solar Power',
                     id: 'sensor.solaredge_current_power_template',
@@ -500,12 +500,12 @@ var CONFIG = {
                     },
                  },
                  {
-                    position: [0, 1],
+                    position: [0, 0.9],
                     width: 1.2,
                     height: 1,
                     type: TYPES.HISTORY,
                     id: 'sensor.solaredge_current_power_template',
-                    title: 'Solare Power Today',
+                    title: 'Solar Power Today',
                     subtitle: function (item, entity) {
                        return 'since ' + timeAgo(Date.now() - (item.offset || 24*3600*1000));
                     },
@@ -513,7 +513,7 @@ var CONFIG = {
                     options: MINIMAL_CHART_OPTIONS,
                  },
                  {
-                    position: [0, 2],
+                    position: [0, 1.9],
                     width: 1.2,
                     height: 1.1,
                     title: '',
