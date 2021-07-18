@@ -1,7 +1,9 @@
 # ui-test.yaml
 title: Remotes
-
 views:
+#############################################################
+##   Bedroom Remote                                        ##
+#############################################################
   - icon: mdi:sofa-outline
     id: Lounge
     cards:
@@ -21,7 +23,6 @@ views:
                     - white-space: initial
                     - text-overflow: initial
                     - overflow: initial
-
                 hold_action:
                   action: none
                 icon: 'mdi:power'
@@ -36,7 +37,9 @@ views:
                 tap_action:
                   action: call-service
                   service: remote.turn_off
-
+#############################################################
+##   Bedroom Remote                                        ##
+#############################################################
   - icon: mdi:bed-empty
     id: Bedroom
     cards:
