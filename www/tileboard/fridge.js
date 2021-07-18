@@ -7,7 +7,7 @@
 */
 
 var CONFIG = {
-   customTheme: null, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
+   customTheme: CUSTOM_THEMES.COMPACT, // null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
    transition: TRANSITIONS.ANIMATED_GPU, //ANIMATED or SIMPLE (better perfomance)
    entitySize: ENTITY_SIZES.NORMAL, //SMALL, BIG are available
    tileSize: 150,
@@ -182,7 +182,7 @@ var CONFIG = {
                   {
                      position: [0, 3],
                      width: 1.2,
-                     id: 'media_player.front_garden',
+                     id: 'media_player.play_room_tv',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
                      textSource: '',
@@ -198,7 +198,7 @@ var CONFIG = {
 
             {
                title: 'Lights',
-               width: 2,
+               width: 3,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
@@ -261,6 +261,36 @@ var CONFIG = {
                           }
                        },
                     ],
+                 },
+                 {
+                    position: [2, 0],
+                    title: 'Front Porch',
+                    subtitle: '',
+                    id: 'light.front_porch_light_86_2',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                 },
+                 {
+                    position: [2, 1],
+                    title: "Girl's Room",
+                    subtitle: '',
+                    id: 'light.girls_bedroom_downlights',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
                  },
                  {
                     position: [0, 1],
@@ -475,7 +505,27 @@ var CONFIG = {
                     refresh: function () {  // can also be a function
                        return 3000 + Math.random() * 1000
                     }
-                 }
+                 },
+                 {
+                    position: [0, 3],
+                    width: 2,
+                    type: TYPES.TEXT_LIST,
+                    id: {}, // using empty object for an unknown id
+                    state: false, // disable state element
+                    list: [
+                       {
+                          title: 'Calendar:',
+                          icon: 'mdi-weather-sunny',
+                          value: '&sensor.template_calendar_family.state'
+                       },
+                       {
+                          value: '&sensor.template_calendar_family.state'
+                       },
+                       {
+                          value: '&calendar.family.attributes.message'
+                       }
+                    ]
+                 },
 
                ]
             },
@@ -485,6 +535,7 @@ var CONFIG = {
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
+/*
                  {
                     position: [0, 0],
                     width: 1.2,
@@ -498,9 +549,9 @@ var CONFIG = {
                        var num = parseFloat(value);
                        return num && !isNaN(num) ? num.toFixed(1) : value;
                     },
-                 },
+                 },*/
                  {
-                    position: [0, 0.9],
+                    position: [0, 0],
                     width: 1.2,
                     height: 1,
                     type: TYPES.HISTORY,
@@ -513,7 +564,7 @@ var CONFIG = {
                     options: MINIMAL_CHART_OPTIONS,
                  },
                  {
-                    position: [0, 1.9],
+                    position: [0, 1],
                     width: 1.2,
                     height: 1.1,
                     title: '',
