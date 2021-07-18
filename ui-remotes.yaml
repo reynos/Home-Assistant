@@ -1,0 +1,77 @@
+# ui-test.yaml
+title: Remotes
+
+views:
+  - icon: mdi:sofa-outline
+    id: Lounge
+    cards:
+      - type: vertical-stack
+        show_header_toggle: true
+        cards:
+          - type: horizontal-stack
+            show_header_toggle: true
+            cards:
+              - type: custom:button-card
+                entity: remote.lounge_room
+                styles:
+                  card:
+                    - height: 80px
+                  name:
+                    - font-size: 15px
+                    - white-space: initial
+                    - text-overflow: initial
+                    - overflow: initial
+
+                hold_action:
+                  action: none
+                icon: 'mdi:power'
+                name: Power Off
+                show_icon: true
+                show_name: true
+                state:
+                  - color: 'rgb(0, 128, 0)'
+                    value: 'off'
+                  - color: 'rgb(255, 0, 0)'
+                    value: 'on'
+                tap_action:
+                  action: call-service
+                  service: remote.turn_off
+
+  - icon: mdi:bed-empty
+    id: Bedroom
+    cards:
+      - type: vertical-stack
+        show_header_toggle: true
+        cards:
+          - type: horizontal-stack
+            show_header_toggle: true
+            cards:
+              - type: custom:button-card
+                entity: input_boolean.morning_lights
+                styles:
+                  card:
+                    - height: 80px
+                  name:
+                    - font-size: 15px
+                    - white-space: initial
+                    - text-overflow: initial
+                    - overflow: initial
+  - icon: mdi:face-woman-outline
+    id: Playroom
+    cards:
+      - type: vertical-stack
+        show_header_toggle: true
+        cards:
+          - type: horizontal-stack
+            show_header_toggle: true
+            cards:
+              - type: custom:button-card
+                entity: input_boolean.morning_lights
+                styles:
+                  card:
+                    - height: 80px
+                  name:
+                    - font-size: 15px
+                    - white-space: initial
+                    - text-overflow: initial
+                    - overflow: initial

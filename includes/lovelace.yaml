@@ -25,6 +25,12 @@ resources:
     type: js
 
 dashboards:
+  ui-remotes: # Needs to contain a hyphen (-)
+    mode: yaml
+    filename: ui-remotes.yaml
+    title: Remotes
+    icon: mdi:remote
+    show_in_sidebar: true
   ui-iphone: # Needs to contain a hyphen (-)
     mode: yaml
     filename: ui-iphone.yaml
