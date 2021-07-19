@@ -672,18 +672,26 @@ var CONFIG = {
                  state: false,
                  icon: 'mdi-trash-can-outline',
                  customStyles: function (item, entity) {
-                   if (entity.state == 'Red Yellow Bins') {
-                     return {
-                       'backgroundColor': '#ffff00',
-               		    'color': '#000',
-                       };
+                   if (this.states['&binary_sensor.bin_night'].state == 'on') {
+                     if (entity.state == 'Red Yellow Bins') {
+                       return {
+                         'backgroundColor': '#ffff00',
+                 		     'color': '#000',
+                         };
+                     } else {
+                         return {
+                           'backgroundColor': '#0000ff',
+                 		       'color': '#fff',
+                     		 };
+                   	   }
                    } else {
                        return {
-                       'backgroundColor': '#0000ff',
-               		    'color': '#fff',
-                   		};
-                 	  }
+                         'backgroundColor': '#0000ff',
+               		       'color': '#fff',
+                   	   };
+                 	   }
                    },
+
                  },
 
                ]

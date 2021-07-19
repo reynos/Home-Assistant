@@ -20,4 +20,9 @@
   before: sunrise
   before_offset: '-00:30'
 
+- platform: workday
+  country: AU
+  name: bin_night
+  workdays: [wed]
+
 #- platform: apcupsd

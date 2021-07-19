@@ -139,25 +139,6 @@
     #     - switch.water_garden
     #     - switch.water_hedge
 
-- alias: "Bargeboard Bin lights"
-  trigger:
-    platform: time
-    at: '16:00:00'
-  condition:
-    - condition: time
-      weekday:
-        - wed
-  action:
-    - service: scene.turn_on
-      data_template:
-        entity_id: >
-           {%if states.calendar.bin_nights.attributes.message == 'Red Yellow Bins' %}
-              scene.bb_yellow_bins
-           {% elif states.calendar.bin_nights.attributes.message == 'Red Blue Green Bins' %}
-              scene.bb_blue_green_bins
-           {% else %}
-             scene.nothing
-           {% endif %}
 # mode mode evening backuo
 # - alias: "House Mode Evening"
 #   trigger:
