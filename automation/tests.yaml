@@ -82,6 +82,9 @@
       to: 'on'
       entity_id: input_boolean.tester
   action:
+    - event: tileboard
+      event_data:
+        command: open_doorentry
     - service: notify.mobile_app_darren_reynolds
       data:
         # message: "Trigger was: {{ trigger.event.data.friendly_name }}"

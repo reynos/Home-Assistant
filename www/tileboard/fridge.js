@@ -1,10 +1,24 @@
 /*
- This is an example configuration file.
-
- COPY OR RENAME THIS FILE TO config.js.
-
- Make sure you use real IDs from your HA entities.
+ Fridge tablet configuration file.
 */
+var DOORENTRY_TILE = {
+      position: [0, 2],
+      type: TYPES.DOOR_ENTRY,
+      id: {},
+      icon: 'mdi-phone',
+      title: 'Door entry',
+      state: false,
+      layout: {
+            type: TYPES.CAMERA_THUMBNAIL,
+            id: 'camera.front_gate_live',
+            refresh: 1500,
+            bgSize: 'cover'
+         },
+         page: {},
+         tiles: [
+             // Define your tiles (door-entry buttons) here if required
+        ]
+      }
 
 var CONFIG = {
    customTheme: CUSTOM_THEMES.COMPACT, // null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
@@ -21,7 +35,14 @@ var CONFIG = {
    pingConnection: true, //ping connection to prevent silent disconnections
    locale: 'en-us', // locale for date and number formats - available locales: it, de, es, fr, pt, ru, nl, pl, en-gb, en-us (default). See readme on adding custom locales.
    // next fields are optional
-   events: [],
+   events: [
+       {
+           command: 'open_doorentry',
+           action: function(eventData) {
+              this.$scope.openDoorEntry(DOORENTRY_TILE, DOORENTRY_TILE.id);
+           }
+       },
+   ],
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar

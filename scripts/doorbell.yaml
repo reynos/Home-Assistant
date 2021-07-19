@@ -12,6 +12,15 @@ doorbell: # for day and night
           {% else %}
             script.donothing
           {% endif %}
+## trigger an event to show the camer image on TileBoard
+    - event: tileboard
+      event_data:
+        command: 'notify'
+        id: 'doorbell'
+        icon: 'mdi-bell-ring'
+        type: 'info'
+        title: 'Doorbell'
+        message: 'Someone is at the door'
     - service: sonos.snapshot
       data:
         entity_id: media_player.kitchen
