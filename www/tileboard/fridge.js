@@ -1,15 +1,36 @@
 /*
  Fridge tablet configuration file.
 */
+/*
+                 {
+                    position: [0, 0],
+                    id: 'camera.front_gate_live',
+                    type: TYPES.CAMERA,
+                    bgSize: 'cover',
+                    width: 1,
+                    state: false,
+                    fullscreen: {
+                       type: TYPES.CAMERA_STREAM,
+                       objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+                       id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+                       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+                    },
+                    refresh: 1500,  // can be number in milliseconds
+                    refresh: function () {  // can also be a function
+                       return 3000 + Math.random() * 1000
+                    }
+                 },
+*/
+
 var DOORENTRY_TILE = {
-      position: [0, 2],
-      type: TYPES.DOOR_ENTRY,
+/*      position: [0, 0],
+      type: TYPES.CAMERA_STREAM,
       id: {},
-      icon: 'mdi-phone',
-      title: 'Door entry',
+      icon: 'mdi-cctv',
+      title: 'Front gate',
       state: false,
       layout: {
-            type: TYPES.CAMERA_THUMBNAIL,
+            type: TYPES.CAMERA_STREAM,
             id: 'camera.front_gate_live',
             refresh: 1500,
             bgSize: 'cover'
@@ -19,6 +40,28 @@ var DOORENTRY_TILE = {
              // Define your tiles (door-entry buttons) here if required
         ]
       }
+
+   { */
+      position: [0, 0],
+      id: 'camera.front_gate_live',
+      type: TYPES.CAMERA,
+      bgSize: 'cover',
+      width: 1,
+      state: false,
+      fullscreen: {
+         type: TYPES.CAMERA_STREAM,
+         objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+         id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+         bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+      },
+      refresh: 1500,  // can be number in milliseconds
+      refresh: function () {  // can also be a function
+         return 3000 + Math.random() * 1000
+      }
+   }
+
+
+
 
 var CONFIG = {
    customTheme: CUSTOM_THEMES.COMPACT, // null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
@@ -612,6 +655,27 @@ var CONFIG = {
                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
                        fractionSize: 0, // Number of decimal places to round the number to. Defaults to current locale formatting
                     },
+                 },
+                 {
+                 position: [0, 3],
+                 type: TYPES.SENSOR_ICON,
+                 id: 'sensor.template_calendar_bin_nights',
+                 title: '&sensor.template_calendar_bin_nights.state',
+                 state: false,
+                 icon: 'mdi-trash-can-outline',
+                 customStyles: function (item, entity) {
+                   if (entity.state == 'Red Yellow Bins') {
+                     return {
+                       'backgroundColor': '#ffff00',
+               		    'color': '#000',
+                       };
+                   } else {
+                       return {
+                       'backgroundColor': '#0000ff',
+               		    'color': '#fff',
+                   		};
+                 	  }
+                   },
                  },
 
                ]
