@@ -1,6 +1,104 @@
 /*
- fridge.js
+ samples
 */
+
+
+  {
+  position: [0, 2],
+  type: TYPES.SENSOR_ICON,
+  id: 'binary_sensor.trashday',
+  title: 'Garbage Tomorrow',
+  state: false,
+  icon: 'mdi-dump-truck',
+  customStyles: function (item, entity) {
+    if (entity.state == 'on') {
+      return {
+        'backgroundColor': '#10938D',
+		'color': '#fff',
+        };
+    } else {
+        return {
+          'opacity': '0',
+		};
+	  }
+    },
+  },
+  {
+  position: [1, 2],
+  type: TYPES.SENSOR_ICON,
+  id: 'sensor.even_or_odd_week',
+  title: 'Recycling Tomorrow',
+  state: false,
+  icon: 'mdi-recycle',
+  customStyles:  function (item, entity) {
+    if (this.states['binary_sensor.trashday'].state == 'on') {
+      if (entity.state == 'True') {
+        return {
+          'backgroundColor': '#13AC20',
+		  'color': '#fff',
+          };
+      } else {
+         return {
+            'opacity': '0',
+		  };
+	    }
+	  } else {
+         return {
+            'opacity': '0',
+		  };
+      }
+    },
+  }
+///////////////////////////////////
+
+  {
+  position: [0, 2],
+  type: TYPES.SENSOR_ICON,
+  id: 'binary_sensor.trashday',
+  title: 'Bins',
+  state: false,
+  icon: 'mdi-dump-truck',
+  customStyles: function (item, entity) {
+    if (entity.state == 'on') {
+      return {
+        'backgroundColor': '#10938D',
+		'color': '#fff',
+        };
+    } else {
+        return {
+          'opacity': '0',
+		};
+	  }
+    },
+  },
+  {
+  position: [1, 2],
+  type: TYPES.SENSOR_ICON,
+  id: 'sensor.even_or_odd_week',
+  title: 'Recycling Tomorrow',
+  state: false,
+  icon: 'mdi-recycle',
+  customStyles:  function (item, entity) {
+    if (this.states['binary_sensor.trashday'].state == 'on') {
+      if (entity.state == 'True') {
+        return {
+          'backgroundColor': '#13AC20',
+		  'color': '#fff',
+          };
+      } else {
+         return {
+            'opacity': '0',
+		  };
+	    }
+	  } else {
+         return {
+            'opacity': '0',
+		  };
+      }
+    },
+  }
+///////////////////////////////////////////
+
 
 var CONFIG = {
    customTheme: null, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
