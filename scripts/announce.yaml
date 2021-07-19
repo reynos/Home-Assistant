@@ -10,10 +10,11 @@ announce:
         command: 'notify'
         id: '{{ context.id }}'
         icon: 'mdi-information'
-        lifetime: 10
+        lifetime: 10 # display for 10 secs
         type: 'info'
         title: 'Message'
         message: '{{ message }}'
+    # if night don't announce
     - choose:
         - conditions:
             - condition: template
