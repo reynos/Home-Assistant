@@ -10,6 +10,7 @@ announce:
         command: 'notify'
         id: '{{ context.id }}'
         icon: 'mdi-information'
+        lifetime: 10
         type: 'info'
         title: 'Message'
         message: '{{ message }}'
