@@ -268,18 +268,6 @@
       target:
         entity_id: light.master_bedroom_level
 
-- alias: "Playroom Light 1 Toggle"
-  trigger:
-    - platform: event
-      event_type: deconz_event
-      event_data:
-        id: tradfri_shortcut_button
-        event: 1002
-  action:
-    - service: switch.toggle
-      target:
-        entity_id: switch.ha_lounge_playroom_lamp_1
-
 - alias: "House Mode Top of Stairs Switch - Kitchen lights"
   trigger:
     - platform: event
