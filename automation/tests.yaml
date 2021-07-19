@@ -82,9 +82,18 @@
       to: 'on'
       entity_id: input_boolean.tester
   action:
+    # - event: tileboard
+    #   event_data:
+    #     command: open_doorentry
     - event: tileboard
       event_data:
-        command: open_doorentry
+        command: 'notify'
+        id: '{{ context.id }}'
+        lifetime: 5
+        icon: 'mdi-information'
+        type: 'info'
+        title: 'Message'
+        message: 'Test Message'
     - service: notify.mobile_app_darren_reynolds
       data:
         # message: "Trigger was: {{ trigger.event.data.friendly_name }}"

@@ -4,6 +4,15 @@ announce:
   alias: "Announce on Sonos"
   mode: queued
   sequence:
+    # popup on Tileboard
+    - event: tileboard
+      event_data:
+        command: 'notify'
+        id: '{{ context.id }}'
+        icon: 'mdi-information'
+        type: 'info'
+        title: 'Message'
+        message: '{{ message }}'
     - choose:
         - conditions:
             - condition: template
