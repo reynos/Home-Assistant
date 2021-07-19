@@ -85,6 +85,14 @@ var CONFIG = {
               this.$scope.openDoorEntry(DOORENTRY_TILE, DOORENTRY_TILE.id);
            }
        },
+       // enables "toaster" popups in the bottom right corner
+       {
+          command: 'notify',
+          action: function(e) {
+             window.Noty.addObject(e);
+          }
+       },
+
    ],
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
