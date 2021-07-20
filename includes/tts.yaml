@@ -5,3 +5,6 @@
 
 - platform: microsoft
   api_key: !secret ms_tts_api_key
+  language: en-au
+  type: NatashaNeural
+  region: australiaeast
