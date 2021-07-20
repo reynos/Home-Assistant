@@ -52,10 +52,6 @@ google:
 #   host: !secret apc_ups_host
 #   port: !secret apc_ups_port
 
-tts:
-  - platform: google_translate
-    base_url: !secret tts_base_url
-
 # cloud intergrate now broken - using HACS ha-dyson local intergration
 # dyson:
 #   username: !secret dyson_uname
@@ -97,6 +93,7 @@ notify: !include includes/notify.yaml
 media_player: !include includes/media_player.yaml
 camera: !include includes/camera.yaml
 webostv: !include includes/webostv.yaml
+tts: !include includes/tts.yaml
 
 ## Dir Includes
 automation: !include_dir_merge_list automation

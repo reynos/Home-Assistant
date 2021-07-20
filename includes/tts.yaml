@@ -1,0 +1,7 @@
+# tts.yaml
+
+- platform: google_translate
+  base_url: !secret tts_base_url
+
+- platform: microsoft
+  api_key: !secret ms_tts_api_key
