@@ -22,43 +22,43 @@
                  },
 */
 
-var DOORENTRY_TILE = {
-/*      position: [0, 0],
-      type: TYPES.CAMERA_STREAM,
-      id: {},
-      icon: 'mdi-cctv',
-      title: 'Front gate',
-      state: false,
-      layout: {
-            type: TYPES.CAMERA_STREAM,
-            id: 'camera.front_gate_live',
-            refresh: 1500,
-            bgSize: 'cover'
-         },
-         page: {},
-         tiles: [
-             // Define your tiles (door-entry buttons) here if required
-        ]
-      }
-
-   { */
-      position: [0, 0],
-      id: 'camera.front_gate_live',
-      type: TYPES.CAMERA,
-      bgSize: 'cover',
-      width: 1,
-      state: false,
-      fullscreen: {
-         type: TYPES.CAMERA_STREAM,
-         objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
-         id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
-         bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
-      },
-      refresh: 1500,  // can be number in milliseconds
-      refresh: function () {  // can also be a function
-         return 3000 + Math.random() * 1000
-      }
-   }
+// var DOORENTRY_TILE = {
+// /*      position: [0, 0],
+//       type: TYPES.CAMERA_STREAM,
+//       id: {},
+//       icon: 'mdi-cctv',
+//       title: 'Front gate',
+//       state: false,
+//       layout: {
+//             type: TYPES.CAMERA_STREAM,
+//             id: 'camera.front_gate_live',
+//             refresh: 1500,
+//             bgSize: 'cover'
+//          },
+//          page: {},
+//          tiles: [
+//              // Define your tiles (door-entry buttons) here if required
+//         ]
+//       }
+//
+//    { */
+//       position: [0, 0],
+//       id: 'camera.front_gate_live',
+//       type: TYPES.CAMERA,
+//       bgSize: 'cover',
+//       width: 1,
+//       state: false,
+//       fullscreen: {
+//          type: TYPES.CAMERA_STREAM,
+//          objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+//          id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+//          bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+//       },
+//       refresh: 1500,  // can be number in milliseconds
+//       refresh: function () {  // can also be a function
+//          return 3000 + Math.random() * 1000
+//       }
+//    }
 
 
 
@@ -222,6 +222,9 @@ var CONFIG = {
                      hideMuteButton: false,
                      state: false,
                      //state: '@attributes.media_title',
+                     customStyles: {
+                       'backgroundColor': '#000000',
+                     },
                      subtitle: '@attributes.media_title',
                      bgSuffix: '@attributes.entity_picture',
                   },
@@ -235,6 +238,9 @@ var CONFIG = {
                      hideMuteButton: false,
                      state: false,
                      //state: '@attributes.media_title',
+                     customStyles: {
+                       'backgroundColor': '#000000',
+                     },
                      subtitle: '@attributes.media_title',
                      bgSuffix: '@attributes.entity_picture',
                   },
@@ -248,6 +254,9 @@ var CONFIG = {
                      hideMuteButton: false,
                      state: false,
                      //state: '@attributes.media_title',
+                     customStyles: {
+                       'backgroundColor': '#000000',
+                     },
                      subtitle: '@attributes.media_title',
                      bgSuffix: '@attributes.entity_picture',
                   },
@@ -261,6 +270,9 @@ var CONFIG = {
                      hideMuteButton: false,
                      state: false,
                      //state: '@attributes.media_title',
+                     customStyles: {
+                       'backgroundColor': '#000000',
+                     },
                      subtitle: '@attributes.media_title',
                      bgSuffix: '@attributes.entity_picture',
                   },
@@ -547,12 +559,12 @@ var CONFIG = {
                     bgSize: 'cover',
                     width: 1,
                     state: false,
-                    fullscreen: {
-                       type: TYPES.CAMERA_STREAM,
-                       objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
-                       id: 'camera.frontcam_high',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
-                       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
-                    },
+                    // fullscreen: {
+                    //    type: TYPES.CAMERA_STREAM,
+                    //    objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+                    //    id: 'camera.frontcam_high',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+                    //    bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+                    // },
                     refresh: 1500,  // can be number in milliseconds
                     refresh: function () {  // can also be a function
                        return 3000 + Math.random() * 1000
@@ -672,7 +684,7 @@ var CONFIG = {
                  state: false,
                  icon: 'mdi-trash-can-outline',
                  customStyles: function (item, entity) {
-                   if (this.states['&binary_sensor.bin_night'].state == 'on') {
+                   if ('&binary_sensor.bin_night' == 'on') {
                      if (entity.state == 'Red Yellow Bins') {
                        return {
                          'backgroundColor': '#ffff00',
@@ -682,18 +694,16 @@ var CONFIG = {
                          return {
                            'backgroundColor': '#0000ff',
                  		       'color': '#fff',
-                     		 };
-                   	   }
+                     		   };
+                   	     }
                    } else {
                        return {
-                         'backgroundColor': '#0000ff',
-               		       'color': '#fff',
-                   	   };
-                 	   }
-                   },
-
-                 },
-
+                         'opacity': '0',
+               	         };
+                       } // else end
+                   } //custom style end
+                 } //tile end
+///                 }
                ]
             },
 ///// end of section
