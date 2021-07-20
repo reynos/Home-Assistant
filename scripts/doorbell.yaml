@@ -18,9 +18,10 @@ doorbell: # for day and night
         command: 'notify'
         id: 'doorbell'
         icon: 'mdi-bell-ring'
+        lifetime: 20 # display for 10 secs
         type: 'info'
         title: 'Doorbell'
-        message: 'Someone is at the door'
+        message: 'Someone is at the front gate'
     - service: sonos.snapshot
       data:
         entity_id: media_player.kitchen
