@@ -4,7 +4,7 @@
   mode: single
   variables:
     day: 1
-    threshold: 61
+    threshold: 20
     sensors: >-
       {% set result = namespace(sensors=[]) %}
       {% for state in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}
