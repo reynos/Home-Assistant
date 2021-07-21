@@ -103,6 +103,15 @@
   payload_available: "good"
   payload_not_available: "bad"
 
+- platform: mqtt
+  name: "Fridge Tablet Battery"
+  state_topic: "fully/deviceInfo/fridge-tab"
+  value_template: "{{value_json.batteryLevel}}"
+  qos: 2
+  unit_of_measurement : "%"
+  icon: mdi:battery
+  device_class: "battery"
+
 #### MQTT States
 - platform: mqtt
   name: "Dryer State"
