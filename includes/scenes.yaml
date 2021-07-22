@@ -34,6 +34,14 @@
         rgb_color: [255,128,0] #setting for Ikea bulb
         brightness: 180
 
+  - name: Lounge Lamp
+    entities:
+      light.ha_lounge_lounge_lamp:
+        state: on
+        rgb_color: [255,128,0] #setting for Ikea bulb
+        brightness: 180
+
+
 # triggered at 10:30 every night
   - name: Night
     entities:

@@ -550,6 +550,7 @@ views:
           - sensor.remote_connection_to_ha_lounge
           - input_select.house_mode
           - input_select.bb_colour
+          - scene.lounge_lamp
           - scene.bb_red
           - scene.bb_pink
           - input_boolean.lockdown
