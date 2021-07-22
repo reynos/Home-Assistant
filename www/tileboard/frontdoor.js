@@ -208,26 +208,30 @@ var CONFIG = {
          groups: [
             {
                title: '',
-               width: 2,
+               width: 1.8,
                height: 3,
                // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
-                  {
-                     position: [0, 0],
-                     type: TYPES.SCRIPT,
-                     id: 'script.playroom_off',
-                     width: 2,
-                     height: 2,
-                     icons: {
-                        on: "mdi-face-woman-outline",
-                        off: "mdi-face-woman-outline"
-                     },
-                     state: false,
-                     variables: { var1: 'foo' },
-                  },
+                 {
+                    position: [0, 0],
+                    title: 'Front Gate',
+                    classes: [CLASS_BIG],
+                    type: TYPES.INPUT_BOOLEAN,
+                    width: 1.8,
+                    height: 2,
+                    id: 'input_boolean.open_front_gate',
+                    icons: {
+                       on: 'mdi-gate-arrow-right',
+                       off: 'mdi-gate'
+                    },
+                    states: {
+                       on: "Open",
+                       off: "Close"
+                    }
+                 },
                   {
                      position: [0, 2],
-                     width: 2,
+                     width: 1.8,
                      id: 'media_player.front_garden',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
@@ -243,7 +247,7 @@ var CONFIG = {
                   },
                   {
                      position: [0, 3],
-                     width: 2,
+                     width: 1.8,
                      id: 'media_player.play_room_tv',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
@@ -261,44 +265,28 @@ var CONFIG = {
             },
             {
                title: 'Lights',
-               width: 2,
+               width: 1.8,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
+                  {
+                     position: [0, 0],
+                     type: TYPES.SCRIPT,
+                     id: 'script.playroom_off',
+                     width: 1.8,
+                     height: 2,
+                     icons: {
+                        on: "mdi-face-woman-outline",
+                        off: "mdi-face-woman-outline"
+                     },
+                     state: false,
+                     variables: { var1: 'foo' },
+                  },
                  {
-                    position: [0, 0],
-                    title: 'Front Gate',
-                    classes: [CLASS_BIG],
-                    type: TYPES.INPUT_BOOLEAN,
-                    width: 2,
-                    id: 'input_boolean.open_front_gate',
-                    icons: {
-                       on: 'mdi-gate-arrow-right',
-                       off: 'mdi-gate'
-                    },
-                    states: {
-                       on: "Open",
-                       off: "Close"
-                    }
-                 },
-                 {
-                    position: [0, 1],
+                    position: [0, 2],
                     title: 'Front Garden',
+                    width: 0.9,
                     id: 'switch.frontyard',
-                    type: TYPES.LIGHT,
-                    states: {
-                       on: "On",
-                       off: "Off"
-                    },
-                    icons: {
-                       on: "mdi-lightbulb-on",
-                       off: "mdi-lightbulb",
-                    },
-                 },
-                 {
-                    position: [1, 1],
-                    title: 'Front Porch',
-                    id: 'light.front_porch_light_86_2',
                     type: TYPES.LIGHT,
                     states: {
                        on: "On",
@@ -324,8 +312,9 @@ var CONFIG = {
                  //    },
                  // },
                  {
-                    position: [0, 2],
+                    position: [0.9, 2],
                     title: "Girl's Room",
+                    width: 0.9,
                     subtitle: '',
                     id: 'light.girls_bedroom_downlights',
                     type: TYPES.LIGHT,
@@ -340,9 +329,8 @@ var CONFIG = {
                  },
                  {
                     position: [0, 3],
-                    title: 'Hall',
-                    subtitle: '',
-                    id: 'light.hall_level_10',
+                    title: 'Front Porch',
+                    id: 'light.front_porch_light_86_2',
                     type: TYPES.LIGHT,
                     states: {
                        on: "On",
@@ -352,27 +340,12 @@ var CONFIG = {
                        on: "mdi-lightbulb-on",
                        off: "mdi-lightbulb",
                     },
-                    sliders: [
-                       {
-                          title: 'Brightness',
-                          field: 'brightness',
-                          max: 255,
-                          min: 0,
-                          step: 5,
-                          request: {
-                             type: "call_service",
-                             domain: "light",
-                             service: "turn_on",
-                             field: "brightness"
-                          }
-                       },
-                    ],
                  },
                  {
                     position: [1, 3],
-                    title: 'Laundry Hall',
+                    title: 'Hall',
                     subtitle: '',
-                    id: 'light.laundry_hall_37_2',
+                    id: 'light.hall_level_10',
                     type: TYPES.LIGHT,
                     states: {
                        on: "On",
