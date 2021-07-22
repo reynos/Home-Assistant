@@ -681,14 +681,14 @@
       unit_of_measurement: "kms"
       value_template: >
         {{"{:,}".format(states('sensor.x5_xdrive30d_remaining_range_fuel')|int)}}
-    template_gtdarren_home:
-      friendly_name: "Darren"
-      value_template: >
-        {{ states.sensor.gtdarren_home.attributes.distance }} ({{states.sensor.gtdarren_home.attributes.duration_in_traffic }})
-    template_gtblythe_home:
-      friendly_name: "Blythe"
-      value_template: >
-        {{ states.sensor.gtblythe_home.attributes.distance }} ({{states.sensor.gtblythe_home.attributes.duration_in_traffic }})
+    # template_gtdarren_home:
+    #   friendly_name: "Darren"
+    #   value_template: >
+    #     {{ states.sensor.gtdarren_home.attributes.distance }} ({{states.sensor.gtdarren_home.attributes.duration_in_traffic }})
+    # template_gtblythe_home:
+    #   friendly_name: "Blythe"
+    #   value_template: >
+    #     {{ states.sensor.gtblythe_home.attributes.distance }} ({{states.sensor.gtblythe_home.attributes.duration_in_traffic }})
     template_nursery_air_quality:
       friendly_name: "Air Quality"
       unit_of_measurement: "State"
