@@ -590,6 +590,18 @@ var CONFIG = {
                        return 3000 + Math.random() * 1000
                     }
                  },
+                 // {
+                 //    position: [0, 3],
+                 //    type: TYPES.SENSOR,
+                 //    title: 'Calendar',
+                 //    id: 'sensor.template_calendar_family',
+                 //    customStyles: {
+                 //      'fontSize': '8px',
+                 //      'backgroundColor': '#000000',
+                 //    },
+                 //    unit: '', // override default entity unit
+                 //    state: false, // hidding state
+                 // },
                  {
                     position: [0, 3],
                     width: 2,
@@ -598,16 +610,16 @@ var CONFIG = {
                     state: false, // disable state element
                     list: [
                        {
-                          title: 'Calendar:',
+                          title: '&sensor.template_calendar_family.attributes.friendly_name',
                           icon: 'mdi-weather-sunny',
                           value: '&sensor.template_calendar_family.state'
                        },
                        {
                           value: '&sensor.template_calendar_family.state'
                        },
-                       {
-                          value: '&calendar.family.attributes.message'
-                       }
+                       // {
+                       //    value: '&calendar.family.attributes.message'
+                       // }
                     ]
                  },
 
