@@ -1,6 +1,6 @@
 ## general.yaml automations
 
-- alias: "Weekely Devices Low Battery Warning"
+- alias: "Weekly Devices Low Battery Warning"
   mode: single
   variables:
     day: 1
