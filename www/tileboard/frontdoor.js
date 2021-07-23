@@ -406,12 +406,6 @@ var CONFIG = {
                     width: 2,
                     height: 2,
                     state: false,
-                    fullscreen: {
-                       type: TYPES.CAMERA_STREAM,
-                       objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
-                       id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
-                       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
-                    },
                     refresh: 1500,  // can be number in milliseconds
                     refresh: function () {  // can also be a function
                        return 3000 + Math.random() * 1000
