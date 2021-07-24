@@ -681,7 +681,7 @@ var CONFIG = {
                        append: '@attributes.unit_of_measurement', // Defaults to undefined
                        prepend: '', // Defaults to undefined
                        duration: 1500, // Defaults to 1500ms
-                       thresholds: { 0: { color: 'green'}, 0.1: { color: 'yellow'}, 1.5: { color: 'orange' }, 3: { color: 'red' } },  // Defaults to undefined
+                       thresholds: { 0: { color: 'lime'}, 0.1: { color: 'yellow'}, 1.5: { color: 'orange' }, 3: { color: 'red' } },  // Defaults to undefined
                        labelOnly: false, // Defaults to false
                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
@@ -689,32 +689,59 @@ var CONFIG = {
                     },
                  },
                  {
-                 position: [0, 3],
-                 type: TYPES.SENSOR_ICON,
-                 id: 'sensor.template_calendar_bin_nights',
-                 title: '&sensor.template_calendar_bin_nights.state',
-                 state: false,
-                 icon: 'mdi-trash-can-outline',
-                 customStyles: function (item, entity) {
-                   if ('&binary_sensor.bin_night' == 'on') {
-                     if (entity.state == 'Red Yellow Bins') {
-                       return {
-                         'backgroundColor': '#ffff00',
-                 		     'color': '#000',
-                         };
-                     } else {
+                    position: [0, 2.1],
+                    width: 1.2,
+                    height: 0.9,
+                    type: TYPES.SENSOR_ICON,
+                    title: 'Front Door',
+                    id: 'sensor.front_door_sensor_template',
+                    customStyles: function (item, entity) {
+                       if (entity.state == 'Open') {
                          return {
-                           'backgroundColor': '#0000ff',
-                 		       'color': '#fff',
-                     		   };
-                   	     }
-                   } else {
-                       return {
-                         'opacity': '0',
-               	         };
-                       } // else end
-                   } //custom style end
-                 } //tile end
+                           'backgroundColor': '#dd4c49',
+                     	     'color': '#000',
+                           };
+                       } else {
+                           return {
+                             'backgroundColor': '#15997f',
+                   		       'color': '#fff',
+                       		   };
+                     	     }
+                    }, //custom style end
+                    icons: {
+                       Open: 'mdi-door-open',
+                       Closed: 'mdi-door-closed'
+                    },
+                 },
+                 {
+                     position: [0, 3],
+                     width: 1.2,
+                     height: 1,
+                     type: TYPES.SENSOR_ICON,
+                     id: 'sensor.template_calendar_bin_nights',
+                     title: '&sensor.template_calendar_bin_nights.state',
+                     state: false,
+                     icon: 'mdi-trash-can-outline',
+                     customStyles: function (item, entity) {
+                       if ('&binary_sensor.bin_night' == 'on') {
+                         if (entity.state == 'Red Yellow Bins') {
+                           return {
+                             'backgroundColor': '#e6de00',
+                     		     'color': '#000',
+                             };
+                         } else {
+                             return {
+                               'backgroundColor': '#1565c0',
+                     		       'color': '#fff',
+                         		   };
+                       	     }
+                       } else {
+                           return {
+                             'opacity': '0',
+                   	         };
+                           } // else end
+                       } //custom style end
+                   } //tile end
 ///                 }
                ]
             },
