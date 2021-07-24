@@ -667,6 +667,42 @@ var CONFIG = {
                     subtitle: '',
                     type: TYPES.GAUGE,
                     id: 'sensor.template_sensor_emoncms_net_grid_power', // Assign the sensor you want to display on the gauge
+                    customStyles: function (item, entity) {
+                       if (entity.state < -0.5) {
+                         return {
+                           'backgroundColor': '#15997f', //green
+                     	     'color': '#fff',
+                           };
+                       } else {
+                         if (entity.state <= 0.5) {
+                           return {
+                             'backgroundColor': '#e6de00', //yellow
+                       	     'color': '#fff',
+                             };
+                         } else {
+                           if (entity.state <= 1.5) {
+                             return {
+                               'backgroundColor': '#f28747', //orange
+                         	     'color': '#fff',
+                               };
+                           } else {
+                             if (entity.state <= 3) {
+                               return {
+                                 'backgroundColor': '#dd4c49', //red
+                           	     'color': '#000',
+                                 };
+                             } else {
+                                 return {
+                                   'backgroundColor': '#c23847', //dark red
+                         		       'color': '#000',
+                             		   };
+                           	     }
+                               }
+                             }
+                           }
+
+                    }, //custom style end
+
                     value: function(item, entity){
                        return entity.state;
                     },
@@ -681,7 +717,7 @@ var CONFIG = {
                        append: '@attributes.unit_of_measurement', // Defaults to undefined
                        prepend: '', // Defaults to undefined
                        duration: 1500, // Defaults to 1500ms
-                       thresholds: { 0: { color: 'lime'}, 0.1: { color: 'yellow'}, 1.5: { color: 'orange' }, 3: { color: 'red' } },  // Defaults to undefined
+                       thresholds: { 0: { color: 'lime'}, 0.1: { color: 'orange'}, 1.5: { color: 'red' }, 3: { color: 'maroon'}},
                        labelOnly: false, // Defaults to false
                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
