@@ -112,6 +112,11 @@
   icon: mdi:battery
   device_class: "battery"
 
+- platform: mqtt
+  state_topic: "fully/event/+/fridge-tab"
+  name: "Fridge Tablet"
+  value_template: '{{value_json.event}}'
+
 #### MQTT States
 - platform: mqtt
   name: "Dryer State"

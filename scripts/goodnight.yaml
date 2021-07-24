@@ -6,6 +6,6 @@ goodnight:
       data_template:
         name: "Script:"
         message: Goodnight lights ON
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       data:
         entity_id: group.all_lights_not_beds
