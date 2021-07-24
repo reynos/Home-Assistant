@@ -76,12 +76,7 @@
     to: 'Idle'
   action:
     - service: script.turn_on
-      entity_id: script.notify_darren
-      data:
-        variables:
-          message: 'Dryer finished!'
-    - service: script.turn_on
-      entity_id: script.notify_blythe
+      entity_id: script.notify_all
       data:
         variables:
           message: 'Dryer finished!'
@@ -147,12 +142,7 @@
     to: 'Idle'
   action:
     - service: script.turn_on
-      entity_id: script.notify_darren
-      data:
-        variables:
-          message: 'Washing Machine finished!'
-    - service: script.turn_on
-      entity_id: script.notify_blythe
+      entity_id: script.notify_all
       data:
         variables:
           message: 'Washing Machine finished!'
@@ -205,12 +195,7 @@
     to: 'Idle'
   action:
     - service: script.turn_on
-      entity_id: script.notify_darren
-      data:
-        variables:
-          message: 'Dishwasher finished!'
-    - service: script.turn_on
-      entity_id: script.notify_blythe
+      entity_id: script.notify_all
       data:
         variables:
           message: 'Dishwasher finished!'
