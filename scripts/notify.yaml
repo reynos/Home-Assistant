@@ -3,36 +3,44 @@
 notify_all:
   alias: Notify All
   sequence:
-    # - service: logbook.log
-    #   data_template:
-    #     name: "All Message:"
-    #     message: {{ message }}
     - service: script.turn_on
+      target:
+        entity_id:
+          - script.notify_darren
+          - script.notify_blythe
       data_template:
-        message: "{{ message }}"
-        entity_id: script.notify_darren
-    - service: script.turn_on
-      data_template:
-        message: "{{ message }}"
-        entity_id: script.notify_blythe
-
+        variables:
+          message: "{{ message }}"
 notify_darren:
   alias: Notify Darren
   sequence:
-    # - service: logbook.log
-    #   data_template:
-    #     name: "Darren Message:"
-    #     message: '{{ message }}'
     - service: notify.mobile_app_darren_reynolds
       data_template:
         message: "{{ message }}"
 notify_blythe:
   alias: Notify Blythe
   sequence:
-    # - service: logbook.log
-    #   data:
-    #     name: "Blythe Message:"
-    #     message: "{{ message }}"
     - service: notify.mobile_app_blythe
       data_template:
         message: "{{ message }}"
+
+battery_level_report:
+  alias: Battery Level Report
+  mode: single
+  variables:
+    sensors: >-
+      {% set result = namespace(sensors=[]) %}
+      {% for state in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}
+        {% set result.sensors = result.sensors + [state.name ~ ' (' ~ state.state ~ ' %)'] %}
+      {% endfor %}
+      {% for state in states.binary_sensor | selectattr('attributes.device_class', '==', 'battery') | selectattr('state', '==', 'on') %}
+        {% set result.sensors = result.sensors + [state.name] %}
+      {% endfor %}
+      {{result.sensors|join(', ')}}
+  sequence:
+    - service: script.turn_on
+      target:
+        entity_id: script.notify_darren
+      data_template:
+        variables:
+          message: "{{ sensors }}"
