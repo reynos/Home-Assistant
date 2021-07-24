@@ -787,7 +787,7 @@ var CONFIG = {
       {
          title: 'Second page',
          bg: 'images/bg2.png',
-         icon: 'mdi-numeric-2-box-outline',
+         icon: 'mdi-power',
          groups: [
             {
                title: '',
