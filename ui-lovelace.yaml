@@ -548,6 +548,7 @@ views:
     cards:
       - entities:
           - sensor.remote_connection_to_ha_lounge
+          - script.battery_level_report
           - input_select.house_mode
           - input_select.bb_colour
           - scene.lounge_lamp
