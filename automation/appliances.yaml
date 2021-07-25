@@ -327,6 +327,13 @@
       entity_id: switch.deck_heater
       to: "on"
   action:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+#        volume: 0.4
+        message: 'The Deck heater has been turned on'
+        delay: '00:00:04'
+        not_at_night: no
     - service: logbook.log
       data_template:
         name: 'Deck Heater:'
@@ -353,7 +360,6 @@
             # waiting for the specific action avoids accidentally continuing
             # for another script/automation's notification action
             action: "{{ action_deck_heater_off }}"
-
       timeout: "00:30:00"
       continue_on_timeout: false
     - alias: "Perform the action"
