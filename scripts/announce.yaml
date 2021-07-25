@@ -4,16 +4,6 @@ announce:
   alias: "Announce on Sonos"
   mode: queued
   sequence:
-    # popup on Tileboard
-    - event: tileboard
-      event_data:
-        command: 'notify'
-        id: '{{ context.id }}'
-        icon: 'mdi-information'
-        lifetime: 10 # display for 10 secs
-        type: 'info'
-        title: 'Message'
-        message: '{{ message }}'
     # if night don't announce
     - choose:
         - conditions:
@@ -41,6 +31,20 @@ announce:
   #           {% else  %}
   #             script.donothing
   #           {% endif %}
+    # turn in fridge tab screen
+    - service: switch.turn_on
+      entity_id: switch.fridge_tab_screen
+    # popup on fridge Tileboard
+    - event: tileboard
+      event_data:
+        command: 'notify'
+        id: '{{ context.id }}'
+        icon: 'mdi-information'
+        lifetime: 15 # display for 15 secs
+        type: 'info'
+        title: 'Message'
+        message: '{{ message }}'
+    # announce on sonos
     - service: sonos.snapshot
       data_template:
         entity_id: "{{ sonos_entity }}"
@@ -67,6 +71,16 @@ announce:
       data_template:
         entity_id: "{{ sonos_entity }}"
 
+test_announement:
+  alias: "Test announce on Sonos"
+  mode: single
+  sequence:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        message: 'This is a test announcement'
+        delay: '00:00:04'
+        not_at_night: no
 #   alias: Announce
 #   sequence:
 #     - service: sonos.snapshot

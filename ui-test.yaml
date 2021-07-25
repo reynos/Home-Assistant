@@ -13,6 +13,7 @@ views:
         - person.darren
         - person.blythe
         - climate.playroom
+        - script.test_announement
         - input_boolean.announce_test
         - input_boolean.kitchen_up_stop
         - input_boolean.kitchen_down_stop
