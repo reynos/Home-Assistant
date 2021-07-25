@@ -666,37 +666,44 @@ var CONFIG = {
                     title: '',
                     subtitle: '',
                     type: TYPES.GAUGE,
-                    id: 'sensor.template_sensor_emoncms_net_grid_power', // Assign the sensor you want to display on the gauge
+                    id: 'sensor.template_sensor_emoncms_net_grid_power',//'input_number.test_power_selector', // Assign the sensor you want to display on the gauge
                     customStyles: function (item, entity) {
-                       if (entity.state <= 0) {
+                       if (entity.state <= -1.5) {
                          return {
-                           'backgroundColor': '#15997f', //green
+                           'backgroundColor': '#16c04c', //bright green
                      	     'color': '#fff',
                            };
                        } else {
-                         if (entity.state <= 1) {
+                         if (entity.state <= 0.1) {
                            return {
-                             'backgroundColor': '#e6de00', //yellow
+                             'backgroundColor': '#15997f', //green
                        	     'color': '#fff',
                              };
                          } else {
-                           if (entity.state <= 2) {
+                           if (entity.state <= 1) {
                              return {
-                               'backgroundColor': '#f28747', //orange
-                         	     'color': '#fff',
+                               'backgroundColor': '#e6de00', //yellow
+                         	     'color': '#000',
                                };
                            } else {
-                             if (entity.state <= 3) {
+                             if (entity.state <= 2) {
                                return {
-                                 'backgroundColor': '#dd4c49', //red
+                                 'backgroundColor': '#f28747', //orange
                            	     'color': '#000',
                                  };
                              } else {
+                               if (entity.state <= 3) {
                                  return {
-                                   'backgroundColor': '#c23847', //dark red
-                         		       'color': '#000',
-                             		   };
-                           	     }
+                                   'backgroundColor': '#dd4c49', //red
+                             	     'color': '#000',
+                                   };
+                               } else {
+                                   return {
+                                     'backgroundColor': '#c23847', //dark red
+                           		       'color': '#000',
+                               		   };
+                             	     }
+                                 }
                                }
                              }
                            }
@@ -715,7 +722,7 @@ var CONFIG = {
                        append: '@attributes.unit_of_measurement', // Defaults to undefined
                        prepend: '', // Defaults to undefined
                        duration: 1500, // Defaults to 1500ms
-                       thresholds: { 0: { color: 'LightYellow'}, 5: { color: 'maroon'}},//{ 0: { color: 'lime'}, 0.1: { color: 'orange'}, 1.5: { color: 'red' }, 3: { color: 'maroon'}},
+                       thresholds: { 0: { color: 'LightGray'}, 4.6: { color: 'maroon'}},//{ 0: { color: 'lime'}, 0.1: { color: 'orange'}, 1.5: { color: 'red' }, 3: { color: 'maroon'}},
                        labelOnly: false, // Defaults to false
                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
