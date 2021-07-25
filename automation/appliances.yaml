@@ -84,8 +84,8 @@
       data:
         sonos_entity: media_player.kitchen
 #        volume: 0.4
-        message: 'Dryer finished'
-        delay: '00:00:02'
+        message: 'The Dryer has finished'
+        delay: '00:00:03'
         not_at_night: yes
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Washing Machine
@@ -150,7 +150,7 @@
       data:
         sonos_entity: media_player.kitchen
 #        volume: 0.4
-        message: 'Washing machine finished'
+        message: 'The Washing machine has finished'
         delay: '00:00:04'
         not_at_night: yes
 
@@ -203,7 +203,7 @@
       data:
         sonos_entity: media_player.kitchen
 #        volume: 0.4
-        message: 'Dishwasher finished'
+        message: 'The Dishwasher has finished'
         delay: '00:00:03'
         not_at_night: yes
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
