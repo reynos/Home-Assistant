@@ -792,7 +792,281 @@ var CONFIG = {
       {
          title: 'Second page',
          bg: 'images/bg2.png',
-         icon: 'mdi-power',
+         icon: 'mdi-gauge',
+         groups: [
+            {
+               title: '',
+               width: 8,
+               height: 3,
+               items: [
+                  {
+                     position: [0, 0],
+                     type: TYPES.SENSOR,
+                     title: 'Washer Power',
+                     id: 'sensor.washer_watts',
+                     unit: 'W', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(0) : value;
+                     },
+                      customStyles: function (item, entity) {
+                         if (entity.state <= -10) {
+                           return {
+                             'backgroundColor': '#16c04c', //bright green
+                       	     'color': '#fff',
+                             };
+                         } else {
+                           if (entity.state <= 100) {
+                             return {
+                               'backgroundColor': '#15997f', //green
+                         	     'color': '#fff',
+                               };
+                           } else {
+                             if (entity.state <= 500) {
+                               return {
+                                 'backgroundColor': '#e6de00', //yellow
+                           	     'color': '#000',
+                                 };
+                             } else {
+                               if (entity.state <= 1500) {
+                                 return {
+                                   'backgroundColor': '#f28747', //orange
+                             	     'color': '#000',
+                                   };
+                               } else {
+                                 if (entity.state <= 2000) {
+                                   return {
+                                     'backgroundColor': '#dd4c49', //red
+                               	     'color': '#000',
+                                     };
+                                 } else {
+                                     return {
+                                       'backgroundColor': '#c23847', //dark red
+                             		       'color': '#000',
+                                 		   };
+                               	     }
+                                   }
+                                 }
+                               }
+                             }
+                      }, //custom style end
+                  },
+                  {
+                     position: [1, 0],
+                     type: TYPES.SENSOR,
+                     title: 'Washer Amps',
+                     id: 'sensor.washer_amps',
+                     unit: 'A', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 1],
+                     type: TYPES.SENSOR,
+                     title: 'Dryer Power',
+                     id: 'sensor.dryer_watts',
+                     unit: 'W', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(0) : value;
+                     },
+                      customStyles: function (item, entity) {
+                         if (entity.state <= -10) {
+                           return {
+                             'backgroundColor': '#16c04c', //bright green
+                       	     'color': '#fff',
+                             };
+                         } else {
+                           if (entity.state <= 100) {
+                             return {
+                               'backgroundColor': '#15997f', //green
+                         	     'color': '#fff',
+                               };
+                           } else {
+                             if (entity.state <= 500) {
+                               return {
+                                 'backgroundColor': '#e6de00', //yellow
+                           	     'color': '#000',
+                                 };
+                             } else {
+                               if (entity.state <= 1500) {
+                                 return {
+                                   'backgroundColor': '#f28747', //orange
+                             	     'color': '#000',
+                                   };
+                               } else {
+                                 if (entity.state <= 2000) {
+                                   return {
+                                     'backgroundColor': '#dd4c49', //red
+                               	     'color': '#000',
+                                     };
+                                 } else {
+                                     return {
+                                       'backgroundColor': '#c23847', //dark red
+                             		       'color': '#000',
+                                 		   };
+                               	     }
+                                   }
+                                 }
+                               }
+                             }
+                      }, //custom style end
+                  },
+                  {
+                     position: [1, 1],
+                     type: TYPES.SENSOR,
+                     title: 'Dryer Amps',
+                     id: 'sensor.dryer_amps',
+                     unit: 'A', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 2],
+                     type: TYPES.SENSOR,
+                     title: 'Dishwasher Power',
+                     id: 'sensor.dishwasher_watts',
+                     unit: 'W', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(0) : value;
+                     },
+                      customStyles: function (item, entity) {
+                         if (entity.state <= -10) {
+                           return {
+                             'backgroundColor': '#16c04c', //bright green
+                       	     'color': '#fff',
+                             };
+                         } else {
+                           if (entity.state <= 100) {
+                             return {
+                               'backgroundColor': '#15997f', //green
+                         	     'color': '#fff',
+                               };
+                           } else {
+                             if (entity.state <= 500) {
+                               return {
+                                 'backgroundColor': '#e6de00', //yellow
+                           	     'color': '#000',
+                                 };
+                             } else {
+                               if (entity.state <= 1500) {
+                                 return {
+                                   'backgroundColor': '#f28747', //orange
+                             	     'color': '#000',
+                                   };
+                               } else {
+                                 if (entity.state <= 2000) {
+                                   return {
+                                     'backgroundColor': '#dd4c49', //red
+                               	     'color': '#000',
+                                     };
+                                 } else {
+                                     return {
+                                       'backgroundColor': '#c23847', //dark red
+                             		       'color': '#000',
+                                 		   };
+                               	     }
+                                   }
+                                 }
+                               }
+                             }
+                      }, //custom style end
+                  },
+                  {
+                     position: [1, 2],
+                     type: TYPES.SENSOR,
+                     title: 'Dishwasher Amps',
+                     id: 'sensor.dishwasher_amps',
+                     unit: 'A', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 3],
+                     type: TYPES.SENSOR,
+                     title: 'Xmas lights Power',
+                     id: 'sensor.xmas_lights_watts',
+                     unit: 'W', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(0) : value;
+                     },
+                      customStyles: function (item, entity) {
+                         if (entity.state <= -10) {
+                           return {
+                             'backgroundColor': '#16c04c', //bright green
+                       	     'color': '#fff',
+                             };
+                         } else {
+                           if (entity.state <= 100) {
+                             return {
+                               'backgroundColor': '#15997f', //green
+                         	     'color': '#fff',
+                               };
+                           } else {
+                             if (entity.state <= 500) {
+                               return {
+                                 'backgroundColor': '#e6de00', //yellow
+                           	     'color': '#000',
+                                 };
+                             } else {
+                               if (entity.state <= 1500) {
+                                 return {
+                                   'backgroundColor': '#f28747', //orange
+                             	     'color': '#000',
+                                   };
+                               } else {
+                                 if (entity.state <= 2000) {
+                                   return {
+                                     'backgroundColor': '#dd4c49', //red
+                               	     'color': '#000',
+                                     };
+                                 } else {
+                                     return {
+                                       'backgroundColor': '#c23847', //dark red
+                             		       'color': '#000',
+                                 		   };
+                               	     }
+                                   }
+                                 }
+                               }
+                             }
+                      }, //custom style end
+                  },
+                  {
+                     position: [1, 3],
+                     type: TYPES.SENSOR,
+                     title: 'Xmas lights Amps',
+                     id: 'sensor.xmas_lights_amps',
+                     unit: 'A', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+               ]
+            },
+         ]
+      },
+      {
+         title: 'Third page',
+         bg: 'images/bg2.png',
+         icon: 'mdi-flasf',
          groups: [
             {
                title: '',
@@ -823,55 +1097,6 @@ var CONFIG = {
                            value: 'github.com'
                         },
                      ]
-                  },
-                  {
-                     position: [2, 0],
-                     width: 2,
-                     title: 'System Status',
-                     type: TYPES.TEXT_LIST,
-                     id: {}, // using empty object for an unknown id
-                     state: false, // disable state element
-                     list: [
-                        {
-                           title: 'Free Memory',
-                           icon: 'mdi-memory',
-                           value: function() {
-                              // var freeMemory = this.parseFieldValue('&sensor.memory_free.state')
-                              var freeMemory = 15.444  // Just an example.
-                              return this.$scope.filterNumber(freeMemory, 1) + ' GB';
-                           }
-                        },
-                     ]
-                  },
-                  {
-                     position: [0, 1.5],
-                     width: 1.5,
-                     height: 1.5,
-                     title: 'My Gauge Title',
-                     subtitle: '',
-                     type: TYPES.GAUGE,
-                     // id: 'sensor.my_sample_sensor', // Assign the sensor you want to display on the gauge
-                     id: {state: 11111}, // Remove after choosing to actual sensor ID
-                     value: function(item, entity) {
-                        return entity.state;
-                     },
-                     settings: {
-                        size: 200, // Defaults to 50% of either height or width, whichever is smaller
-                        type: 'full', // Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
-                        min: 0, // Defaults to 0
-                        max: 25000, // Defaults to 100
-                        cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
-                        thick: 8, // Defaults to 6
-                        label: 'My Gauge', // Defaults to undefined
-                        append: '@attributes.unit_of_measurement', // Defaults to undefined
-                        prepend: '$', // Defaults to undefined
-                        duration: 1500, // Defaults to 1500ms
-                        thresholds: { 0: { color: 'green'}, 80: { color: 'red' } }, // Defaults to undefined
-                        labelOnly: false, // Defaults to false
-                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
-                        fractionSize: 0, // Number of decimal places to round the number to. Defaults to current locale formatting
-                     },
                   },
                ]
             },

@@ -1,9 +1,1 @@
-.item-list{text-align:left;margin:8px 0;position:relative;z-index:2}
-.item-list--item{margin:3px 8px;line-height:18px}
-.item-list--name{width:70%}
-.item-list--name,
-.item-list--value{display:inline-block;vertical-align:middle;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
-.item-list--value{width:50%}
-.item-list--name{float:left}
-.item-list--name .mdi{margin-right:4px;opacity:.8}
-.item-list--value{text-align:right}
+
