@@ -86,3 +86,7 @@ tv_dimmer:
     min: 0
     max: 100
     step: 10
+test_power_selector:
+    min: -5
+    max: 7
+    step: 0.1
