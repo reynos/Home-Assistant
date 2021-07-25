@@ -102,102 +102,87 @@ var CONFIG = {
 
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
       styles: {
-         margin: '30px 130px 0',
+         margin: '5px 80px 0',
          fontSize: '28px'
       },
       right: [
          {
-            type: HEADER_ITEMS.CUSTOM_HTML,
-            html: ''
-         },
-         {
-            type: HEADER_ITEMS.WEATHER,
-            styles: {
-               margin: '0'
-            },
-            icon: '&weather.bondi.state',
-            state: '&weather.bondi.state',
-            icons: {
-               'clear-day': 'clear',
-               'clear-day': 'clear',
-               'clear-night': 'nt-clear',
-               'cloudy': 'cloudy',
-               'exceptional': 'unknown',
-               'fog': 'fog',
-               'hail': 'sleet',
-               'lightning': 'chancestorms',
-               'lightning-rainy': 'tstorms',
-               'partly-cloudy-day': 'partlycloudy',
-               'partly-cloudy-night': 'nt-partlycloudy',
-               'pouring': 'rain',
-               'snowy': 'snow',
-               'snowy-rainy': 'sleet',
-               'wind': 'unknown',
-               'windy': 'unknown',
-               'windy-variant': 'unknown'
-            },
-            states: {
-               'clear-night': 'Clear, night',
-               'cloudy': 'Cloudy',
-               'exceptional': 'Exceptional',
-               'fog': 'Fog',
-               'hail': 'Hail',
-               'lightning': 'Lightning',
-               'lightning-rainy': 'Lightning, rainy',
-               'partlycloudy': 'Partly cloudy',
-               'pouring': 'Pouring',
-               'rainy': 'Rainy',
-               'snowy': 'Snowy',
-               'snowy-rainy': 'Snowy, rainy',
-               'sunny': 'Sunny',
-               'windy': 'Windy',
-               'windy-variant': 'Windy'
-            },
-            fields: {
-               temperature: '&weather.bondi.attributes.temperature',
-               temperatureUnit: '°C',
-            }
-          }
-      ],
-      left: [
-/*         {
-            type: HEADER_ITEMS.CUSTOM_HTML,
-            html: '<b><i>24 Avoca Street</b></i>'
-         }, */
-         {
-            type: HEADER_ITEMS.DATETIME,
-            dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
+            type: HEADER_ITEMS.DATE,
+            dateFormat: 'h:mm a', //https://docs.angularjs.org/api/ng/filter/date
+            styles: { fontSize: '40px' },
          },
          // {
-         //    type: HEADER_ITEMS.DATE,
-         //    dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+         //    type: HEADER_ITEMS.CUSTOM_HTML,
+         //    html: ''
+         // },
+         // {
+         //    type: HEADER_ITEMS.WEATHER,
+         //    styles: {
+         //       margin: '0'
+         //    },
+         //    icon: '&weather.bondi.state',
+         //    state: '&weather.bondi.state',
+         //    icons: {
+         //       'clear-day': 'clear',
+         //       'clear-day': 'clear',
+         //       'clear-night': 'nt-clear',
+         //       'cloudy': 'cloudy',
+         //       'exceptional': 'unknown',
+         //       'fog': 'fog',
+         //       'hail': 'sleet',
+         //       'lightning': 'chancestorms',
+         //       'lightning-rainy': 'tstorms',
+         //       'partly-cloudy-day': 'partlycloudy',
+         //       'partly-cloudy-night': 'nt-partlycloudy',
+         //       'pouring': 'rain',
+         //       'snowy': 'snow',
+         //       'snowy-rainy': 'sleet',
+         //       'wind': 'unknown',
+         //       'windy': 'unknown',
+         //       'windy-variant': 'unknown'
+         //    },
+         //    states: {
+         //       'clear-night': 'Clear, night',
+         //       'cloudy': 'Cloudy',
+         //       'exceptional': 'Exceptional',
+         //       'fog': 'Fog',
+         //       'hail': 'Hail',
+         //       'lightning': 'Lightning',
+         //       'lightning-rainy': 'Lightning, rainy',
+         //       'partlycloudy': 'Partly cloudy',
+         //       'pouring': 'Pouring',
+         //       'rainy': 'Rainy',
+         //       'snowy': 'Snowy',
+         //       'snowy-rainy': 'Snowy, rainy',
+         //       'sunny': 'Sunny',
+         //       'windy': 'Windy',
+         //       'windy-variant': 'Windy'
+         //    },
+         //    fields: {
+         //       temperature: '&weather.bondi.attributes.temperature',
+         //       temperatureUnit: '°C',
+         //    }
+         //  }
+      ],
+      left: [
+         {
+            type: HEADER_ITEMS.DATE,
+            dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+         },
+
+         // {
+         //    type: HEADER_ITEMS.CUSTOM_HTML,
+         //    html: '<b><i>24 Avoca Street</b></i>'
+         // },
+         // {
+         //    type: HEADER_ITEMS.DATETIME,
+         //    dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
          // },
          // {
          //    type: HEADER_ITEMS.TIME,
          // },
       ]
    },
-
-   /*screensaver: {// optional. https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
-      timeout: 300, // after 5 mins of inactive
-      slidesTimeout: 10, // 10s for one slide
-      styles: { fontSize: '40px' },
-      leftBottom: [{ type: SCREENSAVER_ITEMS.DATETIME }], // put datetime to the left-bottom of screensaver
-      slides: [
-         { bg: 'images/bg1.jpeg' },
-         {
-            bg: 'images/bg2.png',
-            rightTop: [ // put text to the 2nd slide
-               {
-                  type: SCREENSAVER_ITEMS.CUSTOM_HTML,
-                  html: 'Welcome to the <b>TileBoard</b>',
-                  styles: { fontSize: '40px' }
-               }
-            ]
-         },
-         { bg: 'images/bg3.jpg' }
-      ]
-   },*/
 
    pages: [
       {

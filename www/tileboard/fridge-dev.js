@@ -102,14 +102,15 @@ var CONFIG = {
 
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
       styles: {
-         margin: '30px 80px 0',
+         margin: '5px 80px 0',
          fontSize: '28px'
       },
       right: [
-         // {
-         //    type: HEADER_ITEMS.CUSTOM_HTML,
-         //    html: ''
-         // },
+         {
+            type: HEADER_ITEMS.DATE,
+            dateFormat: 'h:mm a', //https://docs.angularjs.org/api/ng/filter/date
+            styles: { fontSize: '40px' },
+         },
          // {
          //    type: HEADER_ITEMS.WEATHER,
          //    styles: {
@@ -160,18 +161,23 @@ var CONFIG = {
          //  }
       ],
       left: [
-/*         {
-            type: HEADER_ITEMS.CUSTOM_HTML,
-            html: '<b><i>24 Avoca Street</b></i>'
-         }, */
-         // {
-         //    type: HEADER_ITEMS.DATETIME,
-         //    dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
-         // },
          {
             type: HEADER_ITEMS.DATE,
             dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
          },
+         {
+            type: HEADER_ITEMS.CUSTOM_HTML,
+            html: 'DEVELOPMENT'
+         },
+
+         // {
+         //    type: HEADER_ITEMS.CUSTOM_HTML,
+         //    html: '<b><i>24 Avoca Street</b></i>'
+         // },
+         // {
+         //    type: HEADER_ITEMS.DATETIME,
+         //    dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
+         // },
          // {
          //    type: HEADER_ITEMS.TIME,
          // },
