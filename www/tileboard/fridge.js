@@ -668,19 +668,19 @@ var CONFIG = {
                     type: TYPES.GAUGE,
                     id: 'sensor.template_sensor_emoncms_net_grid_power', // Assign the sensor you want to display on the gauge
                     customStyles: function (item, entity) {
-                       if (entity.state < -0.5) {
+                       if (entity.state <= 0) {
                          return {
                            'backgroundColor': '#15997f', //green
                      	     'color': '#fff',
                            };
                        } else {
-                         if (entity.state <= 0.5) {
+                         if (entity.state <= 1) {
                            return {
                              'backgroundColor': '#e6de00', //yellow
                        	     'color': '#fff',
                              };
                          } else {
-                           if (entity.state <= 1.5) {
+                           if (entity.state <= 2) {
                              return {
                                'backgroundColor': '#f28747', //orange
                          	     'color': '#fff',
@@ -700,11 +700,9 @@ var CONFIG = {
                                }
                              }
                            }
-
                     }, //custom style end
-
                     value: function(item, entity){
-                       return entity.state;
+                       return Math.abs(entity.state);
                     },
                     settings: {
                        size: 180, // Defaults to 50% of either height or width, whichever is smaller
@@ -712,12 +710,12 @@ var CONFIG = {
                        min: 0, // Defaults to 0
                        max: 6, // Defaults to 100
                        cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
-                       thick: 20, // Defaults to 6
+                       thick: 15, // Defaults to 6
                        label: 'House Power', // Defaults to undefined
                        append: '@attributes.unit_of_measurement', // Defaults to undefined
                        prepend: '', // Defaults to undefined
                        duration: 1500, // Defaults to 1500ms
-                       thresholds: { 0: { color: 'lime'}, 0.1: { color: 'orange'}, 1.5: { color: 'red' }, 3: { color: 'maroon'}},
+                       thresholds: { 0: { color: 'LightYellow'}, 5: { color: 'maroon'}},//{ 0: { color: 'lime'}, 0.1: { color: 'orange'}, 1.5: { color: 'red' }, 3: { color: 'maroon'}},
                        labelOnly: false, // Defaults to false
                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
