@@ -1,6 +1,7 @@
 ## actionable_noticiations.yaml automation
 
 - alias: "Deck Tag Actions"
+  mode: restart # due to the wait at the end for the actionable notification
   trigger:
     - platform: tag
       tag_id: d32d05ff-5141-4bb3-9525-9d28e88bd56d

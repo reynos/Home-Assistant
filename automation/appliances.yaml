@@ -322,6 +322,7 @@
           message: 'Deck Heater still on!'
 
 - alias: "Deck Heater Turned On"
+  mode: restart # due to the wait at the end for the actionable notification
   trigger:
     - platform: state
       entity_id: switch.deck_heater
