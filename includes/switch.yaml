@@ -66,3 +66,13 @@
   payload_off: "OFF"
   payload_available: "Online"
   payload_not_available: "Offline"
+
+# Fridge tablet
+- platform: command_line
+  switches:
+    fridge_tab_screen:
+      command_on: !secret fridge_tablet_rest_screen_on
+      command_off: !secret fridge_tablet_rest_screen_off
+      command_state: !secret fridge_tablet_rest_screen_state
+      value_template: '{{ value == "on" }}'
+      friendly_name: Fridge Tablet

@@ -117,6 +117,29 @@
   name: "Fridge Tablet"
   value_template: '{{value_json.event}}'
 
+- platform: rest
+  name: "Fridge Tablet REST"
+  json_attributes:
+    - batteryLevel
+    - kioskMode
+    - screenBrightness
+    - motionDetectorState
+    - maintenanceMode
+    - appFreeMemory
+    - appUsedMemory
+    - totalFreeMemory
+    - totalUsedMemory
+    - hostname4
+    - ip4
+    - mac
+    - locationLatitude
+    - locationLongitude
+    - locationAltitude
+    - startUrl
+    - currentPage
+  resource: !secret fridge_tablet_rest
+  value_template: '{{ value_json.isScreenOn }}'
+
 #### MQTT States
 - platform: mqtt
   name: "Dryer State"
