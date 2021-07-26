@@ -117,6 +117,20 @@
   name: "Fridge Tablet"
   value_template: '{{value_json.event}}'
 
+- platform: mqtt
+  name: "Front Door Tablet Battery"
+  state_topic: "fully/deviceInfo/frontdoor-tab"
+  value_template: "{{value_json.batteryLevel}}"
+  qos: 2
+  unit_of_measurement : "%"
+  icon: mdi:battery
+  device_class: "battery"
+
+- platform: mqtt
+  state_topic: "fully/event/+/frontdoor-tab"
+  name: "Front Door Tablet"
+  value_template: '{{value_json.event}}'
+
 - platform: rest
   name: "Fridge Tablet REST"
   json_attributes:
@@ -138,6 +152,29 @@
     - startUrl
     - currentPage
   resource: !secret fridge_tablet_rest
+  value_template: '{{ value_json.isScreenOn }}'
+
+- platform: rest
+  name: "Front Door Tablet REST"
+  json_attributes:
+    - batteryLevel
+    - kioskMode
+    - screenBrightness
+    - motionDetectorState
+    - maintenanceMode
+    - appFreeMemory
+    - appUsedMemory
+    - totalFreeMemory
+    - totalUsedMemory
+    - hostname4
+    - ip4
+    - mac
+    - locationLatitude
+    - locationLongitude
+    - locationAltitude
+    - startUrl
+    - currentPage
+  resource: !secret frontdoor_tablet_rest
   value_template: '{{ value_json.isScreenOn }}'
 
 #### MQTT States
