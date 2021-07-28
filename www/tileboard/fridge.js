@@ -784,7 +784,7 @@ var CONFIG = {
          groups: [
             {
                title: '',
-               width: 8,
+               width: 2,
                height: 3,
                items: [
                   {
@@ -1033,7 +1033,7 @@ var CONFIG = {
                                  }
                                }
                              }
-                      }, //custom style end
+                       } //custom style end
                   },
                   {
                      position: [1, 3],
@@ -1046,9 +1046,28 @@ var CONFIG = {
                         var num = parseFloat(value);
                         return num && !isNaN(num) ? num.toFixed(1) : value;
                      }
+                  }
+              ],
+            },
+            {
+               title: '',
+               width: 2,
+               height: 3,
+               items: [
+                  {
+                     position: [0, 0],
+                     type: TYPES.SENSOR,
+                     title: 'Outside Temp',
+                     id: 'sensor.outside_temp',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
                   },
                   {
-                     position: [2, 0],
+                     position: [0, 1],
                      type: TYPES.SENSOR,
                      title: 'Kitchen Temp',
                      id: 'sensor.temperature_sensor_129',
