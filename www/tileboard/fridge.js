@@ -749,7 +749,10 @@ var CONFIG = {
                      state: false,
                      icon: 'mdi-trash-can-outline',
                      customStyles: function (item, entity) {
-                       if ('&binary_sensor.bin_night' == 'on') {
+                       var d = new Date();
+                       var n = d.getDay();
+                       // if it's Wednesday
+                       if (n == 3 ) {
                          if (entity.state == 'Red Yellow Bins') {
                            return {
                              'backgroundColor': '#e6de00',
