@@ -192,7 +192,7 @@ var CONFIG = {
          groupMarginCss: '20px 4px',
          groups: [
             {
-               title: 'Music',
+               title: '',
                width: 1.2,
                height: 3,
                // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
@@ -266,7 +266,7 @@ var CONFIG = {
             },
 
             {
-               title: 'Lights',
+               title: '',
                width: 3,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
@@ -514,7 +514,7 @@ var CONFIG = {
                ]
             },
             {
-               title: 'Surveillance',
+               title: '',
                width: 2,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
@@ -611,7 +611,7 @@ var CONFIG = {
                ]
             },
             {
-               title: 'Other',
+               title: '',
                width: 2,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0

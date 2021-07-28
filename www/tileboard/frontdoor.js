@@ -206,7 +206,7 @@ var CONFIG = {
                ]
             },
             {
-               title: 'Lights',
+               title: '',
                width: 1.8,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
@@ -272,6 +272,7 @@ var CONFIG = {
                  {
                     position: [0, 3],
                     title: 'Front Porch',
+                    width: 0.9,
                     id: 'light.front_porch_light_86_2',
                     type: TYPES.LIGHT,
                     states: {
@@ -284,8 +285,9 @@ var CONFIG = {
                     },
                  },
                  {
-                    position: [1, 3],
+                    position: [0.9, 3],
                     title: 'Hall',
+                    width: 0.9,
                     subtitle: '',
                     id: 'light.hall_level_10',
                     type: TYPES.LIGHT,
@@ -316,7 +318,7 @@ var CONFIG = {
                ]
             },
             {
-               title: 'Surveillance',
+               title: '',
                width: 4,
                height: 3,
                row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
