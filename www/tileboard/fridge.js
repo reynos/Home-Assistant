@@ -1047,6 +1047,19 @@ var CONFIG = {
                         return num && !isNaN(num) ? num.toFixed(1) : value;
                      }
                   },
+                  {
+                     position: [2, 0],
+                     type: TYPES.SENSOR,
+                     title: 'Kitchen Temp',
+                     id: 'sensor.temperature_sensor_129',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+
                ]
             },
          ]
@@ -1054,7 +1067,7 @@ var CONFIG = {
       {
          title: 'Third page',
          bg: 'images/bg2.png',
-         icon: 'mdi-flasf',
+         icon: 'mdi-flash',
          groups: [
             {
                title: '',
