@@ -62,6 +62,14 @@
   #     - light.ha_lounge_girls_room_2
   #     - light.ha_lounge_girls_room_3
 
+  playroom:
+    name: Playroom
+    entities:
+      - fan.playroom
+      - climate.playroom
+      - switch.ha_lounge_playroom_lamp_1
+      - switch.ha_lounge_playroom_lamp_2
+
   lollie_lights:
     name: Lollie Nightlight
     entities:
