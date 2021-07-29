@@ -511,6 +511,31 @@ var CONFIG = {
                        off: "mdi-lightbulb",
                     },
                  },
+                 {
+                    position: [2, 3],
+                    title: 'Playroom',
+                    type: TYPES.SCRIPT,
+                    id: 'script.playroom_off',
+                    icons: {
+                       on: "mdi-face-woman-outline",
+                       off: "mdi-face-woman-outline"
+                    },
+                    state: false,
+                    customStyles: function (item, entity) {
+                      var playroomstate = this.parseFieldValue('&group.playroom.state')
+                       if (playroomstate == 'on') {
+                         return {
+                           'backgroundColor': '#16c04c', //bright green
+                     	     'color': '#fff',
+                           };
+                       } else {
+                           return {
+                             'backgroundColor': '#15997f', //green
+                       	     'color': '#fff',
+                             };
+                         }
+                    }
+                 }
                ]
             },
             {

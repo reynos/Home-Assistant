@@ -213,6 +213,7 @@ var CONFIG = {
                items: [
                   {
                      position: [0, 0],
+                     title: 'Playroom',
                      type: TYPES.SCRIPT,
                      id: 'script.playroom_off',
                      width: 1.8,
@@ -222,7 +223,19 @@ var CONFIG = {
                         off: "mdi-face-woman-outline"
                      },
                      state: false,
-                     variables: { var1: 'foo' },
+                     customStyles: function (item, entity) {
+                       var playroomstate = this.parseFieldValue('&group.playroom.state')
+                        if (playroomstate == 'on') {
+                          return {
+                            'backgroundColor': '#16c04c', //bright green
+                      	     'color': '#fff',
+                            };
+                        } else {
+                            return {
+                              'backgroundColor': '#15997f', //green
+                        	     'color': '#fff',
+                              };
+                          }
                   },
                  {
                     position: [0, 2],
