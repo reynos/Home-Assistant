@@ -1061,6 +1061,21 @@ var CONFIG = {
                      id: 'sensor.outside_temp',
                      unit: 'C', // override default entity unit
                      state: false, // hidding state
+                     customStyles: {
+                       'backgroundColor': '#485569',
+                     },
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [1, 0],
+                     type: TYPES.SENSOR,
+                     title: 'Outside Humidity',
+                     id: 'sensor.template_bondi_humidity',
+                     unit: '%', // override default entity unit
+                     state: false, // hidding state
                      filter: function (value) { // optional
                         var num = parseFloat(value);
                         return num && !isNaN(num) ? num.toFixed(1) : value;
@@ -1072,6 +1087,75 @@ var CONFIG = {
                      title: 'Kitchen Temp',
                      id: 'sensor.temperature_sensor_129',
                      unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     customStyles: {
+                       'backgroundColor': '#485569',
+                     },
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [1, 1],
+                     type: TYPES.SENSOR,
+                     title: 'Kitchen Humidity',
+                     id: 'sensor.humidity_sensor_131',
+                     unit: '%', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 2],
+                     type: TYPES.SENSOR,
+                     title: 'Playroom Dyson Temp',
+                     id: 'sensor.playroom_temperature',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     customStyles: {
+                       'backgroundColor': '#485569',
+                     },
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [1, 2],
+                     type: TYPES.SENSOR,
+                     title: 'Playroom Dyson Humidity',
+                     id: 'sensor.playroom_humidity',
+                     unit: '%', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 3],
+                     type: TYPES.SENSOR,
+                     title: 'Ensuite Temp',
+                     id: 'sensor.ensuite_temperature',
+                     unit: 'C', // override default entity unit
+                     state: false, // hidding state
+                     customStyles: {
+                       'backgroundColor': '#485569',
+                     },
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [1, 3],
+                     type: TYPES.SENSOR,
+                     title: 'Ensuite Humidity',
+                     id: 'sensor.ensuite_humidity',
+                     unit: '%', // override default entity unit
                      state: false, // hidding state
                      filter: function (value) { // optional
                         var num = parseFloat(value);
