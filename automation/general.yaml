@@ -46,7 +46,7 @@
 - alias: UPS on battery
   trigger:
     - platform: state
-      to: 'On Battery Battery Discharging'
+      to: On Battery Battery Discharging
       entity_id: sensor.qnapups_status
   action:
     - service: script.notify_darren
@@ -56,7 +56,7 @@
 - alias: UPS Battery Charging
   trigger:
     - platform: state
-      to: 'Online Battery Charging'
+      to:  Online Battery Charging
       entity_id: sensor.qnapups_status
   action:
     - service: script.notify_darren
@@ -66,7 +66,7 @@
 - alias: UPS Online
   trigger:
     - platform: state
-      to: 'Online'
+      to: Online
       entity_id: sensor.qnapups_status
   action:
     - service: script.notify_darren
