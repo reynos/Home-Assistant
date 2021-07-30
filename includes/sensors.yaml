@@ -1329,24 +1329,3 @@
 ##  origin: zone.home
 ##  destination: zone.mdr
 ##  scan_interval: 600
-
-#- platform: filesize
-#  file_paths:
-#    - /home-assistant_v2.db
-
-#- platform: scrape
-#  resource: https://home-assistant.io
-#  name: Release
-#  select: ".current-version h1"
-#  value_template: '{{ value.split(":")[1] }}'
-
-# - platform: apcupsd
-#   resources:
-#     - bcharge
-#     - linev
-#     - loadpct
-#     - numxfers
-#     - outputv
-#     - status
-#     - timeleft
-#     - tonbatt
