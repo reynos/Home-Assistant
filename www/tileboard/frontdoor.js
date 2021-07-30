@@ -236,6 +236,7 @@ var CONFIG = {
                         	     'color': '#fff',
                               };
                           }
+                    }
                   },
                  {
                     position: [0, 2],
