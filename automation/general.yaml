@@ -221,15 +221,17 @@
       data:
         message: "Car windows or sunroof OPEN!"
 
-- alias: "Tasmota State on HA Restart"
+- alias: "on HA Restart"
   trigger:
     platform: homeassistant
     event: start
   action:
+## Tasmota State on HA Restart
     - service: mqtt.publish
       data:
         topic: "cmnd/tasmotas/backlog"
         payload: "power1 ;power2 ;power3 ;power4 ;power5; dimmer; state "
+## add other start up actions here
 
 # - alias: 'Update BOM Icons'
 #   trigger:
