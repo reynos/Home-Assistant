@@ -491,9 +491,19 @@
   password: !secret qnap_pass
   monitored_conditions:
     - status
+    - system_temp
+    - cpu_temp
     - cpu_usage
+    - memory_free
+    - memory_used
     - memory_percent_used
+    - network_link_status
     - network_tx
+    - network_rx
+    - drive_smart_status
+    - drive_temp
+    - volume_size_free
+    - volume_size_used
     - volume_percentage_used
 
 - platform: systemmonitor
@@ -506,7 +516,6 @@
       arg: /home
     - type: processor_use
     - type: memory_free
-    - type: processor_use
     - type: last_boot
     - type: memory_use_percent
     - type: memory_use
