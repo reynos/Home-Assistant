@@ -408,13 +408,6 @@ views:
         - light.bargeboard
         - sensor.bargeboard_wi_fi_signal
         - sensor.bargeboard_estimated_current
-        - light.side_28_2
-        - entity: switch.back_deck_watering_25_2
-          name: Back Deck watering
-          icon: mdi:water
-        - entity: input_number.backdeck_watering_timer
-          name: Timer
-          icon: mdi:timer
         type: entities
         title: Backyard
       - entities:
