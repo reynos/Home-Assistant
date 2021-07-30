@@ -245,7 +245,7 @@
   action:
     - service: media_player.turn_on
       data:
-        entity_id: media_player.lounge_main
+        entity_id: media_player.lounge
     - delay:
         seconds: 5
     - service: media_player.select_source
@@ -262,7 +262,7 @@
   action:
     - service: media_player.turn_off
       data:
-        entity_id: media_player.lounge_main
+        entity_id: media_player.lounge
 
 - alias: "Turntable Turned On"
   trigger:
