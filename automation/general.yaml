@@ -40,6 +40,40 @@
         title: "Update time!"
         message: "Home Assistant version {{ states.binary_sensor.updater.attributes.newest_version }} is available"
 
+##############
+## UPS
+##############
+- alias: UPS on battery
+  trigger:
+    - platform: state
+      to: 'On Battery Battery Discharging'
+      entity_id: sensor.qnapups_status
+  action:
+    - service: script.notify_darren
+      data:
+        variables:
+          message: 'Power Outage?? UPS on battery!'
+- alias: UPS Battery Charging
+  trigger:
+    - platform: state
+      to: 'Online Battery Charging'
+      entity_id: sensor.qnapups_status
+  action:
+    - service: script.notify_darren
+      data:
+        variables:
+          message: 'Power back ON - UPS Batery Chnarging'
+- alias: UPS Online
+  trigger:
+    - platform: state
+      to: 'Online'
+      entity_id: sensor.qnapups_status
+  action:
+    - service: script.notify_darren
+      data:
+        variables:
+          message: 'UPS Battery Charging complete'
+
 - alias: Kitchen Vol down stop
   trigger:
     - platform: event

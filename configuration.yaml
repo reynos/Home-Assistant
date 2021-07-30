@@ -35,7 +35,7 @@ recorder:
       - updater
     entities:
       - sun.sun # Don't record sun data
-      
+
 logbook:
   exclude:
     domains:
@@ -59,9 +59,10 @@ google:
   client_id: !secret google_id
   client_secret: !secret google_secret
 
+# now using NUT
 # apcupsd:
-#   host: !secret apc_ups_host
-#   port: !secret apc_ups_port
+#    host: !secret apc_ups_host
+#    port: !secret apc_ups_port
 
 # cloud intergrate now broken - using HACS ha-dyson local intergration
 # dyson:
