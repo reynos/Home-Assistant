@@ -220,6 +220,109 @@ var CONFIG = {
                items: [
                   {
                      position: [0, 0],
+                     height: 2,
+                     //classes: ['-compact'], // enable this if you want a little square tile (1x1)
+                     type: TYPES.WEATHER,
+                     id: 'group.weather',
+                     state: '&weather.openweathermap.state', // label with weather summary (e.g. Sunny)
+                     // Resolved value must either match one of the supported icons or be mapped
+                     // to one using the 'icons' option. See the 'icons' option for more information.
+                     icon: '&weather.openweathermap.state',
+                     // Use this one if you have an URL of the image to show.
+                     //iconImage: '&sensor.my_weather_icon.state',
+                     // A map from sensor's state (key) to icon name (value).
+                     // The value must match the format:
+                     //   [dark-][nt-]icon_name
+                     // where dark- (optional) selects the dark version of the icon,
+                     // and nt- (optional) selects the night version of the icon and the icon_name can be one of:
+                     //   chanceflurries
+                     //   chancerain
+                     //   chancesleet
+                     //   chancesnow
+                     //   chancetstorms
+                     //   clear
+                     //   cloudy
+                     //   flurries
+                     //   fog
+                     //   hazy
+                     //   mostlycloudy
+                     //   mostlysunny
+                     //   partlycloudy
+                     //   partlysunny
+                     //   rain
+                     //   sleet
+                     //   snow
+                     //   sunny
+                     //   tstorms
+                     //   unknown
+                     // So for example, to map 'clear-night' sensor value to a respective icon, set the value to
+                     // 'nt-clear' (for light icon) or 'dark-nt-clear' (for dark icon).
+                     icons: {
+                        'clear-day': 'clear',
+                        'clear-night': 'nt-clear',
+                        'cloudy': 'cloudy',
+                        'exceptional': 'unknown',
+                        'fog': 'fog',
+                        'hail': 'sleet',
+                        'lightning': 'chancestorms',
+                        'lightning-rainy': 'tstorms',
+                        'partly-cloudy-day': 'partlycloudy',
+                        'partly-cloudy-night': 'nt-partlycloudy',
+                        'pouring': 'rain',
+                        'snowy': 'snow',
+                        'snowy-rainy': 'sleet',
+                        'wind': 'unknown',
+                        'windy': 'unknown',
+                        'windy-variant': 'unknown'
+                     },
+                     // A map from sensor's state (key) to human readable and possibly localized strings.
+                     states: {
+                        'clear-night': 'Clear, night',
+                        'cloudy': 'Cloudy',
+                        'exceptional': 'Exceptional',
+                        'fog': 'Fog',
+                        'hail': 'Hail',
+                        'lightning': 'Lightning',
+                        'lightning-rainy': 'Lightning, rainy',
+                        'partlycloudy': 'Partly cloudy',
+                        'pouring': 'Pouring',
+                        'rainy': 'Rainy',
+                        'snowy': 'Snowy',
+                        'snowy-rainy': 'Snowy, rainy',
+                        'sunny': 'Sunny',
+                        'windy': 'Windy',
+                        'windy-variant': 'Windy'
+                     },
+                     fields: { // most of that fields are optional
+                        summary: '&weather.openweathermap.state',
+                        temperature: '&sensor.openweathermap_temperature.state',
+                        temperatureUnit: '&sensor.openweathermap_temperature.attributes.unit_of_measurement',
+                        windSpeed: '&sensor.openweathermap_wind_speed.state',
+                        windSpeedUnit: '&sensor.openweathermap_wind_speed.attributes.unit_of_measurement',
+                        humidity: '&sensor.openweathermap_humidity.state',
+                        humidityUnit: '&sensor.openweathermap_humidity.attributes.unit_of_measurement',
+                        pressure: '&sensor.openweathermap_pressure.state',
+                        pressureUnit: '&sensor.openweathermap_pressure.attributes.unit_of_measurement',
+
+                        list: [
+                           // custom line
+                           'Rain: '
+                              + '&sensor.openweathermap_rain.state '
+                              + '&sensor.openweathermap_rain.attributes.unit_of_measurement',
+                           'Snow: '
+                              + '&sensor.openweathermap_snow.state '
+                              + '&sensor.openweathermap_snow.attributes.unit_of_measurement',
+                           'Cloud coverage '
+                              + '&sensor.openweathermap_cloud_coverage.state'
+                              + '&sensor.openweathermap_cloud_coverage.attributes.unit_of_measurement',
+                        ]
+                     }
+                  },
+
+
+
+                  {
+                     position: [0, 3],
                      width: 1.2,
                      id: 'media_player.kitchen',
                      type: TYPES.MEDIA_PLAYER,
@@ -235,53 +338,103 @@ var CONFIG = {
                      bgSuffix: '@attributes.entity_picture',
                   },
                   {
-                     position: [0, 1],
-                     width: 1.2,
-                     id: 'media_player.deck',
-                     type: TYPES.MEDIA_PLAYER,
-                     hideSource: false,
-                     textSource: '',
-                     hideMuteButton: false,
+                     type: TYPES.POPUP,
+                     id: {},
+                     position: [1.2, 3],
+                     width: 1,
+                     icon: 'mdi-radio',
+                     title: 'Media popup',
                      state: false,
-                     //state: '@attributes.media_title',
-                     customStyles: {
-                       'backgroundColor': '#000000',
-                     },
-                     subtitle: '@attributes.media_title',
-                     bgSuffix: '@attributes.entity_picture',
+                     popup: {
+                        tileSize: 200,
+                        items: [
+                           {
+                              position: [0, 1],
+                              width: 1.2,
+                              id: 'media_player.deck',
+                              type: TYPES.MEDIA_PLAYER,
+                              hideSource: false,
+                              textSource: '',
+                              hideMuteButton: false,
+                              state: false,
+                              //state: '@attributes.media_title',
+                              // customStyles: {
+                              //   'backgroundColor': '#000000',
+                              // },
+                              subtitle: '@attributes.media_title',
+                              bgSuffix: '@attributes.entity_picture',
+                           },
+                           {
+                              position: [0, 0],
+                              width: 1.2,
+                              id: 'media_player.lounge_room',
+                              type: TYPES.MEDIA_PLAYER,
+                              hideSource: false,
+                              textSource: '',
+                              hideMuteButton: false,
+                              state: false,
+                              //state: '@attributes.media_title',
+                              // customStyles: {
+                              //   'backgroundColor': '#000000',
+                              // },
+                              subtitle: '@attributes.media_title',
+                              bgSuffix: '@attributes.entity_picture',
+                           },
+                        ]
+                     }
                   },
-                  {
-                     position: [0, 2],
-                     width: 1.2,
-                     id: 'media_player.lounge_room',
-                     type: TYPES.MEDIA_PLAYER,
-                     hideSource: false,
-                     textSource: '',
-                     hideMuteButton: false,
-                     state: false,
-                     //state: '@attributes.media_title',
-                     customStyles: {
-                       'backgroundColor': '#000000',
-                     },
-                     subtitle: '@attributes.media_title',
-                     bgSuffix: '@attributes.entity_picture',
-                  },
-                  {
-                     position: [0, 3],
-                     width: 1.2,
-                     id: 'media_player.play_room_tv',
-                     type: TYPES.MEDIA_PLAYER,
-                     hideSource: false,
-                     textSource: '',
-                     hideMuteButton: false,
-                     state: false,
-                     //state: '@attributes.media_title',
-                     customStyles: {
-                       'backgroundColor': '#000000',
-                     },
-                     subtitle: '@attributes.media_title',
-                     bgSuffix: '@attributes.entity_picture',
-                  },
+
+
+
+                  //
+                  // {
+                  //    position: [0, 1],
+                  //    width: 1.2,
+                  //    id: 'media_player.deck',
+                  //    type: TYPES.MEDIA_PLAYER,
+                  //    hideSource: false,
+                  //    textSource: '',
+                  //    hideMuteButton: false,
+                  //    state: false,
+                  //    //state: '@attributes.media_title',
+                  //    customStyles: {
+                  //      'backgroundColor': '#000000',
+                  //    },
+                  //    subtitle: '@attributes.media_title',
+                  //    bgSuffix: '@attributes.entity_picture',
+                  // },
+                  // {
+                  //    position: [0, 2],
+                  //    width: 1.2,
+                  //    id: 'media_player.lounge_room',
+                  //    type: TYPES.MEDIA_PLAYER,
+                  //    hideSource: false,
+                  //    textSource: '',
+                  //    hideMuteButton: false,
+                  //    state: false,
+                  //    //state: '@attributes.media_title',
+                  //    customStyles: {
+                  //      'backgroundColor': '#000000',
+                  //    },
+                  //    subtitle: '@attributes.media_title',
+                  //    bgSuffix: '@attributes.entity_picture',
+                  // },
+                  // {
+                  //    position: [0, 3],
+                  //    width: 1.2,
+                  //    id: 'media_player.play_room_tv',
+                  //    type: TYPES.MEDIA_PLAYER,
+                  //    hideSource: false,
+                  //    textSource: '',
+                  //    hideMuteButton: false,
+                  //    state: false,
+                  //    //state: '@attributes.media_title',
+                  //    customStyles: {
+                  //      'backgroundColor': '#000000',
+                  //    },
+                  //    subtitle: '@attributes.media_title',
+                  //    bgSuffix: '@attributes.entity_picture',
+                  // },
 
                ]
             },
