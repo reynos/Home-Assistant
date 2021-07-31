@@ -541,14 +541,11 @@ views:
     cards:
       - entities:
           - sensor.remote_connection_to_ha_lounge
-          - script.battery_level_report
-          - input_number.test_power_selector
           - input_select.house_mode
           - input_select.bb_colour
           - scene.lounge_lamp
           - scene.bb_red
           - scene.bb_pink
-          - input_boolean.lockdown
           - input_number.lights_auto_dim_level
           - input_number.bathroom_light_timer
           - input_number.announce_volume
@@ -559,8 +556,6 @@ views:
           - input_boolean.evening_lights_on_flag
           - input_boolean.bedtime_beacon_flag
           - binary_sensor.before_sunset
-          - input_boolean.tester
-          - input_boolean.doorbell_test
         type: entities
         show_header_toggle: false
 #      - type: glance

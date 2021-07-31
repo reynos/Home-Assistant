@@ -14,7 +14,12 @@ views:
         - person.blythe
         - climate.playroom
         - script.test_announement
+        - input_boolean.tester
+        - input_boolean.doorbell_test
+        - input_number.test_power_selector
         - input_boolean.announce_test
+        - script.battery_level_report
+        - input_boolean.lockdown
         - input_boolean.kitchen_up_stop
         - input_boolean.kitchen_down_stop
         - script.start_netflix
