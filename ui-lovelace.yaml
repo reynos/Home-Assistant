@@ -539,11 +539,31 @@ views:
         show_header_toggle: false
 
   - icon: mdi:washing-machine
-    type: custom:group-card
-    card:
-      type: entities
-      title: Appliances
-    group: group.washerpanel
+    cards:
+      - type: vertical-stack
+        title: Appliances
+        show_header_toggle: false
+        cards:
+          - type: custom:group-card
+            card:
+              type: entities
+              title: Washing Machine
+            group: group.washerpanel
+          - type: custom:group-card
+            card:
+              type: entities
+              title: Dryer
+            group: group.dryerpanel
+          - type: custom:group-card
+            card:
+              type: entities
+              title: Washing Machine
+            group: group.dishwasherpanel
+          - type: custom:group-card
+            card:
+              type: entities
+              title: Turntable
+            group: group.turntablepanel
 
   # - type: custom:group-card
   #   card:
