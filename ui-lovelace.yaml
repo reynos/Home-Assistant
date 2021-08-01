@@ -537,6 +537,31 @@ views:
         title: Buses
         type: entities
         show_header_toggle: false
+
+  - icon: mdi:washing-machine
+    type: custom:group-card
+    card:
+      type: entities
+      title: Appliances
+    group: group.washerpanel
+
+  # - type: custom:group-card
+  #   card:
+  #     type: entities
+  #     title: Group card
+  #   group: group.washerpanel
+
+    # - entities:
+    #   -
+    #   - group.dryerpanel
+    #   - group.dishwasherpanel
+    #   - group.turntablepanel
+
+  # - icon: mdi:desktop-classic
+  #   cards:
+  #     - entities:
+  #         - group.qnappanel
+
   - icon: mdi:toggle-switch-outline
     cards:
       - entities:
