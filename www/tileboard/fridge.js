@@ -1192,8 +1192,220 @@ var CONFIG = {
             },
          ]
       },
+
       {
-         title: 'Third page',
+         title: 'Appliances',
+         bg: 'images/bg2.png',
+         icon: 'mdi-washing-machine',
+         groupMarginCss: '20px 8px',
+         groups: [
+            {
+               title: 'Washing Machine',
+               width: 1.8,
+               height: 2,
+               items: [
+                  {
+                     position: [0, 0],
+                     width: 1.8,
+                     height: 1.1,
+                     title: ' ',
+                     id: 'sensor.washer_state',
+                     type: TYPES.TEXT_LIST,
+                     state: false,
+                     filter: function (value, field) {
+                        if(field === "value" && value === "unknown") {
+                           return "0";
+                        }
+
+                        return value;
+                     },
+                     list: [
+                        ["Washer State", "sensor.washer_state"],
+                        ["Washer Voltage", "sensor.washer_voltage"],
+                        ["Washer Watts", "sensor.washer_watts"],
+                        ["Washer Amps", "sensor.washer_amps"],
+                        ["Washer Energy Today", "sensor.washer_energy_today"],
+                        ["Washer Energy Yesterday", "sensor.washer_energy_yesterday"],
+                        ["Washer WiFi Signal", "sensor.washer_signal"],
+                     ].map(function (item) {
+                        var id = item[1];
+
+                        return {
+                           title: item[0],
+                           value: '&' + id + '.state',
+                           unit: '&' + id + '.attributes.unit_of_measurement',
+                        }
+                     })
+                  },
+               ]
+            },
+            {
+               title: 'Dryer',
+               width: 1.8,
+               height: 2,
+               items: [
+                  {
+                     position: [0, 0],
+                     width: 1.8,
+                     height: 1.1,
+                     title: ' ',
+                     id: 'sensor.dryer_state',
+                     type: TYPES.TEXT_LIST,
+                     state: false,
+                     filter: function (value, field) {
+                        if(field === "value" && value === "unknown") {
+                           return "0";
+                        }
+
+                        return value;
+                     },
+                     list: [
+                        ["Dryer State", "sensor.dryer_state"],
+                        ["Dryer Voltage", "sensor.dryer_voltage"],
+                        ["Dryer Watts", "sensor.dryer_watts"],
+                        ["Dryer Amps", "sensor.dryer_amps"],
+                        ["Dryer Energy Today", "sensor.dryer_energy_today"],
+                        ["Dryer Energy Yesterday", "sensor.dryer_energy_yesterday"],
+                        ["Dryer WiFi Signal", "sensor.dryer_signal"],
+                     ].map(function (item) {
+                        var id = item[1];
+
+                        return {
+                           title: item[0],
+                           value: '&' + id + '.state',
+                           unit: '&' + id + '.attributes.unit_of_measurement',
+                        }
+                     })
+                  }
+               ]
+            },
+            {
+               title: 'Dishwasher',
+               width: 1.8,
+               height: 2,
+               items: [
+                  {
+                     position: [0, 0],
+                     width: 1.8,
+                     height: 1.1,
+                     title: ' ',
+                     id: 'sensor.dishwasher_state',
+                     type: TYPES.TEXT_LIST,
+                     state: false,
+                     filter: function (value, field) {
+                        if(field === "value" && value === "unknown") {
+                           return "0";
+                        }
+
+                        return value;
+                     },
+                     list: [
+                        ["Dishwasher State", "sensor.dishwasher_state"],
+                        ["Dishwasher Voltage", "sensor.dishwasher_voltage"],
+                        ["Dishwasher Watts", "sensor.dishwasher_watts"],
+                        ["Dishwasher Amps", "sensor.dishwasher_amps"],
+                        ["Dishwasher Energy Today", "sensor.dishwasher_energy_today"],
+                        ["Dishwasher Energy Yesterday", "sensor.dishwasher_energy_yesterday"],
+                        ["Dishwasher WiFi Signal", "sensor.dishwasher_signal"],
+                     ].map(function (item) {
+                        var id = item[1];
+
+                        return {
+                           title: item[0],
+                           value: '&' + id + '.state',
+                           unit: '&' + id + '.attributes.unit_of_measurement',
+                        }
+                     })
+                  }
+               ]
+            },
+            {
+               title: 'Turntable',
+               width: 1.8,
+               height: 2,
+               items: [
+                  {
+                     position: [0, 0],
+                     width: 1.8,
+                     height: 1.1,
+                     title: ' ',
+                     id: 'sensor.turntable_state',
+                     type: TYPES.TEXT_LIST,
+                     state: false,
+                     filter: function (value, field) {
+                        if(field === "value" && value === "unknown") {
+                           return "0";
+                        }
+
+                        return value;
+                     },
+                     list: [
+                        ["Turntable State", "sensor.turntable_state"],
+                        ["Turntable Voltage", "sensor.turntable_voltage"],
+                        ["Turntable Watts", "sensor.turntable_watts"],
+                        ["Turntable Amps", "sensor.turntable_amps"],
+                        ["Turntable Energy Today", "sensor.turntable_energy_today"],
+                        ["Turntable Energy Yesterday", "sensor.turntable_energy_yesterday"],
+                        ["Turntable WiFi Signal", "sensor.turntable_signal"],
+                     ].map(function (item) {
+                        var id = item[1];
+
+                        return {
+                           title: item[0],
+                           value: '&' + id + '.state',
+                           unit: '&' + id + '.attributes.unit_of_measurement',
+                        }
+                     })
+                  }
+               ]
+            },
+            {
+               title: 'Xmas Lights',
+               width: 1.8,
+               height: 2,
+               items: [
+                  {
+                     position: [0, 0],
+                     width: 1.8,
+                     height: 1.1,
+                     title: ' ',
+                     id: 'sensor.xmas_lights_state',
+                     type: TYPES.TEXT_LIST,
+                     state: false,
+                     filter: function (value, field) {
+                        if(field === "value" && value === "unknown") {
+                           return "0";
+                        }
+
+                        return value;
+                     },
+                     list: [
+                        ["Xmas Lights State", "sensor.xmas_lights_state"],
+                        ["Xmas Lights Voltage", "sensor.xmas_lights_voltage"],
+                        ["Xmas Lights Watts", "sensor.xmas_lights_watts"],
+                        ["Xmas Lights Amps", "sensor.xmas_lights_amps"],
+                        ["Xmas Lights Energy Today", "sensor.xmas_lights_energy_today"],
+                        ["Xmas Lights Energy Yesterday", "sensor.xmas_lights_energy_yesterday"],
+                        ["Xmas Lights WiFi Signal", "sensor.xmas_lights_signal"],
+                     ].map(function (item) {
+                        var id = item[1];
+
+                        return {
+                           title: item[0],
+                           value: '&' + id + '.state',
+                           unit: '&' + id + '.attributes.unit_of_measurement',
+                        }
+                     })
+                  }
+               ]
+            },
+          ]
+        },
+
+
+
+      {
+         title: 'Fourth page',
          bg: 'images/bg2.png',
          icon: 'mdi-flash',
          groups: [

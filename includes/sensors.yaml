@@ -191,9 +191,13 @@
   state_topic: "hass/state/dishwasher"
   icon: mdi:dishwasher
 - platform: mqtt
-  name: "turntable State"
+  name: "Turntable State"
   state_topic: "hass/state/turntable"
   icon: mdi:record-player
+- platform: mqtt
+  name: "Xmas Lights State"
+  state_topic: "hass/state/xmas"
+  icon: mdi:string-lights
 #### Washer
 - platform: mqtt
   name: "Washer Watts"
