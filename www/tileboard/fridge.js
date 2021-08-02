@@ -347,21 +347,6 @@ var CONFIG = {
                     },
                  },
                  {
-                    position: [2, 1],
-                    title: "Girl's Room",
-                    subtitle: '',
-                    id: 'light.girls_bedroom_downlights',
-                    type: TYPES.LIGHT,
-                    states: {
-                       on: "On",
-                       off: "Off"
-                    },
-                    icons: {
-                       on: "mdi-lightbulb-on",
-                       off: "mdi-lightbulb",
-                    },
-                 },
-                 {
                     position: [0, 1],
                     title: 'Lounge',
                     subtitle: '',
@@ -419,6 +404,49 @@ var CONFIG = {
                              field: "brightness"
                           }
                        },
+                    ],
+                 },
+                 {
+                    position: [2, 1],
+                    title: "Girl's Room",
+                    subtitle: '',
+                    id: 'light.girls_bedroom_downlights',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
+                    sliders: [
+                       {
+                          title: 'Brightness',
+                          field: 'brightness',
+                          max: 255,
+                          min: 0,
+                          step: 5,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "brightness"
+                          }
+                       },
+                       {
+                          title: 'Color temp',
+                          field: 'color_temp',
+                          max: 650,
+                          min: 50,
+                          step: 50,
+                          request: {
+                             type: "call_service",
+                             domain: "light",
+                             service: "turn_on",
+                             field: "color_temp"
+                          }
+                       }
                     ],
                  },
                  {
@@ -480,6 +508,21 @@ var CONFIG = {
                           }
                        },
                     ],
+                 },
+                 {
+                    position: [2, 2],
+                    title: "Girl's Lamp",
+                    subtitle: '',
+                    id: 'light.girl_s_lamp',
+                    type: TYPES.LIGHT,
+                    states: {
+                       on: "On",
+                       off: "Off"
+                    },
+                    icons: {
+                       on: "mdi-lightbulb-on",
+                       off: "mdi-lightbulb",
+                    },
                  },
                  {
                     position: [0, 3],
