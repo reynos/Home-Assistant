@@ -213,7 +213,7 @@ var CONFIG = {
          groupMarginCss: '20px 4px',
          groups: [
             {
-               title: 'Music',
+               title: '',
                width: 1.2,
                height: 3,
                // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
