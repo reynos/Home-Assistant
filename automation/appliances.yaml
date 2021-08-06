@@ -207,6 +207,53 @@
         delay: '00:00:03'
         not_at_night: yes
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#  Breadmaker
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+- alias: "Breadmaker State - On"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.breadmaker_watts
+    above: 5
+    # for:
+    #   seconds: 10
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'On'
+        retain: 'true'
+- alias: "Breadmaker State - Cooking"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.breadmaker_watts
+    above: 100
+    for:
+      seconds: 2
+# Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.breadmaker_state.state != 'On' }}"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Cooking'
+        retain: 'true'
+
+- alias: "Breadmaker State - Off"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.breadmaker_watts
+    below: 4
+    for: "00:00:03"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Off'
+        retain: 'true'
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Turntable
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 - alias: "Turntable State - On"
