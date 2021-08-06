@@ -13,9 +13,10 @@ views:
         - person.darren
         - person.blythe
         - climate.playroom
+        - script.doorbell
+        - input_boolean.doorbell_test
         - script.test_announement
         - input_boolean.tester
-        - input_boolean.doorbell_test
         - input_number.test_power_selector
         - input_boolean.announce_test
         - script.battery_level_report

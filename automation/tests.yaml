@@ -131,12 +131,20 @@
     entity_id: input_boolean.doorbell_test
     to: 'on'
   action:
-    - service: media_player.play_media
-      data:
-        entity_id: media_player.kitchen
-        # media_content_id: http://10.0.26.20/sounds/doorbell.mp3
-        media_content_id: "http://10.0.26.13:8123/local/sounds/doorbell.mp3"
-        media_content_type: music
+    - service: switch.turn_on
+      entity_id:
+        - switch.fridge_tab_screen
+    - event: tileboard
+      event_data:
+        command: 'doorbell'
+
+    # - service: media_player.play_media
+    #   data:
+    #     entity_id: media_player.kitchen
+    #     # media_content_id: http://10.0.26.20/sounds/doorbell.mp3
+    #     media_content_id: "http://10.0.26.13:8123/local/sounds/doorbell.mp3"
+    #     media_content_type: music
+
     # - service: logbook.log
     #   data:
     #     name: "Doorbell:"

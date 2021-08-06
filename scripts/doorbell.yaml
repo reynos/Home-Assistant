@@ -12,16 +12,20 @@ doorbell: # for day and night
           {% else %}
             script.donothing
           {% endif %}
-## trigger an event to show the camer image on TileBoard
+## trigger an event to show the camera image on TileBoard
+    - service: switch.turn_on
+      entity_id:
+        - switch.fridge_tab_screen
     - event: tileboard
       event_data:
-        command: 'notify'
-        id: 'doorbell'
-        icon: 'mdi-bell-ring'
-        lifetime: 20 # display for 10 secs
-        type: 'info'
-        title: 'Doorbell'
-        message: 'Someone is at the front gate'
+        command: 'doorbell'
+        # command: 'notify'
+        # id: 'doorbell'
+        # icon: 'mdi-bell-ring'
+        # lifetime: 20 # display for 10 secs
+        # type: 'info'
+        # title: 'Doorbell'
+        # message: 'Someone is at the front gate'
     - service: sonos.snapshot
       data:
         entity_id: media_player.kitchen

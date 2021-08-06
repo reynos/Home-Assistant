@@ -22,26 +22,46 @@
                  },
 */
 
-// var DOORENTRY_TILE = {
-// /*      position: [0, 0],
-//       type: TYPES.CAMERA_STREAM,
-//       id: {},
-//       icon: 'mdi-cctv',
-//       title: 'Front gate',
-//       state: false,
-//       layout: {
-//             type: TYPES.CAMERA_STREAM,
-//             id: 'camera.front_gate_live',
-//             refresh: 1500,
-//             bgSize: 'cover'
-//          },
-//          page: {},
-//          tiles: [
-//              // Define your tiles (door-entry buttons) here if required
-//         ]
-//       }
-//
-//    { */
+var DOORBELL_TILE = {
+   position: [0, 0],
+   id: 'camera.front_gate_live',
+   type: TYPES.CAMERA,
+   bgSize: 'cover',
+   width: 4,
+   state: false,
+   fullscreen: {
+      type: TYPES.CAMERA_STREAM,
+      objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+      id: 'camera.front_gate_live',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+      bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+   },
+   refresh: 1500,  // can be number in milliseconds
+   refresh: function () {  // can also be a function
+      return 3000 + Math.random() * 1000
+   }
+}
+
+   //
+   //
+   //    position: [0, 0],
+   //    type: TYPES.CAMERA_STREAM,
+   //    id: {},
+   //    icon: 'mdi-cctv',
+   //    title: 'Front gate',
+   //    state: false,
+   //    layout: {
+   //          type: TYPES.CAMERA_STREAM,
+   //          id: 'camera.front_gate_live',
+   //          refresh: 1500,
+   //          bgSize: 'cover'
+   //       },
+   //       page: {},
+   //       tiles: [
+   //           // Define your tiles (door-entry buttons) here if required
+   //      ]
+   //    }
+   //
+   // {
 //       position: [0, 0],
 //       id: 'camera.front_gate_live',
 //       type: TYPES.CAMERA,
@@ -80,9 +100,9 @@ var CONFIG = {
    // next fields are optional
    events: [
        {
-           command: 'open_doorentry',
+           command: 'doorbell',
            action: function(eventData) {
-              this.$scope.openDoorEntry(DOORENTRY_TILE, DOORENTRY_TILE.id);
+              this.$scope.opendoorbell(DOORBELL_TILE, DOORBELL_TILE.id);
            }
        },
        // enables "toaster" popups in the bottom right corner
@@ -92,7 +112,6 @@ var CONFIG = {
              window.Noty.addObject(e);
           }
        },
-
    ],
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
@@ -111,58 +130,6 @@ var CONFIG = {
             dateFormat: 'h:mm a', //https://docs.angularjs.org/api/ng/filter/date
             styles: { fontSize: '40px' },
          },
-         // {
-         //    type: HEADER_ITEMS.CUSTOM_HTML,
-         //    html: ''
-         // },
-         // {
-         //    type: HEADER_ITEMS.WEATHER,
-         //    styles: {
-         //       margin: '0'
-         //    },
-         //    icon: '&weather.bondi.state',
-         //    state: '&weather.bondi.state',
-         //    icons: {
-         //       'clear-day': 'clear',
-         //       'clear-day': 'clear',
-         //       'clear-night': 'nt-clear',
-         //       'cloudy': 'cloudy',
-         //       'exceptional': 'unknown',
-         //       'fog': 'fog',
-         //       'hail': 'sleet',
-         //       'lightning': 'chancestorms',
-         //       'lightning-rainy': 'tstorms',
-         //       'partly-cloudy-day': 'partlycloudy',
-         //       'partly-cloudy-night': 'nt-partlycloudy',
-         //       'pouring': 'rain',
-         //       'snowy': 'snow',
-         //       'snowy-rainy': 'sleet',
-         //       'wind': 'unknown',
-         //       'windy': 'unknown',
-         //       'windy-variant': 'unknown'
-         //    },
-         //    states: {
-         //       'clear-night': 'Clear, night',
-         //       'cloudy': 'Cloudy',
-         //       'exceptional': 'Exceptional',
-         //       'fog': 'Fog',
-         //       'hail': 'Hail',
-         //       'lightning': 'Lightning',
-         //       'lightning-rainy': 'Lightning, rainy',
-         //       'partlycloudy': 'Partly cloudy',
-         //       'pouring': 'Pouring',
-         //       'rainy': 'Rainy',
-         //       'snowy': 'Snowy',
-         //       'snowy-rainy': 'Snowy, rainy',
-         //       'sunny': 'Sunny',
-         //       'windy': 'Windy',
-         //       'windy-variant': 'Windy'
-         //    },
-         //    fields: {
-         //       temperature: '&weather.bondi.attributes.temperature',
-         //       temperatureUnit: '°C',
-         //    }
-         //  }
       ],
       left: [
          {
@@ -170,17 +137,6 @@ var CONFIG = {
             dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
          },
 
-         // {
-         //    type: HEADER_ITEMS.CUSTOM_HTML,
-         //    html: '<b><i>24 Avoca Street</b></i>'
-         // },
-         // {
-         //    type: HEADER_ITEMS.DATETIME,
-         //    dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
-         // },
-         // {
-         //    type: HEADER_ITEMS.TIME,
-         // },
       ]
    },
 
@@ -264,7 +220,6 @@ var CONFIG = {
 
                ]
             },
-
             {
                title: '',
                width: 3,
