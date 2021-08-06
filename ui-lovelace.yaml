@@ -562,6 +562,11 @@ views:
           - type: custom:group-card
             card:
               type: entities
+              title: Breadmaker
+            group: group.breadmakerpanel
+          - type: custom:group-card
+            card:
+              type: entities
               title: Turntable
             group: group.turntablepanel
 

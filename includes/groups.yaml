@@ -115,6 +115,15 @@
       - sensor.dishwasher_energy_yesterday
       - sensor.dishwasher_signal
 
+  breadmakerpanel:
+      - sensor.breadmaker_state
+      - sensor.breadmaker_voltage
+      - sensor.breadmaker_watts
+      - sensor.breadmaker_amps
+      - sensor.breadmaker_energy_today
+      - sensor.breadmaker_energy_yesterday
+      - sensor.breadmaker_signal
+
   xmaspanel:
     name: Xmas Lights
     entities:
