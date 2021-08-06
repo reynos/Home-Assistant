@@ -66,6 +66,16 @@
   payload_off: "OFF"
   payload_available: "Online"
   payload_not_available: "Offline"
+- platform: mqtt
+  name: "Breadmaker"
+  state_topic: "stat/breadmaker/POWER"
+  command_topic: "cmnd/breadmaker/POWER"
+  availability_topic: "tele/breadmaker/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
 
 # Tablets
 - platform: command_line
