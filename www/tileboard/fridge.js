@@ -1008,6 +1008,71 @@ var CONFIG = {
                   {
                      position: [0, 3],
                      type: TYPES.SENSOR,
+                     title: 'Breadmaker Power',
+                     id: 'sensor.breadmaker_watts',
+                     unit: 'W', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(0) : value;
+                     },
+                      customStyles: function (item, entity) {
+                         if (entity.state <= -10) {
+                           return {
+                             'backgroundColor': '#16c04c', //bright green
+                       	     'color': '#fff',
+                             };
+                         } else {
+                           if (entity.state <= 100) {
+                             return {
+                               'backgroundColor': '#15997f', //green
+                         	     'color': '#fff',
+                               };
+                           } else {
+                             if (entity.state <= 500) {
+                               return {
+                                 'backgroundColor': '#e6de00', //yellow
+                           	     'color': '#000',
+                                 };
+                             } else {
+                               if (entity.state <= 1500) {
+                                 return {
+                                   'backgroundColor': '#f28747', //orange
+                             	     'color': '#000',
+                                   };
+                               } else {
+                                 if (entity.state <= 2000) {
+                                   return {
+                                     'backgroundColor': '#dd4c49', //red
+                               	     'color': '#000',
+                                     };
+                                 } else {
+                                     return {
+                                       'backgroundColor': '#c23847', //dark red
+                             		       'color': '#000',
+                                 		   };
+                               	     }
+                                   }
+                                 }
+                               }
+                             }
+                      }, //custom style end
+                  },
+                  {
+                     position: [1, 3],
+                     type: TYPES.SENSOR,
+                     title: 'Breadmaker Amps',
+                     id: 'sensor.breadmaker_amps',
+                     unit: 'A', // override default entity unit
+                     state: false, // hidding state
+                     filter: function (value) { // optional
+                        var num = parseFloat(value);
+                        return num && !isNaN(num) ? num.toFixed(1) : value;
+                     }
+                  },
+                  {
+                     position: [0, 4],
+                     type: TYPES.SENSOR,
                      title: 'Xmas lights Power',
                      id: 'sensor.xmas_lights_watts',
                      unit: 'W', // override default entity unit
@@ -1059,7 +1124,7 @@ var CONFIG = {
                        } //custom style end
                   },
                   {
-                     position: [1, 3],
+                     position: [1, 4],
                      type: TYPES.SENSOR,
                      title: 'Xmas lights Amps',
                      id: 'sensor.xmas_lights_amps',
