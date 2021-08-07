@@ -180,7 +180,7 @@
     entity_id: sensor.dishwasher_watts
     below: 5
     for:
-      minutes: 9
+      minutes: 10
   action:
     - service: mqtt.publish
       data:
@@ -209,30 +209,48 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Breadmaker
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-- alias: "Breadmaker State - On"
+- alias: "Breadmaker State - Idle"
   trigger:
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
-    above: 5
-    # for:
-    #   seconds: 10
+    above: 0
+    below: 5
+    for:
+      seconds: 2
   action:
     - service: mqtt.publish
       data:
         topic: hass/state/breadmaker
-        payload: 'On'
+        payload: 'Idle'
+        retain: 'true'
+- alias: "Breadmaker State - Operating"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.breadmaker_watts
+    above: 5
+    for:
+      seconds: 2
+# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+#   condition:
+#     condition: template
+#     value_template: "{{ states.sensor.breadmaker_state.state != 'On' }}"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Operating'
         retain: 'true'
 - alias: "Breadmaker State - Cooking"
   trigger:
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
-    above: 100
+    above: 5
     for:
       seconds: 2
-# Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
-  condition:
-    condition: template
-    value_template: "{{ states.sensor.breadmaker_state.state != 'On' }}"
+# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+#   condition:
+#     condition: template
+#     value_template: "{{ states.sensor.breadmaker_state.state != 'On' }}"
   action:
     - service: mqtt.publish
       data:
@@ -244,8 +262,9 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
-    below: 4
-    for: "00:00:03"
+    below: 1
+    for:
+      seconds: 2
   action:
     - service: mqtt.publish
       data:
