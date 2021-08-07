@@ -164,10 +164,10 @@
     above: 30
     for:
       seconds: 2
-# Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
-  condition:
-    condition: template
-    value_template: "{{ states.sensor.dishwasher_state.state != 'Washing' }}"
+# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+#   condition:
+#     condition: template
+#     value_template: "{{ states.sensor.dishwasher_state.state != 'Washing' }}"
   action:
     - service: mqtt.publish
       data:

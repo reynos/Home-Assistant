@@ -116,6 +116,9 @@
       - sensor.dishwasher_signal
 
   breadmakerpanel:
+    name: Breadmaker
+    entities:
+      - switch.breadmaker
       - sensor.breadmaker_state
       - sensor.breadmaker_voltage
       - sensor.breadmaker_watts

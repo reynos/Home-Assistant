@@ -557,7 +557,7 @@ views:
           - type: 'custom:group-card'
             card:
               type: entities
-              title: Washing Machine
+              title: Dishwasher
             group: group.dishwasherpanel
           - type: 'custom:group-card'
             card:
