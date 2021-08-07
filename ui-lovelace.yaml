@@ -544,27 +544,27 @@ views:
         title: Appliances
         show_header_toggle: false
         cards:
-          - type: custom:group-card
+          - type: 'custom:group-card'
             card:
               type: entities
               title: Washing Machine
             group: group.washerpanel
-          - type: custom:group-card
+          - type: 'custom:group-card'
             card:
               type: entities
               title: Dryer
             group: group.dryerpanel
-          - type: custom:group-card
+          - type: 'custom:group-card'
             card:
               type: entities
               title: Washing Machine
             group: group.dishwasherpanel
-          - type: custom:group-card
+          - type: 'custom:group-card'
             card:
               type: entities
               title: Breadmaker
             group: group.breadmakerpanel
-          - type: custom:group-card
+          - type: 'custom:group-card'
             card:
               type: entities
               title: Turntable
