@@ -550,7 +550,7 @@
   qos: 1
   payload_available: "Online"
   payload_not_available: "Offline"
-## Breadmaker runtime
+## Breadmaker runtime - used as a template sensor "template_breadmaker_runtime" below
 - platform: history_stats
   name: Breadmaker runtime
   entity_id: input_boolean.breadmaker_state
@@ -605,6 +605,9 @@
 # templates
 - platform: template
   sensors:
+    template_breadmaker_runtime:
+      value_template: '{{states.sensor.template_breadmaker_runtime.attributes.value}}'
+      friendly_name: "Breadmaker Current Runtime"
     template_house_mode:
       friendly_name: "House Mode:"
       value_template: >-
