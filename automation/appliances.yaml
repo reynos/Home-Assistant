@@ -257,7 +257,7 @@
     entity_id: sensor.breadmaker_watts
     above: 500
     for:
-      seconds: 30
+      seconds: 45
 # # Make sure breadmaker isn't already cooking and delaying between heating cycles - don't re-trigger and cause stopwatch reset
   condition:
     condition: template
@@ -279,6 +279,13 @@
       data:
         variables:
           message: 'Breadmaker starting Cook mode!'
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+#        volume: 0.4
+        message: 'The Breadmaker is starting cook mode'
+        delay: '00:00:04'
+        not_at_night: yes
 - alias: "Breadmaker Finished"
   trigger:
     - platform: state
@@ -291,6 +298,13 @@
       data:
         variables:
           message: 'Breadmaker finished!'
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+#        volume: 0.4
+        message: 'The Breadmaker has finished'
+        delay: '00:00:03'
+        not_at_night: yes
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.breadmaker_state
