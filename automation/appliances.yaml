@@ -248,6 +248,9 @@
         topic: hass/state/breadmaker
         payload: 'Operating'
         retain: 'true'
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.breadmaker_state
 - alias: "Breadmaker State - Cooking"
   trigger:
     platform: numeric_state
@@ -265,20 +268,6 @@
         topic: hass/state/breadmaker
         payload: 'Cooking'
         retain: 'true'
-
-# - alias: "Breadmaker State - Off"
-#   trigger:
-#     platform: numeric_state
-#     entity_id: sensor.breadmaker_watts
-#     below: 1
-#     for:
-#       seconds: 2
-#   action:
-#     - service: mqtt.publish
-#       data:
-#         topic: hass/state/breadmaker
-#         payload: 'Off'
-#         retain: 'true'
 - alias: "Breadmaker Cooking"
   trigger:
     - platform: state
@@ -302,6 +291,9 @@
       data:
         variables:
           message: 'Breadmaker finished!'
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.breadmaker_state
 - alias: "Breadmaker Off"
   trigger:
     - platform: state
@@ -313,6 +305,9 @@
         topic: hass/state/breadmaker
         payload: 'Off'
         retain: 'true'
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.breadmaker_state
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Turntable

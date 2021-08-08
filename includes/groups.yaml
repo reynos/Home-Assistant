@@ -120,6 +120,7 @@
     entities:
       - switch.breadmaker
       - sensor.breadmaker_state
+      - sensor.breadmaker_runtime
       - sensor.breadmaker_voltage
       - sensor.breadmaker_watts
       - sensor.breadmaker_amps

@@ -550,6 +550,14 @@
   qos: 1
   payload_available: "Online"
   payload_not_available: "Offline"
+## Breadmaker runtime
+- platform: history_stats
+  name: Breadmaker runtime
+  entity_id: input_boolean.breadmaker_state
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
 
 - platform: qnap
   host: !secret qnap_ip

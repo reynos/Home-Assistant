@@ -70,6 +70,8 @@ bathroom_motion:
 morning_lights_flag:
 evening_lights_on_flag:
 bedtime_beacon_flag:
+breadmaker_state:
+    name: Breadmaker Running
 
 # tests
 tester:

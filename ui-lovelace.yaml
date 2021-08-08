@@ -547,6 +547,11 @@ views:
           - type: 'custom:group-card'
             card:
               type: entities
+              title: Breadmaker
+            group: group.breadmakerpanel
+          - type: 'custom:group-card'
+            card:
+              type: entities
               title: Washing Machine
             group: group.washerpanel
           - type: 'custom:group-card'
@@ -559,11 +564,6 @@ views:
               type: entities
               title: Dishwasher
             group: group.dishwasherpanel
-          - type: 'custom:group-card'
-            card:
-              type: entities
-              title: Breadmaker
-            group: group.breadmakerpanel
           - type: 'custom:group-card'
             card:
               type: entities
@@ -594,6 +594,7 @@ views:
           - input_select.house_mode
           - input_select.bb_colour
           - scene.lounge_lamp
+          - input_boolean.breadmaker_state
           - input_number.lights_auto_dim_level
           - input_number.bathroom_light_timer
           - input_number.announce_volume
