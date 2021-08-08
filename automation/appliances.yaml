@@ -255,9 +255,9 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
-    above: 100
+    above: 500
     for:
-      seconds: 2
+      seconds: 30
 # # Make sure breadmaker isn't already cooking and delaying between heating cycles - don't re-trigger and cause stopwatch reset
   condition:
     condition: template

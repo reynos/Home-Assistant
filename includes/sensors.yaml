@@ -606,8 +606,9 @@
 - platform: template
   sensors:
     template_breadmaker_runtime:
-      value_template: '{{states.sensor.template_breadmaker_runtime.attributes.value}}'
+      value_template: "{{ states.sensor.breadmaker_runtime.attributes.value}}"
       friendly_name: "Breadmaker Current Runtime"
+      icon_template: mdi:clock-outline
     template_house_mode:
       friendly_name: "House Mode:"
       value_template: >-
