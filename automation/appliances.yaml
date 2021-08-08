@@ -211,11 +211,19 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 - alias: "Breadmaker State - Idle"
   trigger:
-    platform: numeric_state
-    entity_id: sensor.breadmaker_watts
-    below: 3
-    for:
-      seconds: 10
+    - platform: state
+      entity_id: switch.breadmaker
+      to: 'On'
+      from: 'Off'
+    - platform: numeric_state
+      entity_id: sensor.breadmaker_watts
+      above: 0
+      below: 5
+      for:
+        seconds: 30
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.breadmaker_state.state != 'Operating' }}"
   action:
     - service: mqtt.publish
       data:
@@ -227,12 +235,13 @@
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
     above: 3
-    for:
-      seconds: 2
-# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
-#   condition:
-#     condition: template
-#     value_template: "{{ states.sensor.breadmaker_state.state != 'On' }}"
+    below: 100
+    # for:
+    #   seconds: 2
+# # Make sure breadmaker isn't already running and delaying between heating cycles - don't re-trigger and cause stopwatch reset
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.breadmaker_state.state != 'Cooking' }}"
   action:
     - service: mqtt.publish
       data:
@@ -243,13 +252,13 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
-    above: 5
+    above: 100
     for:
       seconds: 2
-# # Make sure dishwasher isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
-#   condition:
-#     condition: template
-#     value_template: "{{ states.sensor.breadmaker_state.state != 'On' }}"
+# # Make sure breadmaker isn't already cooking and delaying between heating cycles - don't re-trigger and cause stopwatch reset
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.breadmaker_state.state != 'Cooking' }}"
   action:
     - service: mqtt.publish
       data:
@@ -257,13 +266,47 @@
         payload: 'Cooking'
         retain: 'true'
 
-- alias: "Breadmaker State - Off"
+# - alias: "Breadmaker State - Off"
+#   trigger:
+#     platform: numeric_state
+#     entity_id: sensor.breadmaker_watts
+#     below: 1
+#     for:
+#       seconds: 2
+#   action:
+#     - service: mqtt.publish
+#       data:
+#         topic: hass/state/breadmaker
+#         payload: 'Off'
+#         retain: 'true'
+- alias: "Breadmaker Cooking"
   trigger:
-    platform: numeric_state
-    entity_id: sensor.breadmaker_watts
-    below: 1
-    for:
-      seconds: 2
+    - platform: state
+      entity_id: sensor.breadmaker_state
+      to: 'Cooking'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Breadmaker starting Cook mode!'
+- alias: "Breadmaker Finished"
+  trigger:
+    - platform: state
+      entity_id: sensor.breadmaker_state
+      to: 'Idle'
+      from: 'Cooking'
+  action:
+    - service: script.turn_on
+      entity_id: script.notify_darren
+      data:
+        variables:
+          message: 'Breadmaker finished!'
+- alias: "Breadmaker Off"
+  trigger:
+    - platform: state
+      entity_id: switch.breadmaker
+      to: 'Off'
   action:
     - service: mqtt.publish
       data:
