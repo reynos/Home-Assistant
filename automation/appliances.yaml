@@ -209,12 +209,23 @@
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Breadmaker
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-- alias: "Breadmaker State - Idle"
+## MQTT publish states
+- alias: "Breadmaker On"
   trigger:
     - platform: state
       entity_id: switch.breadmaker
       to: 'On'
-      from: 'Off'
+      from: 'Off'  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Idle'
+        retain: 'true'
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.breadmaker_state
+- alias: "Breadmaker State - Idle"
+  trigger:
     - platform: numeric_state
       entity_id: sensor.breadmaker_watts
       above: 0
@@ -223,8 +234,7 @@
         seconds: 60
   condition:
     condition: template
-## needs a and Cooking here
-    value_template: "{{ states.sensor.breadmaker_state.state != 'Operating' }}"
+    value_template: "{{ states.sensor.breadmaker_state.state != 'Operating' and states.sensor.breadmaker_state.state != 'Cooking' }}"
   action:
     - service: mqtt.publish
       data:
@@ -235,14 +245,14 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.breadmaker_watts
-    above: 3
-    below: 100
+    above: 4
+    # below: 100
     # for:
     #   seconds: 2
 # # Make sure breadmaker isn't already running and delaying between heating cycles - don't re-trigger and cause stopwatch reset
   condition:
     condition: template
-    value_template: "{{ states.sensor.breadmaker_state.state != 'Cooking' }}"
+    value_template: "{{ states.sensor.breadmaker_state.state == 'Idle' }}"
   action:
     - service: mqtt.publish
       data:
@@ -262,7 +272,7 @@
 # # Make sure breadmaker isn't already cooking and delaying between heating cycles - don't re-trigger and cause stopwatch reset
   condition:
     condition: template
-    value_template: "{{ states.sensor.breadmaker_state.state != 'Cooking' }}"
+    value_template: "{{ states.sensor.breadmaker_state.state == 'Operating' }}"
   action:
     - service: mqtt.publish
       data:
@@ -286,6 +296,21 @@
         topic: hass/state/breadmaker
         payload: 'Finished'
         retain: 'true'
+- alias: "Breadmaker Off"
+  trigger:
+    - platform: state
+      entity_id: switch.breadmaker
+      to: 'off'
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Off'
+        retain: 'true'
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.breadmaker_state
+## Breadmaker - Actions for each published state
 - alias: "Breadmaker Cooking"
   trigger:
     - platform: state
@@ -301,14 +326,14 @@
       data:
         sonos_entity: media_player.kitchen
 #        volume: 0.4
-        message: 'The Breadmaker is starting cook mode'
+        message: 'The Breadmaker is at the bake stage'
         delay: '00:00:04'
         not_at_night: yes
 - alias: "Breadmaker Finished"
   trigger:
     - platform: state
       entity_id: sensor.breadmaker_state
-      to: 'Idle'
+      to: 'Finished'
       from: 'Cooking'
   action:
     - service: script.turn_on
@@ -326,38 +351,19 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.breadmaker_state
-    - service: mqtt.publish
-      data:
-        topic: hass/state/breadmaker
-        payload: 'Idle'
-        retain: 'true'
-- alias: "Breadmaker Off"
-  trigger:
-    - platform: state
-      entity_id: switch.breadmaker
-      to: 'off'
-  action:
-    - service: mqtt.publish
-      data:
-        topic: hass/state/breadmaker
-        payload: 'off'
-        retain: 'true'
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.breadmaker_state
-## set breadmaker on time
-- alias: "Breadmaker Off"
-  trigger:
-    - platform: state
-      entity_id: input_boolean.breadmaker_state
-      from: 'off'
-      to: 'on'
-  action:
-    - service: input_datetime.set_datetime
-      target:
-        entity_id: input_datetime.breadmaker_start
-      data:
-        time: {{ now() }}
+# ## set breadmaker on time
+# - alias: "Breadmaker Off"
+#   trigger:
+#     - platform: state
+#       entity_id: input_boolean.breadmaker_state
+#       from: 'off'
+#       to: 'on'
+#   action:
+#     - service: input_datetime.set_datetime
+#       target:
+#         entity_id: input_datetime.breadmaker_start
+#       data:
+#         datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
 ## update breadmaker sensor when on
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
