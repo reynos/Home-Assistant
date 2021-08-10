@@ -550,15 +550,15 @@
   qos: 1
   payload_available: "Online"
   payload_not_available: "Offline"
-## Breadmaker runtime - used as a template sensor "template_breadmaker_runtime" below
-- platform: history_stats
-  name: Breadmaker runtime
-  entity_id: input_boolean.breadmaker_state
-  state: "on"
-  type: time
-  # start: "{{ now().replace(hour=0, minute=0, second=0) }}"
-  start: "{{ states.template_breadmaker_runtime_start.state }}"
-  end: "{{ now() }}"
+# ## Breadmaker runtime - used as a template sensor "template_breadmaker_runtime" below
+# - platform: history_stats
+#   name: Breadmaker runtime
+#   entity_id: input_boolean.breadmaker_state
+#   state: "on"
+#   type: time
+#   # start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+#   start: "{{ states.template_breadmaker_runtime_start.state }}"
+#   end: "{{ now() }}"
 
 - platform: qnap
   host: !secret qnap_ip
@@ -608,16 +608,21 @@
 - platform: template
   sensors:
     template_breadmaker_runtime:
-      value_template: "{{ states.sensor.breadmaker_runtime.attributes.value}}"
-      friendly_name: "Breadmaker Current Runtime"
-      icon_template: mdi:clock-outline
-    template_breadmaker_runtime_start:
       value_template: >-
         {% if states.input_boolean.breadmaker_state.state == 'on' %}
-          {{ states.input_boolean.breadmaker_state.last_changed }}
+          {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
         {% else %}
-          {{ now() }}
+          Not Operating
         {% endif %}
+      friendly_name: "Breadmaker Runtime"
+      icon_template: mdi:clock-outline
+    # template_breadmaker_runtime_start:
+    #   value_template: >-
+    #     {% if states.input_boolean.breadmaker_state.state == 'on' %}
+    #       {{ states.input_boolean.breadmaker_state.last_changed }}
+    #     {% else %}
+    #       {{ now() }}
+    #     {% endif %}
     template_house_mode:
       friendly_name: "House Mode:"
       value_template: >-

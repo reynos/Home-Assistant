@@ -544,10 +544,14 @@ views:
         title: Appliances
         show_header_toggle: false
         cards:
+          - title: Breadmaker
+            type: entities
+            entities:
+              - entity: sensor.breadmaker_state
+                secondary_info: last-changed
           - type: 'custom:group-card'
             card:
               type: entities
-              title: Breadmaker
             group: group.breadmakerpanel
           - type: 'custom:group-card'
             card:

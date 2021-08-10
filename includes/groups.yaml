@@ -137,7 +137,6 @@
     name: Breadmaker
     entities:
       - switch.breadmaker
-      - sensor.breadmaker_state
       - sensor.template_breadmaker_runtime
       - sensor.breadmaker_voltage
       - sensor.breadmaker_watts
