@@ -220,7 +220,7 @@
       above: 0
       below: 5
       for:
-        seconds: 30
+        seconds: 60
   condition:
     condition: template
     value_template: "{{ states.sensor.breadmaker_state.state != 'Operating' }}"
@@ -312,12 +312,12 @@
   trigger:
     - platform: state
       entity_id: switch.breadmaker
-      to: 'Off'
+      to: 'off'
   action:
     - service: mqtt.publish
       data:
         topic: hass/state/breadmaker
-        payload: 'Off'
+        payload: 'off'
         retain: 'true'
     - service: input_boolean.turn_off
       data:
