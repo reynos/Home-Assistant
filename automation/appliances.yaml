@@ -223,6 +223,7 @@
         seconds: 60
   condition:
     condition: template
+## needs a and Cooking here
     value_template: "{{ states.sensor.breadmaker_state.state != 'Operating' }}"
   action:
     - service: mqtt.publish
@@ -268,6 +269,23 @@
         topic: hass/state/breadmaker
         payload: 'Cooking'
         retain: 'true'
+- alias: "Breadmaker State - Finished"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.breadmaker_watts
+    below: 500
+    for:
+      minutes: 4
+# # Make sure breadmaker isn't already cooking and delaying between heating cycles - don't re-trigger and cause stopwatch reset
+  condition:
+    condition: template
+    value_template: "{{ states.sensor.breadmaker_state.state == 'Cooking' }}"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Finished'
+        retain: 'true'
 - alias: "Breadmaker Cooking"
   trigger:
     - platform: state
@@ -308,6 +326,11 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.breadmaker_state
+    - service: mqtt.publish
+      data:
+        topic: hass/state/breadmaker
+        payload: 'Idle'
+        retain: 'true'
 - alias: "Breadmaker Off"
   trigger:
     - platform: state
@@ -322,6 +345,20 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.breadmaker_state
+## set breadmaker on time
+- alias: "Breadmaker Off"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.breadmaker_state
+      from: 'off'
+      to: 'on'
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.breadmaker_start
+      data:
+        time: {{ now() }}
+## update breadmaker sensor when on
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Turntable

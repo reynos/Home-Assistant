@@ -610,12 +610,25 @@
     template_breadmaker_runtime:
       value_template: >-
         {% if states.input_boolean.breadmaker_state.state == 'on' %}
-          {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
+          {{ relative_time(states.input_datetime.breadmaker_start) }}
         {% else %}
           Not Operating
         {% endif %}
       friendly_name: "Breadmaker Runtime"
       icon_template: mdi:clock-outline
+
+
+# - platform: template
+#   sensors:
+#     template_breadmaker_runtime:
+#       value_template: >-
+#         {% if states.input_boolean.breadmaker_state.state == 'on' %}
+#           {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
+#         {% else %}
+#           Not Operating
+#         {% endif %}
+#       friendly_name: "Breadmaker Runtime"
+#       icon_template: mdi:clock-outline
     # template_breadmaker_runtime_start:
     #   value_template: >-
     #     {% if states.input_boolean.breadmaker_state.state == 'on' %}
