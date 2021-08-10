@@ -584,13 +584,10 @@
 - platform: systemmonitor
   resources:
     - type: disk_free
-      arg: /home
     - type: disk_use
-      arg: /home
     - type: disk_use_percent
-      arg: /home
     - type: processor_use
-    - type: memory_free
+    - type: processor_temperature # does not seem to work
     - type: last_boot
     - type: memory_use_percent
     - type: memory_use
@@ -601,6 +598,10 @@
     - type: network_in
       arg: eno1 # not eth0
     - type: network_out
+      arg: eno1
+    - type: throughput_network_in
+      arg: eno1
+    - type: throughput_network_out
       arg: eno1
 
 # templates

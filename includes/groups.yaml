@@ -77,6 +77,24 @@
       - light.kitchen_bench_19_2
       - light.back_garden_29
 
+  sysmonitorpanel:
+      - sensor.last_boot
+      - sensor.disk_free
+      - sensor.disk_use
+      - sensor.disk_use_percent
+      - sensor.processor_use
+#      - sensor.processor_temperature # does not seem to work
+      - sensor.memory_use_percent
+      - sensor.memory_use
+      - sensor.memory_free
+      - sensor.swap_use_percent
+      - sensor.swap_use
+      - sensor.swap_free
+      - sensor.network_in_eno1
+      - sensor.network_out_eno1
+      - sensor.throughput_network_in_eno1
+      - sensor.throughput_network_out_eno1
+
   qnappanel:
     name: QNAP NAS
     entities:

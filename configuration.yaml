@@ -27,15 +27,12 @@ recorder:
   purge_keep_days: 2
   exclude:
     domains:
-      - group
-      - media_player
       - zwave
       - zone
       - persistent_notification
-      - automation
       - updater
-    entities:
-      - sun.sun # Don't record sun data
+    # entities:
+    #   - sun.sun # Don't record sun data
 
 logbook:
   exclude:
