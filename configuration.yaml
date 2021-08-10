@@ -85,6 +85,10 @@ stream:
 zeroconf:
 system_health:
 updater:
+influxdb:
+  username: !secret influxdb_username
+  password: !secret influxdb_pass
+  default_measurement: state
 
 ## Includes
 light: !include includes/lights.yaml
