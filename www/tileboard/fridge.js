@@ -772,10 +772,7 @@ var CONFIG = {
                      state: false,
                      icon: 'mdi-trash-can-outline',
                      customStyles: function (item, entity) {
-                       var d = new Date();
-                       var n = d.getDay();
-                       // if it's Wednesday
-                       if (n == 3 ) {
+                       if ('&binary_sensor.bin_night' == 'on') {
                          if (entity.state == 'Red Yellow Bins') {
                            return {
                              'backgroundColor': '#e6de00',
@@ -793,6 +790,28 @@ var CONFIG = {
                    	         };
                            } // else end
                        } //custom style end
+
+                       // var d = new Date();
+                       // var n = d.getDay();
+                       // // if it's Wednesday
+                       // if (n == 3 ) {
+                       //   if (entity.state == 'Red Yellow Bins') {
+                       //     return {
+                       //       'backgroundColor': '#e6de00',
+                     		//      'color': '#000',
+                       //       };
+                       //   } else {
+                       //       return {
+                       //         'backgroundColor': '#1565c0',
+                     		//        'color': '#fff',
+                       //   		   };
+                       // 	     }
+                       // } else {
+                       //     return {
+                       //       'opacity': '0',
+                   	   //       };
+                       //     } // else end
+                       // } //custom style end
                    } //tile end
 ///                 }
                ]

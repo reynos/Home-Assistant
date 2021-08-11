@@ -39,7 +39,7 @@
   unit_of_measurement: "W"
   sensor_names:
     1: "Net Grid Power"
-# this value_teplate does not work and should so converted the KW in a template sensor below_horizon
+# this value_template does not work and should so converted the KW in a template sensor below_horizon
 #  value_template: '{{ (value | float / 1000) | round(2) }}'
 - platform: emoncms
   id: 2
@@ -610,7 +610,7 @@
     template_breadmaker_runtime:
       value_template: >-
         {% if states.input_boolean.breadmaker_state.state == 'on' %}
-          {{ relative_time(states.input_datetime.breadmaker_start) }}
+          {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
         {% else %}
           Not Operating
         {% endif %}

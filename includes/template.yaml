@@ -1,0 +1,20 @@
+### template.yaml
+
+- trigger:
+    platform: state
+    entity_id: input_select.house_mode
+    to: "Day"
+  binary_sensor:
+    - name: Bin Night
+      state: {{now().weekday()==2}} # on if Wednesday
+
+- sensor:
+    - name: "Breadmaker Runtime"
+      state: >
+        {% if states.input_boolean.breadmaker_state.state == 'on' %}
+          {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
+        {% else %}
+          Not Operating
+        {% endif %}
+      friendly_name: "Breadmaker Runtime"
+      icon_template: mdi:clock-outline

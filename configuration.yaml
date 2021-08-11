@@ -91,6 +91,7 @@ influxdb:
 ## Includes
 light: !include includes/lights.yaml
 lovelace: !include includes/lovelace.yaml
+template: !include includes/templates.yaml
 weather: !include includes/weather.yaml
 input_select: !include includes/input_select.yaml
 input_boolean: !include includes/input_boolean.yaml

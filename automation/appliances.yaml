@@ -215,7 +215,8 @@
     - platform: state
       entity_id: switch.breadmaker
       to: 'On'
-      from: 'Off'  action:
+      from: 'Off'
+  action:
     - service: mqtt.publish
       data:
         topic: hass/state/breadmaker
