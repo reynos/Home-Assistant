@@ -6,15 +6,20 @@
     to: "Day"
   binary_sensor:
     - name: Bin Night
-      state: {{now().weekday()==2}} # on if Wednesday
+      state: "{{now().weekday()==2}}" # on if Wednesday
 
 - sensor:
     - name: "Breadmaker Runtime"
-      state: >
-        {% if states.input_boolean.breadmaker_state.state == 'on' %}
-          {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
-        {% else %}
-          Not Operating
-        {% endif %}
-      friendly_name: "Breadmaker Runtime"
-      icon_template: mdi:clock-outline
+      state: "{{(as_timestamp(now()) - as_timestamp(states.input_boolean.breadmaker_state.last_changed) < 1800)}}"
+      # state: {{(as_timestamp(now()) - as_timestamp(states.input_datetime.breadmaker_start) < 1800)}}
+      icon: mdi:clock-outline
+# - sensor:
+#     - name: "Breadmaker Runtime"
+#       state: >
+#         {% if states.input_boolean.breadmaker_state.state == 'on' %}
+#           {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
+#         {% else %}
+#           Not Operating
+#         {% endif %}
+#       name: "Breadmaker Runtime"
+#       icon: mdi:clock-outline

@@ -1,0 +1,6 @@
+## input_datetime.yaml
+
+breadmaker_start:
+  name: Breadmaker start time
+  has_date: true
+  has_time: true

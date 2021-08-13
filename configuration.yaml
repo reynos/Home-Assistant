@@ -83,6 +83,7 @@ stream:
 zeroconf:
 system_health:
 updater:
+
 influxdb:
   username: !secret influxdb_username
   password: !secret influxdb_pass
@@ -109,6 +110,7 @@ media_player: !include includes/media_player.yaml
 camera: !include includes/camera.yaml
 webostv: !include includes/webostv.yaml
 tts: !include includes/tts.yaml
+input_datetime: !include includes/input_datetime.yaml
 
 ## Dir Includes
 automation: !include_dir_merge_list automation
