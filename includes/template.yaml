@@ -10,7 +10,13 @@
 
 - sensor:
     - name: "Breadmaker Runtime"
-      state: "{{(as_timestamp(now()) - as_timestamp(states.input_boolean.breadmaker_state.last_changed) < 1800)}}"
+      state: >
+        {% if states.input_boolean.breadmaker_state.state == 'on' %}
+          {{ relative_time(states.input_boolean.breadmaker_state.last_changed) }}
+        {% else %}
+          Not Operating
+        {% endif %}
+      # "{{(as_timestamp(now()) - as_timestamp(states.input_boolean.breadmaker_state.last_changed) < 1800)}}"
       # state: {{(as_timestamp(now()) - as_timestamp(states.input_datetime.breadmaker_start) < 1800)}}
       icon: mdi:clock-outline
 # - sensor:
