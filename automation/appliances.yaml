@@ -416,11 +416,11 @@
     - service: media_player.turn_on
       data:
         entity_id: media_player.lounge
-    - delay:
-        seconds: 7
+    # - delay:
+    #     seconds: 4
     - service: media_player.select_source
       data:
-        entity_id: media_player.lounge_main
+        entity_id: media_player.lounge
         source: 'audio3'
 
 - alias: "Turntable Off - Amp Off"
