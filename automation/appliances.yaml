@@ -416,17 +416,16 @@
     - service: media_player.turn_on
       data:
         entity_id: media_player.lounge
-    # - delay:
-    #     seconds: 4
-    #
     - service: media_player.select_source
       data:
         entity_id: media_player.lounge
         source: 'audio3'
+    - delay:
+        seconds: 3
     - service: media_player.select_sound_mode
       data:
         entity_id: media_player.lounge
-        select_sound_mode: '2ch_stereo'
+        sound_mode: '2ch_stereo'
 - alias: "Turntable Off - Amp Off"
   trigger:
     platform: state
