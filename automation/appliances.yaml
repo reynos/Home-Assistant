@@ -418,6 +418,7 @@
         entity_id: media_player.lounge
     # - delay:
     #     seconds: 4
+    #
     - service: media_player.select_source
       data:
         entity_id: media_player.lounge
