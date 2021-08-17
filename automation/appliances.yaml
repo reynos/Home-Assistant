@@ -423,13 +423,18 @@
       data:
         entity_id: media_player.lounge
         source: 'audio3'
-
+    - service: media_player.select_sound_mode
+      data:
+        entity_id: media_player.lounge
+        select_sound_mode: '2ch_stereo'
 - alias: "Turntable Off - Amp Off"
   trigger:
     platform: state
     entity_id: sensor.turntable_state
     from: 'On'
     to: 'Off'
+  condition: "{{ state_attr('media_player.lounge', 'source') == 'audio3' }}"
+  # only turn off if still set to turntable (audio3)
   action:
     - service: media_player.turn_off
       data:
