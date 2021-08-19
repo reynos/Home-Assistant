@@ -331,7 +331,7 @@
       entity_id: script.notify_darren
       data:
         variables:
-          message: 'Breadmaker starting Cook mode!'
+          message: 'Breadmaker starting Bake stage!'
     - service: script.announce
       data:
         sonos_entity: media_player.kitchen
