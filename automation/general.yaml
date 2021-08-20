@@ -28,6 +28,23 @@
       data:
         message: "Weekly Low battery warning: {{sensors}}"
 
+- alias: Air Cond toggle notify
+  trigger:
+    # any state change - not stateful
+    - platform: state
+      entity_id: switch.ha_lounge_air_conditioning
+  action:
+    - service: notify.mobile_app_darren_reynolds
+      data:
+        title: "Air Con"
+        message: "Air Con toggled!"
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+#        volume: 0.4
+        message: 'The Air Conditioner has been toggled'
+        delay: '00:00:04'
+        not_at_night: yes
 - alias: HA Update notify
   trigger:
     - platform: state
