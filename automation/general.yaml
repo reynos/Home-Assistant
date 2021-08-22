@@ -127,7 +127,7 @@
       data:
         entity_id: input_boolean.kitchen_up_stop
 
-- alias: Front Door Open
+- alias: Doors Still Open at Bedtime
   trigger:
     - platform: state
       entity_id: input_select.house_mode
@@ -146,14 +146,11 @@
       data_template:
         sonos_entity: media_player.kitchen
         volume: 0.3
-        message: "The {{ trigger.to_state.name }} is still open"
-        delay: '00:00:04'
+        message: "Before you go to bed, check the front and back doors"
+        delay: '00:00:05'
     - service: notify.mobile_app_darren_reynolds
       data_template:
-        message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
-    - service: notify.mobile_app_darren_reynolds
-      data_template:
-        message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} still OPEN!"
+        message: "A door downstairs is still OPEN!"
 
 - alias: Car Unlocked Late
   trigger:
