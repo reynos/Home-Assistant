@@ -188,7 +188,7 @@ var CONFIG = {
                   {
                      position: [0, 2],
                      width: 1.2,
-                     id: 'media_player.lounge_room',
+                     id: 'media_player.lounge',
                      type: TYPES.MEDIA_PLAYER,
                      hideSource: false,
                      textSource: '',
