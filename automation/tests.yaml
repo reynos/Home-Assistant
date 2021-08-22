@@ -81,27 +81,48 @@
       from: 'off'
       to: 'on'
       entity_id: input_boolean.tester
+  condition:
+    condition: state
+    entity_id:
+      - binary_sensor.front_door_30
+      - binary_sensor.ha_lounge_back_door
+    state: 'on'
   action:
+    - service: script.announce
+      data:
+        sonos_entity: media_player.kitchen
+        volume: 0.3
+        message: "The {{ trigger.to_state.name }} is still open"
+        delay: '00:00:04'
+    - service: notify.mobile_app_darren_reynolds
+      data_template:
+        message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
+    - service: notify.mobile_app_darren_reynolds
+      data_template:
+        message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} still OPEN!"
+    - service: input_boolean.turn_off
+      data_template:
+        entity_id: input_boolean.tester
+# {{ trigger.event.data.new_state.attributes.friendly_name | replace("Seventeentrack Package: ","") }}
+
     # - event: tileboard
     #   event_data:
     #     command: open_doorentry
-    - event: tileboard
-      event_data:
-        command: 'notify'
-        id: '{{ context.id }}'
-        lifetime: 5
-        icon: 'mdi-information'
-        type: 'info'
-        title: 'Message'
-        message: 'Test Message'
-    - service: notify.mobile_app_darren_reynolds
-      data:
-        # message: "Trigger was: {{ trigger.event.data.friendly_name }}"
-        message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
-        # message: 'Message: {{trigger.entity_id.attributes.friendly_name}}'
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.tester
+    # - event: tileboard
+    #   event_data:
+    #     command: 'notify'
+    #     id: '{{ context.id }}'
+    #     lifetime: 5
+    #     icon: 'mdi-information'
+    #     type: 'info'
+    #     title: 'Message'
+    #     message: 'Test Message'
+    # This below works!
+    # - service: notify.mobile_app_darren_reynolds
+    #   data:
+    #     # message: "Trigger was: {{ trigger.event.data.friendly_name }}"
+    #     message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
+    #     # message: 'Message: {{trigger.entity_id.attributes.friendly_name}}'
 
 - alias: "Test Announce"
   trigger:
