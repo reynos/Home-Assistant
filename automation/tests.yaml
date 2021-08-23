@@ -81,25 +81,29 @@
       from: 'off'
       to: 'on'
       entity_id: input_boolean.tester
-  condition:
-    condition: state
-    entity_id:
-      - binary_sensor.front_door_30
-      - binary_sensor.ha_lounge_back_door
-    state: 'on'
+  # condition:
+  #   condition: state
+  #   entity_id:
+  #     - binary_sensor.front_door_30
+  #     - binary_sensor.ha_lounge_back_door
+  #   state: 'on'
   action:
-    - service: script.announce
+    - service: notify.mobile_app_darren_reynolds
       data:
-        sonos_entity: media_player.kitchen
-        volume: 0.3
-        message: "The {{ trigger.to_state.name }} is still open"
-        delay: '00:00:04'
-    - service: notify.mobile_app_darren_reynolds
-      data_template:
-        message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
-    - service: notify.mobile_app_darren_reynolds
-      data_template:
-        message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} still OPEN!"
+        title: "Air Con"
+        message: "Air Con toggled from {{trigger.from_state}} to {{trigger.to_state}}"
+    # - service: script.announce
+    #   data:
+    #     sonos_entity: media_player.kitchen
+    #     volume: 0.3
+    #     message: "The {{ trigger.to_state.name }} is still open"
+    #     delay: '00:00:04'
+    # - service: notify.mobile_app_darren_reynolds
+    #   data_template:
+    #     message: "Trigger was: {{ state_attr(trigger.entity_id, 'friendly_name') }}"
+    # - service: notify.mobile_app_darren_reynolds
+    #   data_template:
+    #     message: "{{ state_attr(trigger.entity_id, 'friendly_name') }} still OPEN!"
     - service: input_boolean.turn_off
       data_template:
         entity_id: input_boolean.tester
