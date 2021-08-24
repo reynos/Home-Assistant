@@ -91,7 +91,7 @@
     - service: notify.mobile_app_darren_reynolds
       data:
         title: "Air Con"
-        message: "Air Con toggled from {{trigger.from_state}} to {{trigger.to_state}}"
+        message: "Test toggled from {{trigger.from_state}} to {{trigger.to_state}}"
     # - service: script.announce
     #   data:
     #     sonos_entity: media_player.kitchen

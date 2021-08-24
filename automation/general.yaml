@@ -30,9 +30,15 @@
 
 - alias: Air Cond toggle notify
   trigger:
-    # any state change - not stateful
+    # any state change - not stateful - sometimes it goes to "none"
     - platform: state
       entity_id: switch.ha_lounge_air_conditioning
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: switch.ha_lounge_air_conditioning
+      from: 'on'
+      to: 'off'
   action:
     - service: notify.mobile_app_darren_reynolds
       data:
