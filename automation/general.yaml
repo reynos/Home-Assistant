@@ -27,16 +27,16 @@
     - service: notify.mobile_app_darren_reynolds
       data:
         message: "Weekly Low battery warning: {{sensors}}"
-- alias: Air Cond toggle notify (test)
-  trigger:
-    # any state change - not stateful - sometimes it goes to "none"
-    - platform: state
-      entity_id: switch.ha_lounge_air_conditioning
-  action:
-    - service: notify.mobile_app_darren_reynolds
-      data:
-        title: "Air Con"
-        message: "Air Con toggled from {{trigger.from_state}} to {{trigger.to_state}}"
+# - alias: Air Cond toggle notify (test)
+#   trigger:
+#     # any state change - not stateful - sometimes it goes to "none"
+#     - platform: state
+#       entity_id: switch.ha_lounge_air_conditioning
+#   action:
+#     - service: notify.mobile_app_darren_reynolds
+#       data:
+#         title: "Air Con"
+#         message: "Air Con toggled from {{trigger.from_state}} to {{trigger.to_state}}"
 - alias: Air Cond toggle notify
   trigger:
     # any state change - not stateful - sometimes it goes to "none"
